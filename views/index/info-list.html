@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>综合管理系统</title>
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+</head>
+
+<body>
+<div>
+  <iframe src="../../editer/demo.html" width="100%" height=555px></iframe>
+</div>
+<script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script>
+  layui.use(['form', 'jquery', 'layer', 'dialog'], function () {
+    var $ = layui.jquery;
+
+    //修改状态
+    $('#table-list').on('click', '.table-list-status', function () {
+      var That = $(this);
+      var status = That.attr('data-status');
+      var id = That.parent().attr('data-id');
+      if (status == 1) {
+        That.removeClass('layui-btn-normal').addClass('layui-btn-warm').html('隐藏').attr('data-status', 2);
+      } else if (status == 2) {
+        That.removeClass('layui-btn-warm').addClass('layui-btn-normal').html('显示').attr('data-status', 1);
+
+      }
+    })
+
+  });
+</script>
+</body>
+
+</html>

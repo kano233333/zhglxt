@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>网站后台管理模版</title>
+	<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
+</head>
+
+<body>
+  <div class="welcome-container">
+    <div class="welcome-upper">
+      <div class="welcome-upper-left">
+        <hr>
+        <div>
+          <p class="layui-icon picon picon1">&#xe756;</p>
+          <p class="ptip">预警提示 <span class="layui-badge layui-bg">1</span></p>
+        </div>
+        <hr>
+        <div>
+          <p class="layui-icon picon picon2">&#xe60a;</p>
+          <p class="ptip">事件处理 <span class="layui-badge layui-bg-cyan">1</span></p>
+        </div>
+        <hr>
+        <div>
+          <p class="layui-icon picon picon3">&#xe60e;</p>
+          <p class="ptip">请假申请 <span class="layui-badge layui-bg-orange">1</span></p>
+        </div>
+        <hr>
+        <div>
+          <p class="layui-icon picon picon4">&#xe637;</p>
+          <p class="ptip">考勤打卡 <span class="layui-badge layui-bg-blue">1</span></p>
+        </div>
+      </div>
+      <div class="welcome-upper-center">
+        <div class="layui-collapse">
+          <div class="layui-colla-item">
+            <h2 class="welcome-upper-center-h2">人员统计</h2>
+            <div class="welcome-colla-content">
+              <div class="content-left">
+                <p>年龄统计</p>
+                <p>常驻情况</p>
+                <p>性别统计</p>
+                <p>政治面貌</p>
+                <p>低保人员数</p>
+                <p>租房人口</p>
+                <p>经济困难数</p>
+                <p>名字统计</p>
+                <p>重点关注人群</p>
+              </div>
+              <div class="content-right" id="boxEcharts"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-upper-right">
+        <table class="welcome-colla-content" id="demo" lay-filter="test"></table>
+      </div>
+    </div>
+  </div>
+
+
+
+	<script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../static/admin/lib/echarts/echarts.js"></script>
+	<script type="text/javascript">
+		layui.use(['layer', 'jquery','table'], function () {
+			var layer = layui.layer;
+			var $ = layui.jquery;
+			var table = layui.table;
+			//图表
+			var myChart;
+			require.config({
+				paths: {
+					echarts: '../../static/admin/lib/echarts'
+				}
+			});
+			require(
+				[
+					'echarts',
+          'echarts/chart/pie'
+				],
+				function (ec) {
+					//--- 折柱 ---
+					// myChart = ec.init(document.getElementById('boxEcharts'),'light');
+          var dataX = [
+            {
+              name:'0-17',
+              value:23
+            },
+            {
+              name:'18-47',
+              value:32
+            },
+            {
+              name:'48-87',
+              value:12
+            },
+            {
+              name:'88-100',
+              value:45
+            }
+          ]
+          var circle = ec.init(document.getElementById('boxEcharts'),'light');
+          var option3 = {
+            // backgroundColor:'#eedeca',  //设置背景颜色
+            itemStyle:{
+              shadowBlur:8,  //阴影模糊度
+              shadowOffsetX:5,  //阴影x轴上的偏移
+              shadowOffsetY:5,  //阴影y轴上的偏移
+              shadowColor:"#5c5c5c",  //阴影的颜色
+              emphasis:{   //相当于 :hover
+                shadowColor:"#060606"
+              }
+
+            },
+            series:[{
+              name:'哈哈',
+              type:'pie',
+              radius:'50%',
+              roseType:"angle",
+              data:dataX
+            }],
+            // label:{
+            textStyle:{
+              color:"#1c20cc",
+              fontSize:"12"
+            },
+            // },
+            labelLine:{
+              lineStyle:{
+                color:"#1c20cc"
+              }
+            }
+          }
+          circle.setOption(option3);
+				}
+			);
+
+
+      //table
+      table.render({
+        elem: '#demo'
+        ,height: 420
+        ,url: '' //数据接口
+        ,data:[
+          {
+            name:'a',
+            sign:'aa',
+            phone:'111',
+            hj:'呼'
+          },
+          {
+            name:'a',
+            sign:'aa',
+            phone:'111',
+            hj:'呼'
+          },
+          {
+            name:'a',
+            sign:'aa',
+            phone:'111',
+            hj:'呼'
+          },
+          {
+            name:'a',
+            sign:'aa',
+            phone:'111',
+            hj:'呼'
+          },
+          ]
+        ,page: true //开启分页
+        ,toolbar: '<div>通讯录</div>'
+        ,width:400
+        ,cols: [[ //表头
+          {field: 'id', title: 'ID', width:80,type:'numbers'}
+          ,{field: 'name', title: '姓名', width:80}
+          ,{field: 'sign', title: '服务', width: 80}
+          ,{field: 'phone', title: '电话', width: 100}
+          ,{field: 'hj', title: '立即呼叫', width: 80,fixed:'right'}
+        ]]
+      });
+		});
+	</script>
+</body>
+
+</html>

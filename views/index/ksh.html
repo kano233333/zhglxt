@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../../static/admin/css/index.css"/>
+  <link rel="stylesheet" type="text/css" href="../../layuiadmin/layui/css/layui.css"/>
+  <script src="../../layuiadmin/layui/lay/modules/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../static/admin/js/module/yuzhou.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+  <title></title>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div class="body">
+  <div class="head">
+    <img src="../../static/admin/images/ksh/title.png"/>
+    <span>
+					<div>
+						<p class="nowtime"></p>
+						<p class="temp"></p>
+					</div>
+				</span>
+  </div>
+  <div class="content">
+    <div class="left">
+      <div class="left_top">
+        <div>
+          <div class="title">
+            <img src="../../static/admin/images/ksh/detail.png"/>
+            <span class="head-name">
+									党建情况统计
+								</span>
+          </div>
+          <div class="text party">
+            <div class="party-age">
+              <div></div>
+              <span>党龄</span>
+            </div>
+            <div class="party-edu">
+              <div></div>
+              <span>学历分布</span>
+            </div>
+            <div class="party-rank">
+              <div>
+                <div class="rank-top">
+                  <div><span class="lay_btn">考核排名</span></div>
+                  <div>
+                    <div><span>排名</span></div>
+                    <div><span>支部名称</span></div>
+                  </div>
+
+                </div>
+                <div class="rank-bottom">
+                  <ul>
+                    <li>
+                      <div>
+                        <img src="../../static/admin/images/ksh/first.png"/>
+                        <span>1</span>
+                      </div>
+                      <div><span>一支部</span></div>
+                    </li>
+                    <li>
+                      <div>
+                        <img src="../../static/admin/images/ksh/second.png"/>
+                        <span>2</span>
+                      </div>
+                      <div><span>二支部</span></div>
+                    </li>
+                    <li>
+                      <div>
+                        <img src="../../static/admin/images/ksh/third.png"/>
+                        <span>3</span>
+                      </div>
+                      <div><span>三支部</span></div>
+                    </li>
+                    <li>
+                      <div><span>4</span></div>
+                      <div><span>四支部</span></div>
+                    </li>
+                    <li>
+                      <div><span>5</span></div>
+                      <div><span>五支部</span></div>
+                    </li>
+                    <li>
+                      <div><span>6</span></div>
+                      <div><span>六支部</span></div>
+                    </li>
+                    <li>
+                      <div><span>7</span></div>
+                      <div><span>七支部</span></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="left_middle">
+        <div>
+          <div class="title">
+            <img src="../../static/admin/images/ksh/detail.png"/>
+            <span class="head-name">
+									社会组织统计
+								</span>
+          </div>
+          <div class="text">
+            <div class="society">
+              <div class="so-data1"></div>
+              <span name="so-name">
+										商铺统计
+									</span>
+            </div>
+            <div class="society">
+              <div class="so-data2"></div>
+              <span name="so-name">
+										社会单位统计
+									</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="left_foot">
+        <div>
+          <div class="title">
+            <img src="../../static/admin/images/ksh/detail.png"/>
+            <span class="head-name">
+									人口年龄统计
+								</span>
+          </div>
+          <div class="text age">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="middle">
+      <div class="map">
+        <div>
+							<span id="fullScr">
+								<img src="../../static/admin/images/ksh/fullScr.png">
+								<span>全屏</span>
+							</span>
+          <p id="change_list">
+            <img src="../../static/admin/images/ksh/map.png">
+            <span>→切换至地图</span>
+          </p>
+          <h4 id="map_title">地图</h4>
+          <div id="event_box">
+            <div class="c_title">待处理事件</div>
+            <div id="ct">
+              <div id="box">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li style="text-align: center;">加载失败</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="maps">
+            <iframe id="map_box" src="" width="100%" height="100%" frameborder="no"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="video">
+        <div class="lastpage"></div>
+        <div class="mid-video">
+          <div id="v_first">
+            <span></span>
+          </div>
+          <div id="v_second">
+            <span></span>
+          </div>
+        </div>
+        <div class="nextpage"></div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="right_top">
+        <div>
+          <div class="title">
+            <img src="../../static/admin/images/ksh/detail.png"/>
+            <span class="head-name">
+									诉求业务总量
+								</span>
+          </div>
+          <div class="text">
+            <div class="business">
+									<span>
+										<img src="../../static/admin/images/ksh/transferPop.png"/>
+										<div class="tran-event">
+											<p>转办事件</p>
+											<p></p>
+										</div>
+									</span>
+              <span>
+										<img src="../../static/admin/images/ksh/visa.png"/>
+										<div class="over-event">
+											<p>办结案件</p>
+											<p>2000</p>
+										</div>
+									</span>
+            </div>
+            <div class="business">
+									<span>
+										<div class="first-event">
+											<p>一级事件</p>
+											<p></p>
+										</div>
+									</span>
+              <span>
+										<div class="second-event">
+											<p>二级事件</p>
+											<p></p>
+										</div>
+									</span>
+              <span>
+										<div class="third-event">
+											<p>三级事件</p>
+											<p></p>
+										</div>
+									</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right_middle">
+        <div>
+          <div class="title">
+            <img src="../../static/admin/images/ksh/detail.png"/>
+            <span class="head-name">
+									事件处理情况
+								</span>
+          </div>
+          <div class="text event-data"></div>
+        </div>
+      </div>
+      <div class="right_foot">
+        <div>
+          <div class="title">
+            <img src="../../static/admin/images/ksh/detail.png"/>
+            <span class="head-name">
+										网格信息统计
+									</span>
+          </div>
+          <div class="text gridStatus"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  layui.use(['jquery'], function () {
+    var $ = layui.jquery;
+    var num_v = 0;
+    //宇宙背景初始化
+    $(function () {
+      canvas("canvas", 230, 1000, 60, 2, 500000, 0.5);
+      $("#canvas").css({
+        "z-index": -1,
+        "position": "absolute"
+      });
+      window.onresize = function () {
+        canvas("canvas", 230, 1000, 60, 2, 500000, 0.5);
+        $("#canvas").css({
+          "width": Math.floor(window.innerWidth - 1) + "px",
+          "height": Math.floor(window.innerHeight - 1) + "px"
+        })
+      }
+      var data1 = {
+        statusCode: 200,
+        dataName: "人口年龄统计",
+        data: [
+          {
+            name: "0-17岁(人)",
+            value: 793
+          },
+          {
+            name: "18-39岁(人)",
+            value: 6235
+          },
+          {
+            name: "40-59岁(人)",
+            value: 3877
+          },
+          {
+            name: "60-79岁(人)",
+            value: 2572
+          },
+          {
+            name: "80-99岁(人)",
+            value: 361
+          },
+          {
+            name: "100岁以上(人)",
+            value: 4
+          }
+        ]
+      };
+      ssr1('.age', data1.data);
+      var data2 = {
+        statusCode: 200,
+        dataName: "商铺统计",
+        data: [
+          {
+            name: "超市",
+            value: 8
+          },
+          {
+            name: "药店",
+            value: 12
+          },
+          {
+            name: "健身房",
+            value: 4
+          }
+        ]
+      };
+      ssr2('.so-data1', data2.data);
+      ssr2('.so-data2',data1.data);
+      ssr2('.party-age>div',data1.data);
+      ssr2('.party-edu>div',data1.data);
+      ssr1('#v_second>span',data1.data,"单位(件)");
+      ssr4('.gridStatus',data1.data,data1.data);
+      ssr5("#v_first>span",data1.data);
+      ssr3('.event-data',data1.data);
+      // 	//年龄
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getAgeCount.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr1('.age',rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//商铺
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getCountShop.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr2('.so-data1',rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//社会单位
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getCountByCompany.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr2('.so-data2',rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//党龄
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getPartyAge.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr2('.party-age>div',rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//学历
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getPopEducation.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr2('.party-edu>div',rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//已转办案件排名
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getSourceTypeByAreaIdByNewAction.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr1('#v_second>span',rel.data,"单位(件)");
+      // 			}
+      // 		}
+      // 	})
+      // 	//网格统计
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getCount.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				ssr4('.gridStatus',rel.online,rel.outline);
+      // 			}
+      // 		}
+      // 	})
+      // 	//诉求
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getEventCount.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				eventTotal(rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//党支部
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/newgrid/getAssess.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel.statusCode == 200){
+      // 				rank(rel.data);
+      // 			}
+      // 		}
+      // 	})
+      //
+      // 	//走势图
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/event/getCountByToday.do',
+      // 		data: {"daynum": 5},
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel && rel.statusCode == 200){
+      // 				ssr5("#v_first>span",rel.data);
+      // 			}
+      // 		}
+      // 	})
+      // 	//受理状态
+      // 	$.ajax({
+      // 		type: 'get',
+      // 		url: '/grid/event/getIsFinishedByAreaIdFor.do',
+      // 		dataType: 'json',
+      // 		success: function(rel){
+      // 			if(rel && rel.statusCode == 200){
+      // 				ssr3('.event-data',rel.data);
+      // 			}
+      // 		}
+      // 	})
+
+    })
+
+    //柱图
+    function ssr1(el, data, title) {
+      var myChart = echarts.init(document.querySelector(el));
+      var name = [],
+        value = [],
+        total = 0;
+      data.forEach(function (val, i) {
+        name[i] = val.name;
+        value[i] = val.value;
+        total += val.value;
+      })
+      if (!title) {
+        title = '单位(人)'
+      }
+      myChart.clear();
+      option = {
+        title: {
+          text: title,
+          left: 5,
+          textStyle: {
+            fontSize: 12,
+            color: '#0ff'
+          },
+          y: '1%'
+        },
+        legend: {
+          show: false
+        },
+        tooltip: {
+          trigger: 'item',
+          show: true,
+          formatter: function (res) {
+            var text = res.name + ": <br/>" + res.value + "(" + (res.value * 100 / total).toFixed() + "%)"
+            return text;
+          }
+        },
+        xAxis: {
+          type: 'category',
+          data: function () {
+            var datas = [],
+              color = ['#3fc1e8', '#4285f4', '#54b7ff', '#3fe8ca', '#5aa5ff', '#0095ff', '#1c74b3', '#45ff8f', '#66fdff', '#50e9c1', '#313186', '#7e62fb', '#bb7ef1', '#004a81', '#e9aff3'];
+            name.forEach(function (val, i) {
+              datas[i] = {
+                value: name[i],
+                textStyle: {
+                  fontSize: 10,
+                  color: color[i]
+                }
+              }
+            })
+            return datas;
+          }(),
+          axisTick: {
+            show: false,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 45,
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          }
+        },
+        yAxis: {
+          type: 'value',
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: true,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          }
+        },
+        grid: {
+          left: '5px',
+          right: '5px',
+          top: '30px',
+          bottom: '5px',
+          containLabel: true
+        },
+        series: [{
+          type: 'bar',
+          data: data,
+          barMaxWidth: 30,
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                fontSize: 10
+              }
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: function (params) {
+                var colorList = ['#3fc1e8', '#4285f4', '#54b7ff', '#3fe8ca', '#5aa5ff', '#0095ff', '#1c74b3', '#45ff8f', '#66fdff', '#50e9c1', '#313186', '#7e62fb', '#bb7ef1', '#004a81', '#e9aff3'];
+                return colorList[params.dataIndex];
+              }
+            }
+          }
+        }]
+      };
+      myChart.setOption(option);
+      myChart.on('click', function (e) {
+        console.log(e)
+      });
+      //防止调用太快
+      var boor = true;
+
+      function resizes() {
+        boor = true;
+        myChart.resize();
+      }
+
+      $(window).resize(function () {
+        if (boor) {
+          boor = false;
+          setTimeout(resizes, 500);
+        }
+      })
+    }
+
+    //饼图
+    function ssr2(el, data) {
+      var myChart = echarts.init(document.querySelector(el));
+      var name = [],
+        value = [];
+      data.forEach(function (val, i) {
+        name[i] = val.name;
+        value[i] = val.value;
+      })
+      myChart.clear();
+      option = {
+//						title: {
+//							text: title[o],
+//							textStyle: {
+//								fontSize: 12,
+//								color: '#0ff'
+//							},
+//							x: 'center',
+//							y: '1%'
+//						},
+        tooltip: {
+          trigger: 'item',
+          formatter: "{b}:<br/>{c}({d}%)"
+        },
+        grid: {
+          left: '15%',
+          right: '15%'
+        },
+        color: ['#3fc1e8', '#4285f4', '#54b7ff', '#3fe8ca', '#5aa5ff', '#0095ff', '#1c74b3', '#45ff8f', '#66fdff', '#50e9c1', '#313186', '#7e62fb', '#bb7ef1', '#004a81', '#e9aff3'],
+        series: [{
+          //name: str.dataName,
+          type: 'pie',
+          hoverOffset: 3,
+          minAngle: 2,
+          //selectedMode: true,	//选中偏移
+          radius: ['35%', '50%'],
+          center: ["50%", '50%'],
+          avoidLabelOverlap: true,
+          label: {
+            fontSize: 10,
+            formatter: function (res) {
+              var text = res.name,
+                leg = 4;
+              text.length > leg ? text = text.slice(0, leg) + '\n' + text.slice(leg) : text;
+              return text;
+            }
+          },
+          labelLine: {
+            show: true,
+            smooth: false,
+            length: 10,
+            length2: 5
+          },
+          data: data,
+        }]
+      };
+      myChart.setOption(option);
+      myChart.on('click', function (e) {
+        console.log(e)
+      });
+      //防止调用太快
+      var boor = true;
+
+      function resizes() {
+        boor = true;
+        myChart.resize();
+      }
+
+      $(window).resize(function () {
+        if (boor) {
+          boor = false;
+          setTimeout(resizes, 500);
+        }
+      })
+    }
+
+    //横轴柱图
+    function ssr3(el, data) {
+      var myChart = echarts.init(document.querySelector(el));
+      var name = [],
+        value = [],
+        total = 0;
+      data.forEach(function (val, i) {
+        name[i] = val.name;
+        value[i] = val.value;
+        total += val.value;
+      })
+      myChart.clear();
+      option = {
+//						title: {
+//							text: '单位(人)',
+//							left: 5,
+//							textStyle: {
+//								fontSize: 12,
+//								color: '#0ff'
+//							},
+//							y: '1%'
+//						},
+        legend: {
+          show: false
+        },
+        tooltip: {
+          trigger: 'item',
+          show: true,
+          formatter: function (res) {
+            var text = res.name + ": <br/>" + res.value + "(" + (res.value * 100 / total).toFixed() + "%)"
+            return text;
+          }
+        },
+        yAxis: {
+          type: 'category',
+          data: function () {
+            var datas = [],
+              color = ['#3fc1e8', '#4285f4', '#54b7ff', '#3fe8ca', '#5aa5ff', '#0095ff', '#1c74b3', '#45ff8f', '#66fdff', '#50e9c1', '#313186', '#7e62fb', '#bb7ef1', '#004a81', '#e9aff3'];
+            name.forEach(function (val, i) {
+              datas[i] = {
+                value: name[i],
+                textStyle: {
+                  fontSize: 10,
+                  color: color[i]
+                }
+              }
+            })
+            return datas;
+          }(),
+          axisTick: {
+            show: false,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            interval: 0,
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          }
+        },
+        xAxis: {
+          type: 'value',
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: true,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          }
+        },
+        grid: {
+          right: '20px',
+          top: '0',
+          left: '10px',
+          bottom: '15px',
+          containLabel: true
+        },
+        series: [{
+          //name: str.dataName,
+          type: 'bar',
+          data: data,
+          barMaxWidth: 20,
+          label: {
+            normal: {
+              show: true,
+              position: 'right',
+              textStyle: {
+                fontSize: 10
+              }
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: function (params) {
+                var colorList = ['#3fc1e8', '#4285f4', '#54b7ff', '#3fe8ca', '#5aa5ff', '#0095ff', '#1c74b3', '#45ff8f', '#66fdff', '#50e9c1', '#313186', '#7e62fb', '#bb7ef1', '#004a81', '#e9aff3'];
+                return colorList[params.dataIndex];
+              }
+            }
+          }
+        }]
+      };
+      myChart.setOption(option);
+      myChart.on('click', function (e) {
+        console.log(e);
+      });
+      //防止调用太快
+      var boor = true;
+
+      function resizes() {
+        boor = true;
+        myChart.resize();
+      }
+
+      $(window).resize(function () {
+        if (boor) {
+          boor = false;
+          setTimeout(resizes, 500);
+        }
+      })
+    }
+
+    //折线图
+    function ssr4(el, online, offline) {
+      var myChart = echarts.init(document.querySelector(el));
+      var name = [],
+        value = [],
+        value1 = [],
+        total = 0;
+      online.forEach(function (val, i) {
+        name[i] = val.name;
+        value[i] = val.value;
+        total += val.value;
+      })
+      offline.forEach(function (val, i) {
+        value1[i] = val.value;
+      })
+      myChart.clear();
+      option = {
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['在线人数', '离线人数'],
+          x: 'right',
+          itemWidth: 18,
+          itemHeight: 12,
+          textStyle: {
+            color: '#72d9e3'
+          }
+        },
+        grid: {
+          top: '35px',
+          left: '20px',
+          right: '10px',
+          bottom: '5px',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          data: name,
+          axisTick: {
+            show: false,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 45,
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          },
+          axisLine: {
+            lineStyle: {
+              color: "#72d9e3"
+            }
+          }
+        },
+        yAxis: {
+          axisLine: {
+            lineStyle: {
+              color: "#72d9e3"
+            }
+          },
+          type: 'value',
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: true,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          }
+        },
+        series: [
+          {
+            name: '在线人数',
+            type: 'line',
+            itemStyle: {
+              color: "#3fc1e8"
+            },
+            label: {
+              show: true,
+              color: '#72d9e3'
+            },
+            data: online
+          },
+          {
+            name: '离线人数',
+            type: 'line',
+            itemStyle: {
+              color: "#4285f4"
+            },
+            label: {
+              show: true,
+              color: '#72d9e3'
+            },
+            data: offline
+          }
+        ]
+      };
+      myChart.setOption(option);
+      myChart.on('click', function (e) {
+        console.log(e);
+      });
+      //防止调用太快
+      var boor = true;
+
+      function resizes() {
+        boor = true;
+        myChart.resize();
+      }
+
+      $(window).resize(function () {
+        if (boor) {
+          boor = false;
+          setTimeout(resizes, 500);
+        }
+      })
+    }
+
+    //走势图
+    function ssr5(el, data) {
+      var myChart = echarts.init(document.querySelector(el));
+      var axisData = [],
+        value = [];
+      data.forEach(function (val, i) {
+        axisData[i] = val.name.substring(5);
+        value[i] = val.value;
+      })
+
+      var links = value.map(function (item, i) {
+        return {
+          source: i,
+          target: i + 1
+        };
+      });
+      links.pop();
+      myChart.clear();
+      option = {
+        title: {
+          text: '事件提交统计',
+          x: 'center',
+          y: '1%',
+          textStyle: {
+            fontSize: 16,
+            color: '#0ff'
+          }
+
+        },
+        tooltip: {},
+        xAxis: {
+          type: 'category',
+          boundaryGap: true,
+          data: axisData,
+          axisTick: {
+            show: true,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            interval: 0,
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          },
+          axisLine: {
+            lineStyle: {
+              color: "#72d9e3"
+            }
+          }
+        },
+        grid: {
+          left: '15px',
+          top: '20px',
+          right: '25px',
+          bottom: '10px',
+          containLabel: true
+        },
+        yAxis: {
+          axisLine: {
+            lineStyle: {
+              color: "#72d9e3"
+            }
+          },
+          type: 'value',
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: true,
+            lineStyle: {
+              color: '#0ff'
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#0ff",
+              fontSize: 10,
+            },
+          }
+        },
+        series: [
+          {
+            type: 'graph',
+            layout: 'none',
+            coordinateSystem: 'cartesian2d',
+            symbolSize: 15,
+            label: {
+              normal: {
+                show: false
+              }
+            },
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [4, 10],
+            data: data,
+            links: links,
+            lineStyle: {
+              normal: {
+                color: '#0ff'
+              }
+            },
+            itemStyle: {
+              color: '#4892ff'
+            }
+          }
+        ]
+      };
+      myChart.setOption(option);
+      myChart.on('click', function (e) {
+        console.log(e);
+      });
+      //防止调用太快
+      var boor = true;
+
+      function resizes() {
+        boor = true;
+        myChart.resize();
+      }
+
+      $(window).resize(function () {
+        if (boor) {
+          boor = false;
+          setTimeout(resizes, 500);
+        }
+      })
+    }
+
+    //支部排名
+    function rank(data) {
+      data.forEach(function (val, i) {
+        var str = '';
+        str += '<li><div>';
+        switch (i) {
+          case 0:
+            str += '<img src="../../static/admin/images/ksh/first.png"/>';
+            break;
+          case 1:
+            str += '<img src="../../static/admin/images/ksh/second.png"/>';
+            break;
+          case 2:
+            str += '<img src="../../static/admin/images/ksh/third.png"/>';
+            break;
+          default:
+            break;
+        }
+        str += '<span>' + (i + 1) + '</span></div>';
+        str += '<div><span>' + val + '</span></div>'
+        str += '</li>';
+        if (i == 0) {
+          $(".rank-bottom>ul").html(str);
+        } else {
+          $(".rank-bottom>ul").append(str);
+        }
+        ;
+      })
+    }
+
+    //事件统计
+    function eventTotal(data) {
+      data.forEach(function (val, i) {
+        switch (val.name) {
+          case '一级事件':
+            $('.first-event>p:last-child').html(val.value)
+            break;
+          case '二级事件':
+            $('.second-event>p:last-child').html(val.value)
+            break;
+          case '三级事件':
+            $('.third-event>p:last-child').html(val.value)
+            break;
+          case '办结案件':
+            $('.over-event>p:last-child').html(val.value)
+            break;
+          case '转办事件':
+            $('.tran-event>p:last-child').html(val.value)
+            break;
+          default:
+            break;
+        }
+      })
+    }
+  })
+</script>
+<script type="text/javascript">
+  layui.use(['jquery'], function () {
+    var $ = layui.jquery;
+
+
+    function temperature() {
+      if (localStorage.temp) {
+        var news = new Date().getTime();
+        var old = localStorage.getItem("time");
+        var times = (news - old) / 3600000;
+        if (times < 3) {
+          var str = JSON.parse(localStorage.getItem("temp"))
+          temp(str);
+        } else {
+          ajaxs();
+        }
+      } else {
+        ajaxs();
+      }
+
+      function ajaxs() {
+        $.ajax({
+          type: "get",
+          url: "https://free-api.heweather.com/s6/weather/forecast?key=240586c1ee8d4d11b133785bc91c03c9&location=chongqing",
+          dataType: "json",
+          success: function (result) {
+            temp(result);
+            var str = JSON.stringify(result);
+            var time = new Date().getTime();
+            localStorage.clear();
+            localStorage.setItem("temp", str);
+            localStorage.setItem("time", time);
+          }
+        });
+      }
+
+      function temp(data) {
+        var tmp_max = data.HeWeather6[0].daily_forecast[0].tmp_max;
+        var tmp_min = data.HeWeather6[0].daily_forecast[0].tmp_min;
+        var cond_txt_d = data.HeWeather6[0].daily_forecast[0].cond_txt_d;
+        var cond_txt_n = data.HeWeather6[0].daily_forecast[0].cond_txt_n;
+
+        function gettimes() {
+          var times = new Date();
+          var year = times.getFullYear(),
+            month = parseInt(times.getMonth()) + 1,
+            day = times.getDate(),
+            hour = times.getHours(),
+            min = times.getMinutes(),
+            sec = times.getSeconds();
+          $(".nowtime").html(year + "年" + month + "月" + day + "日 " + hour + "时" + min + "分" + sec + "秒");
+        }
+
+        setInterval(gettimes, 1000);
+        $(".temp").html(tmp_min + "℃ -- " + tmp_max + "℃ &nbsp;" + cond_txt_d);
+      }
+    }
+
+    temperature();
+
+    function moves() {
+      var ele = document.querySelector('.mid-video');
+      ele.onmousedown = move;
+
+      function move(e) {
+        e = e || window.event;
+        var x = e.clientX;
+        ele.onmousemove = function (e) {
+          e = e || window.event;
+          fnmove(e, x)
+        }
+        document.onmouseup = function (e) {
+          ele.onmousemove = null;
+          document.onmouseup = null;
+        }
+      }
+
+      function fnmove(e, x) {
+        var left = x - e.clientX,
+          maxleft = ele.scrollWidth - ele.clientWidth;
+        if (left < 0) {
+          left = 0;
+        } else if (left > maxleft) {
+          left = maxleft;
+        }
+        console.log(x, maxleft, left)
+        ele.scrollLeft = left;
+      }
+    }
+
+    window.addEventListener('load', function () {
+      //moves()
+      fullScr();
+      changeList();
+    })
+
+    function changeList() {
+      var change = true;
+      $("#change_list").click(function () {
+        if (change) {
+          $("#change_list>img").prop("src", "../../static/admin/images/ksh/eventList.png");
+          $("#change_list>span").text("→切换至未处理事件");
+          $("#event_box").css("z-index", "1");
+          $(".c_title").css("display", "none");
+          $("#map_title").css("display", "block");
+          $(".maps").css("display", "block");
+          $("#fullScr").css("display", "block");
+          change = false;
+          sessionStorage.map_list = "map";
+        } else {
+          $("#change_list>img").prop("src", "../../static/admin/images/ksh/map.png");
+          $("#change_list>span").text("→切换至地图");
+          $(".c_title").css("display", "block");
+          $("#map_title").css("display", "none");
+          $(".maps").css("display", "none");
+          $("#fullScr").css("display", "none");
+          $("#event_box").css("z-index", "3");
+          change = true;
+          sessionStorage.map_list = "list";
+        }
+      })
+      if (sessionStorage.map_list && sessionStorage.map_list == "map") {
+        $('#change_list').click();
+      }
+    }
+
+    function fullScr() {
+      var full = true;
+      $("#fullScr").click(function () {
+        if (full) {
+          $(".head").css('display', 'none');
+          $(".left").css('display', 'none');
+          $(".right").css('display', 'none');
+          $(".video").css('display', 'none');
+          $("#change_list").css('display', 'none');
+          $(".content").css({'height': '100%'});
+          $(".middle").css({'width': '100%'});
+          $(".map").css({'height': '100%', 'top': '0'});
+          $("#fullScr>span").text("退出全屏");
+          full = false;
+          sessionStorage.full = 'big';
+        } else {
+          $(".head").css('display', 'block');
+          $(".left").css('display', 'block');
+          $(".right").css('display', 'block');
+          $(".video").css('display', 'block');
+          $("#change_list").css('display', 'block');
+          $(".content").css({'height': '90%'});
+          $(".middle").css({'width': '54%'});
+          $(".map").css({'height': '68%', 'top': '5%'});
+          $("#fullScr>span").text("全屏");
+          full = true;
+          sessionStorage.full = 'small';
+        }
+      })
+      if (sessionStorage.full && sessionStorage.full == "big") {
+        $('#fullScr').click();
+      }
+    }
+  })
+</script>
+<script type="text/javascript">
+  /* $(".lay_btn").click(function(){
+    layer.open({
+      type: 2,
+      area:['80%','80%'],
+      skin: 'modal_class',
+      title: false,
+      content: "",
+      closeBtn: 0,
+      shade: 0.5,
+      shadeClose:true
+    })
+  }) */
+
+  layui.use(['jquery'], function () {
+    var $ = layui.jquery;
+
+    var iframes = document.querySelector('#map_box')
+    iframes.src = "http://222.178.182.14:18080/grid/map/hxjy.html";
+    scrolls();
+
+    function scrolls() {
+      function sssr() {
+        var area = document.getElementById('box');
+        var iliHeight = 35; //单行滚动的高度
+        var speed = 50; //滚动的速度
+        var time;
+        var delay = 2000;
+        area.scrollTop = 0;
+        area.innerHTML += (area.innerHTML + area.innerHTML); //克隆一份一样的内容
+        function startScroll() {
+          clearInterval(time);
+          time = setInterval(scrollUp, speed);
+          area.scrollTop++;
+        }
+
+        function scrollUp() {
+          if (area.scrollTop % iliHeight == 0) {
+            clearInterval(time);
+            setTimeout(startScroll, delay);
+          } else {
+            area.scrollTop++;
+            if (area.scrollTop >= area.scrollHeight / 3) {
+              area.scrollTop = 0;
+            }
+          }
+        }
+
+        setTimeout(startScroll, delay)
+      }
+
+      var appendLi = function (data) {
+        data.forEach(function (val) {
+          val.eventContent = val.eventContent.replace(/<.?[^>]+>/g, "")
+          console.log(val.eventContent);
+        })
+        $("#box>ul").html("");
+        data.forEach(function (val, i) {
+          var times = new Date(val.editEventDate.time);
+          var y = times.getFullYear().toString(),
+            m = (times.getMonth() + 1).toString(),
+            d = times.getDate().toString(),
+            h = times.getHours().toString(),
+            min = times.getMinutes().toString();
+          m < 10 ? m = "0" + m : m;
+          d < 10 ? d = "0" + d : d;
+          h < 10 ? h = "0" + h : h;
+          min < 10 ? min = "0" + min : min;
+          var lastTime = y + "/" + m + "/" + d + " " + h + ":" + m;
+          var a;
+          i < 9 ? a = "0" + (i + 1) : a = i + 1;
+          var strings = "<li>";
+          strings += "<span>" + a + ". " + val.eventTitle + "(" + val.author + "): " + val.eventContent + "</span><span>" + lastTime + "</span>";
+          strings += "</li>";
+          $("#box>ul").append(strings);
+        })
+        if ($("#box>ul").height() * 2 > $("#box").height()) {
+          sssr();
+        }
+      }
+      // $.ajax({
+      //   type: "get",
+      //   url: "/grid/event/getEventFor.do",
+      //   dataType: "json",
+      //   success: function (result) {
+      //     if (result.statusCode == 200) {
+      //       appendLi(result.data)
+      //     }
+      //   }
+      // })
+      var result = {
+        data:[
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          },
+          {
+            eventTitle:123,
+            author:'a',
+            eventContent:'aaaaaaaaaaaaaaaaaa',
+            editEventDate:{
+              time:'13'  //时间戳
+            }
+          }
+        ]
+      }
+      appendLi(result.data)
+    }
+  })
+</script>
+</html>
