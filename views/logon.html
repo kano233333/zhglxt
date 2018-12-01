@@ -9,19 +9,100 @@
   <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
   <style>
+    * {
+      letter-spacing: 1px;
+    }
     .layui-col-md3,.layui-col-md9 {
       height:100vh;
       border:1px solid cadetblue;
+    }
+    @media (max-width: 750px) {
+      .layui-col-md3 {
+        display: none;
+      }
+      .aaa {
+        padding-top:0;
+      }
+    }
+    .input-wrap {
+      width:45%;
+      margin:25px auto 0 auto;
+    }
+    .logon-input {
+      outline: none;
+      width:70%;
+      height:35px;
+      border-radius:6px;
+      border:1px solid rgba(149,188,157,0.4);
+      padding:0 10px;
+      transition:0.5s all;
+    }
+    .logon-input:hover {
+      box-shadow: 0 0 3px rgba(149,188,157,0.6);
+    }
+    .logon-input:focus {
+      box-shadow: 0 0 3px rgba(149,188,157,0.6);
+    }
+    .aaa {
+      padding-top:45vh;
+    }
+    .formX {
+      width:80%;
+      margin:0 auto;
+    }
+    .formX>button {
+      display: block;
+      margin:25px auto 0 auto;
     }
   </style>
 </head>
 <body>
 <div>
   <div class="layui-row">
-    <div class="layui-col-md3 layui-col-sm3"></div>
-    <div class="layui-col-md9 layui-col-sm9 layui-col-xs6 "></div>
+    <div class="layui-col-md3 layui-col-sm3 layui-col-xs1 "></div>
+    <div class="layui-col-md9 layui-col-sm9 layui-col-xs12 aaa">
+      <div class="formX">
+        <p class="input-wrap">
+          账号
+          <input type="text" class="logon-input" id="username" placeholder="请输入账号">
+        </p>
+        <p class="input-wrap">
+          密码
+          <input type="password" class="logon-input" id="password" placeholder="请输入密码">
+        </p>
+        <button class="layui-btn" id="btn">登录</button>
+      </div>
+    </div>
   </div>
-  <input type="text" placeholder="">
 </div>
+
+<script src="../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+  layui.use(['jquery','layer'],function(){
+    var $ = layui.jquery;
+
+    document.getElementById('btn').onclick = function(){
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      if(username === '') {
+        layer.msg('请输入账号');
+      }else if(password === ''){
+        layer.msg('请输入密码');
+      }else {
+        $.ajax({
+          url:'',
+          method:'POST',
+          data:{
+            username:username,
+            password:password
+          },
+          success(){
+            window.location.href='index.html'
+          }
+        })
+      }
+    };
+  })
+</script>
 </body>
 </html>

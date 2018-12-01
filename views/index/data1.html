@@ -8,14 +8,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
   <title>综合管理系统</title>
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
 </head>
 
 <body>
 <div class="wrap-container clearfix">
   <div class="column-content-detail">
     <div class="layui-form" id="table-list">
-      <input type="file" id="xlsx">
       <table class="layui-hide" id="demo" lay-filter="test"></table>
     </div>
   </div>
@@ -23,7 +22,25 @@
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/lib/xlsx/xlsx.core.min.js"></script>
-
+<script type="text/html" id="toolBar">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn" style="position:relative;">
+      导入
+      <input type="file" id="xlsx" style="position:absolute;width:100%;left:0;opacity:0;">
+    </button>
+    <button class="layui-btn layui-btn-sm layui-btn-danger delBtn">
+      编辑
+    </button>
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
+      删除
+    </button>
+  </div>
+</script>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script>
   var dataX = [
     {
@@ -64,7 +81,7 @@
       , title: '用户表'
       , page: true //开启分页
       , loading:true
-      , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+      , toolbar: '#toolBar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
       , cols: [[ //表头
         {type: 'checkbox', fixed: 'left'}
         , {field: 'id', title: 'ID',type:'numbers'}
@@ -131,7 +148,7 @@
         , title: '用户表'
         , page: true //开启分页
         , loading:true
-        , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+        , toolbar: '#toolBar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
         , cols: [[ //表头
           {type: 'checkbox', fixed: 'left'}
           , {field: 'id', title: 'ID',type:'numbers'}

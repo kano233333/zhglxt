@@ -21,22 +21,8 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog','element'],
 		form.render('checkbox');
 	});
 	//渲染表单
-	form.render();	
-	//顶部添加
-	// $('.addBtn').click(function() {
-	// 	var url=$(this).attr('data-url');
-	// 	//将iframeObj传递给父级窗口,执行操作完成刷新
-	// 	parent.page("菜单添加", url, iframeObj, w = "700px", h = "620px");
-	// 	return false;
-  //
-	// }).mouseenter(function() {
-  //
-	// 	dialog.tips('添加', '.addBtn');
-  //
-	// })
-  $('.addBtn').onmouseenter(function(){
-    dialog.tips('添加','.addBnt');
-  })
+	form.render();
+
 	//顶部排序
 	$('.listOrderBtn').click(function() {
 		var url=$(this).attr('data-url');
