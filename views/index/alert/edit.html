@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>edit</title>
+  <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css" />
+</head>
+<body>
+<div style="margin:50px;">
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名：</label>
+    <div class="layui-input-block">
+      <input type="text" placeholder="用户名" class="layui-input" id="username">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">真实姓名：</label>
+    <div class="layui-input-block">
+      <input type="text" placeholder="真实姓名" class="layui-input" id="realname">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">所属区域：</label>
+    <div class="layui-input-block">
+      <input type="text" placeholder="所属区域" class="layui-input" id="scope">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">联系电话:</label>
+    <div class="layui-input-block">
+      <input type="text" placeholder="请输入联系电话" class="layui-input" id="phone">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding-left: 10px;">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" id="sub">保存</button>
+      <button class="layui-btn layui-btn-primary" id="reset">重置</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+  var userid;
+  layui.use(['jquery','layer'],function(){
+    var $ = layui.jquery;
+    var layer = layui.layer;
+    $('#sub').click(function(){
+      var username = document.getElementById('username').value;
+      var realname = document.getElementById('realname').value;
+      var scope = document.getElementById('scope').value;
+      var phone = document.getElementById('phone').value;
+      if(realname===''||scope===''||phone===''){
+        layer.msg('请完善信息');
+      }
+      $.ajax({
+        url:'http://172.23.22.120/manage/api.php?action=modifyUserInfo',
+        method:"POST",
+        data:{
+          id:'userid',
+          username:username,
+          realname:realname,
+          scope:scope,
+          phone:phone
+        },
+        success(){
+          var index = parent.layer.getFrameIndex(window.name);
+          parent.layer.close(index);
+        },
+        error(data){
+          console.log(data);
+        }
+      });
+
+    });
+
+    $('#reset').click(function(){
+      $('input').val('');
+    })
+    console.log(window['aaa']);
+  });
+  function getUserId(id){
+    userid = id;
+  }
+</script>
+
+</body>
+</html>
