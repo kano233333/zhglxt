@@ -23,25 +23,6 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog','element'],
 	//渲染表单
 	form.render();
 
-	//顶部排序
-	$('.listOrderBtn').click(function() {
-		var url=$(this).attr('data-url');
-		dialog.confirm({
-			message:'您确定要进行排序吗？',
-			success:function(){
-				layer.msg('确定了')
-			},
-			cancel:function(){
-				layer.msg('取消了')
-			}
-		})
-		return false;
-
-	}).mouseenter(function() {
-
-		dialog.tips('批量排序', '.listOrderBtn');
-
-	})	
 	//顶部批量删除
 	$('.delBtn').click(function() {
 		var url=$(this).attr('data-url');
@@ -155,4 +136,70 @@ function refresh() {
 	}
 
 	layer.closeAll();
+}
+
+
+function tableRender(cols,data) {
+  layui.use(['table'], function() {
+    var table = layui.table;
+    table.render({
+      elem: '#demo'
+      , height: 520
+      , url: '' //数据接口
+      , data: data
+      , title: '用户表'
+      , page: true //开启分页
+      , loading: true
+      , toolbar: '#toolBar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+      , cols: [cols]
+    });
+  })
+}
+
+function setTable(addUrl,editUrl,cols,data,editSuc,editEnd){
+  layui.use(['jquery','table'], function() {
+    var $ = layui.jquery;
+    var table = layui.table;
+    tableRender(cols,data);
+    $('.addBtn').click(function () {
+      layer.open({
+        type: 2,
+        area: ['700px', '550px'],
+        maxmin: true,
+        content: addUrl
+      })
+    });
+
+    var editUserData;
+    var checkNum = 0;
+    table.on('checkbox(test)', function (obj) {
+      if (obj.checked) {
+        editUserData = obj.data;
+        checkNum++;
+      } else {
+        checkNum--;
+      }
+    });
+
+    $('#edit').click(function () {
+      if (checkNum > 1) {
+        layer.msg('一次只能编辑一行')
+      } else if (checkNum <= 0) {
+        layer.msg('请勾选要编辑的那一行');
+      } else if (checkNum === 1) {
+        layer.open({
+          type: 2,
+          area: ['700px', '450px'],
+          maxmin: true,
+          content: editUrl,
+          success:function(layero, index){
+            editSuc(layero, index) || '';
+          },
+          end:function(){
+            editEnd() || '';
+          }
+        })
+      }
+    })
+  })
 }

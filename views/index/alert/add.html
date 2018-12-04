@@ -13,31 +13,38 @@
     <div class="layui-form-item">
       <label class="layui-form-label">用户名：</label>
       <div class="layui-input-block">
-        <input type="text" placeholder="请输用户名" class="layui-input">
+        <input type="text" placeholder="请输用户名" class="layui-input" id="username">
       </div>
     </div>
     <div class="layui-form-item">
       <label class="layui-form-label">真实姓名：</label>
       <div class="layui-input-block">
-        <input type="text" placeholder="请输真实姓名" class="layui-input">
+        <input type="text" placeholder="请输真实姓名" class="layui-input" id="realname">
       </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">ICON：</label>
+      <button type="button" class="layui-btn" id="test1">
+        <i class="layui-icon">&#xe67c;</i>上传图片
+      </button>
     </div>
     <div class="layui-form-item">
       <label class="layui-form-label">所属区域:</label>
       <div class="layui-input-block">
-        <input type="text" placeholder="请输入区域" class="layui-input">
+        <input type="text" placeholder="请输入区域" class="layui-input" id="scope">
       </div>
     </div>
     <div class="layui-form-item">
       <label class="layui-form-label">联系电话:</label>
       <div class="layui-input-block">
-        <input type="text" placeholder="请输入电话" class="layui-input">
+        <input type="text" placeholder="请输入电话" class="layui-input" id="phone">
       </div>
     </div>
     <div class="layui-form-item">
       <label class="layui-form-label">角色名称:</label>
       <div class="layui-input-block">
-        <select name="role">
+        <select name="role" class="layui-select" id="role">
           <option value="1" selected="">社区居民</option>
           <option value="2" >管理员</option>
           <option value="3" >网格管理员</option>
@@ -55,10 +62,38 @@
   </div>
   <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
   <script>
-    layui.use(['jquery', 'layer'], function () {
+    layui.use(['jquery', 'layer','upload'], function () {
       var $ = layui.jquery;
+      var upload = layui.upload;
       var layer = layui.layer;
       $('#sub').click(function () {
+        var username = $('#username').val();
+        var realname = $('#realname').val();
+        var scope = $('#scope').val();
+        var phone = $('#phone').val();
+        var role = $('#role').val();
+        var option = document.querySelectorAll('#role>option');
+
+        // $.ajax({
+        //   url:'http://172.23.22.120/manage/api.php?action=modifyUserInfo',
+        //   method:"POST",
+        //   data:{
+        //     username:username,
+        //     realname:realname,
+        //     scope:scope,
+        //     phone:phone,
+        //     role:role,
+        //     option:option
+        //   },
+        //   success(){
+        //     var index = parent.layer.getFrameIndex(window.name);
+        //     parent.layer.close(index);
+        //   },
+        //   error(data){
+        //     console.log(data);
+        //   }
+        // });
+
         var index = parent.layer.getFrameIndex(window.name)
         parent.layer.close(index);
       })
@@ -66,6 +101,17 @@
       $('#reset').click(function () {
         $('input').val('');
       })
+
+      var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        // ,url: '/upload/' //上传接口
+        ,done: function(res){
+          layer.msg('上传成功');
+        }
+        ,error: function(){
+          //请求异常回调
+        }
+      });
     })
   </script>
 </body>

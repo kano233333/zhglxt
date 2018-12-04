@@ -21,149 +21,48 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../static/admin/lib/xlsx/xlsx.core.min.js"></script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn" style="position:relative;">
-      导入
-      <input type="file" id="xlsx" style="position:absolute;width:100%;left:0;opacity:0;">
+    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
+      添加
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-danger delBtn">
+    <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
     <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      删除
+      刷新
     </button>
   </div>
 </script>
-<script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
 <script>
-  var dataX = [
-    {
-      id:'a',
-      username:'a',
-      sfz:'111',
-      sex:'m',
-      scope:'aaa',
-      wl:'aaa',
-      wg:'aaa'
-    },
-    {
-      id:'a',
-      username:'a',
-      sfz:'111',
-      sex:'m',
-      scope:'aaa',
-      wl:'aaa',
-      wg:'aaa'
-    }
-  ];
-
-  layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider'], function() {
+  layui.use(['jquery','table'], function() {
+    var $ = layui.jquery;
     var laypage = layui.laypage //分页
       , layer = layui.layer //弹层
       , table = layui.table //表格
       , upload = layui.upload //上传
       , element = layui.element //元素操作
-      , slider = layui.slider //滑块
-      // , xlsx = layui.xlsx;
+      , slider = layui.slider;//滑块
 
-    //执行一个 table 实例
-    table.render({
-      elem: '#demo'
-      , height: 520
-      , url: '' //数据接口
-      ,data:dataX
-      , title: '用户表'
-      , page: true //开启分页
-      , loading:true
-      , toolbar: '#toolBar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-      , cols: [[ //表头
-        {type: 'checkbox', fixed: 'left'}
-        , {field: 'id', title: 'ID',type:'numbers'}
-        , {field: 'username', title: '姓名',}
-        , {field: 'sex', title: '性别', sort: true}
-        , {field: 'sfz', title: '身份证号', sort: true, totalRow: true}
-        , {field: 'scope', title: '所属区域'}
-        , {field: 'wl', title: '所属网络'}
-        , {field: 'wg', title: '网格管理员'}
-      ]]
-    });
-
-    //监听头工具栏事件
-    table.on('toolbar(test)', function (obj) {
-      var checkStatus = table.checkStatus(obj.config.id);
-      var data = checkStatus.data; //获取选中的数据
-      switch (obj.event) {
-        case 'add':
-          layer.msg('添加');
-          break;
-        case 'update':
-          if (data.length === 0) {
-            layer.msg('请选择一行');
-          } else if (data.length > 1) {
-            layer.msg('只能同时编辑一个');
-          } else {
-            layer.alert('编辑 [id]：' + checkStatus.data[0].id);
-          }
-          break;
-        case 'delete':
-          if (data.length === 0) {
-            layer.msg('请选择一行');
-          } else {
-            layer.msg('删除');
-          }
-          break;
-      }
-    });
-
-    document.getElementById('xlsx').onchange = function(){
-      ConvertToArray();
-    }
-    //没有经行验证
-    function ConvertToArray() {
-      var reader = new FileReader();
-      reader.readAsBinaryString(document.getElementById("xlsx").files[0]);
-      reader.onloadend = function (evt) {
-        if(evt.target.readyState == FileReader.DONE){
-          var data = reader.result;
-          var workbook = XLSX.read(data, { type: 'binary' });
-        }
-        var sheet_name_list = workbook.SheetNames;
-        var result = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-        dataX = result.concat(dataX);
-        tableRender();
-      }
-    }
-    function tableRender(){
-      table.render({
-        elem: '#demo'
-        , height: 520
-        , url: '' //数据接口
-        ,data:dataX
-        , title: '用户表'
-        , page: true //开启分页
-        , loading:true
-        , toolbar: '#toolBar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-        , cols: [[ //表头
-          {type: 'checkbox', fixed: 'left'}
-          , {field: 'id', title: 'ID',type:'numbers'}
-          , {field: 'username', title: '姓名'}
-          , {field: 'sex', title: '性别', sort: true}
-          , {field: 'sfz', title: '身份证号', sort: true, totalRow: true}
-          , {field: 'scope', title: '所属区域'}
-          , {field: 'wl', title: '所属网络'}
-          , {field: 'wg', title: '网格管理员'}
-        ]]
-      });
-    }
+    var testData = [
+      {id:'2'}
+    ];
+    var cols=[ //表头
+      {type: 'checkbox'}
+      , {field: 'id', title: 'id', align: 'center'}
+      , {field: 'img_src', title: 'icon', align: 'center'}
+      , {field: 'username', title: '用户名', align: 'center'}
+      , {field: 'realname', title: '真实姓名', align: 'center'}
+      , {field: 'scope', title: '所属区域', align: 'center'}
+      , {field: 'phone', title: '联系电话', align: 'center'}
+      , {field: 'last_login', title: '最近登陆', align: 'center'}
+      , {field: 'ip', title: 'ip地址', align: 'center'}
+      , {field: 'name', title: "角色", align: 'center'}
+    ];
+    var addUrl = './alert/add.html';
+    var editUrl = './alert/edit.html';
+    setTable(addUrl,editUrl,cols,testData);
   })
-
-
 </script>
 
 </body>

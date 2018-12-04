@@ -52,10 +52,10 @@
     var $ = layui.jquery;
     var layer = layui.layer;
     $('#sub').click(function(){
-      var username = document.getElementById('username').value;
-      var realname = document.getElementById('realname').value;
-      var scope = document.getElementById('scope').value;
-      var phone = document.getElementById('phone').value;
+      var username = $('#username').val();
+      var realname = $('#realname').val();
+      var scope = $('#scope').val();
+      var phone = $('#phone').val();
       if(realname===''||scope===''||phone===''){
         layer.msg('请完善信息');
         return;
