@@ -46,7 +46,7 @@
           <h2 class="welcome-upper-center-h2">人员统计</h2>
           <div class="welcome-colla-content">
             <div class="content-left">
-              <p>年龄统计</p>
+              <p class="content-left-active">年龄统计</p>
               <p>常驻情况</p>
               <p>性别统计</p>
               <p>政治面貌</p>
@@ -72,56 +72,166 @@
 			var table = layui.table;
 			//图表
 			var myChart;
-			require.config({
-				paths: {
-					echarts: '../../static/admin/lib/echarts'
-				}
-			});
-			require(
-				[
-					'echarts',
-          'echarts/chart/bar'
-				],
-				function (ec) {
-					//--- 折柱 ---
-					// myChart = ec.init(document.getElementById('boxEcharts'),'light');
-          var dataX = [
-            {
-              name:'0-17',
-              value:23
-            },
-            {
-              name:'18-47',
-              value:32
-            },
-            {
-              name:'48-87',
-              value:12
-            },
-            {
-              name:'88-100',
-              value:45
-            }
+			var chartData = [
+        {
+          "title":'年龄统计',
+          data:[
+            {type:'0-17',data:23},
+            {type:'18-47',data:45},
+            {type:'48-87',data:23},
+            {type:'88-107',data:43},
+            {type:'108-157',data:13}
           ]
-          var circle = ec.init(document.getElementById('boxEcharts'),'light');
+        },
+        {
+          "title": '常驻情况',
+          data:[
+          {type: 'a', data: 3},
+          {type: 'b', data: 45},
+          {type: 'c', data: 63},
+          {type: 'd', data: 83},
+          {type: 'e', data: 23}
+          ]
+        },
+        {
+          "title": '性别统计',
+          data: [
+            {type: 'c', data: 33},
+            {type: 'x', data: 45},
+            {type: 'z', data: 23},
+          ]
+        },
+        {
+          "title": '政治面貌',
+          data: [
+            {type: 'a', data: 53},
+            {type: 'b', data: 25},
+            {type: 'c', data: 13},
+            {type: 'd', data: 23},
+            {type: 'e', data: 63}
+          ]
+        },
+        {
+          "title": '低保人员数',
+          data: [
+            {type: 'a', data: 53},
+            {type: 'c', data: 13},
+            {type: 'd', data: 3},
+            {type: 'e', data: 93},
+            {type: 'e', data: 33},
+            {type: 'e', data: 43}
+          ],
+        },
+        {
+          "title": '租房人口',
+          data: [
+            {type: 'a', data: 3},
+            {type: 'b', data: 45},
+            {type: 'd', data: 83},
+            {type: 'e', data: 23}
+          ]
+        },
+        {
+          "title": '经济困难数',
+          data: [
+            {type: 'a', data: 3},
+            {type: 'b', data: 45},
+            {type: 'c', data: 63},
+            {type: 'd', data: 33},
+            {type: 'c', data: 63},
+            {type: 'e', data: 13}
+          ]
+        },
+        {
+          "title": '名字统计',
+          data: [
+            {type: 'a', data: 13},
+            {type: 'b', data: 45},
+            {type: 'c', data: 63},
+            {type: 'd', data: 83},
+            {type: 'c', data: 23},
+            {type: 'c', data: 43},
+            {type: 'c', data: 83},
+            {type: 'e', data: 43}
+          ]
+        },
+        {
+          "title": '重点关注人群',
+          data: [
+            {type: 'a', data: 3},
+            {type: 'b', data: 45},
+            {type: 'c', data: 53},
+            {type: 'd', data: 83},
+            {type: 'e', data: 23}
+          ]
+        }
+    ]
 
-          var option3 =  {
-            backgroundColor:'rgba(0,0,0,0)',
-            xAxis: {
-              type: 'category',
-              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-            },
-            yAxis: {
-              type: 'value'
-            },
-            series: [{
-              data: [120, 200, 150, 80, 70, 110, 130],
-              type: 'bar'
-            }]
-          };
-          circle.setOption(option3);
-				}
-			);
+      function requireEchart(option){
+        require.config({
+          paths: {
+            echarts: '../../static/admin/lib/echarts'
+          }
+        });
+        require(
+          [
+            'echarts',
+            'echarts/chart/bar'
+          ],
+          function (ec) {
+            var circle = ec.init(document.getElementById('boxEcharts'), 'light');
+            var option3 = setOption(option);
+            circle.setOption(option3);
+          }
+        );
+      }
+      function setOption(option){
+        var xAxisData = [];
+        var seriesData = [];
+        for (let i in chartData[option].data) {
+          xAxisData.push(chartData[option].data[i].type);
+          seriesData.push(chartData[option].data[i].data);
+        }
+
+        var option3 = {
+          backgroundColor: 'rgba(0,0,0,0)',
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+          },
+          grid: {
+            left: '1%',
+            right: '1%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            axisTick: {
+              alignWithLabel: true
+            }
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            data: seriesData,
+            type: 'bar'
+          }]
+        };
+        return option3;
+      }
+      requireEchart(0);
+			var contentP = document.querySelectorAll('.content-left>p');
+			for(let i=0;i<contentP.length;i++){
+        contentP[i].onclick = function(){
+          $(".content-left>p").removeClass('content-left-active');
+          $(this).addClass('content-left-active');
+          requireEchart(i);
+        }
+      }
 		});
 	</script>
 </body>

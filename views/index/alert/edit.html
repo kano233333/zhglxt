@@ -9,6 +9,12 @@
 <body>
 <div style="margin:50px;">
   <div class="layui-form-item">
+    <label class="layui-form-label">ID：</label>
+    <div class="layui-input-block">
+      <input type="text" value="id" placeholder="" class="layui-input layui-disabled" id="id" disabled>
+    </div>
+  </div>
+  <div class="layui-form-item">
     <label class="layui-form-label">用户名：</label>
     <div class="layui-input-block">
       <input type="text" placeholder="用户名" class="layui-input" id="username">
@@ -35,7 +41,6 @@
   <div class="layui-form-item" style="padding-left: 10px;">
     <div class="layui-input-block">
       <button class="layui-btn layui-btn-normal" id="sub">保存</button>
-      <button class="layui-btn layui-btn-primary" id="reset">重置</button>
     </div>
   </div>
 </div>
@@ -53,9 +58,10 @@
       var phone = document.getElementById('phone').value;
       if(realname===''||scope===''||phone===''){
         layer.msg('请完善信息');
+        return;
       }
       $.ajax({
-        url:'http://172.23.22.120/manage/api.php?action=modifyUserInfo',
+        // url:'http://172.23.22.120/manage/api.php?action=modifyUserInfo',
         method:"POST",
         data:{
           id:'userid',
@@ -74,14 +80,14 @@
       });
 
     });
-
-    $('#reset').click(function(){
-      $('input').val('');
-    })
-    console.log(window['aaa']);
   });
-  function getUserId(id){
-    userid = id;
+  function getUserData(data){
+    userid = data.id;
+    var input = document.querySelectorAll('input');
+    for(let i=0;i<input.length;i++){
+      var atr = input[i].getAttribute('id');
+      input[i].value = data[atr];
+    }
   }
 </script>
 

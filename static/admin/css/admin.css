@@ -2007,11 +2007,20 @@
   font-size:15px;
   color:#666;
   transition:0.3s all;
+  letter-spacing: 1px;
 }
 .content-left>p:hover {
-  background-color: rgba(137, 218, 175, 0.2);
-  border-left:4px solid #c2cbf9;
+  font-weight:500;
+  color:#333;
+  background-color: #e1f0f5;
+  border-left:4px solid #7f83b7;
   cursor: pointer;
+}
+.content-left .content-left-active {
+  font-weight:500;
+  color: #333;
+  background-color: #e1f0f5;
+  border-left:4px solid #7f83b7;
 }
 .content-right {
   width:75%;
@@ -2038,7 +2047,7 @@
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  padding: 0px;
+  padding: 0;
   background: #f5f5f5;
   overflow-x: hidden;
   overflow-y: auto;

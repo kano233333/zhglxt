@@ -38,28 +38,75 @@
 <script>
   layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
     var $ = layui.jquery;
-    var userData = [];
-    $.ajax({
-      url:'http://172.23.22.120/manage/api.php?action=getAllUsers',
-      method:'GET',
-      success(data){
-        var _data = JSON.parse(data);
-        userData = _data.data;
-        tableRender();
-      },
-      error(state){
-        console.log(state);
-      }
-    })
-
     var laypage = layui.laypage //分页
       , layer = layui.layer //弹层
       , table = layui.table //表格
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
+    var userData ;
+    var getTable = function() {
+      $.ajax({
+        url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
+        method: 'GET',
+        success(data) {
+          var _data = JSON.parse(data);
+          userData = _data.data;
+          setTable();
+        },
+        error(state) {
+          console.log(state);
+        }
+      })
+    }
+    getTable();
 
-    //执行一个 table 实例
+    function setTable(){
+      tableRender();
+      $('.addBtn').click(function(){
+        layer.open({
+          type:2,
+          area:['700px','550px'],
+          maxmin:true,
+          content:'./alert/add.html'
+        })
+      })
+
+      var editUserData;
+      var checkNum = 0;
+      table.on('checkbox(test)',function(obj){
+        if(obj.checked){
+          editUserData = obj.data;
+          checkNum++;
+        }else {
+          checkNum--;
+        }
+      });
+
+      $('#edit').click(function(){
+        if(checkNum>1){
+          layer.msg('一次只能编辑一行')
+        }else if(checkNum<=0){
+          layer.msg('请勾选要编辑的那一行');
+        }else if(checkNum === 1){
+          layer.open({
+            type:2,
+            area:['700px','450px'],
+            maxmin:true,
+            content:'./alert/edit.html',
+            success: function (layero, index) {
+              // 获取子页面的iframe
+              var iframe = window['layui-layer-iframe' + index];
+              // 向子页面的全局函数child传参
+              iframe.getUserData(editUserData);
+            },
+            end(){
+              getTable();
+            }
+          })
+        }
+      })
+    }
 
     function tableRender(){
       table.render({
@@ -74,7 +121,7 @@
         , cols: [[ //表头
           {type: 'checkbox'}
           , {field: 'id', title: 'id',align:'center'}
-          , {field: 'img_src', title: 'icon',align:'center'}
+          , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
           , {field: 'username', title: '用户名',align:'center'}
           , {field: 'realname', title: '真实姓名',align:'center'}
           , {field: 'scope', title: '所属区域',align:'center'}
@@ -84,50 +131,7 @@
           , {field: 'name',title:"角色",align:'center'}
         ]]
       });
-
-      $('.addBtn').click(function(){
-        layer.open({
-          type:2,
-          area:['700px','450px'],
-          maxmin:true,
-          content:'./alert/add.html'
-        })
-      })
-
-      var userid;
-      var checkNum = 0;
-      table.on('checkbox(test)',function(obj){
-        if(obj.checked){
-          userid = obj.data.id;
-          checkNum++;
-        }else {
-          checkNum--;
-        }
-      });
-
-      $('#edit').click(function(){
-        if(checkNum>1){
-          layer.msg('一次只能编辑一行')
-        }else if(checkNum<=0){
-          layer.msg('请勾选要编辑的那一行');
-        }else if(checkNum === 1){
-          window['aaa']= 'aaa';
-          layer.open({
-            type:2,
-            area:['700px','350px'],
-            maxmin:true,
-            content:'./alert/edit.html',
-            success: function (layero, index) {
-              // 获取子页面的iframe
-              var iframe = window['layui-layer-iframe' + index];
-              // 向子页面的全局函数child传参
-              iframe.getUserId('userid');
-            }
-          })
-        }
-      })
     }
-
   })
 </script>
 
