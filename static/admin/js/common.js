@@ -156,17 +156,20 @@ function tableRender(cols,data) {
   })
 }
 
-function setTable(addUrl,editUrl,cols,data,editSuc,editEnd){
+function setTable(obj){
   layui.use(['jquery','table'], function() {
     var $ = layui.jquery;
     var table = layui.table;
-    tableRender(cols,data);
+    tableRender(obj.cols,obj.data);
     $('.addBtn').click(function () {
       layer.open({
         type: 2,
         area: ['700px', '550px'],
         maxmin: true,
-        content: addUrl
+        content: obj.addUrl,
+				success:function(layero, index){
+          obj.addSuc(layero, index) || '';
+        },
       })
     });
 
@@ -191,12 +194,14 @@ function setTable(addUrl,editUrl,cols,data,editSuc,editEnd){
           type: 2,
           area: ['700px', '450px'],
           maxmin: true,
-          content: editUrl,
+          content: obj.editUrl,
           success:function(layero, index){
-            editSuc(layero, index) || '';
+            obj.editSuc(layero, index) || '';
+            var iframe = window['layui-layer-iframe' + index];
+            iframe.getFromParent(editUserData,obj.editAjaxUrl);
           },
           end:function(){
-            editEnd() || '';
+            obj.editEnd() || '';
           }
         })
       }

@@ -5,115 +5,117 @@
   <meta charset="UTF-8">
   <title>add</title>
   <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css" />
+  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
 </head>
 
 <body>
-  <div style="margin:50px;">
-    <div class="layui-form-item">
-      <label class="layui-form-label">用户名：</label>
-      <div class="layui-input-block">
-        <input type="text" placeholder="请输用户名" class="layui-input" id="username">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">真实姓名：</label>
-      <div class="layui-input-block">
-        <input type="text" placeholder="请输真实姓名" class="layui-input" id="realname">
-      </div>
-    </div>
-
-    <div class="layui-form-item">
-      <label class="layui-form-label">ICON：</label>
-      <button type="button" class="layui-btn" id="test1">
-        <i class="layui-icon">&#xe67c;</i>上传图片
-      </button>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">所属区域:</label>
-      <div class="layui-input-block">
-        <input type="text" placeholder="请输入区域" class="layui-input" id="scope">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">联系电话:</label>
-      <div class="layui-input-block">
-        <input type="text" placeholder="请输入电话" class="layui-input" id="phone">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">角色名称:</label>
-      <div class="layui-input-block">
-        <select name="role" class="layui-select" id="role">
-          <option value="1" selected="">社区居民</option>
-          <option value="2" >管理员</option>
-          <option value="3" >网格管理员</option>
-          <option value="4" >网格联系人</option>
-          <option value="5" >楼栋长</option>
-        </select>
-      </div>
-    </div>
-    <div class="layui-form-item" style="padding-left: 10px;">
-      <div class="layui-input-block">
-        <button class="layui-btn layui-btn-normal" id="sub">立即提交</button>
-        <button class="layui-btn layui-btn-primary" id="reset">重置</button>
-      </div>
+<div style="margin:50px;">
+  <div class="layui-form-item" style="padding-left: 10px;">
+    <div id="view"></div>
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" id="sub">立即提交</button>
+      <button class="layui-btn layui-btn-primary" id="reset">重置</button>
     </div>
   </div>
-  <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-  <script>
-    layui.use(['jquery', 'layer','upload'], function () {
+</div>
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/html" id="formModle">
+  {{#  layui.each(d, function(index,item){ }}
+  {{# if(d[index][0]=='img_src'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <button type="button" class="layui-btn" id="test1">
+      <i class="layui-icon">&#xe67c;</i>上传图片
+    </button>
+  </div>
+  {{# }else if(d[index][0]=='name'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1].title}}</label>
+    <div class="layui-input-block">
+      <select name="name" class="layui-select" id="{{d[index][0]}}">
+        {{# for(var i in d[index][1].option){ }}
+        <option value="1">{{d[index][1].option[i]}}</option>
+        {{# } }}
+      </select>
+    </div>
+  </div>
+  {{# }else{ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-block">
+      <input type="text" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+    </div>
+  </div>
+  {{# } }}
+  {{#  }); }}
+</script>
+<script>
+  var elData = {};
+
+  function getFromParent(data,url) {
+    elData = data;
+    layui.use(['jquery', 'layer', 'upload', 'laytpl'], function () {
       var $ = layui.jquery;
+      var laytpl = layui.laytpl;
       var upload = layui.upload;
       var layer = layui.layer;
-      $('#sub').click(function () {
-        var username = $('#username').val();
-        var realname = $('#realname').val();
-        var scope = $('#scope').val();
-        var phone = $('#phone').val();
-        var role = $('#role').val();
-        var option = document.querySelectorAll('#role>option');
+      var getTpl = document.getElementById('formModle').innerHTML;
+      var view = document.getElementById('view');
+      laytpl(getTpl).render(elData, function (html) {
+        view.innerHTML = html;
+      });
 
-        // $.ajax({
-        //   url:'http://172.23.22.120/manage/api.php?action=modifyUserInfo',
-        //   method:"POST",
-        //   data:{
-        //     username:username,
-        //     realname:realname,
-        //     scope:scope,
-        //     phone:phone,
-        //     role:role,
-        //     option:option
-        //   },
-        //   success(){
-        //     var index = parent.layer.getFrameIndex(window.name);
-        //     parent.layer.close(index);
-        //   },
-        //   error(data){
-        //     console.log(data);
-        //   }
-        // });
-
-        var index = parent.layer.getFrameIndex(window.name)
-        parent.layer.close(index);
-      })
+      var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        // ,url: '/upload/' //上传接口
+        , done: function (res) {
+          layer.msg('上传成功');
+        }
+        , error: function () {
+          //请求异常回调
+        }
+      });
 
       $('#reset').click(function () {
         $('input').val('');
       })
 
-      var uploadInst = upload.render({
-        elem: '#test1' //绑定元素
-        // ,url: '/upload/' //上传接口
-        ,done: function(res){
-          layer.msg('上传成功');
+      $('#sub').click(function () {
+        var postJson = {};
+        for (let i in elData) {
+          if ($('#' + postJson[elData[i][0]]).val() == '') {
+            layer.msg('请完善信息');
+            return;
+          }else{
+            if(elData[i][0]=='name'){  //option
+              let index = postJson[elData[i][0]] = $('#' + elData[i][0]).val();
+              postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index-1].innerText;
+            }else if(elData[i][0]=='img_src'){
+              //img
+            }else{
+              postJson[elData[i][0]] = $('#' + elData[i][0]).val();
+            }
+          }
         }
-        ,error: function(){
-          //请求异常回调
-        }
-      });
+        console.log(postJson);
+        $.ajax({
+          //url:url,
+          method: "POST",
+          data: postJson,
+          success() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+          },
+          error(data) {
+            console.log(data);
+          }
+        });
+      })
+
     })
-  </script>
+  }
+</script>
 </body>
 
 </html>

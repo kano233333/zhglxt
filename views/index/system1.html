@@ -46,21 +46,29 @@
       , slider = layui.slider //滑块
     var getTable = function() {
       $.ajax({
-        url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
+        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
         method: 'GET',
         success(data) {
-          var _data = JSON.parse(data);
-          userData = _data.data;
-          setTable();
+          //var _data = JSON.parse(data);
+          //userData = _data.data;
+          setTable({
+            addUrl:addUrl,
+            editUrl:editUrl,
+            cols:cols,
+            data:testData,
+            editSuc:editSuc,
+            editEnd:editEnd,
+            addSuc:addSuc,
+            editAjaxUrl:editAjaxUrl
+          });
         },
         error(state) {
           console.log(state);
         }
       })
     }
-    // getTable();
 
-
+    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
       , {field: 'id', title: 'id',align:'center'}
@@ -75,12 +83,39 @@
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
-    var testData = [{id:'a'}];
-    function editSuc(layero, index){
-      var iframe = window['layui-layer-iframe' + index];
-      iframe.getUserData(editUserData);
+
+    function editSuc(layero, index){}
+    function editEnd(){
+      getTable();
     }
-    setTable(addUrl,editUrl,cols,testData,editSuc);
+    function addSuc(layero, index){
+      var iframe = window['layui-layer-iframe' + index];
+      var addData = [
+        {0:'username',1:"用户名"},
+        {0:"realname",1:'真实姓名'},
+        {0:'img_src',1:'ICON'},
+        {0:"scope",1:'所属区域'},
+        {0:"phone",1:"联系电话"},
+        {0:"name",
+        1:{
+          "title":'角色名称',
+          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
+        }}
+      ]
+      var url = '';
+      iframe.getFromParent(addData,url);
+    }
+    var editAjaxUrl = '';
+    setTable({
+        addUrl:addUrl,
+        editUrl:editUrl,
+        cols:cols,
+        data:testData,
+        editSuc:editSuc,
+        editEnd:editEnd,
+        addSuc:addSuc,
+        editAjaxUrl:editAjaxUrl
+      });
   })
 </script>
 
