@@ -9,6 +9,38 @@
   <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
   <script src="https://cdn.bootcss.com/require.js/2.3.6/require.js"></script>
+  <script src="../layuiadmin/layui/layui.js"></script>
+  <script>
+    var url = window.location.search;
+    var str = url.substring(url.indexOf("?")+1,url.length);
+    var ID = str.substring(str.indexOf("=")+1,str.length);
+
+    layui.use(['jquery','layer'],function(){
+      var $ = layui.jquery;
+      var layer = layui.layer;
+      $.ajax({
+        url:"http://172.23.22.120/manage/api.php?action=getUserInfo",
+        data:{
+          id:ID
+        },
+        method:"GET",
+        success(data){
+          var _data = JSON.parse(data);
+          console.log(_data);
+          // layer.alert('内容', {
+          //   icon: 1,
+          //   skin: 'layer-ext-moon'
+          // },function(){
+          //   document.getElementsByTagName('html')[0].innerHTML = '';
+          // })
+        },
+        error(err){
+          console.log(err);
+        }
+      })
+    })
+  </script>
+
 </head>
 <body class="layui-layout-body">
   <div id="LAY_app">
@@ -39,7 +71,7 @@
             </a>
             <dl class="layui-nav-child">
               <dd><a lay-href="./index/admin-info.html">基本资料</a></dd>
-              <dd><a lay-href="./index/system.html">系统设置</a></dd>
+              <!--<dd><a lay-href="./index/system.html">系统设置</a></dd>-->
               <hr>
               <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
             </dl>
@@ -235,12 +267,12 @@
                 </dd>
               </dl>
             </li>
-            <li data-name="home" class="layui-nav-item">
-              <a lay-href="./index/email.html" lay-tips="邮件系统" lay-direction="2">
-                <i class="layui-icon">&#xe66e;</i>
-                <cite>邮件系统</cite>
-              </a>
-            </li>
+            <!--<li data-name="home" class="layui-nav-item">-->
+              <!--<a lay-href="./index/email.html" lay-tips="邮件系统" lay-direction="2">-->
+                <!--<i class="layui-icon">&#xe66e;</i>-->
+                <!--<cite>邮件系统</cite>-->
+              <!--</a>-->
+            <!--</li>-->
             <li data-name="home" class="layui-nav-item">
               <a lay-href="./index/admin-info.html" lay-tips="个人信息" lay-direction="2">
                 <i class="layui-icon">&#xe66f;</i>
@@ -292,7 +324,10 @@
     </div>
   </div>
 
-  <script src="../layuiadmin/layui/layui.js"></script>
+  <script>
+
+  </script>
+
   <script>
   layui.config({
     base: '../layuiadmin/' //静态资源所在路径

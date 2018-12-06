@@ -91,31 +91,22 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'username',1:"用户名"},
+        {0:"username",1:"用户名"},
+        {0:"passwd",1:"密码"},
         {0:"realname",1:'真实姓名'},
         {0:'img_src',1:'ICON'},
         {0:"scope",1:'所属区域'},
         {0:"phone",1:"联系电话"},
-        {0:"name",
+        {0:"role_id",
         1:{
           "title":'角色名称',
           "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
         }}
       ]
-      var url = '';
+      var url = 'http://172.23.22.120/manage/api.php?action=addUserWeb';
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = '';
-    // setTable({
-    //     addUrl:addUrl,
-    //     editUrl:editUrl,
-    //     cols:cols,
-    //     data:testData,
-    //     editSuc:editSuc,
-    //     editEnd:editEnd,
-    //     addSuc:addSuc,
-    //     editAjaxUrl:editAjaxUrl
-    //   });
+    var editAjaxUrl = 'http://172.23.22.120/manage/api.php?action=modifyUserInfo';
   })
 </script>
 
