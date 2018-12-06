@@ -170,6 +170,9 @@ function setTable(obj){
 				success:function(layero, index){
           obj.addSuc(layero, index) || '';
         },
+        end:function(){
+          obj.editEnd() || '';
+        }
       })
     });
 
