@@ -44,42 +44,14 @@
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-    var getTable = function() {
-      $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
-        method: 'GET',
-        success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:testData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
-        }
-      })
-    }
 
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
+    // var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
+      , {field: 'id', title: 'ID',align:'center'}
+      , {field: 'name', title: '角色',align:'center'}
+      , {field: 'priv_id', title: '权限',align:'center'}
+      , {field: 'time', title: '时间',align:'center'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -91,31 +63,50 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'username',1:"用户名"},
-        {0:"realname",1:'真实姓名'},
-        {0:'img_src',1:'ICON'},
-        {0:"scope",1:'所属区域'},
-        {0:"phone",1:"联系电话"},
-        {0:"name",
-        1:{
-          "title":'角色名称',
-          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
-        }}
+        {
+          0:"name",
+          1:{
+            "title":'角色名称',
+            "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
+          }
+        },
+        {
+          0:'priv_id',
+          1:{
+            "title":'权限',
+            "option":[1,2,3,4,5,6,7]
+          }
+        }
       ]
-      var url = '';
+      var url = 'http://172.23.22.120/manage/api.php?action=addRole';
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
+    var editAjaxUrl = 'http://172.23.22.120/manage/api.php?action=modifyRole';
+
+    var getTable = function() {
+      $.ajax({
+        url: 'http://172.23.22.120/manage/api.php?action=getAllRoles',
+        method: 'GET',
+        success(data) {
+          var _data = JSON.parse(data);
+          userData = _data.data;
+          setTable({
+            addUrl:addUrl,
+            editUrl:editUrl,
+            cols:cols,
+            data:userData,
+            editSuc:editSuc,
+            editEnd:editEnd,
+            addSuc:addSuc,
+            editAjaxUrl:editAjaxUrl
+          });
+        },
+        error(state) {
+          console.log(state);
+        }
+      })
+    }
+    getTable();
   })
 </script>
 
