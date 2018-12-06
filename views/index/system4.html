@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>综合管理系统</title>
+  <title>用户管理</title>
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
 </head>
@@ -21,6 +21,7 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
@@ -35,33 +36,86 @@
   </div>
 </script>
 <script>
-  layui.use(['jquery','table'], function() {
+  layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
     var $ = layui.jquery;
     var laypage = layui.laypage //分页
       , layer = layui.layer //弹层
       , table = layui.table //表格
       , upload = layui.upload //上传
       , element = layui.element //元素操作
-      , slider = layui.slider;//滑块
+      , slider = layui.slider //滑块
+    var getTable = function() {
+      $.ajax({
+        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
+        method: 'GET',
+        success(data) {
+          //var _data = JSON.parse(data);
+          //userData = _data.data;
+          setTable({
+            addUrl:addUrl,
+            editUrl:editUrl,
+            cols:cols,
+            data:testData,
+            editSuc:editSuc,
+            editEnd:editEnd,
+            addSuc:addSuc,
+            editAjaxUrl:editAjaxUrl
+          });
+        },
+        error(state) {
+          console.log(state);
+        }
+      })
+    }
 
-    var testData = [
-      {id:'2'}
-    ];
-    var cols=[ //表头
+    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
+    var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id', align: 'center'}
-      , {field: 'img_src', title: 'icon', align: 'center'}
-      , {field: 'username', title: '用户名', align: 'center'}
-      , {field: 'realname', title: '真实姓名', align: 'center'}
-      , {field: 'scope', title: '所属区域', align: 'center'}
-      , {field: 'phone', title: '联系电话', align: 'center'}
-      , {field: 'last_login', title: '最近登陆', align: 'center'}
-      , {field: 'ip', title: 'ip地址', align: 'center'}
-      , {field: 'name', title: "角色", align: 'center'}
+      , {field: 'id', title: 'id',align:'center'}
+      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
+      , {field: 'username', title: '用户名',align:'center'}
+      , {field: 'realname', title: '真实姓名',align:'center'}
+      , {field: 'scope', title: '所属区域',align:'center'}
+      , {field: 'phone', title: '联系电话',align:'center'}
+      , {field: 'last_login', title: '最近登陆',align:'center'}
+      , {field: 'ip', title: 'ip地址',align:'center'}
+      , {field: 'name',title:"角色",align:'center'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
-    setTable(addUrl,editUrl,cols,testData);
+
+    function editSuc(layero, index){}
+    function editEnd(){
+      getTable();
+    }
+    function addSuc(layero, index){
+      var iframe = window['layui-layer-iframe' + index];
+      var addData = [
+        {0:'username',1:"用户名"},
+        {0:"realname",1:'真实姓名'},
+        {0:'img_src',1:'ICON'},
+        {0:"scope",1:'所属区域'},
+        {0:"phone",1:"联系电话"},
+        {0:"name",
+        1:{
+          "title":'角色名称',
+          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
+        }}
+      ]
+      var url = '';
+      iframe.getFromParent(addData,url);
+    }
+    var editAjaxUrl = '';
+    setTable({
+        addUrl:addUrl,
+        editUrl:editUrl,
+        cols:cols,
+        data:testData,
+        editSuc:editSuc,
+        editEnd:editEnd,
+        addSuc:addSuc,
+        editAjaxUrl:editAjaxUrl
+      });
   })
 </script>
 
