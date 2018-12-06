@@ -46,16 +46,16 @@
       , slider = layui.slider //滑块
     var getTable = function() {
       $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
+        url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
         method: 'GET',
         success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
+          var _data = JSON.parse(data);
+          userData = _data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:userData,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
@@ -67,8 +67,8 @@
         }
       })
     }
-
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
+    getTable();
+    // var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
       , {field: 'id', title: 'id',align:'center'}
@@ -106,16 +106,16 @@
       iframe.getFromParent(addData,url);
     }
     var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
+    // setTable({
+    //     addUrl:addUrl,
+    //     editUrl:editUrl,
+    //     cols:cols,
+    //     data:testData,
+    //     editSuc:editSuc,
+    //     editEnd:editEnd,
+    //     addSuc:addSuc,
+    //     editAjaxUrl:editAjaxUrl
+    //   });
   })
 </script>
 
