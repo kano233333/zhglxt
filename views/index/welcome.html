@@ -41,9 +41,15 @@
       </div>
     </div>
     <div class="welcome-upper-center">
+
       <div class="layui-collapse">
         <div class="layui-colla-item">
-          <h2 class="welcome-upper-center-h2">人员统计</h2>
+          <h2 class="welcome-upper-center-h2">人员统计
+            <button class="layui-btn layui-btn-sm layui-btn-normal">
+              导入
+              <input type="file" id="xlsx" style="position:absolute;width:100%;left:0;opacity:0;">
+            </button>
+          </h2>
           <div class="welcome-colla-content">
             <div class="content-left">
               <p class="content-left-active">年龄统计</p>
@@ -63,7 +69,9 @@
     </div>
   </div>
 
-	<script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../static/admin/lib/xlsx/xlsx.core.min.js"></script>
 	<script src="../../static/admin/lib/echarts/echarts.js"></script>
 	<script type="text/javascript">
 		layui.use(['layer', 'jquery','table'], function () {
@@ -230,6 +238,47 @@
           $(".content-left>p").removeClass('content-left-active');
           $(this).addClass('content-left-active');
           requireEchart(i);
+        }
+      }
+
+
+      document.getElementById('xlsx').onchange = function() {
+        ConvertToArray();
+      }
+
+      function ConvertToArray() {
+        var reader = new FileReader();
+        reader.readAsBinaryString(document.getElementById("xlsx").files[0]);
+        reader.onloadend = function (evt) {
+          if (evt.target.readyState == FileReader.DONE) {
+            var data = reader.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+          }
+          var sheet_name_list = workbook.SheetNames;
+          var result = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+          var resultX = echartExcel(result);
+          chartData = resultX;
+          setP(resultX);
+          requireEchart(0);
+          var contentP = document.querySelectorAll('.content-left>p');
+          for(let i=0;i<contentP.length;i++){
+            contentP[i].onclick = function(){
+              $(".content-left>p").removeClass('content-left-active');
+              $(this).addClass('content-left-active');
+              requireEchart(i);
+            }
+          }
+        }
+      }
+
+      function setP(result){
+			  $('.content-left').empty();
+			  for(let i in result){
+			    if(i == 0){
+            $('.content-left').append("<p class='content-left-active'>"+result[i].title+"</p>");
+          }else{
+            $('.content-left').append("<p>"+result[i].title+"</p>");
+          }
         }
       }
 		});

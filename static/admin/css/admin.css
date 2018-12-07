@@ -1997,12 +1997,11 @@
 
 .content-left {
   width:25%;
-  height:365px;
+  /*height:365px;*/
   display:flex;
   flex-direction: column;
 }
 .content-left>p {
-  flex:1;
   padding:10px 5px;
   font-size:15px;
   color:#666;

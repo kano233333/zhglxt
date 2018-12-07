@@ -211,3 +211,42 @@ function setTable(obj){
     })
   })
 }
+
+
+function echartExcel(result){
+  let arr = [];
+  let obj = {};
+  let xxx;
+  let aaa = [];
+  let flag=false;
+  for(let i in result){
+    if(objnum(result[i])===1){
+      if(i!=0){
+        obj['data'] = aaa;
+        arr.push(obj);
+        obj = {};
+        aaa=[];
+      }
+      obj['title']=result[i].title;
+    }else{
+      xxx = {'type':result[i].title,'data':result[i].__EMPTY};
+      aaa.push(xxx);
+    }
+    if(i==result.length-1){
+      obj['data'] = aaa;
+      arr.push(obj);
+      obj = {};
+      aaa=[];
+    }
+  }
+  console.log(arr)
+  return arr;
+}
+
+function objnum(obj){
+  let i =0;
+  for(let n in obj){
+    i++;
+  }
+  return i;
+}
