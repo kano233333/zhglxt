@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>用户管理</title>
+  <title>事件处理</title>
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
 </head>
@@ -44,42 +44,20 @@
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-    var getTable = function() {
-      $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
-        method: 'GET',
-        success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:testData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
-        }
-      })
-    }
 
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
+    // var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
+      , {field: 'id', title: 'id',align:'center',sort:true}
+      , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'status', title: '处理状态',align:'center'}
+      , {field: 'grid', title: '所属网格',align:'center'}
+      , {field: 'time', title: '创建时间',align:'center'}
+      , {field: 'title', title: '标题',align:'center'}
+      , {field: 'level', title: '事件级别',align:'center'}
+      , {field: 'type',title:"事件类型",align:'center'}
+      , {field: 'organizer',title:"发起人",align:'center'}
+      , {field: '',title:"操作",align:'center'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -91,12 +69,13 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'username',1:"用户名"},
+        {0:"username",1:"用户名"},
+        {0:"passwd",1:"密码"},
         {0:"realname",1:'真实姓名'},
         {0:'img_src',1:'ICON'},
         {0:"scope",1:'所属区域'},
         {0:"phone",1:"联系电话"},
-        {0:"name",
+        {0:"role_id",
         1:{
           "title":'角色名称',
           "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
@@ -106,16 +85,31 @@
       iframe.getFromParent(addData,url);
     }
     var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
+
+    var getTable = function(){
+      $.ajax({
+        url: 'http://172.23.22.120/manage/api.php?action=getDubanEvents',
+        method: 'GET',
+        success(data) {
+          var _data = JSON.parse(data);
+          userData = _data.data;
+          setTable({
+            addUrl:addUrl,
+            editUrl:editUrl,
+            cols:cols,
+            data:userData,
+            editSuc:editSuc,
+            editEnd:editEnd,
+            addSuc:addSuc,
+            editAjaxUrl:editAjaxUrl
+          });
+        },
+        error(state) {
+          console.log(state);
+        }
+      })
+    }
+    getTable();
   })
 </script>
 
