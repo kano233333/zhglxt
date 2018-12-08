@@ -161,7 +161,7 @@ function setTable(obj){
     var $ = layui.jquery;
     var table = layui.table;
     tableRender(obj.cols,obj.data);
-    $('.addBtn').click(function () {
+    $('.addBtn').click(function () {  //add
       layer.open({
         type: 2,
         area: ['700px', '550px'],
@@ -187,7 +187,7 @@ function setTable(obj){
       }
     });
 
-    $('#edit').click(function () {
+    $('#edit').click(function () {   //edit
       if (checkNum > 1) {
         layer.msg('一次只能编辑一行')
       } else if (checkNum <= 0) {
@@ -208,6 +208,10 @@ function setTable(obj){
           }
         })
       }
+    })
+
+		$('#delete').click(function(){
+
     })
   })
 }
@@ -249,4 +253,8 @@ function objnum(obj){
     i++;
   }
   return i;
+}
+
+function deleteCheckbox(){
+  if($('thead')){}
 }

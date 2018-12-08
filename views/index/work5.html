@@ -21,7 +21,16 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-
+<script type="text/html" id="bar">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal">
+      查看详情
+    </button>
+    <button class="layui-btn layui-btn-sm layui-btn-dange">
+      评分
+    </button>
+  </div>
+</script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
@@ -30,8 +39,8 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      刷新
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs" id="delete">
+      删除
     </button>
   </div>
 </script>
@@ -44,42 +53,19 @@
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-    var getTable = function() {
-      $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
-        method: 'GET',
-        success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:testData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
-        }
-      })
-    }
 
     var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
       , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
+      , {field: 'grid', title: '网格',align:'center'}
+      , {field: 'status', title: '状态',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'title', title: '标题',align:'center'}
+      , {field: 'type', title: '事件类型',align:'center'}
+      , {field: 'organizer', title: '发起人',align:'center'}
+      , {field: 'time', title: '时间',align:'center'}
+      , {field: 'other',title:"其他",align:'center',toolbar:'#bar',width:"12%"}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -106,16 +92,31 @@
       iframe.getFromParent(addData,url);
     }
     var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
+    var getTable = function() {
+      $.ajax({
+        // url: 'http://172.23.22.120/manage/api.php?action=displayEvents',
+        method: 'GET',
+        success(data) {
+          // var _data = JSON.parse(data);
+          // userData = _data.data;
+          // console.log(userData)
+          setTable({
+            addUrl:addUrl,
+            editUrl:editUrl,
+            cols:cols,
+            data:testData,
+            editSuc:editSuc,
+            editEnd:editEnd,
+            addSuc:addSuc,
+            editAjaxUrl:editAjaxUrl
+          });
+        },
+        error(state) {
+          console.log(state);
+        }
+      })
+    }
+    getTable();
   })
 </script>
 
