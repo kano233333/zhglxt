@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>score</title>
+  <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
+  <style>
+    .box {
+      width:300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top:25px;
+    }
+    #score i{
+      font-size:30px;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <div id="score"></div>
+  <button class="layui-btn layui-btn-sm" style="display: block;" id="sure">确定</button>
+</div>
+
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="./const.js"></script>
+<script>
+  layui.use(['rate','layer'],function(){
+    var rate = layui.rate;
+    var layer = layui.layer;
+    rate.render({
+      elem: '#score',
+      length:4
+    });
+
+    document.getElementById('sure').onclick = function(){
+      var index = parent.layer.getFrameIndex(window.name);
+      parent.layer.close(index);
+    }
+  })
+</script>
+</body>
+</html>

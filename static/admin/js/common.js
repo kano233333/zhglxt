@@ -157,9 +157,10 @@ function tableRender(cols,data) {
 }
 
 function setTable(obj){
-  layui.use(['jquery','table'], function() {
+  layui.use(['jquery','table','rate'], function() {
     var $ = layui.jquery;
     var table = layui.table;
+    var rate = layui.rate;
     tableRender(obj.cols,obj.data);
     $('.addBtn').click(function () {  //add
       layer.open({
@@ -177,17 +178,12 @@ function setTable(obj){
     });
 
     var editUserData;
-    var checkNum = 0;
     table.on('checkbox(test)', function (obj) {
-      if (obj.checked) {
-        editUserData = obj.data;
-        checkNum++;
-      } else {
-        checkNum--;
-      }
+      editUserData = obj.data;
     });
 
-    $('#edit').click(function () {   //edit
+    $('#edit').click(function () {//edit
+      var checkNum = document.querySelectorAll("tbody input[type='checkbox']:checked").length;
       if (checkNum > 1) {
         layer.msg('一次只能编辑一行')
       } else if (checkNum <= 0) {
@@ -211,7 +207,53 @@ function setTable(obj){
     })
 
 		$('#delete').click(function(){
+		  if(document.querySelectorAll("tbody input[type='checkbox']:checked").length<=0){
+		    layer.msg('请至少选中一行经行删除');
+		    return;
+      }
+      layer.confirm('确定要进行删除？', {
+        btn: ['确定','取消']
+      },function(index){
+        deleteCheckbox(obj.editEnd());
+        layer.close(layer.index)
+      });
+    })
 
+    $('.detail').click(function(){
+      var idX =this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+      layer.open({
+        type: 2,
+        area: ['600px', '550px'],
+        maxmin: true,
+        content: obj.detailUrl,
+        success:function(layero, index){
+          $.ajax({
+            url:obj.detailGetUrl,
+            data:{
+              id:idX
+            },
+            method:"POST",
+            success(data){
+              var _data = JSON.parse(data);
+              var toData = _data.data;
+              var iframe = window['layui-layer-iframe' + index];
+              iframe.getFromParent(toData);
+            },
+            error(){
+              layer.msg('错误');
+            }
+          })
+        }
+      })
+    })
+
+    $('.score').click(function(){
+      layer.open({
+        type: 2,
+        area: ['300px', '200px'],
+        maxmin: true,
+        content: obj.scoreUrl,
+      })
     })
   })
 }
@@ -255,6 +297,26 @@ function objnum(obj){
   return i;
 }
 
-function deleteCheckbox(){
-  if($('thead')){}
+function deleteCheckbox(editEnd){
+  var idArr = [];
+  layui.use(['jquery','layer'],function(){
+    var $ = layui.jquery;
+    var checked = document.querySelectorAll("tbody input[type='checkbox']:checked");
+    for(let i=0;i<checked.length;i++){
+      let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+      idArr.push(tr);
+    }
+    $.ajax({
+      url:"http://172.23.22.120/manage/api.php?action=DeleteEvent",
+      method:"POST",
+      data:idArr,
+      success(){
+        layer.msg('删除成功')
+        editEnd();
+      },
+      error() {
+        layer.msg('错误')
+      }
+    })
+  })
 }

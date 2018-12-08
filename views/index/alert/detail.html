@@ -3,8 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <title>detail</title>
+  <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
+  <style>
+    .xxx {
+      display: flex;
+      flex-wrap:wrap;
+      justify-content: space-between;
+    }
+    .wrap {
+      display:flex;
+      margin-bottom: 25px;
+      margin-right:50px;
+    }
+    .wrap>div {
+      font-size:16px;
+    }
+    .left {
+      padding:10px 15px;
+      background-color: #0a0048;
+      color:#fff;
+    }
+    .right {
+      padding:10px 30px;
+      border:1px solid #0a0048;
+    }
+  </style>
 </head>
 <body>
+<div id="box" style="padding:40px;">
+  <div id="view"></div>
+</div>
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="./const.js"></script>
+<script type="text/html" id="formModle">
+  <div class="xxx">
+  {{# for(let i in d[0]){ }}
+  <div class="wrap">
+    <div class="left">{{ys[i]}}</div>
+    {{# if(i=='level'){ }}
+    <div class="right">{{level[d[0][i]]}}</div>
+    {{# }else if(i=='status'){ }}
+    <div class="right">{{dealStatus[d[0][i]]}}</div>
+    {{# }else{ }}
+    <div class="right">{{d[0][i]}}</div>
+    {{# } }}
+  </div>
+  {{# } }}
+  </div>
+</script>
 
+<script>
+
+  function getFromParent(data){
+    elData = data;
+    console.log(elData)
+    layui.use(['jquery', 'layer', 'upload', 'laytpl'], function () {
+      var $ = layui.jquery;
+      var laytpl = layui.laytpl;
+      var getTpl = document.getElementById('formModle').innerHTML;
+      var view = document.getElementById('view');
+      laytpl(getTpl).render(elData, function (html) {
+        view.innerHTML = html;
+      });
+    })
+  }
+</script>
 </body>
 </html>
