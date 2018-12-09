@@ -214,47 +214,70 @@ function setTable(obj){
       layer.confirm('确定要进行删除？', {
         btn: ['确定','取消']
       },function(index){
-        deleteCheckbox(obj.editEnd());
+        deleteCheckbox(obj.editEnd);
         layer.close(layer.index)
       });
     })
 
-    $('.detail').click(function(){
-      var idX =this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-      layer.open({
-        type: 2,
-        area: ['600px', '550px'],
-        maxmin: true,
-        content: obj.detailUrl,
-        success:function(layero, index){
-          $.ajax({
-            url:obj.detailGetUrl,
-            data:{
-              id:idX
-            },
-            method:"POST",
-            success(data){
-              var _data = JSON.parse(data);
-              var toData = _data.data;
-              var iframe = window['layui-layer-iframe' + index];
-              iframe.getFromParent(toData);
-            },
-            error(){
-              layer.msg('错误');
-            }
-          })
-        }
+    var resetClick = function() {
+      $('.detail').click(function () {
+        var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+        layer.open({
+          type: 2,
+          area: ['600px', '550px'],
+          maxmin: true,
+          content: obj.detailUrl,
+          success: function (layero, index) {
+            $.ajax({
+              url: obj.detailGetUrl,
+              data: {
+                id: idX
+              },
+              method: "POST",
+              success(data) {
+                var _data = JSON.parse(data);
+                var toData = _data.data;
+                var iframe = window['layui-layer-iframe' + index];
+                iframe.getFromParent(toData);
+              },
+              error() {
+                layer.msg('错误');
+              }
+            })
+          }
+        })
       })
-    })
-
-    $('.score').click(function(){
-      layer.open({
-        type: 2,
-        area: ['300px', '200px'],
-        maxmin: true,
-        content: obj.scoreUrl,
+      $('.score').click(function () {
+        var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+        $.ajax({
+          url:"http://47.106.197.31/manage/api.php?action=isRanked",
+          method:"POST",
+          data:{id:idX},
+          success(data){
+            var _data = JSON.parse(data);
+              layer.open({
+                title:'评分',
+                type: 2,
+                area: ['300px', '200px'],
+                maxmin: true,
+                content: obj.scoreUrl,
+                success: function (layero, index) {
+                  var iframe = window['layui-layer-iframe' + index];
+                  iframe.getFromParent(_data,idX);
+                }
+              })
+          }
+        })
       })
+    }
+    //点page 重挂click 太恶心了框架
+    $('.layui-table-page a').click(function(){
+      resetClick();
     })
+    $('.layui-table-page button').click(function(){
+      resetClick();
+    })
+    resetClick();
   })
 }
 
@@ -307,9 +330,9 @@ function deleteCheckbox(editEnd){
       idArr.push(tr);
     }
     $.ajax({
-      url:"http://172.23.22.120/manage/api.php?action=DeleteEvent",
+      url:"http://47.106.197.31/manage/api.php?action=DeleteEvent",
       method:"POST",
-      data:idArr,
+      data:{id:idArr},
       success(){
         layer.msg('删除成功')
         editEnd();

@@ -17,16 +17,18 @@
       margin-right:50px;
     }
     .wrap>div {
-      font-size:16px;
+      font-size:15px;
     }
     .left {
-      padding:10px 15px;
-      background-color: #0a0048;
+      padding:6px 15px;
+      background-color: #009688;
       color:#fff;
+      border-radius:25px 0 0 0;
     }
     .right {
-      padding:10px 30px;
-      border:1px solid #0a0048;
+      padding:6px 30px;
+      border:1px solid #00524a;
+      border-radius:0 0 25px 0;
     }
   </style>
 </head>
@@ -46,7 +48,11 @@
     {{# }else if(i=='status'){ }}
     <div class="right">{{dealStatus[d[0][i]]}}</div>
     {{# }else{ }}
-    <div class="right">{{d[0][i]}}</div>
+    <div class="right">
+      {{# if(d[0][i]!=null){ }}
+        {{d[0][i]}}
+      {{# } }}
+    </div>
     {{# } }}
   </div>
   {{# } }}
@@ -54,10 +60,8 @@
 </script>
 
 <script>
-
   function getFromParent(data){
     elData = data;
-    console.log(elData)
     layui.use(['jquery', 'layer', 'upload', 'laytpl'], function () {
       var $ = layui.jquery;
       var laytpl = layui.laytpl;

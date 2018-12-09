@@ -78,14 +78,14 @@
           }
         }
       ]
-      var url = 'http://172.23.22.120/manage/api.php?action=addRole';
+      var url = 'http://47.106.197.31/manage/api.php?action=addRole';
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = 'http://172.23.22.120/manage/api.php?action=modifyRole';
+    var editAjaxUrl = 'http://47.106.197.31/manage/api.php?action=modifyRole';
 
     var getTable = function() {
       $.ajax({
-        url: 'http://172.23.22.120/manage/api.php?action=getAllRoles',
+        url: 'http://47.106.197.31/manage/api.php?action=getAllRoles',
         method: 'GET',
         success(data) {
           var _data = JSON.parse(data);

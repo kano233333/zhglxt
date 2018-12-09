@@ -7,7 +7,16 @@ const ys = {
   "title": "标题",
   "level": "程度",
   "type": "类型",
-  "organizer": "发起人"
+  "organizer": "发起人",
+  "rank":"评分",
+  "img_path":'图片',
+  "resource":'来源',
+  "content":"内容",
+  "gridman":"网格人",
+  "is_duban":"是否督办",
+  "latitude":"经度",
+  "longitude":"维度",
+  "address":"地址"
 };
 
 const level = {
@@ -38,3 +47,7 @@ const allow = {
   "title":"标题",
   "type":"事件类型"
 };
+
+const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise'];
+const optionAddIndex = ['name'];
+const postFile = ['file','img_src','img_path'];

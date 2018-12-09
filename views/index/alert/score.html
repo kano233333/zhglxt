@@ -28,19 +28,40 @@
 <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="./const.js"></script>
 <script>
-  layui.use(['rate','layer'],function(){
+function getFromParent(data,id){
+  layui.use(['rate','layer','jquery'],function(){
     var rate = layui.rate;
+    var $ = layui.jquery;
     var layer = layui.layer;
     rate.render({
       elem: '#score',
-      length:4
+      length:4,
+      //value:''
     });
 
     document.getElementById('sure').onclick = function(){
-      var index = parent.layer.getFrameIndex(window.name);
-      parent.layer.close(index);
+      var num = document.querySelectorAll('.layui-inline .layui-icon-rate-solid').length;
+      $.ajax({
+        url:"http://47.106.197.31/manage/api.php?action=modifyEventInfo",
+        method:"POST",
+        data:{
+          id:id,
+          rank:num
+        },
+        success(){
+          layer.msg('评分成功');
+          var index = parent.layer.getFrameIndex(window.name);
+          parent.layer.close(index);
+        },
+        error(){
+          layer.msg('错误');
+          var index = parent.layer.getFrameIndex(window.name);
+          parent.layer.close(index);
+        }
+      });
     }
   })
+}
 </script>
 </body>
 </html>
