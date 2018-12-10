@@ -66,7 +66,7 @@
       , {field: 'time', title: '创建时间',align:'center'}
       , {field: 'title', title: '标题',align:'center'}
       , {field: 'level', title: '事件级别',align:'center',templet:'#levelModel'}
-      , {field: 'type',title:"事件类型",align:'center'}
+      , {field: 'type',title:"事件类型",align:'center',templet:"<span>{{eventType[d.type]}}</span>"}
       , {field: 'organizer',title:"发起人",align:'center'}
       , {field: '',title:"操作",align:'center',toolbar:'#bar',width:"15%"}
     ];
@@ -83,7 +83,10 @@
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
         {0:'title',1:'标题'},
-        {0:"type",1:"事件类型"},
+        {0:"type",1:{
+          "title":"事件类型",
+            "option":['民事纠纷','市政环卫','物业管理','隐患排查','其它']
+          }},
         {0:"level",
           1:{
             "title":'事件级别',

@@ -45,11 +45,25 @@ const allow = {
   "name":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
   "priv_id":{title:'权限',option:[1,2,3,4,5,6,7]},
   "title":"标题",
-  "type":"事件类型",
+  "type":{title:'事件类型',option:['民事纠纷','市政环卫','物业管理','隐患排查','其他']},
   "level":{title:'事件级别',option:['紧急','一般']},
   "content":"事件内容"
 };
 
-const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise'];
+const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','type'];
 const optionAddIndex = ['name'];
 const postFile = ['file','img_src','img_path'];
+
+const eventType = {
+  0:'民事纠纷',
+  1:"市政环卫",
+  2:"物业管理",
+  3:"隐患排查",
+  4:"其他"
+};
+
+const eventResource = {
+  0:'群众发现',
+  1:"自己发现",
+  2:"上级安排"
+};

@@ -51,6 +51,14 @@
       {{dealStatus[d[0][i]]}}
       {{# } }}
     </div>
+    {{# }else if(i=='resource'){ }}
+    <div class="right">
+      {{eventResource[d[0][i]]}}
+    </div>
+    {{# }else if(i=='type'){ }}
+    <div class="right">
+      {{eventType[d[0][i]]}}
+    </div>
     {{# }else{ }}
     <div class="right">
       {{# if(d[0][i]!=null){ }}

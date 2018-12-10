@@ -208,6 +208,7 @@ function setTable(obj){
                   var _data = JSON.parse(data);
                   var toData = _data.data;
                   editUserData = toData[0];
+                  console.log(editUserData)
                   iframe.getFromParent(editUserData,obj.editAjaxUrl);
                 },
                 error() {
