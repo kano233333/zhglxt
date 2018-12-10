@@ -144,7 +144,7 @@
   {{dealStatus[d.status]}}
   </span>
   {{# }else if(d.status==1){ }}
-  <span style="color:#3137ff;">
+  <span style="color:#08aa16;">
   {{dealStatus[d.status]}}
   </span>
   {{# }else if(d.status==2){ }}
@@ -157,12 +157,12 @@
 
 <script id="levelModel" type="text/html">
   {{# if(dealStatus[d.level]!= undefined){ }}
-  {{# if(d.status==0){ }}
+  {{# if(d.level==0){ }}
   <span style="color:red;">
   {{level[d.level]}}
   </span>
-  {{# }else if(d.status==1){ }}
-  <span style="color:#3137ff;">
+  {{# }else if(d.level==1){ }}
+  <span style="color:#08aa16;">
   {{level[d.level]}}
   </span>
   {{# } }}
