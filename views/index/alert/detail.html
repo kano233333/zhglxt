@@ -46,7 +46,11 @@
     {{# if(i=='level'){ }}
     <div class="right">{{level[d[0][i]]}}</div>
     {{# }else if(i=='status'){ }}
-    <div class="right">{{dealStatus[d[0][i]]}}</div>
+    <div class="right">
+      {{# if(dealStatus[d[0][i]]!=undefined){ }}
+      {{dealStatus[d[0][i]]}}
+      {{# } }}
+    </div>
     {{# }else{ }}
     <div class="right">
       {{# if(d[0][i]!=null){ }}
