@@ -45,7 +45,9 @@ const allow = {
   "name":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
   "priv_id":{title:'权限',option:[1,2,3,4,5,6,7]},
   "title":"标题",
-  "type":"事件类型"
+  "type":"事件类型",
+  "level":{title:'事件级别',option:['紧急','一般']},
+  "content":"事件内容"
 };
 
 const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise'];

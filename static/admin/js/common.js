@@ -197,7 +197,27 @@ function setTable(obj){
           success:function(layero, index){
             obj.editSuc(layero, index) || '';
             var iframe = window['layui-layer-iframe' + index];
-            iframe.getFromParent(editUserData,obj.editAjaxUrl);
+            if(obj.editOther && obj.editOther!=undefined){ //编辑没有展示的内容
+              $.ajax({
+                url: obj.detailGetUrl,
+                data: {
+                  id: editUserData.id
+                },
+                method: "POST",
+                success(data) {
+                  var _data = JSON.parse(data);
+                  var toData = _data.data;
+                  editUserData = toData[0];
+                  iframe.getFromParent(editUserData,obj.editAjaxUrl);
+                },
+                error() {
+                  layer.msg('错误');
+                  return;
+                }
+              })
+            }else{
+              iframe.getFromParent(editUserData,obj.editAjaxUrl);
+            }
           },
           end:function(){
             obj.editEnd() || '';
@@ -271,16 +291,12 @@ function setTable(obj){
       })
     }
     //点page 重挂click 太恶心了框架
-    $('.layui-table-page a').click(function(){
-      resetClick();
-    })
-    $('.layui-table-page button').click(function(){
+    $('.layui-table-page').click(function(){
       resetClick();
     })
     resetClick();
   })
 }
-
 
 function echartExcel(result){
   let arr = [];

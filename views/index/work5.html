@@ -68,7 +68,7 @@
       , {field: 'level', title: '事件级别',align:'center',templet:'#levelModel'}
       , {field: 'type',title:"事件类型",align:'center'}
       , {field: 'organizer',title:"发起人",align:'center'}
-      , {field: '',title:"操作",align:'center',toolbar:'#bar',width:"12%"}
+      , {field: '',title:"操作",align:'center',toolbar:'#bar',width:"15%"}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -120,7 +120,8 @@
             detailGetUrl:detailGetUrl,
             detailUrl:detailUrl,
             editAjaxUrl:editAjaxUrl,
-            scoreUrl:scoreUrl
+            scoreUrl:scoreUrl,
+            editOther:true
           });
         },
         error(state) {
