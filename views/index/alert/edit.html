@@ -111,8 +111,10 @@ height:100%;" id="{{d[index][0]}}">
           }
         }
         postJson['id'] = data.id;
+        var flag = 0;
         console.log(postJson);
         if(formdata!=undefined){
+          flag=1;
           for(let i in postJson){
             formdata.append(i,postJson[i]);
           }
@@ -121,10 +123,11 @@ height:100%;" id="{{d[index][0]}}">
         }
         $.ajax({
           url:url,
-          type: "POST",
-          cache: false,
-          processData: false,
-          contentType: false,
+          method: "POST",
+          // type:'POST',
+          // cache: flag==0 ? true : false,
+          // processData: formdata==undefined ? true : false,
+          // contentType: flag==0 ? true : false,
           data: formdata,
           success() {
             var index = parent.layer.getFrameIndex(window.name);
