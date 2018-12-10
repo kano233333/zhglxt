@@ -67,3 +67,8 @@ const eventResource = {
   1:"自己发现",
   2:"上级安排"
 };
+
+const yesNo = {
+  0:'否',
+  1:'是'
+}

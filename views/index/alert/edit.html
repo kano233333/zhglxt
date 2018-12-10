@@ -88,7 +88,6 @@ height:100%;" id="{{d[index][0]}}">
 
       $('#sub').click(function () {
         var postJson = {};
-        var formdata;
         for (let i in elData) {
           if ($('#' + postJson[elData[i][0]]).val() == '') {
             layer.msg('请完善信息');
@@ -103,8 +102,6 @@ height:100%;" id="{{d[index][0]}}">
               }else{
                 postJson[elData[i][0]] = index;
               }
-            }else if(postFile.indexOf(elData[i][0])!=-1){ //img
-              formdata= new FormData($("#uploadForm"));
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();
             }
@@ -114,22 +111,10 @@ height:100%;" id="{{d[index][0]}}">
         postJson['resource'] = 2;
         var flag = 0;
         console.log(postJson);
-        if(formdata!=undefined){
-          flag=1;
-          for(let i in postJson){
-            formdata.append(i,postJson[i]);
-          }
-        }else{
-          formdata = postJson;
-        }
         $.ajax({
           url:url,
           method: "POST",
-          // type:'POST',
-          // cache: flag==0 ? true : false,
-          // processData: formdata==undefined ? true : false,
-          // contentType: flag==0 ? true : false,
-          data: formdata,
+          data: postJson,
           success() {
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
