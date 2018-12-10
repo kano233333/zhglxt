@@ -10,36 +10,7 @@
   <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
   <script src="https://cdn.bootcss.com/require.js/2.3.6/require.js"></script>
   <script src="../layuiadmin/layui/layui.js"></script>
-  <script>
-    var url = window.location.search;
-    var str = url.substring(url.indexOf("?")+1,url.length);
-    var ID = str.substring(str.indexOf("=")+1,str.length);
-
-    layui.use(['jquery','layer'],function(){
-      var $ = layui.jquery;
-      var layer = layui.layer;
-      $.ajax({
-        // url:"http://172.23.22.120/manage/api.php?action=getUserInfo",
-        data:{
-          id:ID
-        },
-        method:"GET",
-        success(data){
-          // var _data = JSON.parse(data);
-          // console.log(_data);
-          // layer.alert('内容', {
-          //   icon: 1,
-          //   skin: 'layer-ext-moon'
-          // },function(){
-          //   document.getElementsByTagName('html')[0].innerHTML = '';
-          // })
-        },
-        error(err){
-          console.log(err);
-        }
-      })
-    })
-  </script>
+  <script src="../static/admin/js/common.js"></script>
 
 </head>
 <body class="layui-layout-body">
@@ -323,6 +294,13 @@
       <div class="layadmin-body-shade" layadmin-event="shade"></div>
     </div>
   </div>
+
+  <script>
+    if(getCookie('session') == ''){
+      document.getElementsByTagName('body')[0].innerHTML = '';
+      alert('无权访问');
+    }
+  </script>
 
   <script>
   layui.config({

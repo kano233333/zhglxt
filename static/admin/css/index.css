@@ -580,6 +580,8 @@
 		width: 100%;
 		height: 49%;
 		color: #72D9E3;
+		display: flex;
+    justify-content: space-evenly;
 	}
 	.business:first-child>span{
 		width: 50%;
