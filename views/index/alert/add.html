@@ -33,6 +33,7 @@ height:100%;" id="{{d[index][0]}}">
     <button style="position:relative;top:-25px;z-index:-1;" type="button" class="layui-btn">
       <i class="layui-icon">&#xe67c;</i>上传图片
     </button>
+    <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
   </div>
   {{# }else if(d[index][0]=='passwd'){ }}
   <div class="layui-form-item">
@@ -132,6 +133,12 @@ height:100%;" id="{{d[index][0]}}">
         });
       })
 
+      if($('#file')){
+        $('#file').change(function(){
+          var src = window.URL.createObjectURL(this.files[0])
+          $('#fileImg').attr('src',src)
+        })
+      }
     })
   }
 </script>
