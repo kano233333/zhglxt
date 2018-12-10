@@ -21,7 +21,17 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="./alert/const.js"></script>
+<script type="text/html" id="bar">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal detail">
+      查看详情
+    </button>
+    <button class="layui-btn layui-btn-sm layui-btn-dange score">
+      评分
+    </button>
+  </div>
+</script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
@@ -30,11 +40,13 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      刷新
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs" id="delete">
+      删除
     </button>
   </div>
 </script>
+
+
 <script>
   layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
     var $ = layui.jquery;
@@ -45,23 +57,24 @@
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
 
-    // var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center',sort:true}
+      , {field: 'id', title: 'id',align:'center'}
       , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'status', title: '处理状态',align:'center'}
+      , {field: 'status', title: '处理状态',align:'center',templet:'#statusModel'}
       , {field: 'grid', title: '所属网格',align:'center'}
       , {field: 'time', title: '创建时间',align:'center'}
       , {field: 'title', title: '标题',align:'center'}
-      , {field: 'level', title: '事件级别',align:'center'}
+      , {field: 'level', title: '事件级别',align:'center',templet:'#levelModel'}
       , {field: 'type',title:"事件类型",align:'center'}
       , {field: 'organizer',title:"发起人",align:'center'}
-      , {field: '',title:"操作",align:'center'}
+      , {field: '',title:"操作",align:'center',toolbar:'#bar',width:"15%"}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
-
+    var detailUrl = './alert/detail.html';
+    var detailGetUrl = 'http://47.106.197.31/manage/api.php?action=selectEventById';
+    var scoreUrl = "./alert/score.html";
     function editSuc(layero, index){}
     function editEnd(){
       getTable();
@@ -69,26 +82,29 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:"username",1:"用户名"},
-        {0:"passwd",1:"密码"},
-        {0:"realname",1:'真实姓名'},
-        {0:'img_src',1:'ICON'},
-        {0:"scope",1:'所属区域'},
-        {0:"phone",1:"联系电话"},
-        {0:"role_id",
-        1:{
-          "title":'角色名称',
-          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
-        }}
+        {0:'title',1:'标题'},
+        {0:"type",1:"事件类型"},
+        {0:"level",
+          1:{
+            "title":'事件级别',
+            "option":['紧急','一般']}
+        },
+        {0:'supervise',
+          1:{"title":'是否督办',
+            "option":['否','是']
+        }},
+        {0:'content',1:"内容"},
+        {0:'file',1:"图片"},
+        // {0:'source',1:"来源"},
+        // {0:"address",1:"地址"}
       ]
-      var url = '';
+      var url = 'http://47.106.197.31/manage/api.php?action=uploadEvent';
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = '';
-
-    var getTable = function(){
+    var editAjaxUrl = 'http://47.106.197.31/manage/api.php?action=modifyEventInfo';
+    var getTable = function() {
       $.ajax({
-        url: 'http://172.23.22.120/manage/api.php?action=getDubanEvents',
+        url: 'http://47.106.197.31/manage/api.php?action=getDubanEvents',
         method: 'GET',
         success(data) {
           var _data = JSON.parse(data);
@@ -101,7 +117,11 @@
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
+            detailGetUrl:detailGetUrl,
+            detailUrl:detailUrl,
+            editAjaxUrl:editAjaxUrl,
+            scoreUrl:scoreUrl,
+            editOther:true
           });
         },
         error(state) {
@@ -116,3 +136,35 @@
 </body>
 
 </html>
+
+<script id="statusModel" type="text/html">
+  {{# if(dealStatus[d.status]!= undefined){ }}
+  {{# if(d.status==0){ }}
+  <span style="color:red;">
+  {{dealStatus[d.status]}}
+  </span>
+  {{# }else if(d.status==1){ }}
+  <span style="color:#3137ff;">
+  {{dealStatus[d.status]}}
+  </span>
+  {{# }else if(d.status==2){ }}
+  <span style="color:#504f48;">
+  {{dealStatus[d.status]}}
+  </span>
+  {{# } }}
+  {{# } }}
+</script>
+
+<script id="levelModel" type="text/html">
+  {{# if(dealStatus[d.level]!= undefined){ }}
+  {{# if(d.status==0){ }}
+  <span style="color:red;">
+  {{level[d.level]}}
+  </span>
+  {{# }else if(d.status==1){ }}
+  <span style="color:#3137ff;">
+  {{level[d.level]}}
+  </span>
+  {{# } }}
+  {{# } }}
+</script>
