@@ -245,7 +245,7 @@ function setTable(obj){
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
         layer.open({
           type: 2,
-          area: ['600px', '550px'],
+          area: ['500px', '550px'],
           maxmin: true,
           content: obj.detailUrl,
           success: function (layero, index) {

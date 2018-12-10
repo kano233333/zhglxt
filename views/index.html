@@ -38,7 +38,7 @@
           </li>
           <li class="layui-nav-item" style="margin-right:50px;" lay-unselect>
             <a href="javascript:;">
-              <cite>贤心</cite>
+              <cite id="usernameX"></cite>
             </a>
             <dl class="layui-nav-child">
               <dd><a lay-href="./index/admin-info.html">基本资料</a></dd>
@@ -299,6 +299,8 @@
     if(getCookie('session') == ''){
       document.getElementsByTagName('body')[0].innerHTML = '';
       alert('无权访问');
+    }else {
+      document.getElementById('usernameX').innerText = 'xxx';
     }
   </script>
 
