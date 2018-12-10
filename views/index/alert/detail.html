@@ -9,12 +9,14 @@
     .xxx {
       display: flex;
       flex-wrap:wrap;
-      justify-content: space-between;
+      /*justify-content: space-between;*/
+      /*flex-direction: column;*/
+      flex-wrap:wrap;
     }
     .wrap {
       display:flex;
       margin-bottom: 25px;
-      margin-right:50px;
+      margin-right:30px;
     }
     .wrap>div {
       font-size:15px;
@@ -23,12 +25,10 @@
       padding:6px 15px;
       background-color: #009688;
       color:#fff;
-      border-radius:25px 0 0 0;
     }
     .right {
       padding:6px 30px;
       border:1px solid #00524a;
-      border-radius:0 0 25px 0;
     }
   </style>
 </head>
@@ -58,6 +58,10 @@
     {{# }else if(i=='type'){ }}
     <div class="right">
       {{eventType[d[0][i]]}}
+    </div>
+    {{# }else if(i=='img_path'){ }}
+    <div class="right">
+      <img style="max-width: 300px;max-height: 300px;" src="{{globalUrl+d[0][i]}}" alt="">
     </div>
     {{# }else if(i=='is_duban'){ }}
     <div class="right">

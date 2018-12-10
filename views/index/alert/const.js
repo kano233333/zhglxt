@@ -71,4 +71,6 @@ const eventResource = {
 const yesNo = {
   0:'否',
   1:'是'
-}
+};
+
+const globalUrl = "http://47.106.197.31/manage/";
