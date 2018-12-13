@@ -16,7 +16,11 @@ const ys = {
   "is_duban":"是否督办",
   "latitude":"经度",
   "longitude":"维度",
-  "address":"地址"
+  "address":"地址",
+  "log_name":'日志名称',
+  "grid_admin":'网格管理员',
+  "log_type":'类型',
+  "edit_time":'编辑时间'
 };
 
 const level = {
@@ -47,10 +51,14 @@ const allow = {
   "title":"标题",
   "type":{title:'事件类型',option:['民事纠纷','市政环卫','物业管理','隐患排查','其他']},
   "level":{title:'事件级别',option:['紧急','一般']},
-  "content":"事件内容"
+  "content":"事件内容",
+  "grid":"所属网格",
+  "area":"所属区域",
+  "log_name":"日志名称",
+  "log_type":{title:'类型',option:['巡查','走访 ','宣传','处理','重点人员寻访']}
 };
 
-const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','type'];
+const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','type','log_type'];
 const optionAddIndex = ['name'];
 const postFile = ['file','img_src','img_path'];
 
@@ -74,3 +82,13 @@ const yesNo = {
 };
 
 const globalUrl = "http://47.106.197.31/manage/";
+
+const logType = {
+  1:'巡查',
+  2:'走访',
+  3:'宣传',
+  4:'处理',
+  5:'重点人员寻访'
+};
+
+const indexOne = ['role_id','log_type'];

@@ -342,12 +342,24 @@
 <script>
   layui.use(['jquery'],function(){
     var $ = layui.jquery;
-    ssr1('#b1',['a']);
-    ssr2('#b2',['a'],'#edb056');
-    ssr8("#b3",['a']);
+    ssr1({
+      el:'#b1',
+      xAxisData:['0-17', '18-40', '41-60', '61-70', '71-80', '81-90', '91-100'],
+      seriesData:[23,12,13,45,34,34,76]
+    });
+    ssr2({
+      el:'#b2',
+      color:'#ddd'
+    });
+    ssr3("#b3",['a']);
     ssr7('#b4',['a']);
-    ssr1('#b5',['a']);
-    ssr2('#b6',['a']);
+    ssr1({el:'#b5',
+      xAxisData:['0-17', '18-40', '41-60', '61-70', '71-80', '81-90', '91-100'],
+      seriesData:[23,12,13,45,34,34,76]});
+    ssr2({
+      el:'#b6',
+      color:'#ddd'
+    });
   })
 </script>
 </body>

@@ -19,6 +19,7 @@
   </div>
 </div>
 <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/common.js"></script>
 <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
 <script src="./const.js"></script>
 <script type="text/html" id="formModle">
@@ -84,7 +85,7 @@ height:100%;" id="{{d[index][0]}}">
 
       $('#sub').click(function () {
         var postJson = {};
-        var formdata;
+        var formdata = '';
         for (let i in elData) {
           if ($('#' + postJson[elData[i][0]]).val() == '') {
             layer.msg('请完善信息');
@@ -94,10 +95,10 @@ height:100%;" id="{{d[index][0]}}">
               var index = document.querySelector('#' + elData[i][0]).selectedIndex;
               if(optionAddIndex.indexOf(elData[i][0])!=-1){
                 postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
-              }else if(elData[i][0]=='role_id'){
+              }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
                 postJson[elData[i][0]] = index+1;
               }else{
-                postJson[elData[i][0]] = index;
+                postJson[elData[i][0]] = index+1;
               }
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
               formdata= new FormData($("#uploadForm"));
@@ -110,7 +111,7 @@ height:100%;" id="{{d[index][0]}}">
         }
         postJson['resource'] = 2;
         console.log(postJson);
-        if(formdata!=undefined){
+        if(formdata!=''){
           for(let i in postJson){
             formdata.append(i,postJson[i]);
           }
@@ -119,10 +120,12 @@ height:100%;" id="{{d[index][0]}}">
         }
         $.ajax({
           url:url,
-          type: "POST",
-          cache: false,
-          processData: false,
-          contentType: false,
+          // type: "POST",
+          // cache: false,
+          // processData: false,
+          // contentType: false,
+          method:"POST",
+          headers:{'Authorization':getCookie('Authorization')},
           data: formdata,
           success() {
             var index = parent.layer.getFrameIndex(window.name);

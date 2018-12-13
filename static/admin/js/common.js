@@ -1,85 +1,50 @@
 layui.config({
-	base: '../../static/admin/js/module/'
+  base: '../../static/admin/js/module/'
 }).extend({
-	dialog: 'dialog',
-	// xlsx:'xlsx'
+  dialog: 'dialog',
 });
 
-layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog','element'], function() {
-	var form = layui.form,
-		layer = layui.layer,
-		$ = layui.jquery,
-		dialog = layui.dialog;
-	//获取当前iframe的name值
-	var iframeObj = $(window.frameElement).attr('name');
-	//全选
-	form.on('checkbox(allChoose)', function(data) {
-		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-		child.each(function(index, item) {
-			item.checked = data.elem.checked;
-		});
-		form.render('checkbox');
-	});
-	//渲染表单
-	form.render();
+layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'element'], function () {
+  var form = layui.form,
+    layer = layui.layer,
+    $ = layui.jquery;
+  //获取当前iframe的name值
+  var iframeObj = $(window.frameElement).attr('name');
+  //全选
+  form.on('checkbox(allChoose)', function (data) {
+    var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+    child.each(function (index, item) {
+      item.checked = data.elem.checked;
+    });
+    form.render('checkbox');
+  });
+  //渲染表单
+  form.render();
 
-	//顶部批量删除
-	$('.delBtn').click(function() {
-		var url=$(this).attr('data-url');
-		dialog.confirm({
-			message:'您确定要删除选中项',
-			success:function(){
-				layer.msg('删除了')
-			},
-			cancel:function(){
-				layer.msg('取消了')
-			}
-		})
-		return false;
+  //列表添加
+  $('#table-list').on('click', '.add-btn', function () {
+    var url = $(this).attr('data-url');
+    //将iframeObj传递给父级窗口
+    parent.page("菜单添加", url, iframeObj, w = "700px", h = "620px");
+    return false;
+  })
 
-	}).mouseenter(function() {
-
-		dialog.tips('批量删除', '.delBtn');
-
-	})	
-	//列表添加
-	$('#table-list').on('click', '.add-btn', function() {
-		var url=$(this).attr('data-url');
-		//将iframeObj传递给父级窗口
-		parent.page("菜单添加", url, iframeObj, w = "700px", h = "620px");
-		return false;
-	})
-	//列表删除
-	$('#table-list').on('click', '.del-btn', function() {
-		var url=$(this).attr('data-url');
-		var id = $(this).attr('data-id');
-		dialog.confirm({
-			message:'您确定要进行删除吗？',
-			success:function(){
-				layer.msg('确定了')
-			},
-			cancel:function(){
-				layer.msg('取消了')
-			}
-		})
-		return false;
-	})
-	//列表跳转
-	$('#table-list,.tool-btn').on('click', '.go-btn', function() {
-		var url=$(this).attr('data-url');
-		var id = $(this).attr('data-id');
-		window.location.href=url+"?id="+id;
-		return false;
-	})
-	//编辑栏目
-	$('#table-list').on('click', '.edit-btn', function() {
-		var That = $(this);
-		var id = That.attr('data-id');
-		var url=That.attr('data-url');
-		//将iframeObj传递给父级窗口
-		parent.page("菜单编辑", url + "?id=" + id, iframeObj, w = "700px", h = "620px");
-		return false;
-	})
+  //列表跳转
+  $('#table-list,.tool-btn').on('click', '.go-btn', function () {
+    var url = $(this).attr('data-url');
+    var id = $(this).attr('data-id');
+    window.location.href = url + "?id=" + id;
+    return false;
+  })
+  //编辑栏目
+  $('#table-list').on('click', '.edit-btn', function () {
+    var That = $(this);
+    var id = That.attr('data-id');
+    var url = That.attr('data-url');
+    //将iframeObj传递给父级窗口
+    parent.page("菜单编辑", url + "?id=" + id, iframeObj, w = "700px", h = "620px");
+    return false;
+  })
 });
 
 /**
@@ -89,58 +54,62 @@ var iframeObjName;
 
 //父级弹出页面
 function page(title, url, obj, w, h) {
-	if(title == null || title == '') {
-		title = false;
-	};
-	if(url == null || url == '') {
-		url = "404.html";
-	};
-	if(w == null || w == '') {
-		w = '700px';
-	};
-	if(h == null || h == '') {
-		h = '350px';
-	};
-	iframeObjName = obj;
-	//如果手机端，全屏显示
-	if(window.innerWidth <= 768) {
-		var index = layer.open({
-			type: 2,
-			title: title,
-			area: [320, h],
-			fixed: false, //不固定
-			content: url
-		});
-		layer.full(index);
-	} else {
-		var index = layer.open({
-			type: 2,
-			title: title,
-			area: [w, h],
-			fixed: false, //不固定
-			content: url
-		});
-	}
+  if (title == null || title == '') {
+    title = false;
+  }
+  ;
+  if (url == null || url == '') {
+    url = "404.html";
+  }
+  ;
+  if (w == null || w == '') {
+    w = '700px';
+  }
+  ;
+  if (h == null || h == '') {
+    h = '350px';
+  }
+  ;
+  iframeObjName = obj;
+  //如果手机端，全屏显示
+  if (window.innerWidth <= 768) {
+    var index = layer.open({
+      type: 2,
+      title: title,
+      area: [320, h],
+      fixed: false, //不固定
+      content: url
+    });
+    layer.full(index);
+  } else {
+    var index = layer.open({
+      type: 2,
+      title: title,
+      area: [w, h],
+      fixed: false, //不固定
+      content: url
+    });
+  }
 }
 
 /**
  * 刷新子页,关闭弹窗
  */
 function refresh() {
-	//根据传递的name值，获取子iframe窗口，执行刷新
-	if(window.frames[iframeObjName]) {
-		window.frames[iframeObjName].location.reload();
+  //根据传递的name值，获取子iframe窗口，执行刷新
+  if (window.frames[iframeObjName]) {
+    window.frames[iframeObjName].location.reload();
 
-	} else {
-		window.location.reload();
-	}
+  } else {
+    window.location.reload();
+  }
 
-	layer.closeAll();
+  layer.closeAll();
 }
 
 
-function tableRender(cols,data) {
-  layui.use(['table'], function() {
+function tableRender(cols, data) {
+  layui.use(['table'], function () {
     var table = layui.table;
     table.render({
       elem: '#demo'
@@ -156,22 +125,22 @@ function tableRender(cols,data) {
   })
 }
 
-function setTable(obj){
-  layui.use(['jquery','table','rate'], function() {
+function setTable(obj) {
+  layui.use(['jquery', 'table', 'rate'], function () {
     var $ = layui.jquery;
     var table = layui.table;
     var rate = layui.rate;
-    tableRender(obj.cols,obj.data);
+    tableRender(obj.cols, obj.data);
     $('.addBtn').click(function () {  //add
       layer.open({
         type: 2,
         area: ['700px', '550px'],
         maxmin: true,
         content: obj.addUrl,
-				success:function(layero, index){
+        success: function (layero, index) {
           obj.addSuc(layero, index) || '';
         },
-        end:function(){
+        end: function () {
           obj.editEnd() || '';
         }
       })
@@ -194,10 +163,10 @@ function setTable(obj){
           area: ['700px', '450px'],
           maxmin: true,
           content: obj.editUrl,
-          success:function(layero, index){
+          success: function (layero, index) {
             obj.editSuc(layero, index) || '';
             var iframe = window['layui-layer-iframe' + index];
-            if(obj.editOther && obj.editOther!=undefined){ //编辑没有展示的内容
+            if (obj.editOther && obj.editOther != undefined) { //编辑没有展示的内容
               $.ajax({
                 url: obj.detailGetUrl,
                 data: {
@@ -209,148 +178,152 @@ function setTable(obj){
                   var toData = _data.data;
                   editUserData = toData[0];
                   console.log(editUserData)
-                  iframe.getFromParent(editUserData,obj.editAjaxUrl);
+                  iframe.getFromParent(editUserData, obj.editAjaxUrl);
                 },
                 error() {
                   layer.msg('错误');
                   return;
                 }
               })
-            }else{
-              iframe.getFromParent(editUserData,obj.editAjaxUrl);
+            } else {
+              iframe.getFromParent(editUserData, obj.editAjaxUrl);
             }
           },
-          end:function(){
+          end: function () {
             obj.editEnd() || '';
           }
         })
       }
     })
 
-		$('#delete').click(function(){
-		  if(document.querySelectorAll("tbody input[type='checkbox']:checked").length<=0){
-		    layer.msg('请至少选中一行经行删除');
-		    return;
+    $('#delete').click(function () {
+      if (document.querySelectorAll("tbody input[type='checkbox']:checked").length <= 0) {
+        layer.msg('请至少选中一行经行删除');
+        return;
       }
       layer.confirm('确定要进行删除？', {
-        btn: ['确定','取消']
-      },function(index){
-        deleteCheckbox(obj.editEnd);
+        btn: ['确定', '取消']
+      }, function (index) {
+        deleteCheckbox(obj.editEnd,obj.deleteUrl);
         layer.close(layer.index)
       });
     })
 
-    var resetClick = function() {
+    var resetClick = function () {
       $('.detail').click(function () {
+        var convalue = this.getAttribute('convalue');
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
         layer.open({
+          title:'详情',
           type: 2,
           area: ['500px', '550px'],
           maxmin: true,
           content: obj.detailUrl,
           success: function (layero, index) {
-            $.ajax({
-              url: obj.detailGetUrl,
-              data: {
-                id: idX
-              },
-              method: "POST",
-              success(data) {
-                var _data = JSON.parse(data);
-                var toData = _data.data;
-                var iframe = window['layui-layer-iframe' + index];
-                iframe.getFromParent(toData);
-              },
-              error() {
-                layer.msg('错误');
-              }
-            })
+            // $.ajax({
+            //   url: obj.detailGetUrl,
+            //   data: {
+            //     id: idX
+            //   },
+            //   method: "POST",
+            //   success(data) {
+            //     var _data = JSON.parse(data);
+            //     var toData = _data.data;
+            //     var iframe = window['layui-layer-iframe' + index];
+            //     iframe.getFromParent(toData);
+            //   },
+            //   error() {
+            //     layer.msg('错误');
+            //   }
+            // })
+            var iframe = window['layui-layer-iframe' + index];
+            iframe.getFromParent(obj.data[convalue]);
           }
         })
       })
       $('.score').click(function () {
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
         $.ajax({
-          url:"http://47.106.197.31/manage/api.php?action=isRanked",
-          method:"POST",
-          data:{id:idX},
-          success(data){
+          url: "http://47.106.197.31/manage/api.php?action=isRanked",
+          method: "POST",
+          data: {id: idX},
+          success(data) {
             var _data = JSON.parse(data);
-              layer.open({
-                title:'评分',
-                type: 2,
-                area: ['300px', '200px'],
-                maxmin: true,
-                content: obj.scoreUrl,
-                success: function (layero, index) {
-                  var iframe = window['layui-layer-iframe' + index];
-                  iframe.getFromParent(_data,idX);
-                }
-              })
+            layer.open({
+              title: '评分',
+              type: 2,
+              area: ['300px', '200px'],
+              maxmin: true,
+              content: obj.scoreUrl,
+              success: function (layero, index) {
+                var iframe = window['layui-layer-iframe' + index];
+                iframe.getFromParent(_data, idX);
+              }
+            })
           }
         })
       })
     }
     //点page 重挂click 太恶心了框架
-    $('.layui-table-page').click(function(){
+    $('.layui-table-page').click(function () {
       resetClick();
     })
     resetClick();
   })
 }
 
-function echartExcel(result){
+function echartExcel(result) {
   let arr = [];
   let obj = {};
   let xxx;
   let aaa = [];
-  let flag=false;
-  for(let i in result){
-    if(objnum(result[i])===1){
-      if(i!=0){
+  let flag = false;
+  for (let i in result) {
+    if (objnum(result[i]) === 1) {
+      if (i != 0) {
         obj['data'] = aaa;
         arr.push(obj);
         obj = {};
-        aaa=[];
+        aaa = [];
       }
-      obj['title']=result[i].title;
-    }else{
-      xxx = {'type':result[i].title,'data':result[i].__EMPTY};
+      obj['title'] = result[i].title;
+    } else {
+      xxx = {'type': result[i].title, 'data': result[i].__EMPTY};
       aaa.push(xxx);
     }
-    if(i==result.length-1){
+    if (i == result.length - 1) {
       obj['data'] = aaa;
       arr.push(obj);
       obj = {};
-      aaa=[];
+      aaa = [];
     }
   }
   console.log(arr)
   return arr;
 }
 
-function objnum(obj){
-  let i =0;
-  for(let n in obj){
+function objnum(obj) {
+  let i = 0;
+  for (let n in obj) {
     i++;
   }
   return i;
 }
 
-function deleteCheckbox(editEnd){
+function deleteCheckbox(editEnd,deleteUrl) {
   var idArr = [];
-  layui.use(['jquery','layer'],function(){
+  layui.use(['jquery', 'layer'], function () {
     var $ = layui.jquery;
     var checked = document.querySelectorAll("tbody input[type='checkbox']:checked");
-    for(let i=0;i<checked.length;i++){
+    for (let i = 0; i < checked.length; i++) {
       let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-      idArr.push(tr);
+      idArr=tr;
     }
     $.ajax({
-      url:"http://47.106.197.31/manage/api.php?action=DeleteEvent",
-      method:"POST",
-      data:{id:idArr},
-      success(){
+      url: deleteUrl,
+      method: "POST",
+      data: {'id':'6'},
+      success() {
         layer.msg('删除成功')
         editEnd();
       },
@@ -364,24 +337,23 @@ function deleteCheckbox(editEnd){
 //-----------------------------------------------------------------
 
 
-function setCookie(c_name,value,expiredays){
+function setCookie(c_name,value,expireseconds){
   var exdate=new Date();
-  exdate.setDate(exdate.getDate()+expiredays);
+  exdate.setTime(exdate.getTime()+expireseconds * 1000);
   document.cookie=c_name+ "=" +escape(value)+
-    ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+    ((expireseconds==null) ? "" : ";expires="+exdate.toGMTString())
 }
-
-function getCookie(c_name){
-  if (document.cookie.length>0){
-    c_start=document.cookie.indexOf(c_name + "=");
-    if (c_start!=-1){
-      c_start=c_start + c_name.length+1;
-      c_end=document.cookie.indexOf(";",c_start);
-      if (c_end==-1){
-        c_end=document.cookie.length;
+function getCookie(c_name) {
+  if (document.cookie.length > 0) {
+    c_start = document.cookie.indexOf(c_name + "=");
+    if (c_start != -1) {
+      c_start = c_start + c_name.length + 1;
+      c_end = document.cookie.indexOf(";", c_start);
+      if (c_end == -1) {
+        c_end = document.cookie.length;
       }
 
-      return unescape(document.cookie.substring(c_start,c_end));
+      return unescape(document.cookie.substring(c_start, c_end));
     }
   }
 
@@ -391,96 +363,83 @@ function getCookie(c_name){
 
 //-------------------------------------------------
 //柱图
-function ssr1(el, data, title) {
-  layui.use(['jquery'],function(){
+function ssr1(obj) {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
-  var myChart = echarts.init(document.querySelector(el));
-  var name = [],
-    value = [],
-    total = 0;
-  data.forEach(function (val, i) {
-    name[i] = val.name;
-    value[i] = val.value;
-    total += val.value;
-  })
-  if (!title) {
-    title = '单位(人)'
-  }
-  myChart.clear();
+    var myChart = echarts.init(document.querySelector(obj.el));
+    myChart.clear();
 
-  var aaa= ['0-17', '18-40', '41-60', '61-70', '71-80', '81-90', '91-100'];
-  option = {
-    grid:{
-      x:10,
-      y:10
-    },
-    xAxis: {
-      type: 'category',
-      data: aaa
-    },
-    yAxis: {
-      type: 'value'
-    },
-    tooltip : {
-      show:true,
-    },
-    series: [{
-      data: [120, 200, 150, 80, 70, 110, 130],
-      type: 'line',
-      symbol: 'triangle',
-      symbolSize: 20,
-      lineStyle: {
-        normal: {
-          color: '#e7e7e7',
-          width: 4,
-          type: 'dashed'
-        }
+    option = {
+      title:{
+        left: 'center',
+        text: obj.title,
       },
-      itemStyle: {
-        normal: {
-          borderWidth: 3,
-          borderColor: 'rgba(255,255,255,0.5)',
-          color: 'rgba(167,190,267,0.5)'
+      grid: {
+        x: 10,
+        y: 10
+      },
+      xAxis: {
+        type: 'category',
+        data: obj.xAxisData
+      },
+      yAxis: {
+        type: 'value'
+      },
+      tooltip: {
+        show: true,
+      },
+      series: [{
+        data: obj.seriesData,
+        type: 'line',
+        symbol: 'triangle',
+        symbolSize: 20,
+        lineStyle: {
+          normal: {
+            color: '#e7e7e7',
+            width: 4,
+            type: 'dashed'
+          }
+        },
+        itemStyle: {
+          normal: {
+            borderWidth: 3,
+            borderColor: 'rgba(255,255,255,0.5)',
+            color: 'rgba(167,190,267,0.5)'
+          }
         }
-      }
-    }]
-  };
-  myChart.setOption(option);
-  myChart.on('click', function (e) {
-    console.log(e)
-  });
-  //防止调用太快
-  var boor = true;
+      }]
+    };
+    myChart.setOption(option);
+    myChart.on('click', function (e) {
+      console.log(e)
+    });
+    //防止调用太快
+    var boor = true;
 
-  function resizes() {
-    boor = true;
-    myChart.resize();
-  }
-
-  $(window).resize(function () {
-    if (boor) {
-      boor = false;
-      setTimeout(resizes, 500);
+    function resizes() {
+      boor = true;
+      myChart.resize();
     }
-  })
+
+    $(window).resize(function () {
+      if (boor) {
+        boor = false;
+        setTimeout(resizes, 500);
+      }
+    })
   })
 }
 
 //饼图
-function ssr2(el, data,color) {
-  layui.use(['jquery'],function() {
+function ssr2(obj) {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
-    var myChart = echarts.init(document.querySelector(el));
-    var name = [],
-      value = [];
-    data.forEach(function (val, i) {
-      name[i] = val.name;
-      value[i] = val.value;
-    })
+    var myChart = echarts.init(document.querySelector(obj.el));
     myChart.clear();
     option = {
       title: {
         left: 'center',
+        text:obj.title,
         top: 20,
         textStyle: {
           color: '#ccc'
@@ -515,6 +474,7 @@ function ssr2(el, data,color) {
           ].sort(function (a, b) {
             return a.value - b.value;
           }),
+          // data:[43,234,223,12,43,543],
           roseType: 'radius',
           label: {
             normal: {
@@ -534,9 +494,7 @@ function ssr2(el, data,color) {
           },
           itemStyle: {
             normal: {
-              color: color,
-              shadowBlur: 200,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+              color: obj.color,
             }
           },
 
@@ -571,56 +529,32 @@ function ssr2(el, data,color) {
 
 //横轴柱图
 function ssr3(el, data) {
-  layui.use(['jquery'],function() {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
-    var name = [],
-      value = [],
-      total = 0;
-    data.forEach(function (val, i) {
-      name[i] = val.name;
-      value[i] = val.value;
-      total += val.value;
-    })
     myChart.clear();
+
     option = {
       legend: {
         show: false
       },
       tooltip: {
         trigger: 'item',
-        show: true,
-        formatter: function (res) {
-          var text = res.name + ": <br/>" + res.value + "(" + (res.value * 100 / total).toFixed() + "%)"
-          return text;
-        }
+        show: true
       },
       yAxis: {
         type: 'category',
-        data: function () {
-          var datas = [],
-            color = ['#3fc1e8', '#4285f4', '#54b7ff', '#3fe8ca', '#5aa5ff', '#0095ff', '#1c74b3', '#45ff8f', '#66fdff', '#50e9c1', '#313186', '#7e62fb', '#bb7ef1', '#004a81', '#e9aff3'];
-          name.forEach(function (val, i) {
-            datas[i] = {
-              value: name[i],
-              textStyle: {
-                fontSize: 10,
-                color: color[i]
-              }
-            }
-          })
-          return datas;
-        }(),
+        data: [23,544,23,23,45,65],
         axisTick: {
           show: false,
           lineStyle: {
-            color: '#0ff'
+            // color: '#0ff'
           },
         },
         axisLabel: {
           interval: 0,
           textStyle: {
-            color: "#0ff",
+            // color: "#0ff",
             fontSize: 10,
           },
         }
@@ -633,12 +567,12 @@ function ssr3(el, data) {
         axisTick: {
           show: true,
           lineStyle: {
-            color: '#0ff'
+            // color: '#0ff'
           },
         },
         axisLabel: {
           textStyle: {
-            color: "#0ff",
+            // color: "#0ff",
             fontSize: 10,
           },
         }
@@ -653,7 +587,7 @@ function ssr3(el, data) {
       series: [{
         //name: str.dataName,
         type: 'bar',
-        data: data,
+        data: [23,12,43,54,65],
         barMaxWidth: 20,
         label: {
           normal: {
@@ -697,22 +631,11 @@ function ssr3(el, data) {
 
 //折线图
 function ssr4(el, online, offline) {
-  layui.use(['jquery'],function() {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
-    var name = [],
-      value = [],
-      value1 = [],
-      total = 0;
-    online.forEach(function (val, i) {
-      name[i] = val.name;
-      value[i] = val.value;
-      total += val.value;
-    })
-    offline.forEach(function (val, i) {
-      value1[i] = val.value;
-    })
     myChart.clear();
+
     option = {
       tooltip: {
         trigger: 'axis'
@@ -828,22 +751,11 @@ function ssr4(el, online, offline) {
 }
 
 function ssr6(el, online, offline) {
-  layui.use(['jquery'],function() {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
-    var name = [],
-      value = [],
-      value1 = [],
-      total = 0;
-    online.forEach(function (val, i) {
-      name[i] = val.name;
-      value[i] = val.value;
-      total += val.value;
-    })
-    offline.forEach(function (val, i) {
-      value1[i] = val.value;
-    })
     myChart.clear();
+
     option = {
       tooltip: {
         trigger: 'axis',
@@ -937,7 +849,7 @@ function ssr6(el, online, offline) {
 
 //走势图
 function ssr5(el, data) {
-  layui.use(['jquery'],function() {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
     var axisData = [],
@@ -1066,18 +978,11 @@ function ssr5(el, data) {
 }
 
 function ssr7(el, data) {
-  layui.use(['jquery'],function() {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
-    var name = [],
-      value = [],
-      total = 0;
-    data.forEach(function (val, i) {
-      name[i] = val.name;
-      value[i] = val.value;
-      total += val.value;
-    })
     myChart.clear();
+
     option = {
       angleAxis: {
         type: 'category',
@@ -1128,20 +1033,9 @@ function ssr7(el, data) {
 }
 
 function ssr8(el, data, title) {
-  layui.use(['jquery'],function() {
+  layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
-    var name = [],
-      value = [],
-      total = 0;
-    data.forEach(function (val, i) {
-      name[i] = val.name;
-      value[i] = val.value;
-      total += val.value;
-    })
-    if (!title) {
-      title = '单位(人)'
-    }
     myChart.clear();
 
     option = {
@@ -1190,4 +1084,14 @@ function ssr8(el, data, title) {
       }
     })
   })
+}
+
+//--------------------------------------------------
+
+function jsonData(data){
+  var obj = {};
+  for(let i in data){
+    obj[i] = data[i];
+  }
+  return obj;
 }

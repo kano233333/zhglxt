@@ -97,10 +97,10 @@ height:100%;" id="{{d[index][0]}}">
               var index = document.querySelector('#' + elData[i][0]).selectedIndex;
               if(optionAddIndex.indexOf(elData[i][0])!=-1){
                 postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
-              }else if(elData[i][0]=='role_id'){
+              }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
                 postJson[elData[i][0]] = index+1;
               }else{
-                postJson[elData[i][0]] = index;
+                postJson[elData[i][0]] = index+1;
               }
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();
@@ -108,8 +108,6 @@ height:100%;" id="{{d[index][0]}}">
           }
         }
         postJson['id'] = data.id;
-        postJson['resource'] = 2;
-        var flag = 0;
         console.log(postJson);
         $.ajax({
           url:url,

@@ -293,7 +293,8 @@
   </div>
 
   <script>
-    if(getCookie('session') == ''){
+    if(getCookie('Authorization') == ''){
+
       document.getElementsByTagName('body')[0].innerHTML = '';
       alert('无权访问');
     }else {

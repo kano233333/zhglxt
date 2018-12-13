@@ -85,7 +85,6 @@
   </div>
 </div>
 
-<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
 <script src="../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../static/admin/js/common.js"></script>
 <script>
@@ -101,19 +100,18 @@
         layer.msg('请输入密码');
       }else {
         $.ajax({
-          url:'http://47.106.197.31/manage/login.php',
+          url:'http://web.cqupt.store/public/index.php/index/User/login',
           method:'POST',
           data:{
             username:username,
-            password:md5(password)
+            password:password
           },
           success(data){
-            var _data = JSON.parse(data);
-            if(_data){
-              setCookie('session','xxx',1);
+            console.log(data);
+            var _data = data.data;
+            if(data.state==200){
+              setCookie('Authorization',_data.token,3600*2);
               window.location.href='index.html';
-            } else {
-              layer.msg(_data.msg);
             }
           },
           error(){
