@@ -210,7 +210,7 @@ function setTable(obj) {
       layer.confirm('确定要进行删除？', {
         btn: ['确定', '取消']
       }, function (index) {
-        deleteCheckbox(obj.editEnd,obj.deleteUrl);
+        deleteCheckbox(obj.editEnd,obj.deleteUrl,obj.data);
         layer.close(layer.index)
       });
     })
@@ -270,10 +270,16 @@ function setTable(obj) {
         })
       })
       $('.finished').click(function(){
-        parent.layer.open({ //在父窗口打开
-          type: 1,
+        parent.layer.open({
+          type: 2,
           title: '问题描述',
-          shadeClose:true,
+          area:['900px','600px'],
+          content: obj.workFinish,
+          maxmin: true,
+          success: function (layero, index) {
+            var iframe = window['layui-layer-iframe' + index];
+            iframe.getFromParent(_data, idX);
+          }
         })
       })
     }
@@ -323,20 +329,23 @@ function objnum(obj) {
   return i;
 }
 
-function deleteCheckbox(editEnd,deleteUrl) {
+function deleteCheckbox(editEnd,deleteUrl,data) {
   var idArr = [];
   layui.use(['jquery', 'layer'], function () {
     var $ = layui.jquery;
     var checked = document.querySelectorAll("tbody input[type='checkbox']:checked");
     for (let i = 0; i < checked.length; i++) {
       let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-      idArr.push(tr);
+      idArr.push(data[parseInt(tr)].id);
     }
     for(let i in idArr){
       AJAX({
         url: deleteUrl,
         method: "POST",
-        data: {'id':idArr[i]}
+        data: {'id':idArr[i]},
+        success:function(){
+          editEnd();
+        }
       })
     }
   })
