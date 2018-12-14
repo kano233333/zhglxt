@@ -81,11 +81,10 @@
     var detailUrl = './alert/detail.html'
     var deleteUrl = 'http://web.cqupt.store/public/index.php/index/Work/dailyWorkDelete';
     var getTable = function() {
-      $.ajax({
+      AJAX({
         url: 'http://web.cqupt.store/public/index.php/index/Work/dailyWorkList',
         method: 'POST',
-        headers:{'Authorization':getCookie('Authorization')},
-        success(data) {
+        success:function(data) {
           if(data.state==200){
             correspond = data.data;
             setTable({
@@ -103,9 +102,6 @@
           }else{
             layer.msg('错误');
           }
-        },
-        error(state) {
-          console.log(state);
         }
       })
     }

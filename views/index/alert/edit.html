@@ -23,6 +23,7 @@
 </div>
 
 <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/common.js"></script>
 <script src="./const.js"></script>
 <script type="text/html" id="formModle">
   {{#  layui.each(d, function(index,item){ }}
@@ -109,16 +110,13 @@ height:100%;" id="{{d[index][0]}}">
         }
         postJson['id'] = data.id;
         console.log(postJson);
-        $.ajax({
+        AJAX({
           url:url,
           method: "POST",
           data: postJson,
           success() {
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
-          },
-          error(data) {
-            console.log(data);
           }
         });
       })

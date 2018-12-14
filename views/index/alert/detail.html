@@ -9,11 +9,12 @@
     .xxx {
       display: flex;
       flex-wrap:wrap;
-      flex-direction: column;
+      /*flex-direction: column;*/
       flex-wrap:wrap;
     }
     .wrap {
       display:flex;
+      min-width:50%;
       margin-bottom: 10px;
       transition: 0.4s all;
     }
@@ -27,12 +28,15 @@
       padding:6px 15px;
       background-color: #009688;
       color:#fff;
+      /*min-width:30%;*/
+      text-align: center;
     }
     .right {
-      padding:6px 30px;
       border:1px solid #00524a;
-      flex-grow: 2;
+      padding:6px 0;
+      min-width:70%;
       transition: 0.4s all;
+      text-align: center;
     }
     .right:hover {
       background-color: #eeeeee;

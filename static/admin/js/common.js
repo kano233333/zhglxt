@@ -216,7 +216,7 @@ function setTable(obj) {
         layer.open({
           title:'详情',
           type: 2,
-          area: ['500px', '550px'],
+          area: ['800px', '550px'],
           maxmin: true,
           content: obj.detailUrl,
           success: function (layero, index) {
@@ -1101,4 +1101,22 @@ function jsonData(data){
     obj[i] = data[i];
   }
   return obj;
+}
+
+//--------------------------------------------------
+
+function AJAX(obj){
+  layui.use(['jquery'],function(){
+    var $ = layui.jquery;
+    $.ajax({
+      url:obj.url,
+      method:obj.method,
+      data:obj.data,
+      headers:{'Authorization':getCookie('Authorization')},
+      success:obj.success,
+      error:function(){
+        layui.msg('错误');
+      }
+    })
+  })
 }
