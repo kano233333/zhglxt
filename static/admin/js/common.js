@@ -336,7 +336,6 @@ function deleteCheckbox(editEnd,deleteUrl) {
 
 //-----------------------------------------------------------------
 
-
 function setCookie(c_name,value,expireseconds){
   var exdate=new Date();
   exdate.setTime(exdate.getTime()+expireseconds * 1000);
@@ -359,7 +358,13 @@ function getCookie(c_name) {
 
   return "";
 }
-
+function delCookie(name){
+  var exp = new Date();
+  exp.setTime(exp.getTime() - 1);
+  var cval=getCookie(name);
+  if(cval!=null)
+    document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+}
 
 //-------------------------------------------------
 //柱图
@@ -849,15 +854,15 @@ function ssr6(el, online, offline) {
 
 //走势图
 function ssr5(el, data) {
-  layui.use(['jquery'], function () {
+  layui.use(['jquery'],function() {
     var $ = layui.jquery;
     var myChart = echarts.init(document.querySelector(el));
     var axisData = [],
       value = [];
-    // data.forEach(function (val, i) {
-    //   axisData[i] = val.name.substring(5);
-    //   value[i] = val.value;
-    // })
+    data.forEach(function (val, i) {
+      axisData[i] = val.name.substring(5);
+      value[i] = val.value;
+    })
 
     var links = value.map(function (item, i) {
       return {
@@ -869,12 +874,14 @@ function ssr5(el, data) {
     myChart.clear();
     option = {
       title: {
+        text: '事件提交统计',
         x: 'center',
         y: '1%',
         textStyle: {
           fontSize: 16,
           color: '#0ff'
         }
+
       },
       tooltip: {},
       xAxis: {

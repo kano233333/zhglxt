@@ -44,7 +44,7 @@
               <dd><a lay-href="./index/admin-info.html">基本资料</a></dd>
               <!--<dd><a lay-href="./index/system.html">系统设置</a></dd>-->
               <hr>
-              <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+              <dd id="signOut" layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
@@ -294,11 +294,16 @@
 
   <script>
     if(getCookie('Authorization') == ''){
-
       document.getElementsByTagName('body')[0].innerHTML = '';
-      alert('无权访问');
+      alert('还未登录，无权访问');
+      window.location.href  = './login.html';
     }else {
       document.getElementById('usernameX').innerText = 'xxx';
+    }
+
+    document.getElementById('signOut').onclick = function(){
+      delCookie('Authorization');
+      window.location.href  = './login.html';
     }
   </script>
 

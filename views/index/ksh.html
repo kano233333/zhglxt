@@ -5,30 +5,14 @@
   <link rel="stylesheet" type="text/css" href="../../static/admin/css/index.css"/>
   <link rel="stylesheet" type="text/css" href="../../layuiadmin/layui/css/layui.css"/>
   <!--<script src="../../layuiadmin/layui/lay/modules/jquery.js" type="text/javascript" charset="utf-8"></script>-->
+  <script src="../../static/admin/js/module/yuzhou.js" type="text/javascript" charset="utf-8"></script>
   <script src="../../static/admin/lib/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
   <title></title>
-  <style>
-    * {
-      padding:0;
-      margin:0;
-    }
-    #my-canvas {
-      width:99.5vw;
-      height:99.5vh;
-      background-color: #333333;
-      position:relative;
-      z-index:-1;
-    }
-    .body {
-      position:fixed;
-      top:0;
-    }
-  </style>
 </head>
 <body>
-<canvas id="my-canvas"></canvas>
-<div class="body">
+<canvas id="canvas" style="position:relative;z-index:-1;background-color: #333333"></canvas>
+<div class="body" style="position:fixed;top:0;">
   <div class="head">
     <img src="../../static/admin/images/ksh/title.png"/>
     <span>
@@ -45,17 +29,17 @@
           <div class="title">
             <img src="../../static/admin/images/ksh/detail.png"/>
             <span class="head-name">
-									社会组织统计
-            </span>
+									党建情况统计
+								</span>
           </div>
           <div class="text party">
             <div class="party-age">
               <div></div>
-              <span>商铺统计</span>
+              <span>党龄</span>
             </div>
             <div class="party-edu">
               <div></div>
-              <span>社会单位统计</span>
+              <span>学历分布</span>
             </div>
           </div>
         </div>
@@ -65,20 +49,20 @@
           <div class="title">
             <img src="../../static/admin/images/ksh/detail.png"/>
             <span class="head-name">
-									党建情况统计
-            </span>
+									社会组织统计
+								</span>
           </div>
           <div class="text">
             <div class="society">
               <div class="so-data1"></div>
               <span name="so-name">
-										党龄
+										商铺统计
 									</span>
             </div>
             <div class="society">
               <div class="so-data2"></div>
               <span name="so-name">
-										学历分布
+										社会单位统计
 									</span>
             </div>
           </div>
@@ -92,7 +76,8 @@
 									人口年龄统计
 								</span>
           </div>
-          <div class="text age" style="width:100%;height:100%;">
+          <div class="text age">
+
           </div>
         </div>
       </div>
@@ -104,10 +89,26 @@
 								<img src="../../static/admin/images/ksh/fullScr.png">
 								<span>全屏</span>
 							</span>
+          <p id="change_list">
+            <img src="../../static/admin/images/ksh/map.png">
+            <span>→切换至地图</span>
+          </p>
           <h4 id="map_title">地图</h4>
           <div id="event_box">
-            <div class="c_title">事件处理</div>
-            <div id="ct" style="width:100%;height:100%;"></div>
+            <div class="c_title">待处理事件</div>
+            <div id="ct">
+              <div id="box">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li style="text-align: center;">加载失败</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="maps">
             <iframe id="map_box" src="" width="100%" height="100%" frameborder="no"></iframe>
@@ -154,18 +155,24 @@
 									</span>
             </div>
             <div class="business">
+									<span>
+										<div class="first-event">
+											<p>一级事件</p>
+											<p></p>
+										</div>
+									</span>
               <span>
-                <div class="first-event">
-                  <p>紧急事件</p>
-                  <p></p>
-                </div>
-              </span>
+										<div class="second-event">
+											<p>二级事件</p>
+											<p></p>
+										</div>
+									</span>
               <span>
-                <div class="second-event">
-                  <p>一般事件</p>
-                  <p></p>
-                </div>
-              </span>
+										<div class="third-event">
+											<p>三级事件</p>
+											<p></p>
+										</div>
+									</span>
             </div>
           </div>
         </div>
@@ -197,91 +204,98 @@
 </div>
 </body>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-<!--<script>-->
-  <!--var myCanvas = document.getElementById('my-canvas');-->
-  <!--var allW = document.documentElement.clientWidth;-->
-  <!--var allH = document.documentElement.clientHeight;-->
-  <!--// myCanvas.width = "100vw";-->
-  <!--// myCanvas.height = "100vh";-->
+<script>
+  var myCanvas = document.getElementById('canvas');
+  var allW = document.documentElement.clientWidth;
+  var allH = document.documentElement.clientHeight;
+  myCanvas.width = allW;
+  myCanvas.height = allH;
 
-  <!--var ctx  = myCanvas.getContext('2d');-->
+  var ctx = myCanvas.getContext('2d');
 
-  <!--var ballArr = [];-->
-  <!--(function(){-->
-    <!--for(var i=0;i<300;i++){-->
-      <!--//创建指定个数小圆球-->
-      <!--new Ball();-->
-    <!--}-->
-  <!--})();-->
-  <!--//小圆球对象-->
-  <!--function Ball(){-->
-    <!--this.x = randomNum(0,allW);-->
-    <!--this.y = randomNum(0,allH);-->
-    <!--this.color = "rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+",0.3)";-->
-    <!--this.r = randomNum(1,4);-->
-    <!--var rand = Math.random();-->
-    <!--this.speedX = (Math.random()>0.5) ? rand : -rand;-->
-    <!--rand = Math.random();-->
-    <!--this.speedY = (Math.random()>0.5) ? rand : -rand;-->
-    <!--ballArr.push(this);-->
-  <!--}-->
+  var ballArr = [];
+  (function () {
+    for (var i = 0; i < 100; i++) {
+//创建指定个数小圆球
+      new Ball();
+    }
+  })();
 
-  <!--Ball.prototype.draw = function(){-->
-    <!--ctx.beginPath();-->
-    <!--ctx.fillStyle = this.color;-->
-    <!--ctx.arc(this.x,this.y,this.r,0,Math.PI*2);-->
-    <!--ctx.fill();-->
-  <!--}-->
+  //小圆球对象
+  function Ball() {
+    this.x = randomNum(0, allW);
+    this.y = randomNum(0, allH);
+    this.color = "rgba(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ",0.3)";
+    this.r = randomNum(1, 4);
+    var rand = Math.random();
+    this.speedX = (Math.random() > 0.5) ? rand : -rand;
+    rand = Math.random();
+    this.speedY = (Math.random() > 0.5) ? rand : -rand;
+    ballArr.push(this);
+  }
 
-  <!--Ball.prototype.move = function(){-->
-    <!--this.x = this.x+this.speedX;-->
-    <!--this.y = this.y+this.speedY;-->
+  Ball.prototype.draw = function () {
+    ctx.beginPath();
+    ctx.fillStyle = this.color;
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
-    <!--if(this.x<=0 || this.x>=allW-20){-->
-      <!--this.speedX = -this.speedX;-->
-    <!--}-->
+  Ball.prototype.move = function () {
+    this.x = this.x + this.speedX;
+    this.y = this.y + this.speedY;
 
-    <!--if(this.y<=0 || this.y>=allH){-->
-      <!--this.speedY = -this.speedY;-->
-    <!--}-->
-  <!--}-->
+    if (this.x <= 0 || this.x >= allW - 20) {
+      this.speedX = -this.speedX;
+    }
 
-  <!--var timer = setInterval(function(){-->
-    <!--ctx.clearRect(0,0,allW,allH);-->
-    <!--for(var i = 0;i<ballArr.length;i++){-->
-      <!--ballArr[i].draw();-->
-      <!--ballArr[i].move();-->
-    <!--}-->
-    <!--ballLine();-->
-  <!--},20)-->
+    if (this.y <= 0 || this.y >= allH) {
+      this.speedY = -this.speedY;
+    }
+  }
 
-  <!--//小圆球之间的连线-->
-  <!--function ballLine(){-->
-    <!--for(var i = 0;i<ballArr.length;i++){-->
-      <!--for(var j = 0;j<ballArr.length;j++){-->
-        <!--//距离-->
-        <!--if(i!=j && Math.sqrt(Math.pow(ballArr[i].x-ballArr[j].x,2)+Math.pow(ballArr[i].y-ballArr[j].y,2))<80){-->
-          <!--ctx.beginPath();-->
-          <!--ctx.moveTo(ballArr[i].x,ballArr[i].y);-->
-          <!--ctx.lineTo(ballArr[j].x,ballArr[j].y);-->
-          <!--ctx.strokeStyle = "rgba(255,255,255,0.1)";-->
-          <!--ctx.stroke();-->
-        <!--}-->
-      <!--}-->
-    <!--}-->
-  <!--}-->
+  var timer = setInterval(function () {
+    ctx.clearRect(0, 0, allW, allH);
+    for (var i = 0; i < ballArr.length; i++) {
+      ballArr[i].draw();
+      ballArr[i].move();
+    }
+    ballLine();
+  }, 20)
 
-  <!--function randomNum(start,end){-->
-    <!--return Math.floor(Math.random()*(end-start)+start);-->
-  <!--}-->
+  //小圆球之间的连线
+  function ballLine() {
+    for (var i = 0; i < ballArr.length; i++) {
+      for (var j = 0; j < ballArr.length; j++) {
+//距离
+        if (i != j && Math.sqrt(Math.pow(ballArr[i].x - ballArr[j].x, 2) + Math.pow(ballArr[i].y - ballArr[j].y, 2)) < 120) {
+          ctx.beginPath();
+          ctx.moveTo(ballArr[i].x, ballArr[i].y);
+          ctx.lineTo(ballArr[j].x, ballArr[j].y);
+          ctx.strokeStyle = "rgba(255,255,255,0.1)";
+          ctx.stroke();
+        }
+      }
+    }
+  }
 
-<!--</script>-->
+  function randomNum(start, end) {
+    return Math.floor(Math.random() * (end - start) + start);
+  }
 
+</script>
 <script>
   layui.use(['jquery'], function () {
     var $ = layui.jquery;
     var num_v = 0;
+    //宇宙背景初始化
     $(function () {
+      window.onresize = function () {
+        $("#canvas").css({
+          "width": Math.floor(window.innerWidth - 1) + "px",
+          "height": Math.floor(window.innerHeight - 1) + "px"
+        })
+      }
       var data1 = {
         statusCode: 200,
         dataName: "人口年龄统计",
@@ -312,41 +326,177 @@
           }
         ]
       };
-      var data2 = {
-        statusCode: 200,
-        dataName: "商铺统计",
-        data: [
-          {
-            name: "超市",
-            value: 8
-          },
-          {
-            name: "药店",
-            value: 12
-          },
-          {
-            name: "健身房",
-            value: 4
-          }
-        ]
-      };
-      ssr2({el:'.so-data1', color:'#8389ed'});
-      ssr2({el:'.so-data2', color:'#8389ed'});
-      ssr2({el:'.party-age>div',color:'#edb056'});
-      ssr2({el:'.party-edu>div',color:'#8eedeb'});
+      ssr2({el: '.so-data1', color: '#8389ed'});
+      ssr2({el: '.so-data2', color: '#8389ed'});
+      ssr2({el: '.party-age>div', color: '#edb056'});
+      ssr2({el: '.party-edu>div', color: '#8eedeb'});
       ssr1({
-        el:'.age',
-        xAxisData:['0-17', '18-40', '41-60', '61-70', '71-80', '81-90', '91-100'],
-        seriesData:[23,12,13,45,34,34,76]
+        el: '.age',
+        xAxisData: ['0-17', '18-40', '41-60', '61-70', '71-80', '81-90', '91-100'],
+        seriesData: [23, 12, 13, 45, 34, 34, 76]
       });
-      ssr8('#v_second>span',data1.data);
-      ssr7('.gridStatus',data1.data,data1.data);
-      // ssr6('#ct',data1.data,data1.data);
-      ssr5("#v_first>span",data1.data);
-      ssr7('.event-data',data1.data);
+      ssr8('#v_second>span', data1.data);
+      ssr7('.gridStatus', data1.data, data1.data);
+      ssr5("#v_first>span", data1.data);
+      ssr7('.event-data', data1.data);
     })
   })
 </script>
 
+<script type="text/javascript">
+  layui.use(['jquery'], function () {
+    var $ = layui.jquery;
+    var iframes = document.querySelector('#map_box')
+    // iframes.src = "http://222.178.182.14:18080/grid/map/hxjy.html";
+    scrolls();
 
+    function scrolls() {
+      function sssr() {
+        var area = document.getElementById('box');
+        var iliHeight = 35; //单行滚动的高度
+        var speed = 50; //滚动的速度
+        var time;
+        var delay = 2000;
+        area.scrollTop = 0;
+        area.innerHTML += (area.innerHTML + area.innerHTML); //克隆一份一样的内容
+        function startScroll() {
+          clearInterval(time);
+          time = setInterval(scrollUp, speed);
+          area.scrollTop++;
+        }
+
+        function scrollUp() {
+          if (area.scrollTop % iliHeight == 0) {
+            clearInterval(time);
+            setTimeout(startScroll, delay);
+          } else {
+            area.scrollTop++;
+            if (area.scrollTop >= area.scrollHeight / 3) {
+              area.scrollTop = 0;
+            }
+          }
+        }
+
+        setTimeout(startScroll, delay)
+      }
+
+      var appendLi = function (data) {
+        data.forEach(function (val) {
+          val.eventContent = val.eventContent.replace(/<.?[^>]+>/g, "")
+          console.log(val.eventContent);
+        })
+        $("#box>ul").html("");
+        data.forEach(function (val, i) {
+          var times = new Date(val.editEventDate.time);
+          var y = times.getFullYear().toString(),
+            m = (times.getMonth() + 1).toString(),
+            d = times.getDate().toString(),
+            h = times.getHours().toString(),
+            min = times.getMinutes().toString();
+          m < 10 ? m = "0" + m : m;
+          d < 10 ? d = "0" + d : d;
+          h < 10 ? h = "0" + h : h;
+          min < 10 ? min = "0" + min : min;
+          var lastTime = y + "/" + m + "/" + d + " " + h + ":" + m;
+          var a;
+          i < 9 ? a = "0" + (i + 1) : a = i + 1;
+          var strings = "<li>";
+          strings += "<span>" + a + ". " + val.eventTitle + "(" + val.author + "): " + val.eventContent + "</span><span>" + lastTime + "</span>";
+          strings += "</li>";
+          $("#box>ul").append(strings);
+        })
+        if ($("#box>ul").height() * 2 > $("#box").height()) {
+          sssr();
+        }
+      }
+      // $.ajax({
+      //   type: "get",
+      //   url: "/grid/event/getEventFor.do",
+      //   dataType: "json",
+      //   success: function (result) {
+      //     if (result.statusCode == 200) {
+      //       appendLi(result.data)
+      //     }
+      //   }
+      // })
+      var result = {
+        data: [
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          },
+          {
+            eventTitle: 123,
+            author: 'a',
+            eventContent: 'aaaaaaaaaaaaaaaaaa',
+            editEventDate: {
+              time: '13'  //时间戳
+            }
+          }
+        ]
+      }
+      appendLi(result.data)
+    }
+  })
+</script>
 </html>
