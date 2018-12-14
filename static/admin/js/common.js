@@ -218,7 +218,7 @@ function setTable(obj) {
       $('.detail').click(function () {
         var convalue = this.getAttribute('convalue');
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-        parent.layer.open({
+        layer.open({
           title:'详情',
           type: 2,
           area: ['800px', '500px'],
@@ -236,7 +236,7 @@ function setTable(obj) {
               let iframe = window['layui-layer-iframe' + index];
               iframe.getFromParent(detailData);
             }else{
-              let iframe = window['layui-layer-iframe' + index];
+              var iframe = window['layui-layer-iframe' + index];
               iframe.getFromParent(obj.data[convalue]);
             }
           }
