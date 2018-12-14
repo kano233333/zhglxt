@@ -88,7 +88,7 @@ const globalUrl = "http://web.cqupt.store/public/index.php/index/";
 const otherUrl = {
   User:['User/registerForWeb','User/login'],
   Work:[
-    ['Work/missionList','Work/missionAdd','Work/missionDelete'],
+    ['Work/missionList','Work/missionAdd','Work/missionDelete','Work/missionResult'],
     [],
     ['Work/dailyWorkList','Work/dailyWorkAdd','Work/dailyWorkDelete','/Work/dailyWorkEdit']
   ]

@@ -94,6 +94,7 @@
     var editAjaxUrl =  globalUrl+otherUrl.Work[0][3];
     var detailUrl = './alert/detail.html'
     var deleteUrl =  globalUrl+otherUrl.Work[0][2];
+    var postFinish = globalUrl+otherUrl.Work[0][3]
     var getTable = function() {
       AJAX({
         url: globalUrl+otherUrl.Work[0][0],
@@ -112,7 +113,8 @@
               editAjaxUrl:editAjaxUrl,
               deleteUrl:deleteUrl,
               detailUrl:detailUrl,
-              workFinish:'./workFinish.html'
+              workFinish:'./workFinish.html',
+              postFinish:postFinish
             });
           }else{
             layer.msg('错误');

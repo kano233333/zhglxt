@@ -155,7 +155,6 @@ function setTable(obj) {
       obj.setSuc();
     }
 
-    // $('')
 
     $('#edit').click(function () {//edit
       var checkNum = document.querySelectorAll("tbody input[type='checkbox']:checked").length;
@@ -219,31 +218,27 @@ function setTable(obj) {
       $('.detail').click(function () {
         var convalue = this.getAttribute('convalue');
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-        layer.open({
+        parent.layer.open({
           title:'详情',
           type: 2,
-          area: ['800px', '550px'],
+          area: ['800px', '500px'],
           maxmin: true,
           content: obj.detailUrl,
           success: function (layero, index) {
-            // $.ajax({
-            //   url: obj.detailGetUrl,
-            //   data: {
-            //     id: idX
-            //   },
-            //   method: "POST",
-            //   success(data) {
-            //     var _data = JSON.parse(data);
-            //     var toData = _data.data;
-            //     var iframe = window['layui-layer-iframe' + index];
-            //     iframe.getFromParent(toData);
-            //   },
-            //   error() {
-            //     layer.msg('错误');
-            //   }
-            // })
-            var iframe = window['layui-layer-iframe' + index];
-            iframe.getFromParent(obj.data[convalue]);
+            if(obj.detailSpecial){
+              var detailData = {};
+              for(let i in obj.dataX['missionDetail']){
+                detailData[i] = obj.dataX['missionDetail'][i];
+              }
+              for(let i in obj.data[index-1]){
+                detailData[i] = obj.data[index-1][i];
+              }
+              let iframe = window['layui-layer-iframe' + index];
+              iframe.getFromParent(detailData);
+            }else{
+              let iframe = window['layui-layer-iframe' + index];
+              iframe.getFromParent(obj.data[convalue]);
+            }
           }
         })
       })
@@ -270,15 +265,25 @@ function setTable(obj) {
         })
       })
       $('.finished').click(function(){
-        parent.layer.open({
-          type: 2,
-          title: '问题描述',
-          area:['900px','600px'],
-          content: obj.workFinish,
-          maxmin: true,
-          success: function (layero, index) {
-            var iframe = window['layui-layer-iframe' + index];
-            iframe.getFromParent(_data, idX);
+        var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+        AJAX({
+          url:obj.postFinish,
+          method:'POST',
+          data:{id:obj.data[parseInt(idX)-1].id},
+          success:function(data){
+            if(data.state==200){
+              layer.open({
+                type: 2,
+                title: '完成情况',
+                area:['900px','550px'],
+                content: obj.workFinish,
+                maxmin: true,
+                success: function (layero, index) {
+                  var iframe = window['layui-layer-iframe' + index];
+                  iframe.getFromParent(data, idX);
+                }
+              })
+            }
           }
         })
       })
@@ -336,7 +341,7 @@ function deleteCheckbox(editEnd,deleteUrl,data) {
     var checked = document.querySelectorAll("tbody input[type='checkbox']:checked");
     for (let i = 0; i < checked.length; i++) {
       let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-      idArr.push(data[parseInt(tr)].id);
+      idArr.push(data[parseInt(tr)-1].id);
     }
     for(let i in idArr){
       AJAX({

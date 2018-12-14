@@ -146,7 +146,7 @@ height:100%;" id="{{d[index][0]}}">
               let checkbox = document.querySelectorAll('#'+elData[i][0]+" input[type='checkbox']:checked");
               let arr = [];
               for(let i=0;i<checkbox.length;i++){
-                arr.push(checkbox[i].getAttribute('title'));
+                arr.push(parseInt(checkbox[i].getAttribute('title')));
               }
               postJson[elData[i][0]] = JSON.stringify(arr);
             }else{
