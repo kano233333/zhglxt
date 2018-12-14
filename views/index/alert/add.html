@@ -43,6 +43,23 @@ height:100%;" id="{{d[index][0]}}">
       <input type="password" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
     </div>
   </div>
+  {{# }else if(d[index][0]=='not_before'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-inline" id="{{d[index][0]}}">
+      <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd">
+      <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;">
+    </div>
+  </div>
+  {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1].title}}</label>
+    <div class="layui-input-block" id="{{d[index][0]}}">
+      {{# for(let i in d[index][1].checkout){ }}
+        {{d[index][1].checkout[i]}}<input type="checkbox" title="{{d[index][1].checkout[i]}}">
+      {{# } }}
+    </div>
+  </div>
   {{# }else if(optionAdd.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1].title}}</label>
@@ -69,14 +86,24 @@ height:100%;" id="{{d[index][0]}}">
 
   function getFromParent(data,url) {
     elData = data;
-    layui.use(['jquery', 'layer', 'upload', 'laytpl'], function () {
+    layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
       var $ = layui.jquery;
       var laytpl = layui.laytpl;
       var layer = layui.layer;
+      var laydate = layui.laydate;
       var getTpl = document.getElementById('formModle').innerHTML;
       var view = document.getElementById('view');
       laytpl(getTpl).render(elData, function (html) {
         view.innerHTML = html;
+      });
+
+      laydate.render({
+        elem: '#time'
+      });
+
+      laydate.render({
+        elem: '#time2'
+        ,type: 'time'
       });
 
       $('#reset').click(function () {
@@ -87,7 +114,7 @@ height:100%;" id="{{d[index][0]}}">
         var postJson = {};
         var formdata = '';
         for (let i in elData) {
-          if ($('#' + postJson[elData[i][0]]).val() == '') {
+          if (document.querySelector('#' + elData[i][0]).value == '') {
             layer.msg('请完善信息');
             return;
           }else{
@@ -97,6 +124,8 @@ height:100%;" id="{{d[index][0]}}">
                 postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
               }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
                 postJson[elData[i][0]] = index+1;
+              }else if(optionPostValue.indexOf(elData[i][0])!=-1){
+                postJson[elData[i][0]] = document.querySelectorAll('#'+elData[i][0]+" option")[index].innerText;
               }else{
                 postJson[elData[i][0]] = index+1;
               }
@@ -104,6 +133,22 @@ height:100%;" id="{{d[index][0]}}">
               formdata= new FormData($("#uploadForm"));
             }else if(elData[i][0]=='passwd'){
               postJson[elData[i][0]] = md5($('#' + elData[i][0]).val());
+            }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
+              if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
+                layer.msg('请完善信息');
+                return;
+              }
+              let str = $('#'+elData[i][0]+" #time").val() +" "+$('#'+elData[i][0]+" #time2").val();
+              var str2 = new Date(str);
+              var sjc = Date.parse(str2);
+              postJson[elData[i][0]] = sjc/1000;
+            }else if(checkoutAdd.indexOf(elData[i][0])!=-1){
+              let checkbox = document.querySelectorAll('#'+elData[i][0]+" input[type='checkbox']:checked");
+              let arr = [];
+              for(let i=0;i<checkbox.length;i++){
+                arr.push(checkbox[i].getAttribute('title'));
+              }
+              postJson[elData[i][0]] = JSON.stringify(arr);
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();
             }

@@ -46,7 +46,7 @@
       , slider = layui.slider //滑块
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
+      , {title: 'id',align:'center',type:'numbers'}
       , {field: 'area', title: '所属区域',align:'center'}
       , {field: 'grid', title: '所属网格',align:'center'}
       , {field: 'log_name', title: '日志名称',align:'center'}
@@ -73,16 +73,16 @@
           }},
         {0:"content",1:"日志内容"},
       ]
-      var url =  globalUrl+otherUrl.Work[1];
+      var url =  globalUrl+otherUrl.Work[2][1];
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[3];
+    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2];
+    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
       AJAX({
-        url: globalUrl+otherUrl.Work[0],
+        url: globalUrl+otherUrl.Work[2][0],
         method: 'POST',
         success:function(data) {
           if(data.state==200){

@@ -155,6 +155,8 @@ function setTable(obj) {
       obj.setSuc();
     }
 
+    // $('')
+
     $('#edit').click(function () {//edit
       var checkNum = document.querySelectorAll("tbody input[type='checkbox']:checked").length;
       if (checkNum > 1) {
@@ -267,6 +269,13 @@ function setTable(obj) {
           }
         })
       })
+      $('.finished').click(function(){
+        parent.layer.open({ //在父窗口打开
+          type: 1,
+          title: '问题描述',
+          shadeClose:true,
+        })
+      })
     }
     //点page 重挂click 太恶心了框架
     $('.layui-table-page').click(function () {
@@ -321,20 +330,15 @@ function deleteCheckbox(editEnd,deleteUrl) {
     var checked = document.querySelectorAll("tbody input[type='checkbox']:checked");
     for (let i = 0; i < checked.length; i++) {
       let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-      idArr=tr;
+      idArr.push(tr);
     }
-    AJAX({
-      url: deleteUrl,
-      method: "POST",
-      data: {'id':'6'},
-      success() {
-        layer.msg('删除成功')
-        editEnd();
-      },
-      error() {
-        layer.msg('错误')
-      }
-    })
+    for(let i in idArr){
+      AJAX({
+        url: deleteUrl,
+        method: "POST",
+        data: {'id':idArr[i]}
+      })
+    }
   })
 }
 
@@ -1110,8 +1114,9 @@ function jsonData(data){
 //--------------------------------------------------
 
 function AJAX(obj){
-  layui.use(['jquery'],function(){
+  layui.use(['jquery','layer'],function(){
     var $ = layui.jquery;
+    var layer = layui.layer;
     $.ajax({
       url:obj.url,
       method:obj.method,
@@ -1119,7 +1124,7 @@ function AJAX(obj){
       headers:{'Authorization':getCookie('Authorization')},
       success:obj.success,
       error:function(){
-        layui.msg('错误');
+        layer.msg('错误');
       }
     })
   })

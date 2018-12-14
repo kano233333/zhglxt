@@ -58,9 +58,12 @@ const allow = {
   "log_type":{title:'类型',option:['巡查','走访 ','宣传','处理','重点人员寻访']}
 };
 
-const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','type','log_type'];
+const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','type','log_type','mission_level','mission_type'];
 const optionAddIndex = ['name'];
 const postFile = ['file','img_src','img_path'];
+const optionPostValue = ['mission_level','mission_type'];
+const postTime = ['not_before'];
+const checkoutAdd = ['mission_people'];
 
 const eventType = {
   0:'民事纠纷',
@@ -84,7 +87,11 @@ const yesNo = {
 const globalUrl = "http://web.cqupt.store/public/index.php/index/";
 const otherUrl = {
   User:['User/registerForWeb','User/login'],
-  Work:['Work/dailyWorkList','Work/dailyWorkAdd','Work/dailyWorkDelete','/Work/dailyWorkEdit']
+  Work:[
+    ['Work/missionList','Work/missionAdd','Work/missionDelete'],
+    [],
+    ['Work/dailyWorkList','Work/dailyWorkAdd','Work/dailyWorkDelete','/Work/dailyWorkEdit']
+  ]
 };
 
 const logType = {

@@ -21,7 +21,7 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="./alert/const.js"></script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
@@ -30,56 +30,35 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      刷新
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
+      删除
     </button>
   </div>
 </script>
 <script>
   layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
     var $ = layui.jquery;
+    var laydate = layui.laydate;
     var laypage = layui.laypage //分页
       , layer = layui.layer //弹层
       , table = layui.table //表格
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-    var getTable = function() {
-      $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
-        method: 'GET',
-        success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:testData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
-        }
-      })
-    }
-
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
       , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
+      , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'mission_title', title: '任务标题',align:'center'}
+      , {field: 'mission_level', title: '任务等级',align:'center'}
+      , {field: 'not_before', title: '截止时间',align:'center'}
+      , {field: 'created_at', title: '开始时间',align:'center'}
+      , {field: 'mission_type', title: '任务类型',align:'center'}
+      , {field: 'mission_people', title: '任务人数',align:'center'}
+      , {field: 'not_accepted_people', title: '未受理人数',align:'center'}
+      , {field: 'processing_people', title: '处理中人数',align:'center'}
+      , {field: 'finished_people', title: '已办结人数',align:'center'}
+      , {field: '',title:"操作",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -91,34 +70,67 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'username',1:"用户名"},
-        {0:"realname",1:'真实姓名'},
-        {0:'img_src',1:'ICON'},
-        {0:"scope",1:'所属区域'},
-        {0:"phone",1:"联系电话"},
-        {0:"name",
-        1:{
-          "title":'角色名称',
-          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
-        }}
+        {0:'area',1:"区域"},
+        {0:"mission_title",1:'任务标题'},
+        {0:"mission_level",1:{
+            'title':'任务等级',
+            'option':['一级','二级 ','三级']
+          }},
+        {0:"not_before",1:"截止时间"},
+        {0:"mission_type",1:{
+            'title':'任务类型',
+            'option':['群体活动','宣传活动 ','寻访活动','工作例会','通知']
+          }},
+        {0:'content',1:'任务内容'},
+        {0:'mission_people',1:{
+          "title":'人员',
+            "checkout":['1','2','3']
+          }}
       ]
-      var url = '';
+      var url =  globalUrl+otherUrl.Work[0][1];
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
+    var correspond = {};
+    var editAjaxUrl =  globalUrl+otherUrl.Work[0][3];
+    var detailUrl = './alert/detail.html'
+    var deleteUrl =  globalUrl+otherUrl.Work[0][2];
+    var getTable = function() {
+      AJAX({
+        url: globalUrl+otherUrl.Work[0][0],
+        method: 'POST',
+        success:function(data) {
+          if(data.state==200){
+            console.log(data)
+            correspond = data.data;
+            setTable({
+              addUrl:addUrl,
+              editUrl:editUrl,
+              cols:cols,
+              data:data.data,
+              editSuc:editSuc,
+              editEnd:editEnd,
+              addSuc:addSuc,
+              editAjaxUrl:editAjaxUrl,
+              deleteUrl:deleteUrl,
+              detailUrl:detailUrl,
+            });
+          }else{
+            layer.msg('错误');
+          }
+        }
+      })
+    }
+    getTable();
   })
 </script>
 
+<script id="detail" type="text/html">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal finished" convalue="{{d.id}}">
+      <a href="./work3.html">完成情况</a>
+    </button>
+  </div>
+</script>
 </body>
 
 </html>
