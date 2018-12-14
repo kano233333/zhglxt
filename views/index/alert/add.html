@@ -109,7 +109,7 @@ height:100%;" id="{{d[index][0]}}">
             }
           }
         }
-        postJson['resource'] = 2;
+
         console.log(postJson);
         if(formdata!=''){
           for(let i in postJson){
@@ -118,21 +118,13 @@ height:100%;" id="{{d[index][0]}}">
         }else{
           formdata = postJson;
         }
-        $.ajax({
+        AJAX({
           url:url,
-          // type: "POST",
-          // cache: false,
-          // processData: false,
-          // contentType: false,
           method:"POST",
-          headers:{'Authorization':getCookie('Authorization')},
           data: formdata,
-          success() {
+          success:function() {
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
-          },
-          error(data) {
-            console.log(data);
           }
         });
       })

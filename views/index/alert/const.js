@@ -81,7 +81,11 @@ const yesNo = {
   1:'是'
 };
 
-const globalUrl = "http://47.106.197.31/manage/";
+const globalUrl = "http://web.cqupt.store/public/index.php/index/";
+const otherUrl = {
+  User:['User/registerForWeb','User/login'],
+  Work:['Work/dailyWorkList','Work/dailyWorkAdd','Work/dailyWorkDelete','/Work/dailyWorkEdit']
+};
 
 const logType = {
   1:'巡查',

@@ -73,16 +73,16 @@
           }},
         {0:"content",1:"日志内容"},
       ]
-      var url = 'http://web.cqupt.store/public/index.php/index/Work/dailyWorkAdd';
+      var url =  globalUrl+otherUrl.Work[1];
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl = 'http://web.cqupt.store/public/index.php/index/Work/dailyWorkEdit';
+    var editAjaxUrl =  globalUrl+otherUrl.Work[3];
     var detailUrl = './alert/detail.html'
-    var deleteUrl = 'http://web.cqupt.store/public/index.php/index/Work/dailyWorkDelete';
+    var deleteUrl =  globalUrl+otherUrl.Work[2];
     var getTable = function() {
       AJAX({
-        url: 'http://web.cqupt.store/public/index.php/index/Work/dailyWorkList',
+        url: globalUrl+otherUrl.Work[0],
         method: 'POST',
         success:function(data) {
           if(data.state==200){

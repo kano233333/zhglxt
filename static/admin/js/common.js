@@ -151,6 +151,10 @@ function setTable(obj) {
       editUserData = obj.data;
     });
 
+    if(obj.setSuc){
+      obj.setSuc();
+    }
+
     $('#edit').click(function () {//edit
       var checkNum = document.querySelectorAll("tbody input[type='checkbox']:checked").length;
       if (checkNum > 1) {
@@ -167,7 +171,7 @@ function setTable(obj) {
             obj.editSuc(layero, index) || '';
             var iframe = window['layui-layer-iframe' + index];
             if (obj.editOther && obj.editOther != undefined) { //编辑没有展示的内容
-              $.ajax({
+              AJAX({
                 url: obj.detailGetUrl,
                 data: {
                   id: editUserData.id
@@ -243,7 +247,7 @@ function setTable(obj) {
       })
       $('.score').click(function () {
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-        $.ajax({
+        AJAX({
           url: "http://47.106.197.31/manage/api.php?action=isRanked",
           method: "POST",
           data: {id: idX},
@@ -319,7 +323,7 @@ function deleteCheckbox(editEnd,deleteUrl) {
       let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
       idArr=tr;
     }
-    $.ajax({
+    AJAX({
       url: deleteUrl,
       method: "POST",
       data: {'id':'6'},
