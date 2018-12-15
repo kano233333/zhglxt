@@ -224,16 +224,18 @@
     function setOption(option) {
       var xAxisData = [];
       var seriesData = [];
-      for (let i in chartData[option].data) {
-        xAxisData.push(chartData[option].data[i].type);
-        seriesData.push(chartData[option].data[i].data);
+      for (let i in option) {
+        if(i!='总人数'){
+          xAxisData.push(i);
+          seriesData.push(option[i]);
+        }
       }
       var option3 = {
         backgroundColor: 'rgba(0,0,0,0)',
         tooltip: {
           trigger: 'axis',
-          axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+          axisPointer: {
+            type: 'shadow'
           }
         },
         grid: {
@@ -261,13 +263,26 @@
       return option3;
     }
 
-    requireEchart(0);
+    var addurl = ['getAgeStat','getPopStat'];
+    AJAX({
+      url:'http://47.106.197.31/man/public/index.php/index/Data/'+addurl[0],
+      method:'GET',
+      success:function(data){
+        requireEchart(data.data[0]);
+      }
+    })
     var contentP = document.querySelectorAll('.content-left>p');
     for (let i = 0; i < contentP.length; i++) {
       contentP[i].onclick = function () {
+        AJAX({
+          url:'http://47.106.197.31/man/public/index.php/index/Data/'+addurl[i],
+          method:'GET',
+          success:function(data){
+            requireEchart(data.data[0]);
+          }
+        })
         $(".content-left>p").removeClass('content-left-active');
         $(this).addClass('content-left-active');
-        requireEchart(i);
       }
     }
 
@@ -342,15 +357,52 @@
 <script>
   layui.use(['jquery'],function(){
     var $ = layui.jquery;
-    ssr1({
-      el:'#b1',
-      xAxisData:['0-17', '18-40', '41-60', '61-70', '71-80', '81-90', '91-100'],
-      seriesData:[23,12,13,45,34,34,76]
-    });
-    ssr2({
-      el:'#b2',
-      color:'#ddd'
-    });
+    AJAX({
+      url:'http://47.106.197.31/man/public/index.php/index/Data/getAgeStat',
+      method:'GET',
+      success:function(data){
+        var xAxisData = [];
+        var seriesData = [];
+        for (let i in data.data[0]) {
+          if(i!='总人数'){
+            xAxisData.push(i);
+            seriesData.push(data.data[0][i]);
+          }
+        }
+        ssr1({
+          el:'#b1',
+          title:'年龄统计',
+          xAxisData:xAxisData,
+          seriesData:seriesData
+        });
+      }
+    })
+
+    AJAX({
+      url:'http://47.106.197.31/man/public/index.php/index/Data/getPopStat',
+      method:'GET',
+      success:function(data){
+        var xAxisData = [];
+        var seriesData = [];
+        for (let i in data.data[0]) {
+          if(i!='总人数'){
+            xAxisData.push(i);
+            seriesData.push(data.data[0][i]);
+          }
+        }
+        ssr1({
+          el:'#b2',
+          title:'常驻情况',
+          xAxisData:xAxisData,
+          seriesData:seriesData
+        });
+      }
+    })
+
+    // ssr2({
+    //   el:'#b2',
+    //   color:'#ddd'
+    // });
     ssr3("#b3",['a']);
     ssr7('#b4',['a']);
     ssr1({el:'#b5',

@@ -436,8 +436,8 @@ function ssr1(obj) {
         text: obj.title,
       },
       grid: {
-        x: 10,
-        y: 10
+        x: "8%",
+        y: "5%"
       },
       xAxis: {
         type: 'category',
