@@ -49,9 +49,9 @@
       , {title: 'id',align:'center',type:'numbers'}
       , {field: 'area', title: '所属区域',align:'center'}
       , {field: 'grid', title: '所属网格',align:'center'}
-      , {field: 'state', title: '处理状态',align:'center'}
+      , {field: 'state', title: '处理状态',align:'center',templet:'#dealState'}
       , {field: 'created_at', title: '创建时间',align:'center'}
-      , {field: 'level', title: '事件等级',align:'center'}
+      , {field: 'level', title: '事件等级',align:'center',templet:'#dealLevel'}
       , {field: 'from_who_name',title:"发起人",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
@@ -64,22 +64,28 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        // {0:'area',1:"所属区域"},
-        // {0:"state",1:'处理状态'},
-        // {0:'grid',1:'所属网格'},
-        // {0:"log_type",1:{
-        //     'title':'类型',
-        //     'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-        //   }},
-        // {0:"created_at",1:"日志内容"},
+        {0:'title',1:"标题"},
+        {0:"area",1:'所属区域'},
+        {0:'grid',1:'所属网格'},
+        {0:"content",1:"内容"},
+        {0:"emergency_level",1:{
+            'title':'事件等级',
+            'option':['一级','二级 ','三级']
+          }},
+        {0:"emergency_type",1:"事件类型"},
+        {0:"emergency_source",1:"事件来源"},
+        {0:"is_important",1:{
+            'title':'是否重点事件',
+            'option':['否','是']
+          }}
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
-      iframe.getFromParent(addData,url);
+      var url =  globalUrl+otherUrl.Work[3][1];
+      iframe.getFromParent(addData,url,"edit_time");
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  globalUrl+otherUrl.Work[3][3];
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  globalUrl+otherUrl.Work[3][2];
     var getTable = function() {
       AJAX({
         url: globalUrl+otherUrl.Work[3][0],
@@ -98,7 +104,9 @@
               addSuc:addSuc,
               editAjaxUrl:editAjaxUrl,
               deleteUrl:deleteUrl,
-              detailUrl:detailUrl
+              detailUrl:detailUrl,
+              postTime:'edit_time',
+              dealUrl:'./alert/deal.html'
             });
           }else{
             layer.msg('错误');
@@ -109,20 +117,41 @@
     getTable();
   })
 </script>
-<script id="type5" type="text/html">
-  {{# if(d.log_type==5){ }}
-  <span style="color: #FF0000">{{logType[d.log_type]}}</span>
-  {{# }else{ }}
-  <span>{{logType[d.log_type]}}</span>
+<script id="dealState" type="text/html">
+  {{# if(d.state==0){ }}
+  <span style="color: #ff5542">{{dealStatus[d.state]}}</span>
+  {{# }else if(d.state==1){ }}
+  <span style="color: #ffaf82">{{dealStatus[d.state]}}</span>
+  {{# }else if(d.state==2){ }}
+  <span style="color: #44cb3e">{{dealStatus[d.state]}}</span>
+  {{# }else if(d.state==3){ }}
+  <span style="color: #4c574e">{{dealStatus[d.state]}}</span>
+  {{# } }}
+</script>
+
+<script id="dealLevel" type="text/html">
+  {{# if(d.level==1){ }}
+  <span style="color: #ff5542">{{level[d.level]}}</span>
+  {{# }else if(d.level==2){ }}
+  <span style="color: #4460cb">{{level[d.level]}}</span>
+  {{# }else if(d.level==3){ }}
+  <span style="color: #30d100">{{level[d.level]}}</span>
   {{# } }}
 </script>
 
 <script id="detail" type="text/html">
+  {{# if(d.state!=4){ }}
   <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
-      查看详情
+    <button class="layui-btn layui-btn-sm layui-btn-normal deal" convalue="{{d.LAY_INDEX-1}}">
+      处理
     </button>
   </div>
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+      查看
+    </button>
+  </div>
+  {{# } }}
 </script>
 </body>
 

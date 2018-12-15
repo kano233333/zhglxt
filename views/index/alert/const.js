@@ -31,14 +31,17 @@ const ys = {
 };
 
 const level = {
-  0:"紧急",
-  1:"一般"
+  0:"",
+  1:"一级",
+  2:"二级",
+  3:'三级'
 };
 
 const dealStatus = {
-  0:"未处理",
-  1:"处理中",
-  2:"已结办"
+  0:"未处理未转派",
+  1:"已转派未受理",
+  2:"已受理",
+  3:'已办结'
 };
 
 const scoreXX = {
@@ -58,7 +61,7 @@ const allow = {
   "title":"标题",
   // "type":{title:'事件类型',option:['民事纠纷','市政环卫','物业管理','隐患排查','其他']},
   "type":"类型",
-  "level":{title:'事件级别',option:['紧急','一般']},
+  "level":{title:'事件级别',option:['一级','二级','三级']},
   "content":"内容",
   "grid":"所属网格",
   "area":"所属区域",
@@ -67,12 +70,11 @@ const allow = {
   "not_before":"截至时间",
   "mission_title":"任务标题",
   "mission_level":{title:"任务等级",option:['一级','二级','三级']},
-  "mission_people":{title:'任务人数',checkout:['1','2','3']},
-  "mission_type":{title:'任务类型',option:['群体活动','宣传活动 ','寻访活动','工作例会','通知']}
+  "mission_type":{title:'任务类型',option:['群体活动','宣传活动 ','寻访活动','工作例会','通知']},
+  "is_important":{title:'是否重点事件',option:['否','是']}
 };
 
-const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type'];
-const optionAddIndex = ['name'];
+const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level'];
 const postFile = ['file','img_src','img_path'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
@@ -104,7 +106,7 @@ const otherUrl = {
     ['Work/missionList','Work/missionAdd','Work/missionDelete','Work/missionResult','Work/missionEdit','Work/missionAvailablePeople'],
     ['Work/missionAdmitList'],
     ['Work/dailyWorkList','Work/dailyWorkAdd','Work/dailyWorkDelete','/Work/dailyWorkEdit'],
-    ['Work/emergencyList','Work/emergencyAdd'],
+    ['Work/emergencyList','Work/emergencyAdd','Work/emergencyDelete','Work/emergencyEdit'],
     ['Work/transferredEmergencyList']
   ]
 };
@@ -117,7 +119,7 @@ const logType = {
   5:'重点人员寻访'
 };
 
-const indexOne = ['role_id','log_type'];
+const indexOne = ['role_id','log_type','emergency_level'];
 
 const timeID = ['time','time2'];
 
@@ -187,6 +189,7 @@ var sdlrData = [
     {0:'agent_enterprise_name',1:'代理单位名称'},
     {0:'agent_enterprise_contact',1:'代理单位联系人'}
   ],
+  [],
   [
     {0:'comment',1:'备注'}
   ]

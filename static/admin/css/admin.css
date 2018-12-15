@@ -2135,8 +2135,14 @@
   }
   .layui-form-label {
     padding: 9px 0px;
+    text-align: center;
   }
   .layui-input-block {
     margin-left: 80px;
   }
+}
+
+.layui-form-item .layui-form-label {
+  padding: 9px 0px;
+  text-align: center;
 }

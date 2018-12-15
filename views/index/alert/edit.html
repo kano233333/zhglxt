@@ -47,12 +47,15 @@ height:100%;" id="{{d[index][0]}}">
       <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;">
     </div>
   </div>
-  {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
+  {{# }else if(d[index][0]=='mission_people'){ }}
+  <div class="layui-form-item" id="{{d[index][0]}}">
     <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="layui-input-block" id="{{d[index][0]}}">
-      {{# for(let i in d[index][1].checkout){ }}
-      {{d[index][1].checkout[i]}}<input type="checkbox" title="{{d[index][1].checkout[i]}}">
+    <div class="check-wrap layui-form-item">
+      {{# for(var i in d[index][1].checkout){ }}
+      <div>
+        <input title="{{d[index][1].id[i]}}" class="con-checkbox" type="checkbox" name="layTableCheckbox" lay-skin="primary">
+        {{d[index][1].checkout[i]}}
+      </div>
       {{# } }}
     </div>
   </div>
@@ -79,13 +82,16 @@ height:100%;" id="{{d[index][0]}}">
 </script>
 
 <script>
-  function getFromParent(data,url){
-    console.log(data);
+  function getFromParent(data,url,last){
     var userid = data.id;
     var elData = [];
     for(let i in data){
-      if(allow[i]!=undefined){
-        elData.push({0:i,1:allow[i]});
+      if(i=='mission_people'){
+        elData.push(last.people);
+      }else{
+        if(allow[i]!=undefined){
+          elData.push({0:i,1:allow[i]});
+        }
       }
     }
 
@@ -135,9 +141,7 @@ height:100%;" id="{{d[index][0]}}">
           }else{
             if(optionAdd.indexOf(elData[i][0])!=-1){  //option
               var index = document.querySelector('#' + elData[i][0]).selectedIndex;
-              if(optionAddIndex.indexOf(elData[i][0])!=-1){
-                postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
-              }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
+              if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
                 postJson[elData[i][0]] = index+1;
               }else if(optionPostValue.indexOf(elData[i][0])!=-1){
                 postJson[elData[i][0]] = document.querySelectorAll('#'+elData[i][0]+" option")[index].innerText;
@@ -171,6 +175,9 @@ height:100%;" id="{{d[index][0]}}">
         }
 
         postJson['id'] = data.id;
+        if(last.postTime!=undefined){
+          postJson[last.postTime] = parseInt((new Date()).valueOf()/1000);
+        }
         console.log(postJson);
         AJAX({
           url:url,

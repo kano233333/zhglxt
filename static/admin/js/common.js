@@ -155,7 +155,6 @@ function setTable(obj) {
       obj.setSuc();
     }
 
-
     $('#edit').click(function () {//edit
       var checkNum = document.querySelectorAll("tbody input[type='checkbox']:checked").length;
       if (checkNum > 1) {
@@ -187,12 +186,13 @@ function setTable(obj) {
                     }
                     var iframe = window['layui-layer-iframe' + index];
                     var url =  globalUrl+otherUrl.Work[0][1];
-                    iframe.getFromParent(editUserData,obj.editAjaxUrl);
+                    var aaa = {0:'mission_people',1:{title:'人员',checkout:arr,id:id}}
+                    iframe.getFromParent(editUserData,obj.editAjaxUrl,{people:aaa});
                   }
                 }
               })
             }else {
-              iframe.getFromParent(editUserData, obj.editAjaxUrl);
+              iframe.getFromParent(editUserData, obj.editAjaxUrl,{postTime:obj.postTime});
             }
           },
           end: function () {
@@ -287,6 +287,38 @@ function setTable(obj) {
                 }
               })
             }
+          }
+        })
+      })
+      $('.deal').click(function () {
+        var convalue = this.getAttribute('convalue');
+        var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+        layer.open({
+          title:'详情',
+          type: 2,
+          area: ['800px', '500px'],
+          maxmin: true,
+          content: obj.dealUrl,
+          success: function (layero, index) {
+            if(obj.detailSpecial){
+              var detailData = {};
+              for(let i in obj.dataX['missionDetail']){
+                detailData[i] = obj.dataX['missionDetail'][i];
+              }
+              for(let i in obj.data[index-1]){
+                detailData[i] = obj.data[index-1][i];
+              }
+              console.log(detailData);
+              let iframe = window['layui-layer-iframe' + index];
+              iframe.getFromParent(detailData);
+            }else{
+              console.log(obj.data[convalue])
+              var iframe = window['layui-layer-iframe' + index];
+              iframe.getFromParent(obj.data[convalue]);
+            }
+          },
+          end:function(){
+            editEnd();
           }
         })
       })

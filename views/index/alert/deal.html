@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>detail</title>
+  <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
+  <style>
+    .xxx {
+      display: flex;
+      flex-wrap:wrap;
+      /*flex-direction: column;*/
+      flex-wrap:wrap;
+    }
+    .wrap {
+      display:flex;
+      min-width:50%;
+      margin-bottom: 10px;
+      transition: 0.4s all;
+    }
+    .wrap>div {
+      font-size:15px;
+    }
+    .wrap:hover {
+      opacity:0.9;
+    }
+    .left {
+      padding:6px 15px;
+      background-color: #009688;
+      color:#fff;
+      /*min-width:30%;*/
+      text-align: center;
+    }
+    .right {
+      border:1px solid #00524a;
+      padding:6px 0;
+      min-width:70%;
+      transition: 0.4s all;
+      text-align: center;
+    }
+    .right:hover {
+      background-color: #eeeeee;
+    }
+  </style>
+</head>
+<body>
+<div id="box" style="padding:40px;">
+  <div id="view"></div>
+  <div class="layui-form-item" style="padding-left: 10px;">
+    <div class="layui-input-block" style="position:fixed;bottom:10px;right:10px;">
+      <button class="layui-btn layui-btn-sm layui-btn-danger" id="sl">受理</button>
+      <button class="layui-btn layui-btn-sm" style="background-color: #0f9c00" id="zp">转派</button>
+      <button class="layui-btn layui-btn-sm layui-btn-normal" id="bj">办结</button>
+    </div>
+  </div>
+</div>
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/common.js"></script>
+<script src="./const.js"></script>
+<script type="text/html" id="formModle">
+  <div class="xxx">
+    {{# for(let i in d[0]){ }}
+    {{# if(ys[i]!=undefined){ }}
+    <div class="wrap">
+      <div class="left">{{ys[i]}}</div>
+      {{# if(i=='level'){ }}
+      <div class="right">{{level[d[0][i]]}}</div>
+      {{# }else if(i=='status'){ }}
+      <div class="right">
+        {{# if(dealStatus[d[0][i]]!=undefined){ }}
+        {{dealStatus[d[0][i]]}}
+        {{# } }}
+      </div>
+      {{# }else if(i=='resource'){ }}
+      <div class="right">
+        {{eventResource[d[0][i]]}}
+      </div>
+      {{# }else if(i=='img_path'){ }}
+      <div class="right">
+        <img style="max-width: 300px;max-height: 300px;" src="{{globalUrl+d[0][i]}}" alt="">
+      </div>
+      {{# }else if(i=='is_duban'){ }}
+      <div class="right">
+        {{yesNo[d[0][i]]}}
+      </div>
+      {{# }else if(i=='log_type'){ }}
+      <div class="right">
+        {{logType[d[0][i]]}}
+      </div>
+      {{# }else{ }}
+      <div class="right">
+        {{# if(d[0][i]!=null){ }}
+        {{d[0][i]}}
+        {{# } }}
+      </div>
+      {{# } }}
+    </div>
+    {{# } }}
+    {{# } }}
+  </div>
+</script>
+
+<script>
+  function getFromParent(data){
+    elData = [data];
+    console.log(data)
+    layui.use(['jquery', 'layer', 'upload', 'laytpl'], function () {
+      var $ = layui.jquery;
+      var laytpl = layui.laytpl;
+      var getTpl = document.getElementById('formModle').innerHTML;
+      var view = document.getElementById('view');
+      laytpl(getTpl).render(elData, function (html) {
+        view.innerHTML = html;
+      });
+      $('#sl').click(function(){
+        layer.alert('确认受理事件？',{
+          yes:function(){
+            AJAX({
+              url:globalUrl+'Work/emergencyAdmit',
+              method:"POST",
+              data:{id:elData.id},
+              success:function() {
+                layer.msg('受理成功',{
+                  end:function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                  }
+                })
+              }
+            })
+          }
+        });
+      })
+      $('#zp').click(function(){
+        layer.alert('确认转派事件？',{
+          yes:function(){
+            AJAX({
+              url:globalUrl+'Work/emergencyTransfer',
+              method:"POST",
+              data:{id:elData.id},
+              success:function(){
+                layer.msg('转派成功',{
+                  end:function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                  }
+                });
+              }
+            })
+          }
+        });
+      })
+      $('#bj').click(function(){
+        layer.alert('确认办结事件？',{
+          yes:function(){
+            AJAX({
+              url:globalUrl+'Work/emergencyFinish',
+              method:"POST",
+              data:{id:elData.id},
+              success:function(){
+                layer.msg('办结成功',{
+                  end:function(){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                  }
+                });
+              }
+            })
+          }
+        });
+      })
+    })
+  }
+</script>
+</body>
+</html>

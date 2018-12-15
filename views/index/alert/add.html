@@ -87,7 +87,7 @@ height:100%;" id="{{d[index][0]}}">
 <script>
   var elData = {};
 
-  function getFromParent(data,url) {
+  function getFromParent(data,url,isPostTime) {
     elData = data;
     console.log(elData)
     layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
@@ -124,14 +124,12 @@ height:100%;" id="{{d[index][0]}}">
           }else{
             if(optionAdd.indexOf(elData[i][0])!=-1){  //option
               var index = document.querySelector('#' + elData[i][0]).selectedIndex;
-              if(optionAddIndex.indexOf(elData[i][0])!=-1){
-                postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
-              }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
+              if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
                 postJson[elData[i][0]] = index+1;
               }else if(optionPostValue.indexOf(elData[i][0])!=-1){
                 postJson[elData[i][0]] = document.querySelectorAll('#'+elData[i][0]+" option")[index].innerText;
               }else{
-                postJson[elData[i][0]] = index+1;
+                postJson[elData[i][0]] = index;
               }
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
               formdata= new FormData($("#uploadForm"));
@@ -160,7 +158,11 @@ height:100%;" id="{{d[index][0]}}">
           }
         }
 
+        if(isPostTime!=undefined){
+          postJson[isPostTime] = parseInt((new Date()).valueOf()/1000);
+        }
         console.log(postJson);
+
         if(formdata!=''){
           for(let i in postJson){
             formdata.append(i,postJson[i]);
