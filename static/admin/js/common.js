@@ -308,7 +308,6 @@ function setTable(obj) {
               for(let i in obj.data[index-1]){
                 detailData[i] = obj.data[index-1][i];
               }
-              console.log(detailData);
               let iframe = window['layui-layer-iframe' + index];
               iframe.getFromParent(detailData);
             }else{
@@ -318,7 +317,7 @@ function setTable(obj) {
             }
           },
           end:function(){
-            editEnd();
+            obj.editEnd();
           }
         })
       })

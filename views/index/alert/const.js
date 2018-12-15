@@ -71,7 +71,10 @@ const allow = {
   "mission_title":"任务标题",
   "mission_level":{title:"任务等级",option:['一级','二级','三级']},
   "mission_type":{title:'任务类型',option:['群体活动','宣传活动 ','寻访活动','工作例会','通知']},
-  "is_important":{title:'是否重点事件',option:['否','是']}
+  "is_important":{title:'是否重点事件',option:['否','是']},
+  "emergency_level":{title:'事件等级',option:['一级','二级','三级']},
+  'emergency_source':"事件来源",
+  "emergency_type":"事件类型"
 };
 
 const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level'];
@@ -124,24 +127,11 @@ const indexOne = ['role_id','log_type','emergency_level'];
 const timeID = ['time','time2'];
 
 const xxx = [
-  {0:'org_id',1:''},
-  {0:'grid_id',1:''},
-  {0:'building_id',1:''},
-  {0:'grid_admin_id',1:''},
-  {0:'unit_id',1:''},
-  {0:'housing_property',1:''},
-  {0:'city',1:'所在城市'},
-  {0:'self_name',1:''},
-  {0:'resident_district',1:''},
-  {0:'resident_province',1:''},
-  {0:'resident_address',1:''},
-  {0:'edit_time',1:'录入时间'},
   {0:'state',1:''},
-  {0:'properties',1:''},
   {0:'edit_people_id',1:''}
 ];
 
-var sdlrData = [
+const sdlrData = [
   [
     {0:'id',1:'ID'},
     {0:'area',1:'所属区域'},
@@ -176,11 +166,22 @@ var sdlrData = [
     {0:'enterprise_name',1:'工作单位'},
     {0:'enterprise_type',1:'企业性质'},
     {0:'enterprise_contact',1:'组织关系'},
-    {0:'enterprise_address',1:'单位地址'}
+    {0:'enterprise_address',1:'单位地址'},
+    {0:'city',1:'所在城市'},
+    {0:'self_name',1:'(个人产权)姓名'},
+    {0:'resident_district',1:'户籍区'},
+    {0:'resident_province',1:'户籍省'},
+    {0:'resident_address',1:' 户籍地址'},
+    {0:'org_id',1:'所属组织'},
+    {0:'grid_id',1:'网格'},
+    {0:'grid_admin_id',1:'网格管理员id'}
   ],
   [
     {0:'relation_with_host',1:'与房主关系'},
-    {0:'house_code',1:'房号'}
+    {0:'house_code',1:'房号'},
+    {0:'building_id',1:'楼栋号'},
+    {0:'unit_id',1:'所属单元'},
+    {0:'housing_property',1:'房屋性质'}
   ],
   [
     {0:'agent_name',1:'代理人姓名'},
@@ -197,3 +198,6 @@ var sdlrData = [
 
 const sdlvTime = ['birth_data','in_date','out_date'];
 const sdlrOption = ['sex','is_insured','is_renthouse','marriage','political_status','education','has_jycard'];
+
+
+const sexIndex = {0:'男',1:'女'};
