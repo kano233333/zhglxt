@@ -233,9 +233,11 @@ function setTable(obj) {
               for(let i in obj.data[index-1]){
                 detailData[i] = obj.data[index-1][i];
               }
+              console.log(detailData);
               let iframe = window['layui-layer-iframe' + index];
               iframe.getFromParent(detailData);
             }else{
+              console.log(obj.data[convalue])
               var iframe = window['layui-layer-iframe' + index];
               iframe.getFromParent(obj.data[convalue]);
             }

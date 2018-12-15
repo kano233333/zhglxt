@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>事件处理</title>
+  <title>用户管理</title>
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
 </head>
@@ -22,33 +22,6 @@
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="./alert/const.js"></script>
-<script type="text/html" id="bar">
-  <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal detail">
-      查看详情
-    </button>
-    {{# if(d.status==2){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-dange score">
-      评分
-    </button>
-    {{# } }}
-  </div>
-</script>
-<script type="text/html" id="toolBar">
-  <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
-      添加
-    </button>
-    <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
-      编辑
-    </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs" id="delete">
-      删除
-    </button>
-  </div>
-</script>
-
-
 <script>
   layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
     var $ = layui.jquery;
@@ -58,80 +31,35 @@
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
+      , {title: 'id',align:'center',type:'numbers'}
       , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'status', title: '处理状态',align:'center',templet:'#statusModel'}
       , {field: 'grid', title: '所属网格',align:'center'}
-      , {field: 'time', title: '创建时间',align:'center'}
-      , {field: 'title', title: '标题',align:'center'}
-      , {field: 'level', title: '事件级别',align:'center',templet:'#levelModel'}
-      , {field: 'type',title:"事件类型",align:'center',templet:"<span>{{eventType[d.type]}}</span>"}
-      , {field: 'organizer',title:"发起人",align:'center'}
-      , {field: '',title:"操作",align:'center',toolbar:'#bar',width:"15%"}
+      , {field: 'state', title: '处理状态',align:'center'}
+      , {field: 'created_at', title: '创建时间',align:'center'}
+      , {field: 'level', title: '事件等级',align:'center'}
+      , {field: 'from_who_name',title:"发起人",align:'center',templet:'#detail'}
     ];
-    var addUrl = './alert/add.html';
-    var editUrl = './alert/edit.html';
-    var detailUrl = './alert/detail.html';
-    var detailGetUrl = 'http://47.106.197.31/manage/api.php?action=selectEventById';
-    var scoreUrl = "./alert/score.html";
-    function editSuc(layero, index){}
-    function editEnd(){
-      getTable();
-    }
-    function addSuc(layero, index){
-      var iframe = window['layui-layer-iframe' + index];
-      var addData = [
-        {0:'title',1:'标题'},
-        {0:"type",1:{
-          "title":"事件类型",
-            "option":['民事纠纷','市政环卫','物业管理','隐患排查','其它']
-          }},
-        {0:"level",
-          1:{
-            "title":'事件级别',
-            "option":['紧急','一般']}
-        },
-        {0:'supervise',
-          1:{"title":'是否督办',
-            "option":['否','是']
-        }},
-        {0:'content',1:"内容"},
-        {0:'file',1:"图片"},
-        // {0:'source',1:"来源"},
-        // {0:"address",1:"地址"}
-      ]
-      var url = 'http://47.106.197.31/manage/api.php?action=uploadEvent';
-      iframe.getFromParent(addData,url);
-    }
-    var editAjaxUrl = 'http://47.106.197.31/manage/api.php?action=modifyEventInfo';
+
+    var correspond = {};
+    var detailUrl = './alert/detail.html'
     var getTable = function() {
-      $.ajax({
-        url: 'http://47.106.197.31/manage/api.php?action=displayEvents',
-        method: 'GET',
-        success(data) {
-          var _data = JSON.parse(data);
-          userData = _data.data;
-          console.log(userData)
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:userData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            detailGetUrl:detailGetUrl,
-            detailUrl:detailUrl,
-            editAjaxUrl:editAjaxUrl,
-            scoreUrl:scoreUrl,
-            editOther:true
-          });
-        },
-        error(state) {
-          console.log(state);
+      AJAX({
+        url: globalUrl+otherUrl.Work[4][0],
+        method: 'POST',
+        success:function(data) {
+          if(data.state==200){
+            correspond = data.data;
+            console.log(correspond)
+            setTable({
+              cols:cols,
+              data:data.data,
+              detailUrl:detailUrl
+            });
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
@@ -139,38 +67,13 @@
   })
 </script>
 
+<script id="detail" type="text/html">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+      查看详情
+    </button>
+  </div>
+</script>
 </body>
 
 </html>
-
-<script id="statusModel" type="text/html">
-  {{# if(dealStatus[d.status]!= undefined){ }}
-  {{# if(d.status==0){ }}
-  <span style="color:red;">
-  {{dealStatus[d.status]}}
-  </span>
-  {{# }else if(d.status==1){ }}
-  <span style="color:#08aa16;">
-  {{dealStatus[d.status]}}
-  </span>
-  {{# }else if(d.status==2){ }}
-  <span style="color:#504f48;">
-  {{dealStatus[d.status]}}
-  </span>
-  {{# } }}
-  {{# } }}
-</script>
-
-<script id="levelModel" type="text/html">
-  {{# if(dealStatus[d.level]!= undefined){ }}
-  {{# if(d.level==0){ }}
-    <span style="color:red;">
-    {{level[d.level]}}
-    </span>
-  {{# }else if(d.level==1){ }}
-    <span style="color:#08aa16;">
-    {{level[d.level]}}
-    </span>
-  {{# } }}
-  {{# } }}
-</script>
