@@ -51,15 +51,18 @@ height:100%;" id="{{d[index][0]}}">
       <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;">
     </div>
   </div>
-  {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="layui-input-block" id="{{d[index][0]}}">
-      {{# for(let i in d[index][1].checkout){ }}
-        {{d[index][1].checkout[i]}}<input type="checkbox" title="{{d[index][1].checkout[i]}}">
-      {{# } }}
-    </div>
-  </div>
+  {{# }else if(d[index][0]=='mission_people'){ }}
+      <div class="layui-form-item" id="{{d[index][0]}}">
+        <label class="layui-form-label">{{d[index][1].title}}</label>
+        <div class="check-wrap layui-form-item">
+        {{# for(var i in d[index][1].checkout){ }}
+          <div>
+          <input title="{{d[index][1].id[i]}}" class="con-checkbox" type="checkbox" name="layTableCheckbox" lay-skin="primary">
+          {{d[index][1].checkout[i]}}
+          </div>
+          {{# } }}
+        </div>
+      </div>
   {{# }else if(optionAdd.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1].title}}</label>
@@ -86,6 +89,7 @@ height:100%;" id="{{d[index][0]}}">
 
   function getFromParent(data,url) {
     elData = data;
+    console.log(elData)
     layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
       var $ = layui.jquery;
       var laytpl = layui.laytpl;
@@ -146,6 +150,7 @@ height:100%;" id="{{d[index][0]}}">
               let checkbox = document.querySelectorAll('#'+elData[i][0]+" input[type='checkbox']:checked");
               let arr = [];
               for(let i=0;i<checkbox.length;i++){
+                console.log(checkbox[i].getAttribute('title'))
                 arr.push(parseInt(checkbox[i].getAttribute('title')));
               }
               postJson[elData[i][0]] = JSON.stringify(arr);

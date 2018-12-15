@@ -171,26 +171,27 @@ function setTable(obj) {
           success: function (layero, index) {
             obj.editSuc(layero, index) || '';
             var iframe = window['layui-layer-iframe' + index];
-            if (obj.editOther && obj.editOther != undefined) { //编辑没有展示的内容
+
+            if(obj.editSpecial && obj.editSpecial!=undefined){
+              var mission_people = [];
               AJAX({
-                url: obj.detailGetUrl,
-                data: {
-                  id: editUserData.id
-                },
-                method: "POST",
-                success(data) {
-                  var _data = JSON.parse(data);
-                  var toData = _data.data;
-                  editUserData = toData[0];
-                  console.log(editUserData)
-                  iframe.getFromParent(editUserData, obj.editAjaxUrl);
-                },
-                error() {
-                  layer.msg('错误');
-                  return;
+                url:globalUrl+otherUrl.Work[0][5],
+                method:"POST",
+                success:function(data){
+                  if(data.state==200){
+                    mission_people = data.data;
+                    var arr = [],id = [];
+                    for(let i=0;i<mission_people.length;i++){
+                      arr.push(mission_people[i].name);
+                      id.push(mission_people[i].id)
+                    }
+                    var iframe = window['layui-layer-iframe' + index];
+                    var url =  globalUrl+otherUrl.Work[0][1];
+                    iframe.getFromParent(editUserData,obj.editAjaxUrl);
+                  }
                 }
               })
-            } else {
+            }else {
               iframe.getFromParent(editUserData, obj.editAjaxUrl);
             }
           },

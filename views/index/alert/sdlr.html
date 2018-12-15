@@ -1,12 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>手动录入</title>
+  <title>add</title>
   <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
+  <style>
+    .layui-input {
+      width:200px;
+    }
+    #view1,#view2,#view3,#view4,#view5 {
+      display:flex;
+      flex-wrap: wrap;
+    }
+    .layui-form-label {
+      text-align: center;
+    }
+  </style>
 </head>
-<body>
 
+<body>
+<div style="margin:50px;">
+  <div class="layui-form-item" style="padding-left: 10px;">
+    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">人口信息</blockquote>
+    <div id="view1"></div>
+    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">房屋信息</blockquote>
+    <div id="view2"></div>
+    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">人口属性信息</blockquote>
+    <div id="view3"></div>
+    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">代理信息</blockquote>
+    <div id="view4"></div>
+    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">其他</blockquote>
+    <div id="view5"></div>
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" id="sub">立即提交</button>
+      <button class="layui-btn layui-btn-primary" id="reset">重置</button>
+    </div>
+  </div>
+</div>
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/common.js"></script>
+<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+<script src="./const.js"></script>
+<script type="text/html" id="formModle">
+  {{#  layui.each(d, function(index,item){ }}
+  {{# if(postFile.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" style="opacity:0;width:80px;
+height:100%;" id="{{d[index][0]}}">
+    </form>
+    <button style="position:relative;top:-25px;z-index:-1;" type="button" class="layui-btn">
+      <i class="layui-icon">&#xe67c;</i>上传图片
+    </button>
+    <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
+  </div>
+  {{# }else if(d[index][0]=='passwd'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-block">
+      <input type="password" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+    </div>
+  </div>
+  {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1].title}}</label>
+    <div class="layui-input-block" id="{{d[index][0]}}">
+      {{# for(let i in d[index][1].checkout){ }}
+      {{d[index][1].checkout[i]}}<input type="checkbox" title="{{d[index][1].checkout[i]}}">
+      {{# } }}
+    </div>
+  </div>
+  {{# }else if(sdlrOption.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1].title}}</label>
+    <div class="layui-input-block">
+      <select name="name" class="layui-select" id="{{d[index][0]}}">
+        {{# for(var i in d[index][1].option){ }}
+        <option value="1">{{d[index][1].option[i]}}</option>
+        {{# } }}
+      </select>
+    </div>
+  </div>
+  {{# }else{ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-block">
+      <input type="text" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+    </div>
+  </div>
+  {{# } }}
+  {{#  }); }}
+</script>
+<script>
+  layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
+      var $ = layui.jquery;
+      var laytpl = layui.laytpl;
+      var layer = layui.layer;
+      var laydate = layui.laydate;
+      var getTpl = document.getElementById('formModle').innerHTML;
+
+      for(let i=0;i<5;i++){
+        var view = document.getElementById('view'+(parseInt(i)+1));
+        laytpl(getTpl).render(sdlrData[i], function (html) {
+          view.innerHTML = html;
+        });
+      }
+
+      $('#reset').click(function () {
+        $('input').val('');
+      })
+
+      $('#sub').click(function () {
+        var postJson = {};
+        var formdata = '';
+        for (let i in elData) {
+          if (document.querySelector('#' + elData[i][0]).value == '') {
+            layer.msg('请完善信息');
+            return;
+          }else{
+            if(optionAdd.indexOf(elData[i][0])!=-1){  //option
+              var index = document.querySelector('#' + elData[i][0]).selectedIndex;
+              if(optionAddIndex.indexOf(elData[i][0])!=-1){
+                postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
+              }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
+                postJson[elData[i][0]] = index+1;
+              }else if(optionPostValue.indexOf(elData[i][0])!=-1){
+                postJson[elData[i][0]] = document.querySelectorAll('#'+elData[i][0]+" option")[index].innerText;
+              }else{
+                postJson[elData[i][0]] = index+1;
+              }
+            }else if(postFile.indexOf(elData[i][0])!=-1){ //img
+              formdata= new FormData($("#uploadForm"));
+            }else if(elData[i][0]=='passwd'){
+              postJson[elData[i][0]] = md5($('#' + elData[i][0]).val());
+            }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
+              if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
+                layer.msg('请完善信息');
+                return;
+              }
+              let str = $('#'+elData[i][0]+" #time").val() +" "+$('#'+elData[i][0]+" #time2").val();
+              var str2 = new Date(str);
+              var sjc = Date.parse(str2);
+              postJson[elData[i][0]] = sjc/1000;
+            }else if(checkoutAdd.indexOf(elData[i][0])!=-1){
+              let checkbox = document.querySelectorAll('#'+elData[i][0]+" input[type='checkbox']:checked");
+              let arr = [];
+              for(let i=0;i<checkbox.length;i++){
+                arr.push(parseInt(checkbox[i].getAttribute('title')));
+              }
+              postJson[elData[i][0]] = JSON.stringify(arr);
+            }else{
+              postJson[elData[i][0]] = $('#' + elData[i][0]).val();
+            }
+          }
+        }
+
+        console.log(postJson);
+        if(formdata!=''){
+          for(let i in postJson){
+            formdata.append(i,postJson[i]);
+          }
+        }else{
+          formdata = postJson;
+        }
+        AJAX({
+          url:url,
+          method:"POST",
+          data: formdata,
+          success:function() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+          }
+        });
+      })
+
+      if($('#file')){
+        $('#file').change(function(){
+          var src = window.URL.createObjectURL(this.files[0])
+          $('#fileImg').attr('src',src)
+        })
+      }
+    })
+</script>
 </body>
+
 </html>

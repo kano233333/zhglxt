@@ -1298,8 +1298,20 @@
   border-radius: 2px;
   background-color: #fff;
 }
-.layui-elem-quote {
-  border-left: 5px solid #00b5f9;
+.con-checkbox {
+  width:20px;
+  height:20px;
+  background-color: transparent;
+  border:1px solid chartreuse;
+  position:relative;
+  top:5px;
+}
+.check-wrap {
+  display: flex;
+  margin:0 30px;
+}
+.check-wrap>div {
+  margin:0 20px;
 }
 /*清楚浮动*/
 .clearfix {

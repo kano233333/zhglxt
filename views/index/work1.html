@@ -63,32 +63,50 @@
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    function editSuc(layero, index){}
+    function editSuc(layero, index){
+
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
-      var iframe = window['layui-layer-iframe' + index];
-      var addData = [
-        {0:'area',1:"区域"},
-        {0:"mission_title",1:'任务标题'},
-        {0:"mission_level",1:{
-            'title':'任务等级',
-            'option':['一级','二级 ','三级']
-          }},
-        {0:"not_before",1:"截止时间"},
-        {0:"mission_type",1:{
-            'title':'任务类型',
-            'option':['群体活动','宣传活动 ','寻访活动','工作例会','通知']
-          }},
-        {0:'content',1:'任务内容'},
-        {0:'mission_people',1:{
-          "title":'人员',
-            "checkout":['1','2','3']
-          }}
-      ]
-      var url =  globalUrl+otherUrl.Work[0][1];
-      iframe.getFromParent(addData,url);
+      var mission_people = [];
+      AJAX({
+        url:globalUrl+otherUrl.Work[0][5],
+        method:"POST",
+        success:function(data){
+         if(data.state==200){
+           mission_people = data.data;
+           var arr = [],id = [];
+           for(let i=0;i<mission_people.length;i++){
+             arr.push(mission_people[i].name);
+             id.push(mission_people[i].id)
+           }
+           var iframe = window['layui-layer-iframe' + index];
+           var addData = [
+             {0:'area',1:"区域"},
+             {0:"mission_title",1:'任务标题'},
+             {0:"mission_level",1:{
+                 'title':'任务等级',
+                 'option':['一级','二级 ','三级']
+               }},
+             {0:"not_before",1:"截止时间"},
+             {0:"mission_type",1:{
+                 'title':'任务类型',
+                 'option':['群体活动','宣传活动 ','寻访活动','工作例会','通知']
+               }},
+             {0:'content',1:'任务内容'},
+             {0:'mission_people',1:{
+                 "title":'人员',
+                 "checkout":arr,
+                 "id":id
+               }}
+           ]
+           var url =  globalUrl+otherUrl.Work[0][1];
+           iframe.getFromParent(addData,url);
+         }
+        }
+      })
     }
     var correspond = {};
     var editAjaxUrl =  globalUrl+otherUrl.Work[0][4];
