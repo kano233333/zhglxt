@@ -53,10 +53,12 @@ const scoreXX = {
 
 const allow = {
   'username':'用户名',
-  'realname':'真实姓名',
+  // 'realname':'真实姓名',
+  'name':'真实姓名',
   'scope':"所在区域",
   'phone':"常用电话",
-  "name":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
+  // "name":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
+  "identity":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
   "priv_id":{title:'权限',option:[1,2,3,4,5,6,7]},
   "title":"标题",
   // "type":{title:'事件类型',option:['民事纠纷','市政环卫','物业管理','隐患排查','其他']},
@@ -77,7 +79,7 @@ const allow = {
   "emergency_type":"事件类型"
 };
 
-const optionAdd = ['name','priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level'];
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','identity'];
 const postFile = ['file','img_src','img_path'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
@@ -111,7 +113,8 @@ const otherUrl = {
     ['Work/dailyWorkList','Work/dailyWorkAdd','Work/dailyWorkDelete','/Work/dailyWorkEdit'],
     ['Work/emergencyList','Work/emergencyAdd','Work/emergencyDelete','Work/emergencyEdit'],
     ['Work/transferredEmergencyList']
-  ]
+  ],
+  System:['System/userManager','System/userEdit','System/powerList']
 };
 
 const logType = {

@@ -68,18 +68,15 @@
       })
     }
 
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
+    var testData = [
+    ];
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
+      , {field: 'id', title: 'No.',align:'center'}
+      , {field: 'code', title: '行政区划代码',align:'center'}
+      , {field: 'name', title: '行政区划名称',align:'center'}
+      , {field: 'spell', title: '行政区划简拼',align:'center'}
+      , {field: 'level', title: '行政区划级别',align:'center'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
