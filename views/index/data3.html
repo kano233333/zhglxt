@@ -91,6 +91,7 @@
       })
     }
     getTable();
+    var excelData = [];
 
     //没有经行验证
     function ConvertToArray() {
@@ -103,8 +104,21 @@
         }
         var sheet_name_list = workbook.SheetNames;
         var result = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-        console.log(result);
-        // getTable();
+        for(let i=0;i<result.length;i++){
+          let res = [];
+          for(let k in result[i]){
+            // result[i]
+            res.push(result[i][k]);
+          }
+          excelData.push(res);
+        }
+        AJAX({
+          url:'http://47.106.197.31/man/public/index.php/index/Data/addDataFromJSON',
+          method:'POST',
+          success:function(){
+            getTable();
+          }
+        })
       }
     }
   })
