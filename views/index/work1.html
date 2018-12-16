@@ -78,10 +78,6 @@
          if(data.state==200){
            mission_people = data.data;
            var arr = [],id = [];
-           for(let i=0;i<mission_people.length;i++){
-             arr.push(mission_people[i].name);
-             id.push(mission_people[i].id)
-           }
            var iframe = window['layui-layer-iframe' + index];
            var addData = [
              {0:'area',1:"区域"},
@@ -96,11 +92,7 @@
                  'option':['群体活动','宣传活动 ','寻访活动','工作例会','通知']
                }},
              {0:'content',1:'任务内容'},
-             {0:'mission_people',1:{
-                 "title":'人员',
-                 "checkout":arr,
-                 "id":id
-               }}
+             {0:'mission_people',1:{title:'人员',data:mission_people}}
            ]
            var url =  globalUrl+otherUrl.Work[0][1];
            iframe.getFromParent(addData,url);

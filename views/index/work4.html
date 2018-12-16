@@ -121,14 +121,14 @@
   })
 </script>
 <script id="dealState" type="text/html">
-  {{# if(d.state==0){ }}
-  <span style="color: #ff5542">{{dealStatus[d.state]}}</span>
-  {{# }else if(d.state==1){ }}
-  <span style="color: #ffaf82">{{dealStatus[d.state]}}</span>
-  {{# }else if(d.state==2){ }}
-  <span style="color: #44cb3e">{{dealStatus[d.state]}}</span>
-  {{# }else if(d.state==3){ }}
-  <span style="color: #4c574e">{{dealStatus[d.state]}}</span>
+  {{# if(d.status==0){ }}
+  <span style="color: #ff5542">{{dealStatus[d.status]}}</span>
+  {{# }else if(d.status==1){ }}
+  <span style="color: #ffaf82">{{dealStatus[d.status]}}</span>
+  {{# }else if(d.status==2){ }}
+  <span style="color: #44cb3e">{{dealStatus[d.status]}}</span>
+  {{# }else if(d.status==3){ }}
+  <span style="color: #4c574e">{{dealStatus[d.status]}}</span>
   {{# } }}
 </script>
 
@@ -143,7 +143,7 @@
 </script>
 
 <script id="detail" type="text/html">
-  {{# if(d.state!=4){ }}
+  {{# if(d.status!=3){ }}
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-danger deal" convalue="{{d.LAY_INDEX-1}}">
       处理

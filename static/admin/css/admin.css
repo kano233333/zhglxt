@@ -1309,6 +1309,7 @@
 .check-wrap {
   display: flex;
   margin:0 30px;
+  flex-wrap: wrap;
 }
 .check-wrap>div {
   margin:0 20px;
@@ -2021,20 +2022,20 @@
 }
 
 /*-----------*/
-.sdlr-wrap {
+.sdlr-wrap,.sdlr-wrap2 {
   display:flex;
   margin:10px 15px;
 }
-.box-left p {
+.box-left p,.box-left2 p {
   padding:6px 10px;
   font-size:16px;
   text-align: center;
   color:#666;
 }
-.box-right {
+.box-right,.box-right2 {
   width:200px;
 }
-.box-right input {
+.box-right input,.box-right2 input {
   display: block;
   width:100%;
   padding: 10px 10px;
@@ -2045,16 +2046,16 @@
 .box-right input:hover,.box-right input:focus {
   border:1px solid #c4c3c0;
 }
-.box-right2 {
+.box-right2,.box-right22 {
   width:40px;
 }
 
-.sdlr-wrap .box-right2 input[type=checkbox] {
+.sdlr-wrap .box-right2 input[type=checkbox],.box-right22 input[type=checkbox] {
   -webkit-appearance:none;
   border:none;
   width:20px;
 }
-.sdlr-wrap .box-right2 input[type=checkbox]:after  {
+.sdlr-wrap .box-right2 input[type=checkbox]:after,.box-right22 input[type=checkbox]:after  {
   content: "";
   display:block;
   width: 20px;
@@ -2071,7 +2072,7 @@
   left:-3px;
 }
 
-.sdlr-wrap .box-right2 input[type=checkbox]:checked:after  {
+.sdlr-wrap .box-right2 input[type=checkbox]:checked:after,.box-right22 input[type=checkbox]:checked:after  {
   content: '\2714';
   background-color: #5774FF;
 }

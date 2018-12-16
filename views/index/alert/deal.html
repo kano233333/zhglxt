@@ -118,7 +118,7 @@
             AJAX({
               url:globalUrl+'Work/emergencyAdmit',
               method:"POST",
-              data:{id:elData.id},
+              data:{id:elData[0].id},
               success:function() {
                 layer.msg('受理成功',{
                   end:function(){
@@ -137,7 +137,7 @@
             AJAX({
               url:globalUrl+'Work/emergencyTransfer',
               method:"POST",
-              data:{id:elData.id},
+              data:{id:elData[0].id},
               success:function(){
                 layer.msg('转派成功',{
                   end:function(){
@@ -156,7 +156,7 @@
             AJAX({
               url:globalUrl+'Work/emergencyFinish',
               method:"POST",
-              data:{id:elData.id},
+              data:{id:elData[0].id},
               success:function(){
                 layer.msg('办结成功',{
                   end:function(){
