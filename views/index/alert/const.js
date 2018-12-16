@@ -31,8 +31,10 @@ const ys = {
   "communication_phone":'联系电话',
   'office_phone':'办公电话',
   "service_area":'服务区域',
-  'father_code':'',
-
+  'father_code':'父级代码',
+  'spell':'行政区划简拼',
+  "code":'行政区划代码',
+  'area_level':'行政区划级别'
 };
 
 const level = {
@@ -82,7 +84,12 @@ const allow = {
   "user_state":{title:'用户状态',option:[0,1]},
   "communicate_phone":"联系电话",
   'office_phone':'办公电话',
-
+  'father_code':'父级代码',
+  'spell':'行政区划简拼',
+  "code":'行政区划代码',
+  'area_level':'行政区划级别',
+  "service_area":'服务区域',
+  "id_card":'身份证'
 };
 
 const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state'];

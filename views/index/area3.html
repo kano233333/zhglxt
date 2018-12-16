@@ -30,9 +30,6 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
-      删除
-    </button>
   </div>
 </script>
 <script>
@@ -47,12 +44,11 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      // , {field: 'icon', title: 'Icon',align:'center'}
-      , {field: 'name', title: '网格名称',align:'center'}
-      , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'service_area', title: '服务范围',align:'center'}
-      , {field: 'num', title: '网格管理员人数',align:'center'}
+      , {field: 'name', title: '姓名',align:'center'}
+      , {field: 'area', title: '区域',align:'center'}
+      , {field: 'service_area', title: '服务区域',align:'center'}
       , {field: 'state', title: '状态',align:'center'}
+      , {field: 'num', title: '数目',align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
@@ -65,43 +61,24 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'username',1:"用户名"},
-        {0:"password",1:'密码'},
-        {0:'name',1:'真实姓名'},
-        {0:'area',1:'地区'},
-        {0:"identity",1:{
-          'title':'角色',
-            'option':['街道居民','网格管理员','boss管理员']
-          }},
-        {0:"communication_phone",1:"联系电话"},
-        {0:"office_phone",1:"办公电话"},
-        {0:"user_state",1:"用户状态"},
+        {0:'name',1:"姓名"},
+        {0:"area",1:'区域'},
+        {0:'service_area',1:'服务区域'}
       ]
-      var url =  globalUrl+otherUrl.User[0];
+      var url =  globalUrl+'System/gridAdd';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.System[1];
-    var detailUrl = './alert/detail.html';
+    var editAjaxUrl =  globalUrl+'System/gridEdit';
+    var detailUrl = './alert/detail.html'
     var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
       AJAX({
-        url: 'http://web.cqupt.store/public/index.php/index/System/gridList',
+        url: globalUrl+'System/gridList',
         method: 'POST',
         success:function(data) {
           if(data.state==200){
             correspond = data.data;
-            // console.log(data.data);
-            // console.log(data.data[0]['state']);
-            for (let index = 0; index < data.data.length; index++) {
-                    
-              // console.log(data.data[index]['state']);
-              if(data.data[index]['state'] == 1){
-                data.data[index]['state'] = '已启用';
-              }
-              
-              
-            }
             setTable({
               addUrl:addUrl,
               editUrl:editUrl,
@@ -123,21 +100,19 @@
     getTable();
   })
 </script>
+<script id="type5" type="text/html">
+  {{# if(d.log_type==5){ }}
+  <span style="color: #FF0000">{{logType[d.log_type]}}</span>
+  {{# }else{ }}
+  <span>{{logType[d.log_type]}}</span>
+  {{# } }}
+</script>
 
 <script id="detail" type="text/html">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       查看详情
     </button>
-    {{# if(true){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
-      禁用 
-    </button>
-    {{# }else{ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
-      启用
-    </button>
-    {{# } }}
   </div>
 </script>
 </body>

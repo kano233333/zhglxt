@@ -65,7 +65,7 @@
         {0:'code',1:"行政区划代码"},
         {0:"name",1:'行政区划名称'},
         {0:'spell',1:'服务区域'},
-        {0:'level',1:"行政区划级别"},
+        {0:'area_level',1:"行政区划级别"},
         {0:'father_code',1:"父级代码"},
       ]
       var url =  globalUrl+'System/areaManageAdd';
@@ -92,8 +92,6 @@
               addSuc:addSuc,
               editAjaxUrl:editAjaxUrl,
               // deleteUrl:deleteUrl,
-              detailUrl:detailUrl,
-              editPassword:'password'
             });
           }else{
             layer.msg('错误');
