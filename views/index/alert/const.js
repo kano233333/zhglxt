@@ -80,7 +80,7 @@ const allow = {
 };
 
 const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','identity'];
-const postFile = ['file','img_src','img_path'];
+const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
 const checkoutAdd = ['mission_people'];

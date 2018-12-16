@@ -170,9 +170,13 @@ height:100%;" id="{{d[index][0]}}">
               var check = document.querySelectorAll('check-one');
               for(let i =0;i<check.length;i++){
                 if(this.checked){
-                  // arr.push(parseInt(document.getElementById('checkX').getAttribute('idX')));
+                  var checkTwo = document.querySelectorAll('#checkX'+i+"input:checked");
+                  for(let n=0;n<checkTwo.length;n++){
+                    arr.push(checkTwo[n].getAttribute('idX'));
+                  }
                 }
               }
+              console.log(arr)
               postJson[elData[i][0]] = JSON.stringify(arr);
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();
@@ -189,22 +193,36 @@ height:100%;" id="{{d[index][0]}}">
           for(let i in postJson){
             formdata.append(i,postJson[i]);
           }
+          $.ajax({
+            url:url,
+            type:"POST",
+            data:formdata,
+            contentType:false,
+            processData:false,
+            async:false,
+            cache:false,
+            headers:{'Authorization':getCookie('Authorization')},
+            success:function() {
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.layer.close(index);
+            }
+          })
         }else{
           formdata = postJson;
+          AJAX({
+            url:url,
+            method:"POST",
+            data: formdata,
+            success:function() {
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.layer.close(index);
+            }
+          });
         }
-        AJAX({
-          url:url,
-          method:"POST",
-          data: formdata,
-          success:function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index);
-          }
-        });
       })
 
-      if($('#file')){
-        $('#file').change(function(){
+      if($('input[type=file]')){
+        $('input[type=file]').change(function(){
           var src = window.URL.createObjectURL(this.files[0])
           $('#fileImg').attr('src',src)
         })
