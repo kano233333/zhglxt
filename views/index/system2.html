@@ -21,7 +21,7 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="./alert/const.js"></script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
@@ -30,8 +30,8 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      刷新
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
+      删除
     </button>
   </div>
 </script>
@@ -44,14 +44,15 @@
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-
-    // var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
       , {field: 'id', title: 'ID',align:'center'}
-      , {field: 'name', title: '角色',align:'center'}
-      , {field: 'priv_id', title: '权限',align:'center'}
-      , {field: 'time', title: '时间',align:'center'}
+      , {field: 'description', title: '角色名称',align:'center'}
+      , {field: 'power_level', title: '角色级别',align:'center'}
+      , {field: 'edit_user', title: '编辑人',align:'center'}
+      , {field: 'edit_time', title: '编辑时间',align:'center'}
+      , {field: 'comment', title: '备注',align:'center'}
+      , {field: 'num', title: '权限人数',align:'center'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -63,46 +64,46 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {
-          0:"name",
-          1:{
-            "title":'角色名称',
-            "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
-          }
-        },
-        {
-          0:'priv_id',
-          1:{
-            "title":'权限',
-            "option":[1,2,3,4,5,6,7]
-          }
-        }
+        {0:'username',1:"用户名"},
+        {0:"password",1:'密码'},
+        {0:'name',1:'姓名'},
+        {0:'area',1:'地区'},
+        {0:"identity",1:{
+          'title':'角色',
+            'option':['街道居民','网格管理员','boss管理员']
+          }},
+        {0:"communication_phone",1:"联系电话"},
+        {0:"office_phone",1:"办公电话"},
       ]
-      var url = 'http://47.106.197.31/manage/api.php?action=addRole';
+      var url =  '';
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = 'http://47.106.197.31/manage/api.php?action=modifyRole';
-
+    var correspond = {};
+    var editAjaxUrl =  '';
+    var detailUrl = './alert/detail.html';
+    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
-      $.ajax({
-        url: 'http://47.106.197.31/manage/api.php?action=getAllRoles',
-        method: 'GET',
-        success(data) {
-          var _data = JSON.parse(data);
-          userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:userData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
+      AJAX({
+        url: globalUrl+otherUrl.System[2],
+        method: 'POST',
+        success:function(data) {
+          if(data.state==200){
+            correspond = data.data;
+            setTable({
+              addUrl:addUrl,
+              editUrl:editUrl,
+              cols:cols,
+              data:data.data,
+              editSuc:editSuc,
+              editEnd:editEnd,
+              addSuc:addSuc,
+              editAjaxUrl:editAjaxUrl,
+              deleteUrl:deleteUrl,
+              detailUrl:detailUrl
+            });
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
@@ -110,6 +111,22 @@
   })
 </script>
 
+<script id="detail" type="text/html">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+      查看详情
+    </button>
+    {{# if(true){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+      禁用 
+    </button>
+    {{# }else{ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
+      启用
+    </button>
+    {{# } }}
+  </div>
+</script>
 </body>
 
 </html>
