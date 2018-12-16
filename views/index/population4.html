@@ -47,19 +47,54 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '党员姓名',align:'center'}
-      , {field: 'grid', title: '性别',align:'center'}
-      , {field: 'log_name', title: '年龄',align:'center'}
-      , {field: 'grid_admin', title: '入党时间',align:'center'}
-      , {field: 'log_type', title: '现住地址',align:'center'}
-      , {field: 'log_type', title: '所在组织',align:'center'}
-      , {field: 'log_type', title: '党员所在党支部',align:'center'}
-      , {field: 'log_type', title: '担任的党员职位',align:'center'}
-      , {field: 'log_type', title: '联系方式',align:'center'}
+      , {field: 'name', title: '姓名',align:'center'}
+      , {field: 'sex', title: '性别',align:'center'}
+      , {field: 'sfzh', title: '身份证号',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'address', title: '现住地址',align:'center'}
+      , {field: 'object', title: '服务对象类型',align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
+
+var testData = [
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',address:'XX家园77号6幢1单元6-8',object:'独居老人'},
+      ];
 
     function editSuc(layero, index){}
     function editEnd(){
@@ -95,7 +130,7 @@
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:[{'id':1}],
+            data:testData,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
@@ -123,7 +158,7 @@
 <script id="detail" type="text/html">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
-      查看详情
+     走访记录 
     </button>
   </div>
 </script>

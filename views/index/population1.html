@@ -55,11 +55,38 @@
       , {field: 'log_name', title: '身份证号',align:'center'}
       , {field: 'grid_admin', title: '房主电话',align:'center'}
       , {field: 'log_type', title: '房主地址',align:'center'}
-      , {field: 'log_type', title: '状态',align:'center'}
+      , {field: 'log_status', title: '状态',align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
+
+    var testData = [
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
+      ];
 
     function editSuc(layero, index){}
     function editEnd(){
@@ -95,7 +122,7 @@
               addUrl:addUrl,
               editUrl:editUrl,
               cols:cols,
-              data:[{'id':1}],
+              data:testData,
               editSuc:editSuc,
               editEnd:editEnd,
               addSuc:addSuc,
