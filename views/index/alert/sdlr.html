@@ -116,44 +116,42 @@ height:100%;" id="{{d[index][0]}}">
       $('#sub').click(function () {
         var postJson = {};
         var formdata = '';
-        for (let i in elData) {
-          if (document.querySelector('#' + elData[i][0]).value == '') {
+        for (let i in aaa) {
+          if (false) {
             layer.msg('请完善信息');
             return;
           }else{
-            if(optionAdd.indexOf(elData[i][0])!=-1){  //option
-              var index = document.querySelector('#' + elData[i][0]).selectedIndex;
-              if(optionAddIndex.indexOf(elData[i][0])!=-1){
-                postJson[elData[i][0]] = document.querySelectorAll('#' + elData[i][0]+">option")[index].innerText;
-              }else if(indexOne.indexOf(elData[i][0])!=-1){ //index 从1开始
-                postJson[elData[i][0]] = index+1;
-              }else if(optionPostValue.indexOf(elData[i][0])!=-1){
-                postJson[elData[i][0]] = document.querySelectorAll('#'+elData[i][0]+" option")[index].innerText;
-              }else{
-                postJson[elData[i][0]] = index+1;
+            if(optionAdd.indexOf(aaa[i][0])!=-1){  //option
+              var index = document.querySelector('#' + aaa[i][0]).selectedIndex;
+              if(optionAddIndex.indexOf(aaa[i][0])!=-1){
+                if(dataYesNo.indexOf(aaa[i][0])!=-1){
+                  postJson[aaa[i][0]] = index;
+                }else{
+                  postJson[aaa[i][0]] = document.querySelectorAll('#'+aaa[i][0]+" option")[index].innerText;
+                }
               }
-            }else if(postFile.indexOf(elData[i][0])!=-1){ //img
+            }else if(postFile.indexOf(aaa[i][0])!=-1){ //img
               formdata= new FormData($("#uploadForm"));
-            }else if(elData[i][0]=='passwd'){
-              postJson[elData[i][0]] = md5($('#' + elData[i][0]).val());
-            }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
-              if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
+            }else if(aaa[i][0]=='passwd'){
+              postJson[aaa[i][0]] = md5($('#' + aaa[i][0]).val());
+            }else if(postTime.indexOf(aaa[i][0])!=-1){  //时间戳
+              if($('#'+aaa[i][0]+" #time").val()=='' || $('#'+aaa[i][0]+" #time2").val()==''){
                 layer.msg('请完善信息');
                 return;
               }
-              let str = $('#'+elData[i][0]+" #time").val() +" "+$('#'+elData[i][0]+" #time2").val();
+              let str = $('#'+aaa[i][0]+" #time").val() +" "+$('#'+aaa[i][0]+" #time2").val();
               var str2 = new Date(str);
               var sjc = Date.parse(str2);
-              postJson[elData[i][0]] = sjc/1000;
-            }else if(checkoutAdd.indexOf(elData[i][0])!=-1){
-              let checkbox = document.querySelectorAll('#'+elData[i][0]+" input[type='checkbox']:checked");
+              postJson[aaa[i][0]] = sjc/1000;
+            }else if(checkoutAdd.indexOf(aaa[i][0])!=-1){
+              let checkbox = document.querySelectorAll('#'+aaa[i][0]+" input[type='checkbox']:checked");
               let arr = [];
               for(let i=0;i<checkbox.length;i++){
                 arr.push(parseInt(checkbox[i].getAttribute('title')));
               }
-              postJson[elData[i][0]] = JSON.stringify(arr);
+              postJson[aaa[i][0]] = JSON.stringify(arr);
             }else{
-              postJson[elData[i][0]] = $('#' + elData[i][0]).val();
+              postJson[aaa[i][0]] = $('#' + aaa[i][0]).val();
             }
           }
         }
@@ -167,7 +165,7 @@ height:100%;" id="{{d[index][0]}}">
           formdata = postJson;
         }
         AJAX({
-          url:url,
+          url:'http://47.106.197.31/man/public/index.php/index/Data/addPeopleData',
           method:"POST",
           data: formdata,
           success:function() {

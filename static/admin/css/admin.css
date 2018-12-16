@@ -2025,6 +2025,7 @@
   /*height:365px;*/
   display:flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .content-left>p {
   padding:10px 5px;

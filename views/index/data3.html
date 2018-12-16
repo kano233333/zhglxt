@@ -22,10 +22,15 @@
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="./alert/const.js"></script>
+<script src="../../static/admin/lib/xlsx/xlsx.core.min.js"></script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
-      添加
+    <button class="layui-btn layui-btn-sm layui-btn-normal">
+      导入
+      <input type="file" id="xlsx" style="position:absolute;width:100%;left:0;opacity:0;">
+    </button>
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
+      刷新
     </button>
   </div>
 </script>
@@ -57,6 +62,9 @@
           if(data.state===200){
             correspond = data.data;
             tableRender(cols, data.data);
+            document.getElementById('xlsx').onchange = function() {
+              ConvertToArray();
+            }
           }else{
             layer.msg('错误');
           }
@@ -64,6 +72,22 @@
       })
     }
     getTable();
+
+    //没有经行验证
+    function ConvertToArray() {
+      var reader = new FileReader();
+      reader.readAsBinaryString(document.getElementById("xlsx").files[0]);
+      reader.onloadend = function (evt) {
+        if (evt.target.readyState == FileReader.DONE) {
+          var data = reader.result;
+          var workbook = XLSX.read(data, {type: 'binary'});
+        }
+        var sheet_name_list = workbook.SheetNames;
+        var result = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+        console.log(result);
+        // getTable();
+      }
+    }
   })
 </script>
 

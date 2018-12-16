@@ -57,8 +57,7 @@
               <p>政治面貌</p>
               <p>低保人员数</p>
               <p>租房人口</p>
-              <p>经济困难数</p>
-              <p>名字统计</p>
+              <p>民族统计</p>
               <p>重点关注人群</p>
             </div>
             <div class="content-right" id="boxEcharts"></div>
@@ -263,7 +262,7 @@
       return option3;
     }
 
-    var addurl = ['getAgeStat','getPopStat'];
+    var addurl = ['getAgeStat','getPopStat','getSexStat','getPoliticalStat','getPoorStat','getRentHouseStat','getEthnicityStat','getKeyAttnStat'];
     AJAX({
       url:'http://47.106.197.31/man/public/index.php/index/Data/'+addurl[0],
       method:'GET',
@@ -278,6 +277,7 @@
           url:'http://47.106.197.31/man/public/index.php/index/Data/'+addurl[i],
           method:'GET',
           success:function(data){
+            console.log(data);
             requireEchart(data.data[0]);
           }
         })

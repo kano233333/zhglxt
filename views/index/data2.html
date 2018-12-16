@@ -24,8 +24,8 @@
 <script src="./alert/const.js"></script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
-      添加
+    <button class="layui-btn layui-btn-sm layui-btn-normal import">
+      手动导入
     </button>
   </div>
 </script>
@@ -49,6 +49,20 @@
       , {field: 'grid_admin',title:"网格管理员",align:'center'}
     ];
 
+    var addUrl = './alert/sdlr.html';
+    layer.open({
+      title:'手动导入',
+      type: 2,
+      area: ['800px', '500px'],
+      maxmin: true,
+      content: './alert/sdlr.html',
+      success: function (layero, index) {},
+      end:function(){
+        getTable();
+      }
+    })
+    var correspond = {};
+
     var getTable = function() {
       AJAX({
         url: 'http://47.106.197.31/man/public/index.php/index/Data/getPeopleDataList',
@@ -57,6 +71,20 @@
           if(data.state===200){
             correspond = data.data;
             tableRender(cols, data.data);
+            $('.import').click(function() {
+              layer.open({
+                title: '手动导入',
+                type: 2,
+                area: ['800px', '500px'],
+                maxmin: true,
+                content: './alert/sdlr.html',
+                success: function (layero, index) {
+                },
+                end: function () {
+                  getTable();
+                }
+              })
+            })
           }else{
             layer.msg('错误');
           }
