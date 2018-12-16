@@ -72,19 +72,16 @@
         {0:"password",1:'密码'},
         {0:'name',1:'真实姓名'},
         {0:'area',1:'地区'},
-        {0:"identity",1:{
-          'title':'角色',
-            'option':['街道居民','网格管理员','boss管理员']
-          }},
+        {0:"identity",1:'身份'},
         {0:"communication_phone",1:"联系电话"},
         {0:"office_phone",1:"办公电话"},
-        {0:"user_state",1:"用户状态"},
+        {0:"user_state",1:{title:"用户状态",option:[0,1]}}
       ]
       var url =  globalUrl+otherUrl.User[0];
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.System[1];
+    var editAjaxUrl =  globalUrl+"System/userEdit";
     var detailUrl = './alert/detail.html';
     var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
@@ -103,8 +100,9 @@
               editEnd:editEnd,
               addSuc:addSuc,
               editAjaxUrl:editAjaxUrl,
-              deleteUrl:deleteUrl,
-              detailUrl:detailUrl
+              // deleteUrl:deleteUrl,
+              detailUrl:detailUrl,
+              editPassword:'password'
             });
           }else{
             layer.msg('错误');
@@ -121,7 +119,7 @@
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       查看详情
     </button>
-    {{# if(true){ }}
+    {{# if(d.state==0){ }}
     <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       禁用 
     </button>

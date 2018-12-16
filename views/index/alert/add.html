@@ -36,7 +36,7 @@ height:100%;" id="{{d[index][0]}}">
     </button>
     <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
   </div>
-  {{# }else if(d[index][0]=='passwd'){ }}
+  {{# }else if(d[index][0]=='password'){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1]}}</label>
     <div class="layui-input-block">
@@ -177,7 +177,6 @@ height:100%;" id="{{d[index][0]}}">
                   }
                 }
               }
-              console.log(arr)
               postJson[elData[i][0]] = JSON.stringify(arr);
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();

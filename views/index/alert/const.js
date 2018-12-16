@@ -27,7 +27,12 @@ const ys = {
   "mission_level":"任务等级",
   "score":"任务得分",
   "source":"事件来源",
-  "operator":"任务发布人"
+  "operator":"任务发布人",
+  "communication_phone":'联系电话',
+  'office_phone':'办公电话',
+  "service_area":'服务区域',
+  'father_code':'',
+
 };
 
 const level = {
@@ -52,16 +57,12 @@ const scoreXX = {
 };
 
 const allow = {
-  'username':'用户名',
-  // 'realname':'真实姓名',
-  'name':'真实姓名',
+  'name':'姓名',
   'scope':"所在区域",
   'phone':"常用电话",
-  // "name":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
-  "identity":{title:'角色名称',option:['社区居民','管理员','网格管理员']},
+  "identity":'身份',
   "priv_id":{title:'权限',option:[1,2,3,4,5,6,7]},
   "title":"标题",
-  // "type":{title:'事件类型',option:['民事纠纷','市政环卫','物业管理','隐患排查','其他']},
   "type":"类型",
   "level":{title:'事件级别',option:['一级','二级','三级']},
   "content":"内容",
@@ -76,10 +77,15 @@ const allow = {
   "is_important":{title:'是否重点事件',option:['否','是']},
   "emergency_level":{title:'事件等级',option:['一级','二级','三级']},
   'emergency_source':"事件来源",
-  "emergency_type":"事件类型"
+  "emergency_type":"事件类型",
+  "password":'密码',
+  "user_state":{title:'用户状态',option:[0,1]},
+  "communicate_phone":"联系电话",
+  'office_phone':'办公电话',
+
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','identity'];
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];

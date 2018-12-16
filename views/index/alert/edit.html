@@ -39,6 +39,13 @@ height:100%;" id="{{d[index][0]}}">
     </button>
     <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
   </div>
+  {{# }else if(d[index][0]=='password'){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-block">
+      <input type="password" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+    </div>
+  </div>
   {{# }else if(d[index][0]=='not_before'){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1]}}</label>
@@ -97,8 +104,11 @@ height:100%;" id="{{d[index][0]}}">
 
 <script>
   function getFromParent(data,url,last){
-    var userid = data.id;
+    // var userid = data.id;
     var elData = [];
+    if(last.password!=undefined){
+      elData.push(last.password);
+    }
     for(let i in data){
       if(i=='mission_people'){
         elData.push(last.people);
@@ -108,7 +118,7 @@ height:100%;" id="{{d[index][0]}}">
         }
       }
     }
-
+    console.log(elData)
     //分割事件串
     if(data['not_before']!=undefined){
       var timeArr = data['not_before'].split(' ');
@@ -164,8 +174,6 @@ height:100%;" id="{{d[index][0]}}">
               }
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
               formdata= new FormData($("#uploadForm"));
-            }else if(elData[i][0]=='passwd'){
-              postJson[elData[i][0]] = md5($('#' + elData[i][0]).val());
             }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
               if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
                 layer.msg('请完善信息');
@@ -176,11 +184,17 @@ height:100%;" id="{{d[index][0]}}">
               var sjc = Date.parse(str2);
               postJson[elData[i][0]] = sjc/1000;
             }else if(checkoutAdd.indexOf(elData[i][0])!=-1){
-              let checkbox = document.querySelectorAll('#'+elData[i][0]+" input[type='checkbox']:checked");
-              let arr = [];
-              for(let i=0;i<checkbox.length;i++){
-                arr.push(parseInt(checkbox[i].getAttribute('title')));
+              var arr = [];
+              var check = document.querySelectorAll('check-one');
+              for(let i =0;i<check.length;i++){
+                if(this.checked){
+                  var checkTwo = document.querySelectorAll('#checkX'+i+"input:checked");
+                  for(let n=0;n<checkTwo.length;n++){
+                    arr.push(checkTwo[n].getAttribute('idX'));
+                  }
+                }
               }
+              console.log(arr)
               postJson[elData[i][0]] = JSON.stringify(arr);
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();

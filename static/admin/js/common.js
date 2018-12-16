@@ -147,8 +147,10 @@ function setTable(obj) {
     });
 
     var editUserData;
-    table.on('checkbox(test)', function (obj) {
-      editUserData = obj.data;
+    table.on('checkbox(test)', function (xxx) {
+      let index = xxx.tr.selector.split('"')[1];
+      editUserData = obj.data[index];
+      console.log(editUserData)
     });
 
     if(obj.setSuc){
@@ -179,11 +181,6 @@ function setTable(obj) {
                 success:function(data){
                   if(data.state==200){
                     mission_people = data.data;
-                    var arr = [],id = [];
-                    for(let i=0;i<mission_people.length;i++){
-                      arr.push(mission_people[i].name);
-                      id.push(mission_people[i].id)
-                    }
                     var iframe = window['layui-layer-iframe' + index];
                     var url =  globalUrl+otherUrl.Work[0][1];
                     var aaa = {0:'mission_people',1:{title:'人员',data:mission_people}};
@@ -191,6 +188,8 @@ function setTable(obj) {
                   }
                 }
               })
+            }else if(obj.editPassword!=undefined){
+              iframe.getFromParent(editUserData, obj.editAjaxUrl,{password:{0:obj.editPassword,1:'密码'}});
             }else {
               iframe.getFromParent(editUserData, obj.editAjaxUrl,{postTime:obj.postTime});
             }
