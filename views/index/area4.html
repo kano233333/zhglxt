@@ -21,7 +21,7 @@
 </div>
 <script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="./alert/const.js"></script>
 <script type="text/html" id="toolBar">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
@@ -30,8 +30,8 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      刷新
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
+      删除
     </button>
   </div>
 </script>
@@ -44,42 +44,17 @@
       , upload = layui.upload //上传
       , element = layui.element //元素操作
       , slider = layui.slider //滑块
-    var getTable = function() {
-      $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
-        method: 'GET',
-        success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:testData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
-        }
-      })
-    }
-
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
     var cols = [ //表头
       {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
+      , {title: 'id',align:'center',type:'numbers'}
+      // , {field: 'icon', title: 'Icon',align:'center'}
+      , {field: 'name', title: '姓名',align:'center'}
+      , {field: 'sex', title: '性别',align:'center'}
+      , {field: 'age', title: '年龄',align:'center'}
+      , {field: 'grid', title: '所属网格',align:'center'}
+      , {field: 'server_area', title: '服务范围',align:'center'}
+      , {field: 'state', title: '状态',align:'center'}
+      , {field: '',title:"操作",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
@@ -92,33 +67,89 @@
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
         {0:'username',1:"用户名"},
-        {0:"realname",1:'真实姓名'},
-        {0:'img_src',1:'ICON'},
-        {0:"scope",1:'所属区域'},
-        {0:"phone",1:"联系电话"},
-        {0:"name",
-        1:{
-          "title":'角色名称',
-          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
-        }}
+        {0:"password",1:'密码'},
+        {0:'name',1:'真实姓名'},
+        {0:'area',1:'地区'},
+        {0:"identity",1:{
+          'title':'角色',
+            'option':['街道居民','网格管理员','boss管理员']
+          }},
+        {0:"communication_phone",1:"联系电话"},
+        {0:"office_phone",1:"办公电话"},
+        {0:"user_state",1:"用户状态"},
       ]
-      var url = '';
+      var url =  globalUrl+otherUrl.User[0];
       iframe.getFromParent(addData,url);
     }
-    var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
+    var correspond = {};
+    var editAjaxUrl =  globalUrl+otherUrl.System[1];
+    var detailUrl = './alert/detail.html';
+    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var getTable = function() {
+      AJAX({
+        url: 'http://web.cqupt.store/public/index.php/index/System/gridAdminList',
+        method: 'POST',
+        success:function(data) {
+          if(data.state==200){
+            correspond = data.data;
+              for (let index = 0; index < data.data.length; index++) {
+                    
+              // console.log(data.data[index]['sex']);
+                  if(data.data[index]['sex'] == 1){
+                    data.data[index]['sex'] = '男';
+                  } else {
+                    data.data[index]['sex'] = '女';
+                  }
+                  if(data.data[index]['grid'] == 1){
+                    data.data[index]['grid'] = '第一网格';
+                  } 
+                  if(data.data[index]['state'] == 1){
+                    data.data[index]['state'] = '已启用';
+                  } else {
+                    data.data[index]['state'] = '未启用';
+                  }
+              }
+            setTable({
+              addUrl:addUrl,
+              editUrl:editUrl,
+              cols:cols,
+              data:data.data,
+              editSuc:editSuc,
+              editEnd:editEnd,
+              addSuc:addSuc,
+              editAjaxUrl:editAjaxUrl,
+              deleteUrl:deleteUrl,
+              detailUrl:detailUrl
+            });
+          }else{
+            layer.msg('错误');
+          }
+        }
+      })
+    }
+    getTable();
   })
 </script>
 
+<script id="detail" type="text/html">
+  <div class="layui-inline tool-btn">
+    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+      查看详情
+    </button>
+    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+      编辑APP账号
+    </button>
+    {{# if(true){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+      禁用 
+    </button>
+    {{# }else{ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
+      启用
+    </button>
+    {{# } }}
+  </div>
+</script>
 </body>
 
 </html>
