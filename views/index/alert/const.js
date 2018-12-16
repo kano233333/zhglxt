@@ -131,71 +131,6 @@ const xxx = [
   {0:'edit_people_id',1:''}
 ];
 
-const sdlrData = [
-  [
-    {0:'no',1:'序号'},
-    {0:'area',1:'所属区域'},
-    {0:'population_type',1:'人口类型'},
-    {0:'username',1:'姓名'},
-    {0:'sex',1:{title:'性别',option:['男','女']}},
-    {0:'native_place',1:'籍贯'},
-    {0:'aga',1:'年龄'},
-    {0:'ethnicity',1:'民族'},
-    {0:'id_number',1:'身份证'},
-    {0:'birth_data',1:'出生日期'},
-    {0:'is_insured',1:{title:'是否参保',option:['否','是']}},
-    {0:'is_renthouse',1:{title:'是否为出租房',option:['否','是']}},
-    {0:'marriage',1:{title:'婚姻状况',option:['未婚','已婚']}},
-    {0:'phone',1:'联系电话'},
-    {0:'political_status',1:{title:'政治面貌',option:['党员','预备党员','团员','民革党员','民盟盟员','民建会员','民进会员','农工党党员','致公党党员','九三学社社员','台盟盟员','无党派人士','群众']}},
-    {0:'education',1:{title:'文化程度',option:['博士','硕士','本科','大专','中专/中技','高中','初中','小学','其他']}},
-    {0:'occupation',1:'职业'},
-    {0:'work_place',1:'工作地点'},
-    {0:'pic',1:'上传照片'},
-    {0:'address',1:'现居住地'},
-    {0:'car_info',1:'汽车信息'},
-    {0:'living_reason',1:'居住事由'},
-    {0:'floating_reason',1:'流动原因'},
-    {0:'in_data',1:'来本市日期'},
-    {0:'has_jycard',1:{title:'是否办理缙云卡',option:['否','是']}},
-    {0:'out_data',1:'流出时间'},
-    {0:'out_province',1:'流出到省'},
-    {0:'out_city',1:'流出到市'},
-    {0:'out_district',1:'流出到区（县）'},
-    {0:'out_address',1:'流往地详址'},
-    {0:'enterprise_name',1:'工作单位'},
-    {0:'enterprise_type',1:'企业性质'},
-    {0:'enterprise_contact',1:'组织关系'},
-    {0:'enterprise_address',1:'单位地址'},
-    {0:'city',1:'所在城市'},
-    {0:'self_name',1:'(个人产权)姓名'},
-    {0:'resident_district',1:'户籍市'},
-    {0:'resident_province',1:'户籍省'},
-    {0:'resident_address',1:' 户籍地址'},
-    {0:'org_id',1:'所属组织'},
-    {0:'grid_id',1:'网格'},
-    {0:'grid_admin_id',1:'网格管理员id'}
-  ],
-  [
-    {0:'relation_with_host',1:'与房主关系'},
-    {0:'house_code',1:'房号'},
-    {0:'building_id',1:'楼栋号'},
-    {0:'unit_id',1:'所属单元'},
-    {0:'housing_property',1:'房屋性质'}
-  ],
-  [
-    {0:'agent_name',1:'代理人姓名'},
-    {0:'agent_address',1:'代理人地址'},
-    {0:'agent_enterprise_address',1:'代理单位地址'},
-    {0:'agent_enterprise_name',1:'代理单位名称'},
-    {0:'agent_enterprise_contact',1:'代理单位联系人'}
-  ],
-  [],
-  [
-    {0:'comment',1:'备注'}
-  ]
-];
-
 const aaa = [
   {0:'no',1:'序号'},
   {0:'community_id',1:'所属小区'},
@@ -239,12 +174,15 @@ const aaa = [
   {0:'population_type',1:'人口类型'},
   {0:'floating_reason',1:'流动原因'},
   {0:'relation_with_host',1:'与户主关系'},
-  {0:'in_date',1:'来本市日期'},
+  {0:'in_data',1:'来本市日期'},
   {0:'has_jycard',1:{title:'是否办理缙云卡',option:['否','是']}},
-  {0:'out_date',1:'流出到省'},
+  {0:'out_data',1:'流出到省'},
   {0:'out_province',1:'流出到市'},
   {0:'out_city',1:'流出到区（县）'},
-  {0:'out_district',1:'流往地详址'}
+  {0:'out_district',1:'流往地详址'},
+  {0:'edit_people',1:'录入人'},
+  {0:'comment',1:'注释'},
+  {0:'pic',1:'图片网址'}
 ];
 
 const bbb = [
@@ -268,10 +206,7 @@ const bbb = [
   {0:'is_overseas_student',1:'留学人员'},
   {0:'is_overseas_chinese',1:'归国华侨'},
   {0:'is_cflac_member',1:'文联会员'},
-  {0:'is_ftu_member',1:'工会会员'},
-  {0:'edit_people',1:'录入人'},
-  {0:'comment',1:'注释'},
-  {0:'pic',1:'图片网址'}
+  {0:'is_ftu_member',1:'工会会员'}
 ];
 
 const sdlvTime = ['birth_data','in_date','out_date'];
@@ -279,4 +214,4 @@ const sdlrOption = ['sex','is_insured','is_renthouse','marriage','political_stat
 
 
 const sexIndex = {0:'男',1:'女'};
-const dataYesNo = ['has_jycard','is_renthouse','is_insured'];
+const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];

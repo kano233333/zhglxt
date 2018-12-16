@@ -96,7 +96,36 @@
         $('input').val('');
       })
 
-      $('#sub').click()
+      $('#sub').click(function(){
+        var postJson = {};
+        for(let i in aaa){
+          if(sdlrOption.indexOf(aaa[i][0])!=-1){
+            var index = document.querySelector('#' + aaa[i][0]).selectedIndex;
+            if(dataYesNo.indexOf(aaa[i][0])!=-1){
+              postJson[aaa[i][0]] = index;
+            }
+          }else{
+            postJson[aaa[i][0]] = $('#' + aaa[i][0]).val();
+          }
+        }
+        for(let i in bbb){
+          if($('#' + bbb[i][0]).is(':checked')){
+            postJson[bbb[i][0]] = 1;
+          }else{
+            postJson[bbb[i][0]] = 0;
+          }
+        }
+        console.log(postJson);
+        AJAX({
+          url:'http://47.106.197.31/man/public/index.php/index/Data/addPeopleData',
+          method:"POST",
+          data: postJson,
+          success:function() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+          }
+        });
+      })
 
       if($('#file')){
         $('#file').change(function(){
