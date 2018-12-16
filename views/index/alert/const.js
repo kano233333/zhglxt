@@ -200,7 +200,7 @@ const aaa = [
   {0:'no',1:'序号'},
   {0:'community_id',1:'所属小区'},
   {0:'username',1:'姓名'},
-  {0:'sex',1:'性别'},
+  {0:'sex',1:{title:'性别',option:['男','女']}},
   {0:'age',1:'年龄'},
   {0:'resident_province',1:'户籍省'},
   {0:'resident_district',1:'户籍市'},
@@ -215,18 +215,18 @@ const aaa = [
   {0:'grid',1:'所属网格'},
   {0:'building_id',1:'所属楼栋'},
   {0:'unit_id',1:'所属单元'},
-  {0:'is_insured',1:'是否参保'},
-  {0:'marriage',1:'婚姻状况'},
-  {0:'political_status',1:'政治面貌'},
+  {0:'is_insured',1:{title:'是否参保',option:['否','是']}},
+  {0:'marriage',1:{title:'婚姻状况',option:['未婚','已婚']}},
+  {0:'political_status',1:{title:'政治面貌',option:['党员','预备党员','团员','民革党员','民盟盟员','民建会员','民进会员','农工党党员','致公党党员','九三学社社员','台盟盟员','无党派人士','群众']}},
   {0:'phone',1:'联系电话'},
-  {0:'education',1:'学历'},
+  {0:'education',1:{title:'文化程度',option:['博士','硕士','本科','大专','中专/中技','高中','初中','小学','其他']}},
   {0:'occupation',1:'职业'},
   {0:'enterprise_type',1:'企业性质'},
   {0:'work_place',1:'工作地点'},
   {0:'housing_property',1:'房屋性质'},
   {0:'address',1:'街路巷（组）'},
   {0:'house_code',1:'门牌号'},
-  {0:'is_renthouse',1:'是否为出租房'},
+  {0:'is_renthouse',1:{title:'是否为出租房',option:['否','是']}},
   {0:'room_code',1:'房号'},
   {0:'self_name',1:'(个人产权)姓名'},
   {0:'enterprise_name',1:'(单位产权)单位名称'},
@@ -240,11 +240,14 @@ const aaa = [
   {0:'floating_reason',1:'流动原因'},
   {0:'relation_with_host',1:'与户主关系'},
   {0:'in_date',1:'来本市日期'},
-  {0:'has_jycard',1:'是否办理缙云卡'},
+  {0:'has_jycard',1:{title:'是否办理缙云卡',option:['否','是']}},
   {0:'out_date',1:'流出到省'},
   {0:'out_province',1:'流出到市'},
   {0:'out_city',1:'流出到区（县）'},
-  {0:'out_district',1:'流往地详址'},
+  {0:'out_district',1:'流往地详址'}
+];
+
+const bbb = [
   {0:'is_single_old',1:'独居老人'},
   {0:'mental_disease',1:'精神障碍'},
   {0:'is_correctional',1:'社区矫正人员'},
@@ -269,7 +272,6 @@ const aaa = [
   {0:'edit_people',1:'录入人'},
   {0:'comment',1:'注释'},
   {0:'pic',1:'图片网址'}
-
 ];
 
 const sdlvTime = ['birth_data','in_date','out_date'];

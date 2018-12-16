@@ -7,15 +7,12 @@
   <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
   <style>
-    .layui-input {
-      width:200px;
-    }
-    #view1,#view2,#view3,#view4,#view5 {
-      display:flex;
+    #view1,#view2 {
+      display: flex;
       flex-wrap: wrap;
     }
-    .layui-form-label {
-      text-align: center;
+    .layui-input-block {
+      margin-top:50px;
     }
   </style>
 </head>
@@ -25,14 +22,8 @@
   <div class="layui-form-item" style="padding-left: 10px;">
     <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">人口信息</blockquote>
     <div id="view1"></div>
-    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">房屋信息</blockquote>
-    <div id="view2"></div>
     <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">人口属性信息</blockquote>
-    <div id="view3"></div>
-    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">代理信息</blockquote>
-    <div id="view4"></div>
-    <blockquote class="layui-elem-quote" style="border-color:#000;font-size:17px;padding:10px;">其他</blockquote>
-    <div id="view5"></div>
+    <div id="view2"></div>
     <div class="layui-input-block">
       <button class="layui-btn layui-btn-normal" id="sub">立即提交</button>
       <button class="layui-btn layui-btn-primary" id="reset">重置</button>
@@ -45,54 +36,42 @@
 <script src="./const.js"></script>
 <script type="text/html" id="formModle">
   {{#  layui.each(d, function(index,item){ }}
-  {{# if(postFile.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <form id="uploadForm" enctype="multipart/form-data">
-      <input type="file" style="opacity:0;width:80px;
-height:100%;" id="{{d[index][0]}}">
-    </form>
-    <button style="position:relative;top:-25px;z-index:-1;" type="button" class="layui-btn">
-      <i class="layui-icon">&#xe67c;</i>上传图片
-    </button>
-    <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
-  </div>
-  {{# }else if(d[index][0]=='passwd'){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <div class="layui-input-block">
-      <input type="password" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+    {{# if(sdlrOption.indexOf(d[index][0])!=-1){ }}
+    <div class="sdlr-wrap">
+      <div class="box-left">
+        <p>{{d[index][1].title}}</p>
+      </div>
+      <div class="box-right">
+        <select name="name" class="layui-select" id="{{d[index][0]}}">
+          {{# for(let i in d[index][1].option){ }}
+          <option>{{d[index][1].option[i]}}</option>
+          {{# } }}
+        </select>
+      </div>
+    </div>
+    {{# }else{ }}
+    <div class="sdlr-wrap">
+      <div class="box-left">
+        <p>{{d[index][1]}}</p>
+      </div>
+      <div class="box-right">
+        <input type="text" placeholder="" id="{{d[index][0]}}">
+      </div>
+    </div>
+    {{# } }}
+  {{# }) }}
+</script>
+<script type="text/html" id="checkboxModle">
+  {{#  layui.each(d, function(index,item){ }}
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right2">
+      <input type="checkbox" placeholder="" id="{{d[index][0]}}">
     </div>
   </div>
-  {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="layui-input-block" id="{{d[index][0]}}">
-      {{# for(let i in d[index][1].checkout){ }}
-      {{d[index][1].checkout[i]}}<input type="checkbox" title="{{d[index][1].checkout[i]}}">
-      {{# } }}
-    </div>
-  </div>
-  {{# }else if(sdlrOption.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="layui-input-block">
-      <select name="name" class="layui-select" id="{{d[index][0]}}">
-        {{# for(var i in d[index][1].option){ }}
-        <option value="1">{{d[index][1].option[i]}}</option>
-        {{# } }}
-      </select>
-    </div>
-  </div>
-  {{# }else{ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <div class="layui-input-block">
-      <input type="text" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
-    </div>
-  </div>
-  {{# } }}
-  {{#  }); }}
+  {{# }) }}
 </script>
 <script>
   layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
@@ -101,79 +80,23 @@ height:100%;" id="{{d[index][0]}}">
       var layer = layui.layer;
       var laydate = layui.laydate;
       var getTpl = document.getElementById('formModle').innerHTML;
+      var getTpl2 = document.getElementById('checkboxModle').innerHTML;
 
-      for(let i=0;i<5;i++){
-        var view = document.getElementById('view'+(parseInt(i)+1));
-        laytpl(getTpl).render(sdlrData[i], function (html) {
-          view.innerHTML = html;
-        });
-      }
+      var view = document.getElementById('view1');
+      laytpl(getTpl).render(aaa, function (html) {
+        view.innerHTML = html;
+      });
+
+      var view2= document.getElementById('view2');
+      laytpl(getTpl2).render(bbb, function (html) {
+        view2.innerHTML = html;
+      });
 
       $('#reset').click(function () {
         $('input').val('');
       })
 
-      $('#sub').click(function () {
-        var postJson = {};
-        var formdata = '';
-        for (let i in aaa) {
-          if (false) {
-            layer.msg('请完善信息');
-            return;
-          }else{
-            if(optionAdd.indexOf(aaa[i][0])!=-1){  //option
-              var index = document.querySelector('#' + aaa[i][0]).selectedIndex;
-              if(optionAddIndex.indexOf(aaa[i][0])!=-1){
-                if(dataYesNo.indexOf(aaa[i][0])!=-1){
-                  postJson[aaa[i][0]] = index;
-                }else{
-                  postJson[aaa[i][0]] = document.querySelectorAll('#'+aaa[i][0]+" option")[index].innerText;
-                }
-              }
-            }else if(postFile.indexOf(aaa[i][0])!=-1){ //img
-              formdata= new FormData($("#uploadForm"));
-            }else if(aaa[i][0]=='passwd'){
-              postJson[aaa[i][0]] = md5($('#' + aaa[i][0]).val());
-            }else if(postTime.indexOf(aaa[i][0])!=-1){  //时间戳
-              if($('#'+aaa[i][0]+" #time").val()=='' || $('#'+aaa[i][0]+" #time2").val()==''){
-                layer.msg('请完善信息');
-                return;
-              }
-              let str = $('#'+aaa[i][0]+" #time").val() +" "+$('#'+aaa[i][0]+" #time2").val();
-              var str2 = new Date(str);
-              var sjc = Date.parse(str2);
-              postJson[aaa[i][0]] = sjc/1000;
-            }else if(checkoutAdd.indexOf(aaa[i][0])!=-1){
-              let checkbox = document.querySelectorAll('#'+aaa[i][0]+" input[type='checkbox']:checked");
-              let arr = [];
-              for(let i=0;i<checkbox.length;i++){
-                arr.push(parseInt(checkbox[i].getAttribute('title')));
-              }
-              postJson[aaa[i][0]] = JSON.stringify(arr);
-            }else{
-              postJson[aaa[i][0]] = $('#' + aaa[i][0]).val();
-            }
-          }
-        }
-
-        console.log(postJson);
-        if(formdata!=''){
-          for(let i in postJson){
-            formdata.append(i,postJson[i]);
-          }
-        }else{
-          formdata = postJson;
-        }
-        AJAX({
-          url:'http://47.106.197.31/man/public/index.php/index/Data/addPeopleData',
-          method:"POST",
-          data: formdata,
-          success:function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index);
-          }
-        });
-      })
+      $('#sub').click()
 
       if($('#file')){
         $('#file').change(function(){
