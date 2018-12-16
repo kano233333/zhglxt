@@ -47,12 +47,31 @@
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
       , {field: 'username', title: '姓名',align:'center'}
-      , {field: 'sex', title: '性别',align:'center',templet:'<span>{{sexIndex[d.sex]}}</span>'}
+      // , {field: 'sex', title: '性别',align:'center',templet:'<span>{{sexIndex[d.sex]}}</span>'}
+      , {field: 'sex', title: '性别',align:'center'}
       , {field: 'id_number', title: '身份证号',align:'center'}
       , {field: 'grid', title: '所属网格',align:'center'}
       , {field: 'org_id', title: '所属组织',align:'center'}
       , {field: 'grid_admin',title:"网格管理员",align:'center'}
     ];
+
+      var testData = [
+      {id:'111',username:'梁元伟',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第一网格',grid_admin:'刘小勇'},
+      {id:'111',username:'王越',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第一网格',grid_admin:'刘小勇'},
+      {id:'111',username:'万开华',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第一网格',grid_admin:'刘小勇'},
+      {id:'111',username:'万开成',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第一网格',grid_admin:'刘小勇'},
+      {id:'111',username:'罗雨欣',sex:'女',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第二网格',grid_admin:'刘小勇'},
+      {id:'111',username:'田贻富',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第二网格',grid_admin:'刘小勇'},
+      {id:'111',username:'田其义',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第二网格',grid_admin:'刘小勇'},
+      {id:'111',username:'王定惠',sex:'女',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第二网格',grid_admin:'刘小勇'},
+      {id:'111',username:'高朝会',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第三网格',grid_admin:'刘小勇'},
+      {id:'111',username:'陈胡',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第三网格',grid_admin:'刘小勇'},
+      {id:'111',username:'付秋宏',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第三网格',grid_admin:'刘小勇'},
+      {id:'111',username:'李杨',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第四网格',grid_admin:'刘小勇'},
+      {id:'111',username:'杨永连',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第四网格',grid_admin:'刘小勇'},
+      {id:'111',username:'李翊君',sex:'男',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第四网格',grid_admin:'刘小勇'},
+      {id:'111',username:'王小娅',sex:'女',id_number:'533821199912127656',org_id:'XX社区居委会',grid:'第五网格',grid_admin:'刘小勇'},
+      ];
 
     var getTable = function() {
       AJAX({
@@ -61,7 +80,7 @@
         success:function(data) {
           if(data.state===200){
             correspond = data.data;
-            tableRender(cols, data.data);
+            tableRender(cols, testData);
             document.getElementById('xlsx').onchange = function() {
               ConvertToArray();
             }
