@@ -186,7 +186,7 @@ function setTable(obj) {
                     }
                     var iframe = window['layui-layer-iframe' + index];
                     var url =  globalUrl+otherUrl.Work[0][1];
-                    var aaa = {0:'mission_people',1:{title:'人员',checkout:arr,id:id}}
+                    var aaa = {0:'mission_people',1:{title:'人员',data:mission_people}};
                     iframe.getFromParent(editUserData,obj.editAjaxUrl,{people:aaa});
                   }
                 }

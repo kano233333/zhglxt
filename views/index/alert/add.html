@@ -153,7 +153,8 @@ height:100%;" id="{{d[index][0]}}">
                 postJson[elData[i][0]] = index;
               }
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
-              formdata= new FormData($("#uploadForm"));
+              formdata= new FormData();
+              formdata.append("pic[]", $('#pic')[0].files[0]);
             }else if(elData[i][0]=='passwd'){
               postJson[elData[i][0]] = md5($('#' + elData[i][0]).val());
             }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳

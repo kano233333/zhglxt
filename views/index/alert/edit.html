@@ -47,17 +47,31 @@ height:100%;" id="{{d[index][0]}}">
       <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;">
     </div>
   </div>
-  {{# }else if(d[index][0]=='mission_people'){ }}
+  {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item" id="{{d[index][0]}}">
-    <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="check-wrap layui-form-item">
-      {{# for(var i in d[index][1].checkout){ }}
-      <div>
-        <input title="{{d[index][1].id[i]}}" class="con-checkbox" type="checkbox" name="layTableCheckbox" lay-skin="primary">
-        {{d[index][1].checkout[i]}}
+    <div style="margin-left:30px;">{{d[index][1].title}}</div>
+    {{# for(var i in d[index][1].data){ }}
+    <div class="sdlr-wrap2">
+      <div class="box-left2">
+        <p>第{{i}}网格</p>
+      </div>
+      <div class="box-right22">
+        <input class="check-one" type="checkbox" placeholder="">
+      </div>
+    </div>
+    <div id="checkX{{i}}" style="margin: 0 20px; display: flex;flex-wrap: wrap;">
+      {{# for(let k in d[index][1].data[i]){ }}
+      <div class="sdlr-wrap2" id="check-two{{i}}" style="display: none;margin:0 20px;">
+        <div class="box-left2">
+          <p>{{d[index][1].data[i][k].name}}</p>
+        </div>
+        <div class="box-right22">
+          <input type="checkbox" placeholder="" id="aaa{{k}}" idX="d[index][1].data[i][k].id">
+        </div>
       </div>
       {{# } }}
     </div>
+    {{# } }}
   </div>
   {{# }else if(optionAdd.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item">
