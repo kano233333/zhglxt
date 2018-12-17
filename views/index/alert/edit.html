@@ -105,6 +105,7 @@ height:100%;" id="{{d[index][0]}}">
 <script>
   function getFromParent(data,url,last){
     // var userid = data.id;
+    console.log(data)
     var elData = [];
     if(last.password!=undefined){
       elData.push(last.password);
@@ -112,6 +113,8 @@ height:100%;" id="{{d[index][0]}}">
     for(let i in data){
       if(i=='mission_people'){
         elData.push(last.people);
+      }else if(i=='icon'){
+          elData.push({0:'pic',1:allow['pic']});
       }else{
         if(allow[i]!=undefined){
           elData.push({0:i,1:allow[i]});
@@ -141,6 +144,8 @@ height:100%;" id="{{d[index][0]}}">
             input[i].value = timeArr[0];
           }else if(atr == 'time2'){
             input[i].value = timeArr[1];
+          }else if(atr == 'pic'){
+            $('#fileImg').attr('src',data['icon'])
           }else{
             input[i].value = data[atr];
           }
@@ -173,7 +178,8 @@ height:100%;" id="{{d[index][0]}}">
                 postJson[elData[i][0]] = index+1;
               }
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
-              formdata= new FormData($("#uploadForm"));
+              formdata= new FormData();
+              formdata.append("pic[]", $('#pic')[0].files[0]);
             }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
               if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
                 layer.msg('请完善信息');
@@ -207,19 +213,40 @@ height:100%;" id="{{d[index][0]}}">
           postJson[last.postTime] = parseInt((new Date()).valueOf()/1000);
         }
         console.log(postJson);
-        AJAX({
-          url:url,
-          method: "POST",
-          data: postJson,
-          success() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index);
+        if(formdata!=''){
+          for(let i in postJson){
+            formdata.append(i,postJson[i]);
           }
-        });
+          $.ajax({
+            url:url,
+            type:"POST",
+            data:formdata,
+            contentType:false,
+            processData:false,
+            async:false,
+            cache:false,
+            headers:{'Authorization':getCookie('Authorization')},
+            success:function() {
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.layer.close(index);
+            }
+          })
+        }else{
+          formdata = postJson;
+          AJAX({
+            url:url,
+            method:"POST",
+            data: formdata,
+            success:function() {
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.layer.close(index);
+            }
+          });
+        }
       })
 
-      if($('#img_src')){
-        $('#file').change(function(){
+      if($('input[type=file]')){
+        $('input[type=file]').change(function(){
           var src = window.URL.createObjectURL(this.files[0])
           $('#fileImg').attr('src',src)
         })
