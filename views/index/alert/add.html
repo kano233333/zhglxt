@@ -6,11 +6,19 @@
   <title>add</title>
   <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
+  <style>
+    .box-right {
+      flex-grow: 1;
+    }
+    .box-left {
+      text-align: left;
+    }
+  </style>
 </head>
 
 <body>
 <div style="margin:50px;">
-  <div class="layui-form-item" style="padding-left: 10px;">
+  <div class="layui-form-item">
     <div id="view"></div>
     <div class="layui-input-block">
       <button class="layui-btn layui-btn-normal" id="sub">立即提交</button>
@@ -36,19 +44,28 @@ height:100%;" id="{{d[index][0]}}">
     </button>
     <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
   </div>
-  {{# }else if(d[index][0]=='password'){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <div class="layui-input-block">
-      <input type="password" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+  {{# }else if(passwd.indexOf(d[index][0])!=-1){ }}
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right">
+      <input type="password" placeholder="" id="{{d[index][0]}}">
     </div>
   </div>
-  {{# }else if(d[index][0]=='not_before'){ }}
+  {{# }else if(postTime.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1]}}</label>
     <div class="layui-input-inline" id="{{d[index][0]}}">
       <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd">
       <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;">
+    </div>
+  </div>
+  {{# }else if(postTimeYear.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-inline" id="{{d[index][0]}}">
+      <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd">
     </div>
   </div>
   {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
@@ -77,22 +94,35 @@ height:100%;" id="{{d[index][0]}}">
         </div>
           {{# } }}
       </div>
+  {{# }else if(checkOne.indexOf(d[index][0])!=-1){ }}
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right2">
+      <input type="checkbox" placeholder="" id="{{d[index][0]}}">
+    </div>
+  </div>
   {{# }else if(optionAdd.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="layui-input-block">
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1].title}}</p>
+    </div>
+    <div class="box-right">
       <select name="name" class="layui-select" id="{{d[index][0]}}">
-        {{# for(var i in d[index][1].option){ }}
-        <option value="1">{{d[index][1].option[i]}}</option>
+        {{# for(let i in d[index][1].option){ }}
+        <option>{{d[index][1].option[i]}}</option>
         {{# } }}
       </select>
     </div>
   </div>
   {{# }else{ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <div class="layui-input-block">
-      <input type="text" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right">
+      <input type="text" placeholder="" id="{{d[index][0]}}">
     </div>
   </div>
   {{# } }}
@@ -103,7 +133,6 @@ height:100%;" id="{{d[index][0]}}">
 
   function getFromParent(data,url,isPostTime) {
     elData = data;
-    console.log(elData)
     layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
       var $ = layui.jquery;
       var laytpl = layui.laytpl;
@@ -155,9 +184,15 @@ height:100%;" id="{{d[index][0]}}">
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
               formdata= new FormData();
               formdata.append("pic[]", $('#pic')[0].files[0]);
-            }else if(elData[i][0]=='passwd'){
-              postJson[elData[i][0]] = md5($('#' + elData[i][0]).val());
-            }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
+            }else if(postTimeYear.indexOf(elData[i][0])!=-1){
+              if($('#'+elData[i][0]+" #time").val()==''){
+                layer.msg('请完善信息');
+                return;
+              }
+              let str = $('#'+elData[i][0]+" #time").val();
+              postJson[elData[i][0]] = str;
+            }else if(postTime.indexOf(elData[i][0])!=-1){
+              //时间戳
               if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
                 layer.msg('请完善信息');
                 return;

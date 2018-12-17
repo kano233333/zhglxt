@@ -55,7 +55,19 @@
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    function editSuc(layero, index){}
+    function editSuc(layero, index,data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',1:'ID',2:data['id']},
+        {0:'code',1:"行政区划代码",2:data['code']},
+        {0:'name',1:"行政区划名称",2:data['name']},
+        {0:'spell',1:"行政区划简拼",2:data['spell']},
+        {0:'level',1:"行政区划级别",2:data['level']},
+        {0:'father_code',1:"父级区域代码",2:data['father_code']},
+      ]
+      var url =  globalUrl+'System/areaManageEdit';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }

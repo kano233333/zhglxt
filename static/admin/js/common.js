@@ -170,29 +170,7 @@ function setTable(obj) {
           maxmin: true,
           content: obj.editUrl,
           success: function (layero, index) {
-            obj.editSuc(layero, index) || '';
-            var iframe = window['layui-layer-iframe' + index];
-
-            if(obj.editSpecial && obj.editSpecial!=undefined){
-              var mission_people = [];
-              AJAX({
-                url:globalUrl+otherUrl.Work[0][5],
-                method:"POST",
-                success:function(data){
-                  if(data.state==200){
-                    mission_people = data.data;
-                    var iframe = window['layui-layer-iframe' + index];
-                    var url =  globalUrl+otherUrl.Work[0][1];
-                    var aaa = {0:'mission_people',1:{title:'人员',data:mission_people}};
-                    iframe.getFromParent(editUserData,obj.editAjaxUrl,{people:aaa});
-                  }
-                }
-              })
-            }else if(obj.editPassword!=undefined){
-              iframe.getFromParent(editUserData, obj.editAjaxUrl,{password:{0:obj.editPassword,1:'密码'}});
-            }else {
-              iframe.getFromParent(editUserData, obj.editAjaxUrl,{postTime:obj.postTime});
-            }
+            obj.editSuc(layero, index,editUserData);
           },
           end: function () {
             obj.editEnd() || '';

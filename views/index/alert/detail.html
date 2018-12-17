@@ -6,40 +6,32 @@
   <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css"/>
   <style>
-    .xxx {
+    table {
+      border:1px solid #929292;
+    }
+    tbody {
       display: flex;
-      flex-wrap:wrap;
-      /*flex-direction: column;*/
-      flex-wrap:wrap;
+      flex-wrap: wrap;
     }
-    .wrap {
-      display:flex;
-      min-width:50%;
-      margin-bottom: 10px;
-      transition: 0.4s all;
-    }
-    .wrap>div {
+    tbody>tr {
+      width:50%;
+      display: flex;
       font-size:15px;
+      font-weight:normal;
     }
-    .wrap:hover {
-      opacity:0.9;
+    th {
+      border:1px solid #929292;
     }
     .left {
-      padding:6px 15px;
-      background-color: #009688;
-      color:#fff;
-      /*min-width:30%;*/
-      text-align: center;
-    }
-    .right {
-      border:1px solid #00524a;
+      flex: 0.5;
       padding:6px 0;
-      min-width:70%;
-      transition: 0.4s all;
-      text-align: center;
+      background-color: #e9e9e9;
+      font-weight:normal;
     }
-    .right:hover {
-      background-color: #eeeeee;
+    .right{
+      flex: 1;
+      padding:6px 0;
+      font-weight:normal;
     }
   </style>
 </head>
@@ -51,45 +43,48 @@
 <script src="./const.js"></script>
 <script type="text/html" id="formModle">
   <div class="xxx">
+    <table>
   {{# for(let i in d[0]){ }}
     {{# if(ys[i]!=undefined){ }}
-      <div class="wrap">
-        <div class="left">{{ys[i]}}</div>
+      <tr class="wrap">
+        <th class="left">{{ys[i]}}</th>
         {{# if(i=='level'){ }}
-        <div class="right">{{level[d[0][i]]}}</div>
+        <th class="right">{{level[d[0][i]]}}</th>
         {{# }else if(i=='status'){ }}
-        <div class="right">
+        <th class="right">
           {{# if(dealStatus[d[0][i]]!=undefined){ }}
           {{dealStatus[d[0][i]]}}
           {{# } }}
-        </div>
+        </th>
         {{# }else if(i=='resource'){ }}
-        <div class="right">
+        <th class="right">
           {{eventResource[d[0][i]]}}
-        </div>
+        </th>
         {{# }else if(i=='img_path'){ }}
-        <div class="right">
+        <th class="right">
           <img style="max-width: 300px;max-height: 300px;" src="{{globalUrl+d[0][i]}}" alt="">
-        </div>
+        </th>
         {{# }else if(i=='is_duban'){ }}
-        <div class="right">
+        <th class="right">
           {{yesNo[d[0][i]]}}
-        </div>
+        </th>
         {{# }else if(i=='log_type'){ }}
-        <div class="right">
+        <th class="right">
           {{logType[d[0][i]]}}
-        </div>
+        </th>
         {{# }else{ }}
-        <div class="right">
+        <th class="right">
           {{# if(d[0][i]!=null){ }}
             {{d[0][i]}}
           {{# } }}
-        </div>
+        </th>
         {{# } }}
-      </div>
+      </tr>
     {{# } }}
   {{# } }}
+    </table>
   </div>
+
 </script>
 
 <script>

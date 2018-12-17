@@ -8,12 +8,6 @@
 </head>
 <body>
 <div style="margin:50px;">
-  <div class="layui-form-item">
-    <label class="layui-form-label">ID：</label>
-    <div class="layui-input-block">
-      <input type="text" value="id" placeholder="" class="layui-input layui-disabled" id="id" disabled>
-    </div>
-  </div>
   <div id="view"></div>
   <div class="layui-form-item" style="padding-left: 10px;">
     <div class="layui-input-block">
@@ -27,7 +21,16 @@
 <script src="./const.js"></script>
 <script type="text/html" id="formModle">
   {{#  layui.each(d, function(index,item){ }}
-  {{# if(postFile.indexOf(d[index][0])!=-1){ }}
+  {{# if(d[index][0]=='id'){ }}
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right">
+      <input style="cursor: not-allowed;background-color: transparent;color:#9c9c9c;" type="text" placeholder="" id="{{d[index][0]}}" value="{{d[index][2]}}" disabled>
+    </div>
+  </div>
+  {{# }else if(postFile.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1]}}</label>
     <form id="uploadForm" enctype="multipart/form-data">
@@ -39,19 +42,28 @@ height:100%;" id="{{d[index][0]}}">
     </button>
     <img id="fileImg" src="" alt="" style="display:block;margin:0 auto;max-width: 300px;max-height: 300px;">
   </div>
-  {{# }else if(d[index][0]=='password'){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <div class="layui-input-block">
-      <input type="password" placeholder="请输{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+  {{# }else if(passwd.indexOf(d[index][0])!=-1){ }}
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right">
+      <input type="password" placeholder="" id="{{d[index][0]}}" value="{{d[index][2]}}">
     </div>
   </div>
-  {{# }else if(d[index][0]=='not_before'){ }}
+  {{# }else if(postTime.indexOf(d[index][0])!=-1){ }}
   <div class="layui-form-item">
     <label class="layui-form-label">{{d[index][1]}}</label>
     <div class="layui-input-inline" id="{{d[index][0]}}">
-      <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd">
-      <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;">
+      <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd" value="{{d[index][3][0]}}">
+      <input type="text" class="layui-input" id="time2" placeholder="s:f:m" style="margin-top:10px;" value="{{d[index][3][1]}}">
+    </div>
+  </div>
+  {{# }else if(postTimeYear.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item">
+    <label class="layui-form-label">{{d[index][1]}}</label>
+    <div class="layui-input-inline" id="{{d[index][0]}}">
+      <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd"  value="{{d[index][2]}}">
     </div>
   </div>
   {{# }else if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
@@ -80,22 +92,35 @@ height:100%;" id="{{d[index][0]}}">
     </div>
     {{# } }}
   </div>
+  {{# }else if(checkOne.indexOf(d[index][0])!=-1){ }}
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right2">
+      <input type="checkbox" placeholder="" id="{{d[index][0]}}">
+    </div>
+  </div>
   {{# }else if(optionAdd.indexOf(d[index][0])!=-1){ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1].title}}</label>
-    <div class="layui-input-block">
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1].title}}</p>
+    </div>
+    <div class="box-right">
       <select name="name" class="layui-select" id="{{d[index][0]}}">
-        {{# for(var i in d[index][1].option){ }}
-        <option value="1">{{d[index][1].option[i]}}</option>
+        {{# for(let i in d[index][1].option){ }}
+        <option>{{d[index][1].option[i]}}</option>
         {{# } }}
       </select>
     </div>
   </div>
   {{# }else{ }}
-  <div class="layui-form-item">
-    <label class="layui-form-label">{{d[index][1]}}</label>
-    <div class="layui-input-block">
-      <input type="text" placeholder="请输入{{d[index][1]}}" class="layui-input" id="{{d[index][0]}}">
+  <div class="sdlr-wrap">
+    <div class="box-left">
+      <p>{{d[index][1]}}</p>
+    </div>
+    <div class="box-right">
+      <input type="text" placeholder="" id="{{d[index][0]}}" value="{{d[index][2]}}">
     </div>
   </div>
   {{# } }}
@@ -104,28 +129,8 @@ height:100%;" id="{{d[index][0]}}">
 
 <script>
   function getFromParent(data,url,last){
-    // var userid = data.id;
+    var elData = data;
     console.log(data)
-    var elData = [];
-    if(last.password!=undefined){
-      elData.push(last.password);
-    }
-    for(let i in data){
-      if(i=='mission_people'){
-        elData.push(last.people);
-      }else if(i=='icon'){
-          elData.push({0:'pic',1:allow['pic']});
-      }else{
-        if(allow[i]!=undefined){
-          elData.push({0:i,1:allow[i]});
-        }
-      }
-    }
-    console.log(elData)
-    //分割事件串
-    if(data['not_before']!=undefined){
-      var timeArr = data['not_before'].split(' ');
-    }
 
     layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
       var $ = layui.jquery;
@@ -137,19 +142,6 @@ height:100%;" id="{{d[index][0]}}">
       var view = document.getElementById('view');
       laytpl(getTpl).render(elData, function (html) {
         view.innerHTML = html;
-        var input = document.querySelectorAll('input');
-        for(let i=0;i<input.length;i++){
-          var atr = input[i].getAttribute('id');
-          if(atr == 'time'){
-            input[i].value = timeArr[0];
-          }else if(atr == 'time2'){
-            input[i].value = timeArr[1];
-          }else if(atr == 'pic'){
-            $('#fileImg').attr('src',data['icon'])
-          }else{
-            input[i].value = data[atr];
-          }
-        }
       });
 
       laydate.render({
@@ -163,6 +155,7 @@ height:100%;" id="{{d[index][0]}}">
 
       $('#sub').click(function () {
         var postJson = {};
+        var formdata = '';
         for (let i in elData) {
           if (document.querySelector('#' + elData[i][0]).value == '') {
             layer.msg('请完善信息');
@@ -175,12 +168,20 @@ height:100%;" id="{{d[index][0]}}">
               }else if(optionPostValue.indexOf(elData[i][0])!=-1){
                 postJson[elData[i][0]] = document.querySelectorAll('#'+elData[i][0]+" option")[index].innerText;
               }else{
-                postJson[elData[i][0]] = index+1;
+                postJson[elData[i][0]] = index;
               }
             }else if(postFile.indexOf(elData[i][0])!=-1){ //img
               formdata= new FormData();
               formdata.append("pic[]", $('#pic')[0].files[0]);
-            }else if(postTime.indexOf(elData[i][0])!=-1){  //时间戳
+            }else if(postTimeYear.indexOf(elData[i][0])!=-1){
+              if($('#'+elData[i][0]+" #time").val()==''){
+                layer.msg('请完善信息');
+                return;
+              }
+              let str = $('#'+elData[i][0]+" #time").val();
+              postJson[elData[i][0]] = str;
+            }else if(postTime.indexOf(elData[i][0])!=-1){
+              //时间戳
               if($('#'+elData[i][0]+" #time").val()=='' || $('#'+elData[i][0]+" #time2").val()==''){
                 layer.msg('请完善信息');
                 return;
@@ -200,7 +201,6 @@ height:100%;" id="{{d[index][0]}}">
                   }
                 }
               }
-              console.log(arr)
               postJson[elData[i][0]] = JSON.stringify(arr);
             }else{
               postJson[elData[i][0]] = $('#' + elData[i][0]).val();
@@ -208,9 +208,11 @@ height:100%;" id="{{d[index][0]}}">
           }
         }
 
-        postJson['id'] = data.id;
-        if(last.postTime!=undefined){
-          postJson[last.postTime] = parseInt((new Date()).valueOf()/1000);
+        //postJson['id'] = data.id;
+        if(last){
+          if(last.postTime!=undefined){
+            postJson[last.postTime] = parseInt((new Date()).valueOf()/1000);
+          }
         }
         console.log(postJson);
         if(formdata!=''){

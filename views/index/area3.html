@@ -54,7 +54,17 @@
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    function editSuc(layero, index){}
+    function editSuc(layero, index,data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',1:'ID',2:data['id']},
+        {0:'name',1:"姓名",2:data['name']},
+        {0:'area',1:"区域",2:data['area']},
+        {0:'service_area',1:'服务区域',2:data['service_area']},
+      ]
+      var url =  globalUrl+'System/gridEdit';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }

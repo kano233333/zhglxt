@@ -59,7 +59,25 @@
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    function editSuc(layero, index){}
+    function editSuc(layero, index,data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',1:'ID',2:data['id']},
+        {0:"name",1:"日志内容",2:data['name']},
+        {0:"age",1:"年龄",2:data['age']},
+        {0:"grid",1:{title:'网格',option:gridOption}},
+        {0:'id_card',1:'身份证',2:data['id_card']},
+        {0:"sex",1:{
+            'title':'性别',
+            'option':['男','女 ']
+          }},
+        {0:"communication_phone",1:"日志内容",2:data['communication_phone']},
+        {0:"server_area",1:"服务区域",2:data['server_area']},
+        {0:"pic",1:"图片",2:data['server_area']}
+      ]
+      var url =  globalUrl+otherUrl.Work[2][1];
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
@@ -67,10 +85,13 @@
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
         {0:'name',1:"姓名"},
-        {0:"grid",1:'网格'},
+        {0:"grid",1:{title:'网格',option:gridOption}},
         {0:'id_card',1:'身份证'},
         {0:"communication_phone",1:"办公电话"},
-        {0:"sex",1:"性别"},
+        {0:"sex",1:{
+            'title':'性别',
+            'option':['男','女 ']
+          }},
         {0:"age",1:"年龄"},
         {0:"server_area",1:"服务区域"},
         {0:"pic",1:"图片"}

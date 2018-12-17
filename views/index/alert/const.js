@@ -58,49 +58,16 @@ const scoreXX = {
   4:'优'
 };
 
-const allow = {
-  'name':'姓名',
-  'scope':"所在区域",
-  'phone':"常用电话",
-  "identity":'身份',
-  "priv_id":{title:'权限',option:[1,2,3,4,5,6,7]},
-  "title":"标题",
-  "type":"类型",
-  "level":{title:'事件级别',option:['一级','二级','三级']},
-  "content":"内容",
-  "grid":"所属网格",
-  "area":"所属区域",
-  "log_name":"日志名称",
-  "log_type":{title:'类型',option:['巡查','走访 ','宣传','处理','重点人员寻访']},
-  "not_before":"截至时间",
-  "mission_title":"任务标题",
-  "mission_level":{title:"任务等级",option:['一级','二级','三级']},
-  "mission_type":{title:'任务类型',option:['群体活动','宣传活动 ','寻访活动','工作例会','通知']},
-  "is_important":{title:'是否重点事件',option:['否','是']},
-  "emergency_level":{title:'事件等级',option:['一级','二级','三级']},
-  'emergency_source':"事件来源",
-  "emergency_type":"事件类型",
-  "password":'密码',
-  "user_state":{title:'用户状态',option:[0,1]},
-  "communication_phone":"联系电话",
-  'office_phone':'办公电话',
-  'father_code':'父级代码',
-  'spell':'行政区划简拼',
-  "code":'行政区划代码',
-  'area_level':'行政区划级别',
-  "service_area":'服务区域',
-  "id_card":'身份证',
-  'sex':'性别',
-  'age':"年龄",
-  'pic':'图片',
-  'server_area':'服务区域'
-};
-
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state'];
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
 const checkoutAdd = ['mission_people'];
+const passwd = ['password'];
+const checkOne = [];
+const postTimeYear = [];  //年月日
+const postTimeNor = [];
+
 
 const eventType = {
   0:'民事纠纷',
@@ -142,7 +109,7 @@ const logType = {
   5:'重点人员寻访'
 };
 
-const indexOne = ['role_id','log_type','emergency_level'];
+const indexOne = ['role_id','log_type','emergency_level','grid','sex'];
 
 const timeID = ['time','time2'];
 
@@ -235,3 +202,5 @@ const sdlrOption = ['sex','is_insured','is_renthouse','marriage','political_stat
 
 const sexIndex = {0:'男',1:'女'};
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
+
+const gridOption = ['第一网格','第二网格','第三网格','第四网格','第五网格','第六网格','第七网格','第八网格','第九网格'];

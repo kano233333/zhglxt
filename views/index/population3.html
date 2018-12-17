@@ -62,40 +62,6 @@
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',age:'31',time:'2001-12-12',address:'XX家园77号6幢1单元6-8',org:'社区党组织',org_address:'一支部',titile:'支部委员',tel:'19745563456',status:'未审核'},
-      ];
-
     function editSuc(layero, index){}
     function editEnd(){
       getTable();
@@ -121,16 +87,17 @@
     var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: 'http://47.106.197.31/man/public/index.php/index/Data/getPartyMemberList',
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          console.log(data)
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:data.data,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
@@ -138,9 +105,9 @@
             deleteUrl:deleteUrl,
             detailUrl:detailUrl
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
