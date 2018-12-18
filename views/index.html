@@ -57,7 +57,7 @@
       <div class="layui-side layui-side-menu">
         <div class="layui-side-scroll">
           <div class="layui-logo" lay-href="home/console.html">
-            <span>layuiAdmin</span>
+            <span></span>
           </div>
           
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
@@ -295,7 +295,17 @@
       alert('还未登录，无权访问');
       window.location.href  = './login.html';
     }else {
-      document.getElementById('usernameX').innerText = 'xxx';
+      AJAX({
+        url:'http://web.cqupt.store/public/index.php/index/User/userInfo',
+        method:'POST',
+        success(data){
+          if(data.state==200){
+            document.getElementById('usernameX').innerText = data.data.username;
+            setCookie('id',data.data.id,3600*2);
+          }
+
+        }
+      })
     }
 
     document.getElementById('signOut').onclick = function(){

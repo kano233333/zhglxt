@@ -12,73 +12,33 @@
 	<body>
 		<div class="layui-tab page-content-wrap">
 		  <ul class="layui-tab-title">
-		    <li class="layui-this">修改资料</li>
-		    <li>修改密码</li>
+		    <li class="layui-this">修改密码</li>
 		  </ul>
 		  <div class="layui-tab-content">
 		    <div class="layui-tab-item layui-show">
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;">
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">ID：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="id" disabled autocomplete="off" class="layui-input layui-disabled" value="1">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">用户名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label">姓名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">邮箱：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="email" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="123@qq.com">
-				    </div>
-				  </div>
-				  <div class="layui-form-item layui-form-text">
-				    <label class="layui-form-label">备注：</label>
-				    <div class="layui-input-block">
-				      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo">立即提交</button>
-				    </div>
-				  </div>
-				</form>
-		    </div>
-		    <div class="layui-tab-item">
 		    	<form class="layui-form" v style="width: 90%;padding-top: 20px;">
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">用户名：</label>
+				    <label class="layui-form-label">id：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
+				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" id="userId" value="">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">旧密码：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password1" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="password1" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" id="old">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">新密码：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password2" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="password2" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" id="new1">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">重复密码：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password3" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="password3" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" id="new2">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
@@ -91,22 +51,45 @@
 		  </div>
 		</div>
 		<script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		//Demo
-		layui.use(['form','element'], function(){
-		  var form = layui.form;
-		  var element = layui.element;
-		  form.render();
-		  //监听信息提交
-		  form.on('submit(adminInfo)', function(data){
-		    layer.msg(JSON.stringify(data.field));
-		    return false;
-		  });
-		  //监听密码提交
-		   form.on('submit(adminPassword)', function(data){
-		    layer.msg(JSON.stringify(data.field));
-		    return false;
-		  });
+    document.getElementById('userId').value = getCookie('id');
+		layui.use(['form','element','layer','jquery'], function(){
+		  var layer = layui.layer;
+		  var $ = layui.jquery;
+		  $('.layui-input-block button').click(function(){
+		    var input = document.getElementsByTagName('input');
+		    for(let i=0;i<input.length;i++){
+		      var old = document.getElementById('old').value;
+		      var new1 = document.getElementById('new1').value;
+          var new2 = document.getElementById('new2').value;
+          if(input[i].value == ''){
+            layer.msg('请完善信息');
+            return;
+          }else{
+            if(new1!=new2){
+              layer.msg('请核实两次输入的新密码');
+              return;
+            }else{
+              AJAX({
+                url:globalUrl+'User/editPassword',
+                method:"POST",
+                success:function(data){
+                  if(data,state==200){
+                    layer.msg('修改成功');
+                    document.getElementById('old').value = '';
+                    document.getElementById('new1').value = '';
+                    document.getElementById('new2').value = '';
+                  }else{
+                    layer.msg('旧密码不正确');
+                  }
+                }
+              })
+            }
+          }
+        }
+      })
 		});
 	</script>
 	</body>
