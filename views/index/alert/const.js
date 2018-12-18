@@ -35,8 +35,81 @@ const ys = {
   'spell':'行政区划简拼',
   "code":'行政区划代码',
   'area_level':'行政区划级别',
-  'icon':"图片",
-  "pic":'图片'
+
+  //人口表部分
+  "username":"姓名",
+  'id_number': "身份证号",
+  "ethnicity": "民族",
+  "name": "党员姓名",
+  "in_date": "入党时间",
+  "party_branch": "党员所在党支部",
+  "duty": "担任的党员职位",
+  "org": "所在组织",
+  "age": '年龄',
+  "phone": "联系方式",
+  "in_code": "入党编号",
+  "education": "学历",
+  "sex": '性别',
+  "address": "地址",
+
+    /*%%%%%%%%%%%%%%%%%%%%  zhouyang  %%%%%%%%%%%%%%%%%%%%*/
+  'courtName':     '小区名称',
+  'propertyName':  '物业公司',
+  'courtArea':     '小区面积',
+  'editCourtDate': '编辑时间',
+  'blockCount':    '楼栋总数',
+  'editCourtName': '编辑人',
+  'courtPic':      '小区地址',
+  'courtAudit':         '审核状态',
+
+  'block_name':         '楼栋名称',
+  'court_id':           '所属小区',
+  'grid_id':            '所属网格',
+  //'block_admintor':     '网格管理员',
+  'unit_count':         '总单元数',
+  'block_audit':              '审核状态',
+  'block_admintor':     '楼 栋 长',
+  'block_admintor_tel': '联系电话',
+  'block_admintor':     '编 辑 人',
+  'edit_block_date':    '编辑时间',
+
+  'facility_type': '公共设施类别',
+  'facility_name': '公共设施名称',
+  'facility_site': '公共设施地址',
+  'facility_status':         '状态',
+
+  'area':     '所属区域',
+  //'level':    '道路等级',
+  'name':     '道路名称',
+  'length':   '长度',
+  'width':    '宽度',
+  'lane':     '车道数',
+  'one_lane': '单车道',
+  'road_audit':    '状态',
+
+  'store_name':   '商铺名称',
+  'store_holder': '商铺店主',
+  'store_area':   '商铺面积',
+  'store_audit':        '状态',
+  /*%%%%%%%%%%%%%%%%%%%%  zhouyang  %%%%%%%%%%%%%%%%%%%%*/
+  //房屋（户主)
+  'house_num': '门牌号',
+  'area': '所属小区',
+  'block': '所属楼栋',
+  'unit': '所属单元',
+  'house_area': '房屋面积',
+  'house_audit': '审核状态',
+  'house_type': '房屋户型',
+  'house_status': '房屋状态',
+  'edit_house_name': '编辑人',
+  'edit_house_date': '编辑时间',
+  'house_site': '房屋地址',
+  'house_holder': '房主姓名',
+  'people_number': '居住人数',
+  'holder_tel': '房主电话',
+  'id_number': '房主证件号',
+  'house_site2': '户籍地址',
+
 };
 
 const level = {
@@ -67,7 +140,7 @@ const postTime = ['not_before'];
 const checkoutAdd = ['mission_people'];
 const passwd = ['password'];
 const checkOne = [];
-const postTimeYear = [];  //年月日
+const postTimeYear = ['in_date'];  //年月日
 const postTimeNor = [];
 
 

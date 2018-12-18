@@ -49,12 +49,12 @@
       , slider = layui.slider //滑块
     var cols = [ //表头
       {type: 'checkbox'}
-      , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'type', title: '公共设施类别',align:'center'}
-      , {field: 'name', title: '公共设施名称',align:'center'}
-      , {field: 'address', title: '公共设施地址',align:'center'}
-      , {field: 'status', title: '状态',align:'center'}
+      , {title: 'id',            align: 'center',     type:'numbers'}
+      , {field: 'area',          title: '所属区域',    align:'center'}
+      , {field: 'facility_type', title: '公共设施类别', align:'center'}
+      , {field: 'facility_name', title: '公共设施名称', align:'center'}
+      , {field: 'facility_site', title: '公共设施地址', align:'center'}
+      , {field: 'facility_status',         title: '状态',        align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
@@ -65,41 +65,51 @@
       {id:'111',area:'XX家园',type:'文化娱乐类',name:'XX公园',address:'XX街道街心花园',status:'已审核'},
       ];
 
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',            1:'ID   ',      2:data['id']},
+        {0:'area',          1:"所属区域",    2:data['area']},
+        {0:"facility_type", 1:'公共设施类别', 2:data['facility_type']},
+        {0:'facility_name', 1:'公共设施名称', 2:data['facility_name']},
+        {0:'facility_site', 1:'公共设施地址', 2:data['facility_site']},
+        // {0:'facility_pic', 1:'公共设施图片', 2:data['facility_site']},
+      ]
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editFacility';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
-        {0:"log_type",1:{
-            'title':'类型',
-            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-          }},
-        {0:"content",1:"日志内容"},
+        {0:'area',          1:"所属区域"},
+        {0:"facility_type", 1:'公共设施类别'},
+        {0:'facility_name', 1:'公共设施名称'},
+        {0:'facility_site', 1:'公共设施地址'},
+        // {0:'facility_pic', 1:'公共设施图片'},
+        // {0:'facility_status',         1:'状态'},
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/addFacility';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/getFacilityList';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/deleteFacility';
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: editAjaxUrl,
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:correspond,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
@@ -107,9 +117,9 @@
             deleteUrl:deleteUrl,
             detailUrl:detailUrl
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }

@@ -49,59 +49,78 @@
       , slider = layui.slider //滑块
     var cols = [ //表头
       {type: 'checkbox'}
-      , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'name', title: '小区名称',align:'center'}
-      , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'company', title: '物业公司',align:'center'}
-      , {field: 'court_area', title: '所属区域',align:'center'}
-      , {field: 'court_address', title: '小区地址',align:'center'}
-      , {field: 'block', title: '楼栋数',align:'center'}
-      , {field: 'status', title: '状态',align:'center'}
+      , {title: 'id',           align: 'center',  type: 'numbers'}
+      , {field: 'courtName',    title: '小区名称', align: 'center'}
+      , {field: 'area',         title: '所属区域', align: 'center'}
+      , {field: 'propertyName', title: '物业公司', align: 'center'}
+      , {field: 'courtArea',    title: '小区面积', align: 'center'}
+      , {field: 'courtSite',     title: '小区地址', align: 'center'}
+      , {field: 'blockCount',   title: '楼栋数',   align: 'center'}
+      , {field: 'courtAudit',        title: '状态',    align: 'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-      {id:'111',name:'XX家园',area:'XX社区居委会',company:'XX物业',court_area:'1000平方米',court_address:'XX镇XX社区居委会',block:'21',status:'已审核'},
-      ];
-
-
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',            1:'ID   ',   2:data['id']},
+        {0:'area',          1:"所属区域", 2:data['area']},
+        {0:"courtName",     1:'小区名称', 2:data['courtName']},
+        {0:'propertyName',  1:'物业公司', 2:data['propertyName']},
+        {0:'editCourtDate', 1:'编辑时间', 2:data['editCourtDate']},
+        {0:'courtArea',     1:'小区面积', 2:data['courtArea']},
+        {0:'blockCount',    1:'楼栋总数', 2:data['blockCount']},
+        {0:'courtPic',      1:'小区地址', 2:data['courtPic']},
+        /*
+        {0:"log_type",1:{
+            'title':'类型',
+            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
+          }},
+        */
+      ]
+      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/editCourtData';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
+        {0:'area',          1:"所属区域"},
+        {0:"courtName",     1:'小区名称'},
+        {0:'propertyName',  1:'物业公司'},
+        {0:'courtArea',    1:'小区面积'},
+        {0:'blockCount',    1:'楼栋总数'},
+        {0:'courtSite',      1:'小区地址'},
+        /*
         {0:"log_type",1:{
             'title':'类型',
             'option':['巡查','走访 ','宣传','处理','重点人员寻访']
           }},
-        {0:"content",1:"日志内容"},
+        */
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/addCourtData';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/getCourtDataList';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/deleteCourtData';
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: editAjaxUrl,
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:correspond,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
@@ -109,9 +128,9 @@
             deleteUrl:deleteUrl,
             detailUrl:detailUrl
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
