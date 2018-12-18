@@ -1,6 +1,5 @@
 const ys = {
   "id": "ID",
-  "area": "所属区域",
   "status": "状态",
   "grid": "所属网格",
   "time": "时间",
@@ -16,7 +15,6 @@ const ys = {
   "is_duban":"是否督办",
   "latitude":"经度",
   "longitude":"维度",
-  "address":"地址",
   "log_name":'日志名称',
   "grid_admin":'网格管理员',
   "log_type":'类型',
@@ -40,7 +38,7 @@ const ys = {
   "username":"姓名",
   'id_number': "身份证号",
   "ethnicity": "民族",
-  "name": "党员姓名",
+  "name": "姓名",
   "in_date": "入党时间",
   "party_branch": "党员所在党支部",
   "duty": "担任的党员职位",
@@ -70,7 +68,7 @@ const ys = {
   'block_audit':              '审核状态',
   'block_admintor':     '楼 栋 长',
   'block_admintor_tel': '联系电话',
-  'block_admintor':     '编 辑 人',
+  'edit_block_name':     '编 辑 人',
   'edit_block_date':    '编辑时间',
 
   'facility_type': '公共设施类别',
@@ -80,7 +78,7 @@ const ys = {
 
   'area':     '所属区域',
   //'level':    '道路等级',
-  'name':     '道路名称',
+  'road_name':     '道路名称',
   'length':   '长度',
   'width':    '宽度',
   'lane':     '车道数',
@@ -94,7 +92,6 @@ const ys = {
   /*%%%%%%%%%%%%%%%%%%%%  zhouyang  %%%%%%%%%%%%%%%%%%%%*/
   //房屋（户主)
   'house_num': '门牌号',
-  'area': '所属小区',
   'block': '所属楼栋',
   'unit': '所属单元',
   'house_area': '房屋面积',
@@ -107,8 +104,7 @@ const ys = {
   'house_holder': '房主姓名',
   'people_number': '居住人数',
   'holder_tel': '房主电话',
-  'id_number': '房主证件号',
-  'house_site2': '户籍地址',
+  'house_site2': '户籍地址'
 
 };
 

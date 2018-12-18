@@ -23,7 +23,7 @@
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="./alert/const.js"></script>
 <script type="text/html" id="toolBar">
-  <div class="layui-inline tool-btn">
+  <!-- <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
       添加
     </button>
@@ -36,7 +36,7 @@
     <button class="layui-btn layui-btn-sm listOrderBtn" style="background-color: #0f9c00" id="exam">
       审核
     </button>
-  </div>
+  </div> -->
 </script>
 <script>
   layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
@@ -50,60 +50,18 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'name', title: '姓名',align:'center'}
+      , {field: 'username', title: '姓名',align:'center'}
       , {field: 'sex', title: '性别',align:'center'}
-      , {field: 'sfzh', title: '身份证号',align:'center'}
+      , {field: 'id_number', title: '身份证号',align:'center'}
       , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'relation', title: '住址',align:'center'}
+      , {field: 'address', title: '住址',align:'center'}
       , {field: 'grid', title: '所属网格',align:'center'}
       , {field: 'gridman', title: '网格管理员',align:'center'}
-      , {field: 'status', title: '状态',align:'center'}
+      // , {field: 'state', title: '状态',align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
-
-    var testData = [
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      {id:'111',name:'梁元伟',sex:'男',sfzh:'533821199912127656',area:'XX社区居委会',relation:'XX家园77号6幢1单元6-8',grid:'第一网格',gridman:'刘小勇',status:'未审核'},
-      ];
-
 
     function editSuc(layero, index){}
     function editEnd(){
@@ -130,16 +88,16 @@
     var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: 'http://47.106.197.31/man/public/index.php/index/Data/getPeopleDataList',
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:data.data,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
@@ -147,9 +105,9 @@
             deleteUrl:deleteUrl,
             detailUrl:detailUrl
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
@@ -172,7 +130,7 @@
     <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       家庭成员
     </button> -->
-    {{# if(true){ }}
+    <!-- {{# if(true){ }}
     <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
@@ -180,7 +138,7 @@
     <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
       已通过
     </button>
-    {{# } }}
+    {{# } }} -->
   </div>
 </script>
 </body>

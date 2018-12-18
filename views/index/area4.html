@@ -63,7 +63,7 @@
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
         {0:'id',1:'ID',2:data['id']},
-        {0:"name",1:"日志内容",2:data['name']},
+        {0:"name",1:"姓名",2:data['name']},
         {0:"age",1:"年龄",2:data['age']},
         {0:"grid",1:{title:'网格',option:gridOption}},
         {0:'id_card',1:'身份证',2:data['id_card']},
@@ -71,27 +71,31 @@
             'title':'性别',
             'option':['男','女 ']
           }},
-        {0:"communication_phone",1:"日志内容",2:data['communication_phone']},
+        {0:"communication_phone",1:"联系电话",2:data['communication_phone']},
         {0:"server_area",1:"服务区域",2:data['server_area']},
         {0:"pic",1:"图片",2:data['icon']}
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  globalUrl+'System/gridAdminEdit';
       iframe.getFromParent(editData,url);
     }
 
     function editAppSuc(layero, index,data){
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
-        {0:'id',1:'ID',2:data['id'] || ''},
-        {0:"name",1:"姓名",2:data['name'] || ''},
-        {0:"username",1:"用户名",2:data['username'] || ''},
-        {0:"area",1:"区域",2:data['area'] || ''},
-        {0:"communicate_phone",1:"联系电话",2:data['communicate_phone'] || ''},
-        {0:"office_phone",1:"办公电话",2:data['office_phone'] || ''},
+        {0:'id',1:'ID',2:data['id']||''},
+        {0:'password',1:"区域",2:data['password']||''},
         {0:"grid",1:{title:'网格',option:gridOption}},
-        {0:"icon",1:"图片",2:data['icon'] || ''}
+        {0:'name',1:'姓名',2:data['name']||''},
+        {0:"area",1:"区域",2:data['area']||''},
+        {0:"identity",1:"身份",2:data['identity']||''},
+        {0:"office_phone",1:"办公电话",2:data['office_phone']||''},
+        {0:"communicate_phone",1:"联系电话",2:data['communicate_phone']||''},
+        {0:"user_state",1:{
+            'title':'状态',
+            'option':['0','1 ']
+          }},
       ]
-      // var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  globalUrl+'System/userEdit';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -116,7 +120,7 @@
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  globalUrl+'System/gridAdminEdit';
     var detailUrl = './alert/detail.html'
     var deleteUrl =  globalUrl+'System/gridAdminDelete';
     var getTable = function() {

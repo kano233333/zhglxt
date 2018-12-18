@@ -129,7 +129,8 @@
             addSuc:addSuc,
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
-            detailUrl:detailUrl
+            detailUrl:detailUrl,
+            checkUrl:'http://47.106.197.31/man/public/index.php/index/Basicdata/editHouse'
           });
           }else{
             layer.msg('错误');
@@ -156,8 +157,8 @@
     <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       家庭成员
     </button> -->
-    {{# if(true){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+    {{# if(d['house_audit']!=1){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal check" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
     {{# }else{ }}

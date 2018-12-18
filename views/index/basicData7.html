@@ -49,67 +49,72 @@
       , slider = layui.slider //滑块
     var cols = [ //表头
       {type: 'checkbox'}
-      , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'name', title: '所属区域',align:'center'}
-      , {field: 'sex', title: '商铺名称',align:'center'}
-      , {field: 'sfzh', title: '商铺店主',align:'center'}
-      , {field: 'area', title: '商铺面积',align:'center'}
-      , {field: 'status', title: '状态',align:'center'}
-      , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
+      , {title: 'id',           align:'center',type:'numbers'}
+      , {field: 'area',         title: '所属区域',align:'center'}
+      , {field: 'store_name',   title: '商铺名称',align:'center'}
+      , {field: 'store_holder', title: '商铺店主',align:'center'}
+      , {field: 'store_area',   title: '商铺面积',align:'center'}
+      , {field: 'store_audit',        title: '状态',align:'center'}
+      , {field: '',             title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-  {id:'111',name:'XX小区',sex:'西街小卖部',sfzh:'李小芳',area:'100平米',status:'已审核'},
-  {id:'111',name:'XX小区',sex:'西街小卖部',sfzh:'李小芳',area:'100平米',status:'已审核'},
-  ];
-
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',           1:'ID   ',   2:data['id']||''},
+        {0:'area',         1:"所属区域", 2:data['area']||''},
+        {0:"store_name",   1:'商铺名称', 2:data['store_name']||''},
+        {0:'store_holder', 1:'商铺店主', 2:data['store_holder']||''},
+        {0:'store_area',   1:'商铺面积', 2:data['store_area']||''},
+        // {0:'store_audit',        1:'状态',    2:data['store_audit']},
+      ]
+      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/editStoreData';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
-        {0:"log_type",1:{
-            'title':'类型',
-            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-          }},
-        {0:"content",1:"日志内容"},
+        {0:'area',         1:"所属区域"},
+        {0:'store_name',   1:"商铺名称"},
+        {0:'store_holder', 1:"商铺店主"},
+        {0:'store_area',   1:"商铺面积"},
+        // {0:'state',        1:"状态"},
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/addStoreData';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/getStoreDataList';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/deleteStoreData';
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: editAjaxUrl,
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:correspond,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
-            detailUrl:detailUrl
+            detailUrl:detailUrl,
+            checkUrl:'http://47.106.197.31/man/public/index.php/index/Courtdata/auditStore'
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
@@ -132,8 +137,8 @@
     <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       家庭成员
     </button> -->
-    {{# if(true){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+    {{# if(d['store_audit']!=1){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal check" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
     {{# }else{ }}

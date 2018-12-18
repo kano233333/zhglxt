@@ -156,7 +156,6 @@ function setTable(obj) {
     if(obj.setSuc){
       obj.setSuc();
     }
-
     $('#edit').click(function () {//edit
       var checkNum = document.querySelectorAll("tbody input[type='checkbox']:checked").length;
       if (checkNum > 1) {
@@ -189,6 +188,33 @@ function setTable(obj) {
       }, function (index) {
         deleteCheckbox(obj.editEnd,obj.deleteUrl,obj.data);
         layer.close(layer.index)
+      });
+    })
+
+    $('#exam').click(function(){
+      if (document.querySelectorAll("tbody input[type='checkbox']:checked").length <= 0) {
+        layer.msg('请至少选中一行经行审核');
+        return;
+      }
+      layer.confirm('确定要进行审核？', {
+        btn: ['确定', '取消']
+      }, function (index) {
+        var idArr = [];
+        var checked = document.querySelectorAll("tbody input[type='checkbox']:checked");
+        for (let i = 0; i < checked.length; i++) {
+          let tr = checked[i].parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+          idArr.push(obj.data[parseInt(tr)-1].id);
+        }
+        AJAX({
+          url:obj.checkUrl,
+          method:"POST",
+          data:{id:idArr.join()},
+          success:function(){
+            console.log(idArr.join())
+            obj.editEnd();
+            layer.close(layer.index)
+          }
+        })
       });
     })
 
@@ -311,6 +337,27 @@ function setTable(obj) {
             obj.editEnd() || '';
           }
         })
+      })
+      $('.check').click(function(){
+        var convalue = this.getAttribute('convalue');
+        layer.alert('确定要审核',{
+          yes:function(){
+            AJAX({
+              url:obj.checkUrl,
+              method:'POST',
+              data:{id:obj.data[convalue]['id']},
+              success(){
+                obj.editEnd();
+                var index = layer.alert();
+                layer.close(index);
+              }
+            })
+          }
+        })
+      })
+      $('.startUse').click(function(){
+        var convalue = this.getAttribute('convalue');
+        obj.editStateSuc(obj.data[convalue]);
       })
     }
     //点page 重挂click 太恶心了框架

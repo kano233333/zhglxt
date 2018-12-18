@@ -65,21 +65,21 @@
     function editSuc(layero, index, data){
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
-        {0:'id',            1:'ID   ',   2:data['id']},
-        {0:'area',          1:"所属区域", 2:data['area']},
-        {0:"courtName",     1:'小区名称', 2:data['courtName']},
-        {0:'propertyName',  1:'物业公司', 2:data['propertyName']},
-        {0:'editCourtDate', 1:'编辑时间', 2:data['editCourtDate']},
-        {0:'courtArea',     1:'小区面积', 2:data['courtArea']},
-        {0:'blockCount',    1:'楼栋总数', 2:data['blockCount']},
-        {0:'courtPic',      1:'小区地址', 2:data['courtPic']},
+        {0:'id',            1:'ID   ',   2:data['id']||''},
+        {0:'area',          1:"所属区域", 2:data['area']||''},
+        {0:"courtName",     1:'小区名称', 2:data['courtName']||''},
+        {0:'propertyName',  1:'物业公司', 2:data['propertyName']||''},
+        {0:'editCourtDate', 1:'编辑时间', 2:data['editCourtDate']||''},
+        {0:'courtArea',     1:'小区面积', 2:data['courtArea']||''},
+        {0:'blockCount',    1:'楼栋总数', 2:data['blockCount']||''},
+        {0:'courtPic',      1:'小区地址', 2:data['courtPic']||''},
         /*
         {0:"log_type",1:{
             'title':'类型',
             'option':['巡查','走访 ','宣传','处理','重点人员寻访']
           }},
         */
-      ]
+      ];
       var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/editCourtData';
       iframe.getFromParent(editData,url);
     }
@@ -126,7 +126,8 @@
             addSuc:addSuc,
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
-            detailUrl:detailUrl
+            detailUrl:detailUrl,
+            checkUrl:'http://47.106.197.31/man/public/index.php/index/Courtdata/auditCourt'
           });
           }else{
             layer.msg('错误');
@@ -153,8 +154,8 @@
     <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       家庭成员
     </button> -->
-    {{# if(true){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+    {{# if(d['courtAudit']!=1){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal check" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
     {{# }else{ }}

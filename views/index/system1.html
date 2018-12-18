@@ -47,7 +47,7 @@
       // , {field: 'icon', title: 'Icon',align:'center'}
       , {field: 'username', title: '用户名',align:'center'}
       , {field: 'name', title: '真实姓名',align:'center'}
-      , {field: 'identity', title: '角色',align:'center'}
+      , {field: 'identity', title: '身份',align:'center',templte:'#identity'}
       , {field: 'area', title: '所属区域',align:'center'}
       , {field: 'communicate_phone', title: '联系电话',align:'center'}
       , {field: 'last_login', title: '最近登陆',align:'center'}
@@ -62,7 +62,7 @@
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
         {0:'id',1:'ID',2:data['id']},
-        {0:'password',1:"区域",2:data['password']},
+        {0:'password',1:"密码",2:data['password']},
         {0:"grid",1:{title:'网格',option:gridOption}},
         {0:'name',1:'姓名',2:data['name']},
         {0:"area",1:"区域",2:data['area']},
@@ -79,6 +79,27 @@
     }
     function editEnd(){
       getTable();
+    }
+    function editStateSuc(data){
+      var editData = {
+        'id': data['id'],
+        'password': data['password'],
+        "grid": data['grid'],
+        'name': data['name'],
+        "area": data['area'],
+        "identity": data['identity'],
+        "office_phone": data['office_phone'],
+        "communicate_phone": data['communicate_phone'],
+        "user_state": 1
+      };
+      AJAX({
+        url:globalUrl+'System/userEdit',
+        method:'POST',
+        data:editData,
+        success:function(){
+          getTable();
+        }
+      })
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
@@ -117,7 +138,8 @@
               editAjaxUrl:editAjaxUrl,
               // deleteUrl:deleteUrl,
               detailUrl:detailUrl,
-              editPassword:'password'
+              editPassword:'password',
+              editStateSuc:editStateSuc
             });
           }else{
             layer.msg('错误');
@@ -134,17 +156,18 @@
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       查看详情
     </button>
-    {{# if(d.state==0){ }}
+    {{# if(d.user_state==0){ }}
     <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       禁用 
     </button>
     {{# }else{ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
+    <button class="layui-btn layui-btn-sm layui-btn-normal startUse" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
       启用
     </button>
     {{# } }}
   </div>
 </script>
+
 </body>
 
 </html>

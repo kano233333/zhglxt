@@ -50,89 +50,90 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '房主',align:'center'}
-      , {field: 'grid', title: '人数',align:'center'}
-      , {field: 'log_name', title: '身份证号',align:'center'}
-      , {field: 'grid_admin', title: '房主电话',align:'center'}
-      , {field: 'log_type', title: '房主地址',align:'center'}
-      , {field: 'log_status', title: '状态',align:'center'}
+      , {field: 'house_holder', title: '房主',align:'center'}
+      , {field: 'people_number', title: '人数',align:'center'}
+      , {field: 'id_number', title: '身份证号',align:'center'}
+      , {field: 'holder_tel', title: '房主电话',align:'center'}
+      , {field: 'house_site', title: '房主地址',align:'center'}
+      , {field: 'house_audit', title: '状态',align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      {id:'111',area:'梁元伟',grid:'3',log_name:'533821199912127656',grid_admin:'18384456743',log_type:'XX家园77号6幢1单元6-8',log_status:'未审核'},
-      ];
-
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',                 1:'ID',        2:data['id']},
+        {0:'area',         1:'所属区域',   2:data['area']},
+        {0:'house_num',         1:'门牌号',   2:data['house_num']},
+        {0:'block',         1:'所属楼栋',   2:data['block']},
+        {0:'unit',         1:'所属单元',   2:data['unit']},
+        {0:'house_area',         1:'房屋面积',   2:data['house_area']},
+        {0:'house_status',         1:'房屋状态',   2:data['house_status']},
+        {0:'house_type',         1:'房屋户型',   2:data['house_type']},
+        {0:'edit_house_name',         1:'编辑人',   2:data['edit_house_name']},
+        {0:'house_site',         1:'房屋地址',   2:data['house_site']},
+        {0:'house_holder',         1:'户主',   2:data['house_holder']},
+        {0:'holder_tel',         1:'户主电话',   2:data['holder_tel']},
+        {0:'id_number',         1:'身份证号',   2:data['id_number']},
+        {0:'people_number',         1:'居住人数',   2:data['people_number']},
+        {0:'house_site2',         1:'户籍地址',   2:data['house_site2']}
+      ]
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editHouse';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
-        {0:"log_type",1:{
-            'title':'类型',
-            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-          }},
-        {0:"content",1:"日志内容"},
+        {0:'area',1:"所属区域"},
+        {0:"house_num",1:'门牌号'},
+        {0:"block",1:'所属楼栋'},
+        {0:"house_area",1:'房屋面积'},
+        {0:"house_status",1:'房屋状态'},
+        {0:"house_type",1:'门牌号'},
+        {0:"edit_house_name",1:'编辑人'},
+        {0:"house_site",1:'房屋地址'},
+        // 房主信息
+        {0:"house_holder",1:'房主'},
+        {0:"id_number",1:"身份证号"},
+        {0:"people_tel",1:"房主电话"},
+        {0:"people_number",1:"居住人数"},
+        {0:"house_site2",1:"户籍地址"},
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/addHouse';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editHouse';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/deleteHouse';
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: 'http://47.106.197.31/man/public/index.php/index/Basicdata/getHouseList',
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
             correspond = data.data;
             setTable({
               addUrl:addUrl,
               editUrl:editUrl,
               cols:cols,
-              data:testData,
+              data:data.data,
               editSuc:editSuc,
               editEnd:editEnd,
               addSuc:addSuc,
               editAjaxUrl:editAjaxUrl,
               deleteUrl:deleteUrl,
-              detailUrl:detailUrl
+              detailUrl:detailUrl,
+              checkUrl:'http://47.106.197.31/man/public/index.php/index/Basicdata/auditHouse'
             });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
@@ -152,11 +153,8 @@
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       查看详情
     </button>
-    <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
-      家庭成员
-    </button>
-    {{# if(true){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+    {{# if(d.house_audit!=1){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal check" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
     {{# }else{ }}

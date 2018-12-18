@@ -51,23 +51,30 @@
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
       , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'name', title: '企业名称',align:'center'}
-      , {field: 'sfzh', title: '企业性质',align:'center'}
-      , {field: 'hangye', title: '所处行业',align:'center'}
-      , {field: 'relation', title: '企业规模',align:'center'}
-      , {field: 'status', title: '状态',align:'center'}
+      , {field: 'company_name', title: '企业名称',align:'center'}
+      , {field: 'property', title: '企业性质',align:'center'}
+      , {field: 'industry', title: '所处行业',align:'center'}
+      , {field: 'company_size', title: '企业规模',align:'center'}
+      , {field: 'company_audit', title: '状态',align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-      {id:'111',area:'XX家园',name:'东街电子厂',sfzh:'民办',hangye:'电子信息',relation:'100人',status:'已审核'},
-      {id:'111',area:'XX家园',name:'东街电子厂',sfzh:'民办',hangye:'电子信息',relation:'100人',status:'已审核'},
-      {id:'111',area:'XX家园',name:'东街电子厂',sfzh:'民办',hangye:'电子信息',relation:'100人',status:'已审核'},
-      ];
-
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',       1:'ID   ',   2:data['id']},
+        {0:'area',     1:"所属区域", 2:data['area']},
+        {0:"company_name",    1:'企业名称', 2:data['company_name']},
+        // {0:'property',     1:'企业性质', 2:data['property']},
+        {0:'industry',   1:'所处行业',    2:data['industry']},
+        {0:'company_size',    1:'企业规模',    2:data['company_size']},
+        // {0:'company_audit',     1:'状态',  2:data['company_audit']},
+      ]
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editCompany';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
@@ -75,43 +82,42 @@
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
         {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
-        {0:"log_type",1:{
-            'title':'类型',
-            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-          }},
-        {0:"content",1:"日志内容"},
+        {0:"company_name",1:'企业名称'},
+        // {0:'property',1:'日志名称'},
+        {0:"industry",1:"所处行业"},
+        {0:"company_size",1:"企业规模"},
+        // {0:"company_audit",1:"日志内容"},
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/addCompany';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
     var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/deleteCompany';
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: 'http://47.106.197.31/man/public/index.php/index/Basicdata/getCompanyList',
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:data.data,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
-            detailUrl:detailUrl
+            detailUrl:detailUrl,
+            checkUrl:'http://47.106.197.31/man/public/index.php/index/Basicdata/auditCompany'
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
@@ -134,8 +140,8 @@
     <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       家庭成员
     </button> -->
-    {{# if(true){ }}
-    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+    {{# if(d['facility_status']!=1){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal check" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
     {{# }else{ }}

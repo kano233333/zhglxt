@@ -49,71 +49,81 @@
       , slider = layui.slider //滑块
     var cols = [ //表头
       {type: 'checkbox'}
-      , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'street_level', title: '道路等级',align:'center'}
-      , {field: 'street_name', title: '道路名称',align:'center'}
-      , {field: 'long', title: '长度',align:'center'}
-      , {field: 'width', title: '宽度',align:'center'}
-      , {field: 'car', title: '车道数',align:'center'}
-      , {field: 'single_car', title: '单车道',align:'center'}
-      , {field: 'status', title: '状态',align:'center'}
+      , {title: 'id',       align:'center',  type:'numbers'}
+      , {field: 'area',     title: '所属区域', align:'center'}
+      , {field: 'road_level',    title: '道路等级', align:'center'}
+      , {field: 'road_name',     title: '道路名称', align:'center'}
+      , {field: 'length',   title: '长度',    align:'center'}
+      , {field: 'width',    title: '宽度',    align:'center'}
+      , {field: 'lane',     title: '车道数',   align:'center'}
+      , {field: 'one_lane', title: '单车道',   align:'center'}
+      , {field: 'road_audit',    title: '状态',    align:'center'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-      {id:'111',area:'XX家园',street_level:'三级',street_name:'三江大道',long:'10km',width:'12m',car:'2',single_car:'是',status:'已审核'},
-      {id:'111',area:'XX家园',street_level:'三级',street_name:'三江大道',long:'10km',width:'12m',car:'2',single_car:'是',status:'已审核'},
-      {id:'111',area:'XX家园',street_level:'三级',street_name:'三江大道',long:'10km',width:'12m',car:'2',single_car:'是',status:'已审核'},
-      ];
-
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',       1:'ID   ',   2:data['id']||''},
+        {0:'area',     1:"所属区域", 2:data['area']||''},
+        {0:"road_level",    1:'道路等级', 2:data['level']||''},
+        {0:'road_name',     1:'道路名称', 2:data['road_name']||''},
+        {0:'length',   1:'长度',    2:data['length']||''},
+        {0:'width',    1:'宽度',    2:data['width']||''},
+        {0:'lane',     1:'车道数',  2:data['lane']||''},
+        {0:'one_lane', 1:'单车道',  2:data['one_lane']||''},
+        {0:'road_audit',    1:'状态',    2:data['road_audit']||''},
+      ]
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/roadEdit';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
-        {0:"log_type",1:{
-            'title':'类型',
-            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-          }},
-        {0:"content",1:"日志内容"},
+        {0:'area',     1:"所属区域"},
+        //{0:'level',    1:"道路等级"},
+        {0:'name',     1:"道路名称"},
+        {0:'length',   1:"长度"},
+        {0:'width',    1:"宽度"},
+        {0:'lane',     1:"车道数"},
+        {0:'one_lane', 1:"单车道"},
+        {0:'state',    1:"状态"},
       ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/roadAdd';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
+    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/roadList';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/roadDelete';
     var getTable = function() {
       AJAX({
-        // url: globalUrl+otherUrl.Work[2][0],
+        url: editAjaxUrl,
         method: 'GET',
         success:function(data) {
-          // if(data.state==200){
+          if(data.state==200){
           correspond = data.data;
           setTable({
             addUrl:addUrl,
             editUrl:editUrl,
             cols:cols,
-            data:testData,
+            data:correspond,
             editSuc:editSuc,
             editEnd:editEnd,
             addSuc:addSuc,
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
-            detailUrl:detailUrl
+            detailUrl:detailUrl,
+            // checkUrl:'http://47.106.197.31/man/public/index.php/index/Basicdata/auditFacility'
           });
-          // }else{
-          //   layer.msg('错误');
-          // }
+          }else{
+            layer.msg('错误');
+          }
         }
       })
     }
