@@ -355,10 +355,6 @@ function setTable(obj) {
           }
         })
       })
-      $('.startUse').click(function(){
-        var convalue = this.getAttribute('convalue');
-        obj.editStateSuc(obj.data[convalue]);
-      })
     }
     //点page 重挂click 太恶心了框架
     $('.layui-table-page').click(function () {

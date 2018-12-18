@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>edit</title>
+  <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../../static/admin/css/admin.css" />
+</head>
+<body>
+<div style="margin:50px;">
+  <div id="view"></div>
+  <div class="layui-form-item" style="padding-left: 10px;">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" id="sub">确定</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/common.js"></script>
+<script src="./const.js"></script>
+<script type="text/html" id="formModle">
+  {{#  layui.each(d, function(index,item){ }}
+  {{# if(checkoutAdd.indexOf(d[index][0])!=-1){ }}
+  <div class="layui-form-item" id="{{d[index][0]}}">
+    <div style="margin-left:30px;font-size:18px;">{{d[index][1].title}}</div>
+    {{# for(var i in d[index][1].data){ }}
+    <div class="sdlr-wrap2">
+      <div class="box-left2">
+        <p>第{{i}}网格</p>
+      </div>
+      <div class="box-right22">
+        <input class="check-one" type="checkbox" placeholder="">
+      </div>
+    </div>
+    <div id="checkX{{i}}" style="margin: 0 20px; display: flex;flex-wrap: wrap;">
+      <div class="sdlr-wrap2" id="check-two{{i}}" style="display: none;margin:0 20px;">
+        {{# for(let k in d[index][1].data[i]){ }}
+        <div class="box-left2">
+          <p>{{d[index][1].data[i][k].name}}</p>
+        </div>
+        <div class="box-right22">
+          <input type="checkbox" placeholder="" id="aaa{{k}}" idX="{{d[index][1].data[i][k].id}}">
+        </div>
+        {{# } }}
+      </div>
+    </div>
+    {{# } }}
+  </div>
+  {{# } }}
+  {{#  }); }}
+</script>
+
+<script>
+  function getFromParent(data,url){
+    var elData = data;
+    console.log(data)
+
+    layui.use(['jquery', 'layer', 'upload', 'laytpl','laydate'], function () {
+      var $ = layui.jquery;
+      var laytpl = layui.laytpl;
+      var upload = layui.upload;
+      var layer = layui.layer;
+      var laydate = layui.laydate;
+      var getTpl = document.getElementById('formModle').innerHTML;
+      var view = document.getElementById('view');
+      laytpl(getTpl).render(elData, function (html) {
+        view.innerHTML = html;
+      });
+
+      var checkOne = document.querySelectorAll('.check-one');
+      for(let i=0;i<checkOne.length;i++){
+        checkOne[i].onclick = function(){
+          console.log(checkOne[i].checked)
+          if(checkOne[i].checked){
+            $('#check-two'+i).show(200);
+          }else{
+            $('#check-two'+i).hide(200);
+          }
+        }
+      }
+
+
+      $('#sub').click(function () {
+        var postJson = {};
+        for (let i in elData) {
+          if(checkoutAdd.indexOf(elData[i][0])!=-1){
+            var arr = [];
+            var check = document.querySelectorAll('.check-one');
+            for(let i =0;i<check.length;i++){
+              if(check[i].checked){
+                var checkTwo = document.querySelectorAll('#checkX'+i+" input:checked");
+                for(let n=0;n<checkTwo.length;n++){
+                  arr.push(checkTwo[n].getAttribute('idX'));
+                }
+              }
+            }
+            postJson[elData[i][0]] = JSON.stringify(arr);
+          }
+        }
+
+        postJson['id']=data[0][2];
+        console.log(postJson);
+        AJAX({
+          url:url,
+          method:"POST",
+          data: postJson,
+          success:function() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+          }
+        });
+
+      })
+    });
+  }
+</script>
+
+</body>
+</html>

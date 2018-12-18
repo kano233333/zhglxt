@@ -79,16 +79,16 @@ height:100%;" id="{{d[index][0]}}">
       </div>
     </div>
     <div id="checkX{{i}}" style="margin: 0 20px; display: flex;flex-wrap: wrap;">
-      {{# for(let k in d[index][1].data[i]){ }}
       <div class="sdlr-wrap2" id="check-two{{i}}" style="display: none;margin:0 20px;">
+        {{# for(let k in d[index][1].data[i]){ }}
         <div class="box-left2">
           <p>{{d[index][1].data[i][k].name}}</p>
         </div>
         <div class="box-right22">
-          <input type="checkbox" placeholder="" id="aaa{{k}}" idX="d[index][1].data[i][k].id">
+          <input type="checkbox" placeholder="" id="aaa{{k}}" idX="{{d[index][1].data[i][k].id}}">
         </div>
+        {{# } }}
       </div>
-      {{# } }}
     </div>
     {{# } }}
   </div>
@@ -144,6 +144,17 @@ height:100%;" id="{{d[index][0]}}">
         view.innerHTML = html;
       });
 
+      var checkOne = document.querySelectorAll('.check-one');
+      for(let i=0;i<checkOne.length;i++){
+        checkOne[i].onclick = function(){
+          if(checkOne[i].checked){
+            $('#check-two'+i).show(200);
+          }else{
+            $('#check-two'+i).hide(200);
+          }
+        }
+      }
+
       laydate.render({
         elem: '#time'
       });
@@ -192,10 +203,10 @@ height:100%;" id="{{d[index][0]}}">
               postJson[elData[i][0]] = sjc/1000;
             }else if(checkoutAdd.indexOf(elData[i][0])!=-1){
               var arr = [];
-              var check = document.querySelectorAll('check-one');
+              var check = document.querySelectorAll('.check-one');
               for(let i =0;i<check.length;i++){
-                if(this.checked){
-                  var checkTwo = document.querySelectorAll('#checkX'+i+"input:checked");
+                if(check[i].checked){
+                  var checkTwo = document.querySelectorAll('#checkX'+i+" input:checked");
                   for(let n=0;n<checkTwo.length;n++){
                     arr.push(checkTwo[n].getAttribute('idX'));
                   }
