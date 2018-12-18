@@ -65,6 +65,10 @@
         <th class="right">
           <img style="max-width: 300px;max-height: 300px;" src="{{globalUrl+d[0][i]}}" alt="">
         </th>
+        {{# }else if(i=='icon'){ }}
+        <th class="right">
+          <img style="max-width: 100%;max-height: 100%;" src="{{d[0][i]}}" alt="">
+        </th>
         {{# }else if(i=='is_duban'){ }}
         <th class="right">
           {{yesNo[d[0][i]]}}

@@ -269,7 +269,6 @@ function setTable(obj) {
       })
       $('.deal').click(function () {
         var convalue = this.getAttribute('convalue');
-        var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
         layer.open({
           title:'详情',
           type: 2,
@@ -295,6 +294,21 @@ function setTable(obj) {
           },
           end:function(){
             obj.editEnd();
+          }
+        })
+      })
+      $('.editapp').click(function () {
+        var convalue = this.getAttribute('convalue');
+        layer.open({
+          type: 2,
+          area: ['700px', '450px'],
+          maxmin: true,
+          content: obj.editUrl,
+          success: function (layero, index) {
+            obj.editAppSuc(layero, index,obj.data[convalue].app_info);
+          },
+          end: function () {
+            obj.editEnd() || '';
           }
         })
       })

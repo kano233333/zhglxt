@@ -15,39 +15,39 @@
 <body>
 <div class="welcome-container">
   <div class="welcome-upper">
-    <div class="welcome-upper-left">
-      <hr>
-      <div>
-        <p class="layui-icon picon picon1" style="color:#f5961f;">&#xe756;</p>
-        <p class="ptip">预警提示 <span class="layui-badge layui-bg-cyan">1</span></p>
-      </div>
-      <hr>
-      <div>
-        <p class="layui-icon picon picon2" style="color:#6da3ea;">&#xe667;</p>
-        <p class="ptip">
-          事件处理
-          <span class="layui-badge layui-bg-cyan">1</span></p>
-      </div>
-      <hr>
-      <div>
-        <p class="layui-icon picon picon3" style="color:#74dc27;">&#xe60e;</p>
-        <p class="ptip">请假申请 <span class="layui-badge layui-bg-cyan">1</span></p>
-      </div>
-      <hr>
-      <div>
-        <p class="layui-icon picon picon4" style="color:#f56551;">&#xe715;</p>
-        <p class="ptip">考勤打卡 <span class="layui-badge layui-bg-cyan">1</span></p>
-      </div>
-      <hr>
-    </div>
+    <!--<div class="welcome-upper-left">-->
+      <!--<hr>-->
+      <!--<div>-->
+        <!--<p class="layui-icon picon picon1" style="color:#f5961f;">&#xe756;</p>-->
+        <!--<p class="ptip">预警提示 <span class="layui-badge layui-bg-cyan">1</span></p>-->
+      <!--</div>-->
+      <!--<hr>-->
+      <!--<div>-->
+        <!--<p class="layui-icon picon picon2" style="color:#6da3ea;">&#xe667;</p>-->
+        <!--<p class="ptip">-->
+          <!--事件处理-->
+          <!--<span class="layui-badge layui-bg-cyan">1</span></p>-->
+      <!--</div>-->
+      <!--<hr>-->
+      <!--<div>-->
+        <!--<p class="layui-icon picon picon3" style="color:#74dc27;">&#xe60e;</p>-->
+        <!--<p class="ptip">请假申请 <span class="layui-badge layui-bg-cyan">1</span></p>-->
+      <!--</div>-->
+      <!--<hr>-->
+      <!--<div>-->
+        <!--<p class="layui-icon picon picon4" style="color:#f56551;">&#xe715;</p>-->
+        <!--<p class="ptip">考勤打卡 <span class="layui-badge layui-bg-cyan">1</span></p>-->
+      <!--</div>-->
+      <!--<hr>-->
+    <!--</div>-->
     <div class="welcome-upper-right">
       <div class="layui-collapse">
         <div class="layui-colla-item">
           <h2 class="welcome-upper-center-h2">人员统计
-            <button class="layui-btn layui-btn-sm layui-btn-normal">
-              导入
-              <input type="file" id="xlsx" style="position:absolute;width:100%;left:0;opacity:0;">
-            </button>
+            <!--<button class="layui-btn layui-btn-sm layui-btn-normal">-->
+              <!--导入-->
+              <!--<input type="file" id="xlsx" style="position:absolute;width:100%;left:0;opacity:0;">-->
+            <!--</button>-->
           </h2>
           <div class="welcome-colla-content">
             <div class="content-left">
@@ -193,10 +193,10 @@
       }
     }
 
-
-    document.getElementById('xlsx').onchange = function () {
-      ConvertToArray();
-    }
+    //
+    // document.getElementById('xlsx').onchange = function () {
+    //   ConvertToArray();
+    // }
 
     function ConvertToArray() {
       var reader = new FileReader();

@@ -34,7 +34,9 @@ const ys = {
   'father_code':'父级代码',
   'spell':'行政区划简拼',
   "code":'行政区划代码',
-  'area_level':'行政区划级别'
+  'area_level':'行政区划级别',
+  'icon':"图片",
+  "pic":'图片'
 };
 
 const level = {
