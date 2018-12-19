@@ -12,112 +12,16 @@
 </head>
 
 <body>
-<div class="wrap-container clearfix">
-  <div class="column-content-detail">
-    <div class="layui-form" id="table-list">
-      <table class="layui-hide" id="demo" lay-filter="test"></table>
-    </div>
-  </div>
-</div>
-<script src="../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+  <div style="margin: 0 auto; width: 1080px; min-width: 1080px;height: auto;padding-top: 10px; background-color: #F2F2F2;">
 
-<script type="text/html" id="toolBar">
-  <div class="layui-inline tool-btn">
-    <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
-      添加
-    </button>
-    <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
-      编辑
-    </button>
-    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn hidden-xs">
-      刷新
-    </button>
-  </div>
-</script>
-<script>
-  layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
-    var $ = layui.jquery;
-    var laypage = layui.laypage //分页
-      , layer = layui.layer //弹层
-      , table = layui.table //表格
-      , upload = layui.upload //上传
-      , element = layui.element //元素操作
-      , slider = layui.slider //滑块
-    var getTable = function() {
-      $.ajax({
-        //url: 'http://172.23.22.120/manage/api.php?action=getAllUsers',
-        method: 'GET',
-        success(data) {
-          //var _data = JSON.parse(data);
-          //userData = _data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:testData,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl
-          });
-        },
-        error(state) {
-          console.log(state);
-        }
-      })
-    }
+        <div class="layui-card">
+          <!-- <div class="layui-card-header"></div> -->
+          <div class="layui-card-body">
+              <img src="../../static\admin\images\area2.jpg" alt="" width=100%>
+          </div>
+        </div>
+  </div> 
 
-    var testData = [{id:'111',username:'aaa',realname:'111',scope:'aaa','phone':'123','ip':'125',name:'aaa'}];
-    var cols = [ //表头
-      {type: 'checkbox'}
-      , {field: 'id', title: 'id',align:'center'}
-      , {field: 'img_src', title: 'icon',align:'center',templet:"<div><img style='width:40px; height:40px;' src='{{d.img_src}}' alt=''></div>"}
-      , {field: 'username', title: '用户名',align:'center'}
-      , {field: 'realname', title: '真实姓名',align:'center'}
-      , {field: 'scope', title: '所属区域',align:'center'}
-      , {field: 'phone', title: '联系电话',align:'center'}
-      , {field: 'last_login', title: '最近登陆',align:'center'}
-      , {field: 'ip', title: 'ip地址',align:'center'}
-      , {field: 'name',title:"角色",align:'center'}
-    ];
-    var addUrl = './alert/add.html';
-    var editUrl = './alert/edit.html';
-
-    function editSuc(layero, index){}
-    function editEnd(){
-      getTable();
-    }
-    function addSuc(layero, index){
-      var iframe = window['layui-layer-iframe' + index];
-      var addData = [
-        {0:'username',1:"用户名"},
-        {0:"realname",1:'真实姓名'},
-        {0:'img_src',1:'ICON'},
-        {0:"scope",1:'所属区域'},
-        {0:"phone",1:"联系电话"},
-        {0:"name",
-        1:{
-          "title":'角色名称',
-          "option":['社区居民','管理员','网格管理员','网格联系人','楼栋长']
-        }}
-      ]
-      var url = '';
-      iframe.getFromParent(addData,url);
-    }
-    var editAjaxUrl = '';
-    setTable({
-        addUrl:addUrl,
-        editUrl:editUrl,
-        cols:cols,
-        data:testData,
-        editSuc:editSuc,
-        editEnd:editEnd,
-        addSuc:addSuc,
-        editAjaxUrl:editAjaxUrl
-      });
-  })
-</script>
 
 </body>
 
