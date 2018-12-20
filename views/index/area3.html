@@ -47,8 +47,8 @@
       , {field: 'name', title: '姓名',align:'center'}
       , {field: 'area', title: '区域',align:'center'}
       , {field: 'service_area', title: '服务区域',align:'center'}
-      , {field: 'state', title: '状态',align:'center'}
       , {field: 'num', title: '数目',align:'center'}
+      , {field: 'state', title: '状态',align:'center',templet:'<span>{{gridStatus[d.state]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
