@@ -54,7 +54,7 @@
       , {field: 'facility_type', title: '公共设施类别', align:'center'}
       , {field: 'facility_name', title: '公共设施名称', align:'center'}
       , {field: 'facility_site', title: '公共设施地址', align:'center'}
-      , {field: 'facility_status',         title: '状态',        align:'center'}
+      , {field: 'facility_status',         title: '状态',        align:'center', templet:'<span>{{otherStatus[d.facility_status]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';

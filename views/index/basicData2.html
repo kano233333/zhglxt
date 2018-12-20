@@ -56,7 +56,7 @@
       , {field: 'unit_count',       title: '总单元数', align: 'center'}
       , {field: 'unit_floor_count', title: '总层数',   align: 'center'}
       , {field: 'house_count',      title: '总户数',   align: 'center'}
-      , {field: 'block_audit',            title: '状态',    align: 'center'}
+      , {field: 'block_audit',            title: '状态',    align: 'center', templet:'<span>{{otherStatus[d.block_audit]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';

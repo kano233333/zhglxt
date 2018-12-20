@@ -57,7 +57,7 @@
       , {field: 'width',    title: '宽度',    align:'center'}
       , {field: 'lane',     title: '车道数',   align:'center'}
       , {field: 'one_lane', title: '单车道',   align:'center'}
-      , {field: 'road_audit',    title: '状态',    align:'center'}
+      , {field: 'road_audit',    title: '状态',    align:'center',templet:'<span>{{otherStatus[d.road_audit]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
@@ -74,7 +74,7 @@
         {0:'width',    1:'宽度',    2:data['width']||''},
         {0:'lane',     1:'车道数',  2:data['lane']||''},
         {0:'one_lane', 1:'单车道',  2:data['one_lane']||''},
-        {0:'road_audit',    1:'状态',    2:data['road_audit']||''},
+        // {0:'road_audit',    1:'状态',    2:data['road_audit']||''},
       ]
       var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/roadEdit';
       iframe.getFromParent(editData,url);
@@ -92,7 +92,7 @@
         {0:'width',    1:"宽度"},
         {0:'lane',     1:"车道数"},
         {0:'one_lane', 1:"单车道"},
-        {0:'state',    1:"状态"},
+        // {0:'state',    1:"状态"},
       ]
       var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/roadAdd';
       iframe.getFromParent(addData,url);

@@ -54,7 +54,7 @@
       , {field: 'store_name',   title: '商铺名称',align:'center'}
       , {field: 'store_holder', title: '商铺店主',align:'center'}
       , {field: 'store_area',   title: '商铺面积',align:'center'}
-      , {field: 'store_audit',        title: '状态',align:'center'}
+      , {field: 'store_audit',        title: '状态',align:'center',templet:'<span>{{otherStatus[d.store_audit]}}</span>'}
       , {field: '',             title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';

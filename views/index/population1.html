@@ -55,7 +55,7 @@
       , {field: 'id_number', title: '身份证号',align:'center'}
       , {field: 'holder_tel', title: '房主电话',align:'center'}
       , {field: 'house_site', title: '房主地址',align:'center'}
-      , {field: 'house_audit', title: '状态',align:'center'}
+      , {field: 'house_audit', title: '状态',align:'center',  templet:'<span>{{otherStatus[d.house_audit]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';

@@ -55,7 +55,7 @@
       , {field: 'property', title: '企业性质',align:'center'}
       , {field: 'industry', title: '所处行业',align:'center'}
       , {field: 'company_size', title: '企业规模',align:'center'}
-      , {field: 'company_audit', title: '状态',align:'center'}
+      , {field: 'company_audit', title: '状态',align:'center',templet:'<span>{{otherStatus[d.company_audit]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';

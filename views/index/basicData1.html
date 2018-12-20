@@ -56,7 +56,7 @@
       , {field: 'courtArea',    title: '小区面积', align: 'center'}
       , {field: 'courtSite',     title: '小区地址', align: 'center'}
       , {field: 'blockCount',   title: '楼栋数',   align: 'center'}
-      , {field: 'courtAudit',        title: '状态',    align: 'center'}
+      , {field: 'courtAudit',        title: '状态',    align: 'center', templet:'<span>{{otherStatus[d.courtAudit]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
     var addUrl = './alert/add.html';
