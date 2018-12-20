@@ -30,6 +30,9 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
+      删除
+    </button>
   </div>
 </script>
 <script>
@@ -81,7 +84,7 @@
     var correspond = {};
     var editAjaxUrl =  globalUrl+'System/gridEdit';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://web.cqupt.store/public/index.php/index/System/gridDelete';
     var getTable = function() {
       AJAX({
         url: globalUrl+'System/gridList',

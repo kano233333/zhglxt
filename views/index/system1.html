@@ -30,6 +30,9 @@
     <button class="layui-btn layui-btn-sm layui-btn-danger edBtn" id="edit">
       编辑
     </button>
+    <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
+      删除
+    </button>
   </div>
 </script>
 <script>
@@ -119,7 +122,7 @@
     var correspond = {};
     var editAjaxUrl =  globalUrl+"System/userEdit";
     var detailUrl = './alert/detail.html';
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var deleteUrl =  'http://web.cqupt.store/public/index.php/index/User/userDelete';
     var getTable = function() {
       AJAX({
         url: globalUrl+otherUrl.System[0],
@@ -136,7 +139,7 @@
               editEnd:editEnd,
               addSuc:addSuc,
               editAjaxUrl:editAjaxUrl,
-              // deleteUrl:deleteUrl,
+              deleteUrl:deleteUrl,
               detailUrl:detailUrl,
               editPassword:'password',
               editStateSuc:editStateSuc
