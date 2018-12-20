@@ -9,6 +9,7 @@ const ys = {
   "organizer": "发起人",
   "rank":"评分",
   "img_path":'图片',
+  'pic':'图片',
   "resource":'来源',
   "content":"内容",
   "gridman":"网格人",
@@ -129,7 +130,7 @@ const scoreXX = {
   4:'优'
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption'];
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption','houseStatusOption'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
@@ -277,6 +278,8 @@ const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
 const gridOption = ['第一网格','第二网格','第三网格','第四网格','第五网格','第六网格','第七网格','第八网格','第九网格'];
 
 const userStatusOption = ['未启用','已启用'];
+
+const houseStatusOption = ['出租','空置','自住','其他'];
 
 const userStatus = {
   0:"未启用",
