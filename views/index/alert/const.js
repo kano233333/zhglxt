@@ -129,7 +129,7 @@ const scoreXX = {
   4:'优'
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex'];
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
@@ -275,3 +275,20 @@ const sexIndex = {0:'男',1:'女'};
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
 
 const gridOption = ['第一网格','第二网格','第三网格','第四网格','第五网格','第六网格','第七网格','第八网格','第九网格'];
+
+const userStatusOption = ['未启用','已启用'];
+
+const userStatus = {
+  0:"未启用",
+  1:"已启用"
+};
+
+const otherStatus = {
+  0:"未审核",
+  1:"已审核"
+};
+
+const gridStatus = {
+  0:"未通过",
+  1:"已通过"
+};
