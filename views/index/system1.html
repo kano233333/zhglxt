@@ -52,7 +52,7 @@
       , {field: 'communicate_phone', title: '联系电话',align:'center'}
       , {field: 'last_login', title: '最近登陆',align:'center'}
       , {field: 'last_login_ip', title: 'IP地址',align:'center'}
-      , {field: 'user_state', title: '状态',align:'center'}
+      , {field: 'user_state', title: '状态',align:'center',templet:'<span>{{userStatus[d.user_state]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'15%'}
     ];
     var addUrl = './alert/add.html';
@@ -71,7 +71,8 @@
         {0:"communicate_phone",1:"联系电话",2:data['communicate_phone']},
         {0:"user_state",1:{
             'title':'状态',
-            'option':['0','1 ']
+            // 'option':['0','1 ']
+            'option':userStatusOption
           }},
       ]
       var url =  globalUrl+'System/userEdit';
@@ -110,7 +111,7 @@
         {0:"identity",1:'身份'},
         {0:"communication_phone",1:"联系电话"},
         {0:"office_phone",1:"办公电话"},
-        {0:"user_state",1:{title:"用户状态",option:[0,1]}}
+        {0:"user_state",1:{title:"用户状态",option:userStatusOption}}
       ]
       var url =  globalUrl+otherUrl.User[0];
       iframe.getFromParent(addData,url);
