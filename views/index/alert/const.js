@@ -160,7 +160,7 @@ const yesNo = {
   1:'是'
 };
 
-const globalUrl = "http://web.cqupt.store/public/index.php/index/";
+const globalUrl = "http://47.106.197.31/man/public/index.php/index/";
 const otherUrl = {
   User:['User/registerForWeb','User/login'],
   Work:[
