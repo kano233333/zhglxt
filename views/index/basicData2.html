@@ -82,7 +82,7 @@
           }},
         */
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/editBlockData';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/editBlockData';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -101,13 +101,13 @@
         {0:'block_admintor',     1:"楼栋长"},
         {0:'block_admintor_tel', 1:"联系电话"},
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/addBlockData';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/addBlockData';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl = 'http://47.106.197.31/man/public/index.php/index/Courtdata/getBlockDataList';
+    var editAjaxUrl = 'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/getBlockDataList';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/deleteBlockData';
+    var deleteUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/deleteBlockData';
     var getTable = function() {
       AJAX({
         url: editAjaxUrl,
@@ -126,7 +126,7 @@
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
             detailUrl:detailUrl,
-            checkUrl:'http://47.106.197.31/man/public/index.php/index/Courtdata/auditBlock'
+            checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/auditBlock'
           });
           }else{
             layer.msg('错误');

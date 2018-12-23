@@ -36,20 +36,71 @@ const ys = {
   'area_level':'行政区划级别',
 
   //人口表部分
-  "username":"姓名",
-  'id_number': "身份证号",
-  "ethnicity": "民族",
-  "name": "姓名",
-  "in_date": "入党时间",
-  "party_branch": "党员所在党支部",
-  "duty": "担任的党员职位",
-  "org": "所在组织",
-  "age": '年龄',
-  "phone": "联系方式",
-  "in_code": "入党编号",
-  "education": "学历",
-  "sex": '性别',
-  "address": "地址",
+  // "username":"姓名",
+  // 'id_number': "身份证号",
+  // "ethnicity": "民族",
+  // "name": "姓名",
+  // "in_date": "入党时间",
+  // "party_branch": "党员所在党支部",
+  // "duty": "担任的党员职位",
+  // "org": "所在组织",
+  // "age": '年龄',
+  // "phone": "联系方式",
+  // "in_code": "入党编号",
+  // "education": "学历",
+  // "sex": '性别',
+  // "address": "地址",
+  'no':'序号',
+  'community_id':'所属小区',
+  'username':'姓名',
+  'sex':'性别',
+  'age':'年龄',
+  'resident_province':'户籍省',
+  'resident_district':'户籍市',
+  'city':'户籍县(区)',
+  'resident_address':'户籍详址',
+  'living_reason':'居住事由',
+  'native_place':'籍贯',
+  'ethnicity':'民族',
+  'id_number':'身份证号',
+  'birth_data':'出生日期',
+  'org_id':'组织关系',
+  'grid':'所属网格',
+  'building_id':'所属楼栋',
+  'unit_id':'所属单元',
+  'is_insured':'是否参保',
+  'marriage':'婚姻状况',
+  'political_status':'政治面貌',
+  'phone':'联系电话',
+  'education':'文化程度',
+  'occupation':'职业',
+  'enterprise_type':'企业性质',
+  'work_place':'工作地点',
+  'housing_property':'房屋性质',
+  'address':'街路巷（组）',
+  'house_code':'门牌号',
+  'is_renthouse':'是否为出租房',
+  'room_code':'房号',
+  'self_name':'(个人产权)姓名',
+  'enterprise_name':'(单位产权)单位名称',
+  'enterprise_address':'(单位产权)单位地址',
+  'agent_name':'(代理人信息)姓名',
+  'agent_address':'(代理人信息)联系地址',
+  'agent_enterprise_address':'(代理单位信息)单位地址',
+  'agent_enterprise_name':'(代理单位信息)单位名称',
+  'agent_enterprise_contact':'(代理单位信息)联系人',
+  'population_type':'人口类型',
+  'floating_reason':'流动原因',
+  'relation_with_host':'与户主关系',
+  'in_data':'来本市日期',
+  'has_jycard':'是否办理缙云卡',
+  'out_data':'流出时间',
+  'out_province':'流出到省',
+  'out_city':'流出到市',
+  'out_district':'流往地详址',
+  'edit_people':'录入人',
+  'comment':'注释',
+  'pic':'图片网址',
 
     /*%%%%%%%%%%%%%%%%%%%%  zhouyang  %%%%%%%%%%%%%%%%%%%%*/
   'courtName':     '小区名称',
@@ -160,7 +211,7 @@ const yesNo = {
   1:'是'
 };
 
-const globalUrl = "http://47.106.197.31/man/public/index.php/index/";
+const globalUrl = "http://58.144.34.96:5000/web_manager/public/index.php/index/";
 const otherUrl = {
   User:['User/registerForWeb','User/login'],
   Work:[
@@ -191,7 +242,8 @@ const xxx = [
 ];
 
 const aaa = [
-  {0:'no',1:'序号'},
+  // {0:'no',1:'序号'},
+  {0:'area',1:'所属区域'},
   {0:'community_id',1:'所属小区'},
   {0:'username',1:'姓名'},
   {0:'sex',1:{title:'性别',option:['男','女']}},
@@ -235,9 +287,9 @@ const aaa = [
   {0:'relation_with_host',1:'与户主关系'},
   {0:'in_data',1:'来本市日期'},
   {0:'has_jycard',1:{title:'是否办理缙云卡',option:['否','是']}},
-  {0:'out_data',1:'流出到省'},
-  {0:'out_province',1:'流出到市'},
-  {0:'out_city',1:'流出到区（县）'},
+  {0:'out_data',1:'流出时间'},
+  {0:'out_province',1:'流出到省'},
+  {0:'out_city',1:'流出到到市'},
   {0:'out_district',1:'流往地详址'},
   {0:'edit_people',1:'录入人'},
   {0:'comment',1:'注释'},
@@ -272,7 +324,9 @@ const sdlvTime = ['birth_data','in_date','out_date'];
 const sdlrOption = ['sex','is_insured','is_renthouse','marriage','political_status','education','has_jycard'];
 
 
-const sexIndex = {0:'男',1:'女'};
+const sexIndex = {0:'男',1:'女','男性':'男','女性':'女'};
+const sexOption = ['男','女'];
+
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
 
 const gridOption = ['第一网格','第二网格','第三网格','第四网格','第五网格','第六网格','第七网格','第八网格','第九网格'];

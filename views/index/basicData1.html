@@ -80,7 +80,7 @@
           }},
         */
       ];
-      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/editCourtData';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/editCourtData';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -102,13 +102,13 @@
           }},
         */
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Courtdata/addCourtData';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/addCourtData';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/getCourtDataList';
+    var editAjaxUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/getCourtDataList';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Courtdata/deleteCourtData';
+    var deleteUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/deleteCourtData';
     var getTable = function() {
       AJAX({
         url: editAjaxUrl,
@@ -127,7 +127,7 @@
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
             detailUrl:detailUrl,
-            checkUrl:'http://47.106.197.31/man/public/index.php/index/Courtdata/auditCourt'
+            checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/auditCourt'
           });
           }else{
             layer.msg('错误');

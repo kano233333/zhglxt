@@ -75,7 +75,7 @@
 
     var getTable = function() {
       AJAX({
-        url: 'http://47.106.197.31/man/public/index.php/index/Data/getPeopleDataList',
+        url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/getPeopleDataList',
         method: 'GET',
         success:function(data) {
           if(data.state===200){
@@ -112,7 +112,7 @@
           excelData.push(res);
         }
         AJAX({
-          url:'http://47.106.197.31/man/public/index.php/index/Data/addDataFromJSON',
+          url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/addDataFromJSON',
           method:'POST',
           data:{data:JSON.stringify(excelData)},
           success:function(){

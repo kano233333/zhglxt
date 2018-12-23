@@ -81,7 +81,7 @@
         {0:'people_number',         1:'居住人数',   2:data['people_number']},
         {0:'house_site2',         1:'户籍地址',   2:data['house_site2']}
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editHouse';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editHouse';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -106,16 +106,16 @@
         {0:"people_number",1:"居住人数"},
         {0:"house_site2",1:"户籍地址"},
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/addHouse';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/addHouse';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editHouse';
+    var editAjaxUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editHouse';
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/deleteHouse';
+    var deleteUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/deleteHouse';
     var getTable = function() {
       AJAX({
-        url: 'http://47.106.197.31/man/public/index.php/index/Basicdata/getHouseList',
+        url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/getHouseList',
         method: 'GET',
         success:function(data) {
           if(data.state==200){
@@ -131,7 +131,7 @@
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
             detailUrl:detailUrl,
-            checkUrl:'http://47.106.197.31/man/public/index.php/index/Basicdata/editHouse'
+            checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editHouse'
           });
           }else{
             layer.msg('错误');

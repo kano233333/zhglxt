@@ -81,7 +81,7 @@
         {0:"sex",1:{title:'性别',option:sexIndex}},
         {0:'address',1:'地址',2:data['address']},
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Data/editPartyMember';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/editPartyMember';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -105,16 +105,16 @@
         {0:"sex",1:{title:"性别",option:sexIndex}},
         {0:'address',1:'地址'},
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Data/addPartyMember';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/addPartyMember';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  'http://47.106.197.31/man/public/index.php/index/Data/editPartyMember';
+    var editAjaxUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/editPartyMember';
     var detailUrl = './alert/detail.html'
     var deleteUrl =  globalUrl+otherUrl.Work[2][2];
     var getTable = function() {
       AJAX({
-        url: 'http://47.106.197.31/man/public/index.php/index/Data/getPartyMemberList',
+        url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/getPartyMemberList',
         method: 'GET',
         success:function(data) {
           console.log(data)

@@ -171,7 +171,7 @@
 
     var addurl = ['getAgeStat','getPopStat','getSexStat','getPoliticalStat','getPoorStat','getRentHouseStat','getEthnicityStat','getKeyAttnStat'];
     AJAX({
-      url:'http://47.106.197.31/man/public/index.php/index/Data/'+addurl[0],
+      url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/'+addurl[0],
       method:'GET',
       success:function(data){
         requireEchart(data.data[0]);
@@ -181,7 +181,7 @@
     for (let i = 0; i < contentP.length; i++) {
       contentP[i].onclick = function () {
         AJAX({
-          url:'http://47.106.197.31/man/public/index.php/index/Data/'+addurl[i],
+          url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/'+addurl[i],
           method:'GET',
           success:function(data){
             console.log(data);
@@ -265,7 +265,7 @@
   layui.use(['jquery'],function(){
     var $ = layui.jquery;
     AJAX({
-      url:'http://47.106.197.31/man/public/index.php/index/Data/getAgeStat',
+      url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/getAgeStat',
       method:'GET',
       success:function(data){
         var xAxisData = [];
@@ -286,7 +286,7 @@
     })
 
     AJAX({
-      url:'http://47.106.197.31/man/public/index.php/index/Data/getPopStat',
+      url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/getPopStat',
       method:'GET',
       success:function(data){
         var xAxisData = [];

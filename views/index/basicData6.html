@@ -72,7 +72,7 @@
         {0:'company_size',    1:'企业规模',    2:data['company_size']},
         // {0:'company_audit',     1:'状态',  2:data['company_audit']},
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/editCompany';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editCompany';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -88,16 +88,16 @@
         {0:"company_size",1:"企业规模"},
         // {0:"company_audit",1:"日志内容"},
       ]
-      var url =  'http://47.106.197.31/man/public/index.php/index/Basicdata/addCompany';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/addCompany';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
     var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
     var detailUrl = './alert/detail.html'
-    var deleteUrl =  'http://47.106.197.31/man/public/index.php/index/Basicdata/deleteCompany';
+    var deleteUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/deleteCompany';
     var getTable = function() {
       AJAX({
-        url: 'http://47.106.197.31/man/public/index.php/index/Basicdata/getCompanyList',
+        url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/getCompanyList',
         method: 'GET',
         success:function(data) {
           if(data.state==200){
@@ -113,7 +113,7 @@
             editAjaxUrl:editAjaxUrl,
             deleteUrl:deleteUrl,
             detailUrl:detailUrl,
-            checkUrl:'http://47.106.197.31/man/public/index.php/index/Basicdata/auditCompany'
+            checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/auditCompany'
           });
           }else{
             layer.msg('错误');
