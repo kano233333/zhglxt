@@ -148,7 +148,7 @@ function setTable(obj) {
 
     var editUserData;
     table.on('checkbox(test)', function (xxx) {
-      let index = xxx.tr.selector.split('"')[1];
+      let index = parseInt(xxx.data.id)-1;
       editUserData = obj.data[index];
       console.log(editUserData)
     });
