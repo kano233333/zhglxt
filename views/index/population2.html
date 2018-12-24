@@ -114,35 +114,35 @@
         {0:'floating_reason',          1:"流动原因", 2:data['floating_reason']||''},
         {0:'in_date',          1:"来本市日期", 2:data['in_date']||''},
         {0:'out_date',          1:"流出时间", 2:data['out_date']||''},
-        {0:'has_jycard',          1:"是否办理缙云卡", 2:data['has_jycard']||''},
+        {0:'has_jycard',          1:{title:'是否办理缙云卡',option:['否','是']}},
         {0:'out_province',          1:"流出到省", 2:data['out_province']||''},
         {0:'out_city',          1:"流出到到市", 2:data['out_city']||''},
         {0:'out_district',          1:"流往地详址", 2:data['out_district']||''},
         // {0:'out_address',          1:"所属区域", 2:data['out_address']||''},
         {0:'edit_people',          1:"编辑人", 2:data['edit_people']||''},
-        // {0:'is_single_parent',          1:"单亲家庭", 2:data['is_single_parent']||''},
-        // {0:'is_single_old',          1:"独居老人", 2:data['is_single_old']||''},
-        // {0:'mental_disease',          1:"精神障碍", 2:data['mental_disease']||''},
-        // {0:'is_correctional',          1:"社区矫正人员", 2:data['is_correctional']||''},
-        // {0:'is_released',          1:"刑满释放人员", 2:data['is_released']||''},
-        // {0:'is_xj',          1:"XJ人员", 2:data['is_xj']||''},
-        // {0:'is_xd',          1:"XD人员", 2:data['is_xd']||''},
-        // {0:'is_special_care',          1:"优抚对象", 2:data['is_special_care']||''},
-        // {0:'is_disabled',          1:"残疾人", 2:data['is_disabled']||''},
-        // {0:'is_leftover_children',          1:"留守儿童", 2:data['is_leftover_children']||''},
-        // {0:'has_critical_disease',          1:"重疾人员", 2:data['has_critical_disease']||''},
-        // {0:'is_empty_nester',          1:"空巢老人", 2:data['is_empty_nester']||''},
-        // {0:'is_poor',          1:"经济困难人员", 2:data['is_poor']||''},
-        // {0:'is_veteran',          1:"退伍军人", 2:data['is_veteran']||''},
-        // {0:'is_jobless',          1:"下岗职工", 2:data['is_jobless']||''},
-        // {0:'is_sanwu',          1:"三无人员", 2:data['is_sanwu']||''},
-        // {0:'is_dibao',          1:"低保人员", 2:data['is_dibao']||''},
-        // {0:'is_cflac_member',          1:"留学人员", 2:data['is_cflac_member']||''},
-        // {0:'is_overseas_chinese',          1:"归国华侨", 2:data['is_overseas_chinese']||''},
-        // {0:'is_overseas_student',          1:"留学人员", 2:data['is_overseas_student']||''},
-        // {0:'is_ftu_member',          1:"工会会员", 2:data['is_ftu_member']||''},
+        {0:'is_single_parent',          1:{title:'单亲家庭',option:['否','是']}},
+        {0:'is_single_old',          1:{title:'独居老人',option:['否','是']}},
+        {0:'metal_disease',          1:{title:'精神障碍',option:['否','是']}},
+        {0:'is_correctional',          1:{title:'社区矫正人员',option:['否','是']}},
+        {0:'is_released',          1:{title:'刑满释放人员',option:['否','是']}},
+        {0:'is_xj',          1:{title:'XJ人员',option:['否','是']}},
+        {0:'is_xd',          1:{title:'XD人员',option:['否','是']}},
+        {0:'is_special_care',          1:{title:'优抚对象',option:['否','是']}},
+        {0:'is_disabled',          1:{title:'残疾人',option:['否','是']}},
+        {0:'is_leftover_children',          1:{title:'留守儿童',option:['否','是']}},
+        {0:'has_critical_disease',          1:{title:'重疾人员',option:['否','是']}},
+        {0:'is_empty_nester',          1:{title:'空巢老人',option:['否','是']}},
+        {0:'is_poor',          1:{title:'经济困难人员',option:['否','是']}},
+        {0:'is_veteran',          1:{title:'退伍军人',option:['否','是']}},
+        {0:'is_jobless',          1:{title:'下岗职工',option:['否','是']}},
+        {0:'is_sanwu',          1:{title:'三无人员',option:['否','是']}},
+        {0:'is_dibao',          1:{title:'低保人员',option:['否','是']}},
+        {0:'is_overseas_student',          1:{title:'留学人员',option:['否','是']}},
+        {0:'is_overseas_chinese',          1:{title:'归国华侨',option:['否','是']}},
+        {0:'is_cflac_member',          1:{title:'文联会员',option:['否','是']}},
+        {0:'is_ftu_member',          1:{title:'工会会员',option:['否','是']}},
       ];
-      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/editCourtData';
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/editPeople';
       iframe.getFromParent(editData,url);
     }
     function editEnd(){
@@ -161,7 +161,7 @@
       //   {0:"content",1:"日志内容"},
       // ]
       var addData = aaa;
-      var url =  globalUrl+otherUrl.Work[2][1];
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/addPeopleData';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};

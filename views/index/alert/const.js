@@ -181,14 +181,15 @@ const scoreXX = {
   4:'优'
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption','houseStatusOption'];
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption','houseStatusOption',
+                    'is_single_parent','is_single_old','metal_disease','metal_disease','is_correctional','is_released','is_xj','is_xd','is_special_care','is_disabled','is_leftover_children','has_critical_disease','is_empty_nester','is_poor','is_veteran','is_jobless','is_sanwu','is_dibao','is_overseas_student','is_overseas_chinese','is_cflac_member','is_ftu_member','has_jycard'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
 const postTime = ['not_before'];
 const checkoutAdd = ['mission_people'];
 const passwd = ['password'];
 const checkOne = [];
-const postTimeYear = ['in_date'];  //年月日
+const postTimeYear = ['in_date','edit_time','birth_date'];  //年月日
 const postTimeNor = [];
 
 
