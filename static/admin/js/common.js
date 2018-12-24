@@ -148,9 +148,8 @@ function setTable(obj) {
 
     var editUserData;
     table.on('checkbox(test)', function (xxx) {
-      let index = parseInt(xxx.data.id)-1;
+      let index = parseInt(xxx.tr[0].querySelector('td .laytable-cell-numbers').innerText)-1;
       editUserData = obj.data[index];
-      console.log(editUserData)
     });
 
     if(obj.setSuc){
@@ -265,7 +264,7 @@ function setTable(obj) {
               content: obj.scoreUrl,
               success: function (layero, index) {
                 var iframe = window['layui-layer-iframe' + index];
-                iframe.getFromParent(idX);
+                iframe.getFromParent(obj.data[convalue]);
               }
             })
           // }

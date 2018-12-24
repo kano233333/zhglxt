@@ -40,7 +40,7 @@
 <script src="../../../static/admin/js/common.js"></script>
 <script src="./const.js"></script>
 <script>
-function getFromParent(id){
+function getFromParent(data){
   layui.use(['rate','layer','jquery'],function(){
     var rate = layui.rate;
     var $ = layui.jquery;
@@ -58,7 +58,7 @@ function getFromParent(id){
         url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Work/emergencyScore',
         method:"POST",
         data:{
-          id:id,
+          id:data.id,
           score:num,
           score_content:score_content
         },
