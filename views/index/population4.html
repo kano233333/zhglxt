@@ -23,7 +23,7 @@
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="./alert/const.js"></script>
 <script type="text/html" id="toolBar">
-  <!-- <div class="layui-inline tool-btn">
+  <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal addBtn">
       添加
     </button>
@@ -33,7 +33,10 @@
     <button class="layui-btn layui-btn-sm layui-btn-warm listOrderBtn" id="delete">
       删除
     </button>
-  </div> -->
+    <!-- <button class="layui-btn layui-btn-sm listOrderBtn" style="background-color: #0f9c00" id="exam">
+      审核
+    </button> -->
+  </div>
 </script>
 <script>
   layui.use(['laypage', 'layer', 'table', 'upload', 'element', 'slider','jquery'], function() {
@@ -48,39 +51,123 @@
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
       , {field: 'username', title: '姓名',align:'center'}
-      , {field: 'sex', title: '性别',align:'center'}
+      , {field: 'sex', title: '性别',align:'center',templet:'<span>{{sexIndex[d.sex]}}</span>'}
       , {field: 'id_number', title: '身份证号',align:'center'}
       , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'address', title: '现住地址',align:'center'}
-      // , {field: 'object', title: '服务对象类型',align:'center'}
-      , {field: '',title:"操作",align:'center',templet:'#detail'}
+      , {field: 'address', title: '住址',align:'center'}
+      // , {field: 'grid', title: '所属网格',align:'center'}
+      // , {field: 'gridman', title: '网格管理员',align:'center'}
+      // , {field: 'state', title: '状态',align:'center'}
+      , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
-    var addUrl = './alert/add.html';
+    // var addUrl = './alert/add.html';
+    var addUrl = './alert/sdlr.html';
     var editUrl = './alert/edit.html';
 
-    function editSuc(layero, index){}
+    function editSuc(layero, index, data){
+      var iframe = window['layui-layer-iframe' + index];
+      var editData = [
+        {0:'id',            1:'ID   ',   2:data['id']||''},
+        {0:'area',          1:"所属区域", 2:data['area']||''},
+        {0:'community_id',          1:"所属小区", 2:data['community_id']||''},
+        {0:'username',          1:"姓名", 2:data['username']||''},
+        {0:'sex',1:{title:'性别',option:sexOption}},
+        {0:'age',          1:"年龄", 2:data['age']||''},
+        {0:'native_place',          1:"籍贯", 2:data['native_place']||''},
+        {0:'ethnicity',          1:"民族", 2:data['ethnicity']||''},
+        {0:'id_number',          1:"身份证号", 2:data['id_number']||''},
+        {0:'work_place',          1:"工作地点", 2:data['work_place']||''},
+        {0:'org_id',          1:"组织关系", 2:data['org_id']||''},
+        {0:'grid',          1:{title:'所属网格',option:gridOption}},
+        {0:'building_id',          1:"所属楼栋", 2:data['building_id']||''},
+        {0:'birth_date',          1:"出生日期", 2:data['birth_date']||''},
+        {0:'is_insured',          1:"是否参保", 2:data['is_insured']||''},
+        {0:'marriage',          1:"婚姻状况", 2:data['marriage']||''},
+        {0:'phone',          1:"联系电话", 2:data['phone']||''},
+        {0:'political_status',          1:"政治面貌", 2:data['political_status']||''},
+        {0:'enterprise_name',          1:"单位名称", 2:data['enterprise_name']||''},
+        {0:'unit_id',          1:"所属单元", 2:data['unit_id']||''},
+        {0:'relation_with_host',          1:"与户主关系", 2:data['relation_with_host']||''},
+        {0:'population_type',          1:"人口类型", 2:data['population_type']||''},
+        {0:'occupation',          1:"职业", 2:data['occupation']||''},
+        {0:'education',          1:"文化程度", 2:data['education']||''},
+        {0:'enterprise_address',          1:"单位地址", 2:data['enterprise_address']||''},
+        // {0:'pic',          1:"图片", 2:data['pic']||''},
+        {0:'address',          1:"街路巷（组）", 2:data['address']||''},
+        {0:'resident_address',          1:"户籍详址", 2:data['resident_address']||''},
+        {0:'comment',          1:"注释", 2:data['comment']||''},
+        {0:'enterprise_type',          1:"企业性质", 2:data['enterprise_type']||''},
+        {0:'house_code',          1:"门牌号", 2:data['house_code']||''},
+        {0:'room_code',          1:"房号", 2:data['room_code']||''},
+        {0:'is_renthouse',          1:"是否为出租房", 2:data['is_renthouse']||''},
+        {0:'housing_property',          1:"房屋性质", 2:data['housing_property']||''},
+        {0:'self_name',          1:"(个人产权)姓名", 2:data['self_name']||''},
+        {0:'edit_time',          1:"编辑时间", 2:data['edit_time']||''},
+        {0:'agent_name',          1:"(代理人信息)姓名", 2:data['agent_name']||''},
+        {0:'agent_address',          1:"(代理人信息)联系地址", 2:data['agent_address']||''},
+        {0:'agent_enterprise_name',          1:"(代理单位信息)单位名", 2:data['agent_enterprise_name']||''},
+        {0:'agent_enterprise_contact',          1:"(代理单位信息)联系人", 2:data['agent_enterprise_contact']||''},
+        {0:'resident_district',          1:"流往地详址", 2:data['resident_district']||''},
+        {0:'resident_province',          1:"流出到省", 2:data['resident_province']||''},
+        {0:'living_reason',          1:"居住事由", 2:data['living_reason']||''},
+        {0:'city',          1:"户籍县(区)", 2:data['city']||''},
+        {0:'floating_reason',          1:"流动原因", 2:data['floating_reason']||''},
+        {0:'in_date',          1:"来本市日期", 2:data['in_date']||''},
+        {0:'out_date',          1:"流出时间", 2:data['out_date']||''},
+        {0:'has_jycard',          1:{title:'是否办理缙云卡',option:['否','是']}},
+        {0:'out_province',          1:"流出到省", 2:data['out_province']||''},
+        {0:'out_city',          1:"流出到到市", 2:data['out_city']||''},
+        {0:'out_district',          1:"流往地详址", 2:data['out_district']||''},
+        // {0:'out_address',          1:"所属区域", 2:data['out_address']||''},
+        {0:'edit_people',          1:"编辑人", 2:data['edit_people']||''},
+        {0:'is_single_parent',          1:{title:'单亲家庭',option:['否','是']}},
+        {0:'is_single_old',          1:{title:'独居老人',option:['否','是']}},
+        {0:'metal_disease',          1:{title:'精神障碍',option:['否','是']}},
+        {0:'is_correctional',          1:{title:'社区矫正人员',option:['否','是']}},
+        {0:'is_released',          1:{title:'刑满释放人员',option:['否','是']}},
+        {0:'is_xj',          1:{title:'XJ人员',option:['否','是']}},
+        {0:'is_xd',          1:{title:'XD人员',option:['否','是']}},
+        {0:'is_special_care',          1:{title:'优抚对象',option:['否','是']}},
+        {0:'is_disabled',          1:{title:'残疾人',option:['否','是']}},
+        {0:'is_leftover_children',          1:{title:'留守儿童',option:['否','是']}},
+        {0:'has_critical_disease',          1:{title:'重疾人员',option:['否','是']}},
+        {0:'is_empty_nester',          1:{title:'空巢老人',option:['否','是']}},
+        {0:'is_poor',          1:{title:'经济困难人员',option:['否','是']}},
+        {0:'is_veteran',          1:{title:'退伍军人',option:['否','是']}},
+        {0:'is_jobless',          1:{title:'下岗职工',option:['否','是']}},
+        {0:'is_sanwu',          1:{title:'三无人员',option:['否','是']}},
+        {0:'is_dibao',          1:{title:'低保人员',option:['否','是']}},
+        {0:'is_overseas_student',          1:{title:'留学人员',option:['否','是']}},
+        {0:'is_overseas_chinese',          1:{title:'归国华侨',option:['否','是']}},
+        {0:'is_cflac_member',          1:{title:'文联会员',option:['否','是']}},
+        {0:'is_ftu_member',          1:{title:'工会会员',option:['否','是']}},
+      ];
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/editPeople';
+      iframe.getFromParent(editData,url);
+    }
     function editEnd(){
       getTable();
     }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
-      var addData = [
-        {0:'area',1:"区域"},
-        {0:"grid",1:'网格'},
-        {0:'log_name',1:'日志名称'},
-        {0:"log_type",1:{
-            'title':'类型',
-            'option':['巡查','走访 ','宣传','处理','重点人员寻访']
-          }},
-        {0:"content",1:"日志内容"},
-      ]
-      var url =  globalUrl+otherUrl.Work[2][1];
+      // var addData = [
+      //   {0:'area',1:"区域"},
+      //   {0:"grid",1:'网格'},
+      //   {0:'log_name',1:'日志名称'},
+      //   {0:"log_type",1:{
+      //       'title':'类型',
+      //       'option':['巡查','走访 ','宣传','处理','重点人员寻访']
+      //     }},
+      //   {0:"content",1:"日志内容"},
+      // ]
+      var addData = aaa;
+      var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/addPeopleData';
       iframe.getFromParent(addData,url);
     }
     var correspond = {};
-    var editAjaxUrl =  globalUrl+otherUrl.Work[2][3];
-    var detailUrl = './alert/detail.html'
-    var deleteUrl =  globalUrl+otherUrl.Work[2][2];
+    var editAjaxUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/editPeople';
+    var detailUrl = './alert/detail.html';
+    var deleteUrl = 'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/deletePeopleData';
     var getTable = function() {
       AJAX({
         url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/getAttentionList',
@@ -120,8 +207,20 @@
 <script id="detail" type="text/html">
   <div class="layui-inline tool-btn">
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
-     查看详情 
+      查看详情
     </button>
+    <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+      家庭成员
+    </button> -->
+    <!-- {{# if(true){ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
+      审核
+    </button>
+    {{# }else{ }}
+    <button class="layui-btn layui-btn-sm layui-btn-normal" style="background-color: #0f9c00" convalue="{{d.LAY_INDEX-1}}">
+      已通过
+    </button>
+    {{# } }} -->
   </div>
 </script>
 </body>

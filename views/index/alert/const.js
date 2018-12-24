@@ -77,7 +77,7 @@ const ys = {
   'enterprise_type':'企业性质',
   'work_place':'工作地点',
   'housing_property':'房屋性质',
-  'address':'街路巷（组）',
+  'address':'住址',
   'house_code':'门牌号',
   'is_renthouse':'是否为出租房',
   'room_code':'房号',
