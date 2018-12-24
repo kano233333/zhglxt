@@ -12,41 +12,55 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-top:25px;
+      margin: 40px auto 0 auto;
     }
     #score i{
       font-size:30px;
+    }
+    #sure {
+      margin-top:20px;
     }
   </style>
 </head>
 <body>
 <div class="box">
   <div id="score"></div>
+  <div class="sdlr-wrap" style="margin-top:30px;">
+    <div class="box-left">
+      <p>备注:</p>
+    </div>
+    <div class="box-right">
+      <input type="text" placeholder="" value="">
+    </div>
+  </div>
   <button class="layui-btn layui-btn-sm" style="display: block;" id="sure">确定</button>
 </div>
 
 <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/common.js"></script>
 <script src="./const.js"></script>
 <script>
-function getFromParent(data,id){
+function getFromParent(id){
   layui.use(['rate','layer','jquery'],function(){
     var rate = layui.rate;
     var $ = layui.jquery;
     var layer = layui.layer;
     rate.render({
       elem: '#score',
-      length:4,
+      length:4
       //value:''
     });
 
     document.getElementById('sure').onclick = function(){
       var num = document.querySelectorAll('.layui-inline .layui-icon-rate-solid').length;
-      $.ajax({
-        url:"http://47.106.197.31/manage/api.php?action=modifyEventInfo",
+      var score_content = document.querySelector('.box-right input').value;
+      AJAX({
+        url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Work/emergencyEdit',
         method:"POST",
         data:{
           id:id,
-          rank:num
+          score:num,
+          score_content:score_content
         },
         success(){
           layer.msg('评分成功');

@@ -249,26 +249,27 @@ function setTable(obj) {
         })
       })
       $('.score').click(function () {
+        var convalue = this.getAttribute('convalue');
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
-        AJAX({
-          url: "http://47.106.197.31/manage/api.php?action=isRanked",
-          method: "POST",
-          data: {id: idX},
-          success(data) {
-            var _data = JSON.parse(data);
+        // AJAX({
+        //   url: "http://47.106.197.31/manage/api.php?action=isRanked",
+        //   method: "POST",
+        //   data: {id: idX},
+        //   success(data) {
+        //     var _data = JSON.parse(data);
             layer.open({
               title: '评分',
               type: 2,
-              area: ['300px', '200px'],
+              area: ['500px', '400px'],
               maxmin: true,
               content: obj.scoreUrl,
               success: function (layero, index) {
                 var iframe = window['layui-layer-iframe' + index];
-                iframe.getFromParent(_data, idX);
+                iframe.getFromParent(idX);
               }
             })
-          }
-        })
+          // }
+        // })
       })
       $('.finished').click(function(){
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
