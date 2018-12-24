@@ -167,7 +167,8 @@ const scoreXX = {
   4:'优'
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption','houseStatusOption',
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption',
+                    'house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane',
                     'is_single_parent','is_single_old','metal_disease','metal_disease','is_correctional','is_released','is_xj','is_xd','is_special_care','is_disabled','is_leftover_children','has_critical_disease','is_empty_nester','is_poor','is_veteran','is_jobless','is_sanwu','is_dibao','is_overseas_student','is_overseas_chinese','is_cflac_member','is_ftu_member','has_jycard'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type'];
@@ -321,6 +322,84 @@ const gridOption = ['第一网格','第二网格','第三网格','第四网格',
 const userStatusOption = ['未启用','已启用'];
 
 const houseStatusOption = ['出租','空置','自住','其他'];
+
+const houseTypeOption = {0:'一室一厅',1:'二室一厅',2:'三室一厅',3:'四室一厅',4:'其他'};
+
+const facilityTypeOption = {
+  0:'行政办公类',
+  1:'商业金融类',
+  2:'文化娱乐类',
+  3:'体育类',
+  4:'医疗卫生类',
+  5:'大专院校科研设计类',
+  6:'文物古迹类',
+  7:'其他'
+}
+
+const roadLevelOption = {
+  0:'主干道',
+  1:'次干道',
+  2:'文化娱乐类',
+  3:'其他',
+}
+
+const oneLane = {
+  0:'是',
+  1:'否',
+}
+
+const industryOption = {
+  0:'机构组织',
+  1:'农林牧渔',
+  2:'医药卫生',
+  3:'建筑建材',
+  4:'冶金矿产',
+  5:'石油化工',
+  6:'水利水电',
+  7:'交通运输',
+  8:'信息产业',
+  9:'机械机电',
+  10:'轻工食品',
+  11:'服装纺织',
+  12:'专业服务',
+  13:'安全防护',
+  14:'环保绿化',
+  15:'旅游休闲',
+  16:'办公文教',
+  17:'电子电工',
+  18:'玩具礼品',
+  19:'家居用品',
+  20:'物质',
+  21:'包装',
+  22:'体育',
+  23:'办公',
+  24:'物质',
+  25:'教育培训',
+  26:'其他'
+}
+
+const propertyOption = {
+  0:'国有企业',
+  1:'政府机关',
+  2:'事业单位',
+  3:'非盈利机构',
+  4:'民营企业',
+  5:'合资企业',
+  6:'外资企业',
+  7:'其他民办非企业',
+  8:'居委会',
+  9:'社会团体',
+  10:'基金会',
+  11:'其他'
+}
+
+const companySizeOption = {
+  0:'50人以下',
+  1:'51-100人',
+  2:'101-500人',
+  3:'501-1000人',
+  4:'1000以上',
+}
 
 const userStatus = {
   0:"未启用",

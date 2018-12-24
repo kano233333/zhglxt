@@ -51,7 +51,7 @@
       {type: 'checkbox'}
       , {title: 'id',            align: 'center',     type:'numbers'}
       , {field: 'area',          title: '所属区域',    align:'center'}
-      , {field: 'facility_type', title: '公共设施类别', align:'center'}
+      , {field: 'facility_type', title: '公共设施类别', align:'center', templet:'<span>{{facilityTypeOption[d.facility_type]}}</span>'}
       , {field: 'facility_name', title: '公共设施名称', align:'center'}
       , {field: 'facility_site', title: '公共设施地址', align:'center'}
       , {field: 'facility_status',         title: '状态',        align:'center', templet:'<span>{{otherStatus[d.facility_status]}}</span>'}
@@ -60,17 +60,12 @@
     var addUrl = './alert/add.html';
     var editUrl = './alert/edit.html';
 
-    var testData = [
-      {id:'111',area:'XX家园',type:'文化娱乐类',name:'XX儿童乐园',address:'XX街道街心花园',status:'已审核'},
-      {id:'111',area:'XX家园',type:'文化娱乐类',name:'XX公园',address:'XX街道街心花园',status:'已审核'},
-      ];
-
     function editSuc(layero, index, data){
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
         {0:'id',            1:'ID   ',      2:data['id']},
         {0:'area',          1:"所属区域",    2:data['area']},
-        {0:"facility_type", 1:'公共设施类别', 2:data['facility_type']},
+        {0:"facility_type",1:{title:'公共设施类别',option:facilityTypeOption}},
         {0:'facility_name', 1:'公共设施名称', 2:data['facility_name']},
         {0:'facility_site', 1:'公共设施地址', 2:data['facility_site']},
         // {0:'facility_pic', 1:'公共设施图片', 2:data['facility_site']},
@@ -85,7 +80,8 @@
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
         {0:'area',          1:"所属区域"},
-        {0:"facility_type", 1:'公共设施类别'},
+        // {0:"facility_type", 1:'公共设施类别'},
+        {0:"facility_type",1:{title:'公共设施类别',option:facilityTypeOption}},
         {0:'facility_name', 1:'公共设施名称'},
         {0:'facility_site', 1:'公共设施地址'},
         // {0:'facility_pic', 1:'公共设施图片'},

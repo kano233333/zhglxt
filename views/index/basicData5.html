@@ -51,12 +51,12 @@
       {type: 'checkbox'}
       , {title: 'id',       align:'center',  type:'numbers'}
       , {field: 'area',     title: '所属区域', align:'center'}
-      , {field: 'road_level',    title: '道路等级', align:'center'}
+      , {field: 'road_level',    title: '道路等级', align:'center',templet:'<span>{{roadLevelOption[d.road_level]}}</span>'}
       , {field: 'road_name',     title: '道路名称', align:'center'}
       , {field: 'length',   title: '长度',    align:'center'}
       , {field: 'width',    title: '宽度',    align:'center'}
       , {field: 'lane',     title: '车道数',   align:'center'}
-      , {field: 'one_lane', title: '单车道',   align:'center'}
+      , {field: 'one_lane', title: '单车道',   align:'center',templet:'<span>{{oneLane[d.one_lane]}}</span>'}
       , {field: 'road_audit',    title: '状态',    align:'center',templet:'<span>{{otherStatus[d.road_audit]}}</span>'}
       , {field: '',title:"操作",align:'center',templet:'#detail',width:'20%'}
     ];
@@ -68,12 +68,12 @@
       var editData = [
         {0:'id',       1:'ID   ',   2:data['id']||''},
         {0:'area',     1:"所属区域", 2:data['area']||''},
-        {0:"road_level",    1:'道路等级', 2:data['level']||''},
+        {0:"road_level",1:{title:'道路等级',option:roadLevelOption}},
         {0:'road_name',     1:'道路名称', 2:data['road_name']||''},
         {0:'length',   1:'长度',    2:data['length']||''},
         {0:'width',    1:'宽度',    2:data['width']||''},
         {0:'lane',     1:'车道数',  2:data['lane']||''},
-        {0:'one_lane', 1:'单车道',  2:data['one_lane']||''},
+        {0:"one_lane",1:{title:'单车道',option:oneLane}},
         // {0:'road_audit',    1:'状态',    2:data['road_audit']||''},
       ]
       var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/roadEdit';
@@ -87,11 +87,12 @@
       var addData = [
         {0:'area',     1:"所属区域"},
         //{0:'level',    1:"道路等级"},
+        {0:"road_level",1:{title:'道路等级',option:roadLevelOption}},
         {0:'name',     1:"道路名称"},
         {0:'length',   1:"长度"},
         {0:'width',    1:"宽度"},
         {0:'lane',     1:"车道数"},
-        {0:'one_lane', 1:"单车道"},
+        {0:"one_lane",1:{title:'单车道',option:oneLane}},
         // {0:'state',    1:"状态"},
       ]
       var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/roadAdd';
