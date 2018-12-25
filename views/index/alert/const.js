@@ -317,8 +317,6 @@ const sexOption = ['男','女'];
 
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
 
-const gridOption = ['第一网格','第二网格','第三网格','第四网格','第五网格','第六网格','第七网格','第八网格','第九网格'];
-
 const userStatusOption = ['未启用','已启用'];
 
 const houseStatusOption = ['出租','空置','自住','其他'];

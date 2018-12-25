@@ -1211,3 +1211,19 @@ function AJAX(obj){
     })
   })
 }
+
+var gridOption = [];
+function setGridOption(){
+  AJAX({
+    url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/System/areaManageList',
+    method:'POST',
+    success:function(data){
+      var _data = data.data;
+      for(let i in _data){
+        gridOption.push(_data[i].name);
+      }
+    }
+  })
+}
+
+setGridOption();
