@@ -1225,5 +1225,6 @@ function setGridOption(){
     }
   })
 }
-
-setGridOption();
+if(getCookie('Authorization')){
+  setGridOption();
+}
