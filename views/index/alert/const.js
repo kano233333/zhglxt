@@ -24,7 +24,6 @@ const ys = {
   "not_before":"截至时间",
   "mission_type":"事件类型",
   "mission_level":"任务等级",
-  "score":"任务得分",
   "source":"事件来源",
   "operator":"任务发布人",
   "communication_phone":'联系电话',
@@ -34,7 +33,10 @@ const ys = {
   'spell':'行政区划简拼',
   "code":'行政区划代码',
   'area_level':'行政区划级别',
-
+  
+  "name":'网格名称',
+  "score":"评分情况",
+  "score_content":"评分备注",
   //人口表部分
   'no':'序号',
   'community_id':'所属小区',
@@ -167,11 +169,11 @@ const scoreXX = {
   4:'优'
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','grid','sex','userStatusOption',
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','sex','userStatusOption',
                     'house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane',
                     'is_single_parent','is_single_old','metal_disease','metal_disease','is_correctional','is_released','is_xj','is_xd','is_special_care','is_disabled','is_leftover_children','has_critical_disease','is_empty_nester','is_poor','is_veteran','is_jobless','is_sanwu','is_dibao','is_overseas_student','is_overseas_chinese','is_cflac_member','is_ftu_member','has_jycard'];
 const postFile = ['file','img_src','img_path','pic'];
-const optionPostValue = ['mission_level','mission_type'];
+const optionPostValue = ['mission_level','mission_type','house_type','house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane'];
 const postTime = ['not_before'];
 const checkoutAdd = ['mission_people'];
 const passwd = ['password'];

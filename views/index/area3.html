@@ -47,7 +47,7 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'name', title: '姓名',align:'center'}
+      , {field: 'name', title: '网格名称',align:'center'}
       , {field: 'area', title: '区域',align:'center'}
       , {field: 'service_area', title: '服务区域',align:'center'}
       , {field: 'num', title: '数目',align:'center'}
@@ -61,7 +61,7 @@
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
         {0:'id',1:'ID',2:data['id']},
-        {0:'name',1:"姓名",2:data['name']},
+        {0:'name',1:"网格名称",2:data['name']},
         {0:'area',1:"区域",2:data['area']},
         {0:'service_area',1:'服务区域',2:data['service_area']},
       ]
@@ -74,7 +74,7 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'name',1:"姓名"},
+        {0:'name',1:"网格名称"},
         {0:"area",1:'区域'},
         {0:'service_area',1:'服务区域'}
       ]

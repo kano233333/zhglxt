@@ -1215,7 +1215,7 @@ function AJAX(obj){
 var gridOption = [];
 function setGridOption(){
   AJAX({
-    url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/System/areaManageList',
+    url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/System/gridList',
     method:'POST',
     success:function(data){
       var _data = data.data;
