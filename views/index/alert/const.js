@@ -170,7 +170,7 @@ const scoreXX = {
 };
 
 const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','sex','userStatusOption',
-                    'house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane',
+                    'house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane','area','grid',
                     'is_single_parent','is_single_old','metal_disease','metal_disease','is_correctional','is_released','is_xj','is_xd','is_special_care','is_disabled','is_leftover_children','has_critical_disease','is_empty_nester','is_poor','is_veteran','is_jobless','is_sanwu','is_dibao','is_overseas_student','is_overseas_chinese','is_cflac_member','is_ftu_member','has_jycard'];
 const postFile = ['file','img_src','img_path','pic'];
 const optionPostValue = ['mission_level','mission_type','house_type','house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane'];
@@ -318,6 +318,8 @@ const sexIndex = {0:'男',1:'女','男性':'男','女性':'女'};
 const sexOption = ['男','女'];
 
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
+
+const areaOption = ['天府镇'];
 
 const userStatusOption = ['未启用','已启用'];
 

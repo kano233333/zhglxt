@@ -48,7 +48,8 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '所属区域',align:'center'}
+      // , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center',templet:'<span>{{areaOption[d.area]}}</span>'}
       , {field: 'mission_title', title: '任务标题',align:'center'}
       , {field: 'mission_level', title: '任务等级',align:'center'}
       , {field: 'not_before', title: '截止时间',align:'center'}
@@ -73,7 +74,7 @@
             mission_people = dataX.data;
             var editData = [
               {0:'id',1:'ID',2:data['id']},
-              {0:'area',1:"区域",2:data['area']},
+              {0:"area",1:{title:'所属区域',option:areaOption}},
               {0:"grid",1:{title:'网格',option:gridOption}},
               {0:'mission_title',1:'标题',2:data['mission_title']},
               {0:'mission_level',1:{title:'网格',option:['一级','二级','三级']},2:''},
@@ -102,7 +103,7 @@
            mission_people = data.data;
            var iframe = window['layui-layer-iframe' + index];
            var addData = [
-             {0:'area',1:"区域"},
+             {0:"area",1:{title:'所属区域',option:areaOption}},
              {0:'grid',1:{title:'网格',option:gridOption}},
              {0:"mission_title",1:'任务标题'},
              {0:"mission_level",1:{

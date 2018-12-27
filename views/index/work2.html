@@ -41,7 +41,7 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '任务发布人',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center',templet:'<span>{{areaOption[d.area]}}</span>'}
       , {field: 'mission_title', title: '任务标题',align:'center'}
       , {field: 'mission_level', title: '任务等级',align:'center'}
       , {field: 'created_at', title: '发布时间',align:'center'}

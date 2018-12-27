@@ -47,8 +47,8 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '所属区域',align:'center'}
-      , {field: 'grid', title: '所属网格',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center',templet:'<span>{{areaOption[d.area]}}</span>'}
+      , {field: 'grid', title: '所属网格',align:'center',templet:'<span>{{gridOption[d.grid-1]}}</span>'}
       , {field: 'log_name', title: '日志名称',align:'center'}
       , {field: 'grid_admin', title: '网格管理员',align:'center'}
       , {field: 'log_type', title: '类型',align:'center',templet:'#type5'}
@@ -61,7 +61,7 @@
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
         {0:'id',1:'ID',2:data['id']},
-        {0:'area',1:"区域",2:data['area']},
+        {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"grid",1:{title:'网格',option:gridOption}},
         {0:'log_name',1:'日志名称',2:data['log_name']},
         {0:"log_type",1:{
@@ -79,7 +79,7 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
+        {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"grid",1:{title:'网格',option:gridOption}},
         {0:'log_name',1:'日志名称'},
         {0:"log_type",1:{

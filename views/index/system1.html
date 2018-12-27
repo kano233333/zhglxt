@@ -51,7 +51,7 @@
       , {field: 'username', title: '用户名',align:'center'}
       , {field: 'name', title: '真实姓名',align:'center'}
       , {field: 'identity', title: '身份',align:'center',templte:'#identity'}
-      , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center',templet:'<span>{{areaOption[d.area]}}</span>'}
       , {field: 'communicate_phone', title: '联系电话',align:'center'}
       , {field: 'last_login', title: '最近登陆',align:'center'}
       , {field: 'last_login_ip', title: 'IP地址',align:'center'}
@@ -68,7 +68,8 @@
         {0:'password',1:"密码",2:data['password']},
         {0:"grid",1:{title:'网格',option:gridOption}},
         {0:'name',1:'姓名',2:data['name']},
-        {0:"area",1:"区域",2:data['area']},
+        // {0:"area",1:"区域",2:data['area']},
+        {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"identity",1:"身份",2:data['identity']},
         {0:"office_phone",1:"办公电话",2:data['office_phone']},
         {0:"communicate_phone",1:"联系电话",2:data['communicate_phone']},
@@ -84,33 +85,14 @@
     function editEnd(){
       getTable();
     }
-    function editStateSuc(data){
-      var editData = {
-        'id': data['id'],
-        "grid": data['grid'],
-        'name': data['name'],
-        "area": data['area'],
-        "identity": data['identity'],
-        "office_phone": data['office_phone'],
-        "communicate_phone": data['communicate_phone'],
-        "user_state": 1
-      };
-      AJAX({
-        url:globalUrl+'System/userEdit',
-        method:'POST',
-        data:editData,
-        success:function(){
-          getTable();
-        }
-      })
-    }
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
         {0:'username',1:"用户名"},
         {0:"password",1:'密码'},
         {0:'name',1:'真实姓名'},
-        {0:'area',1:'地区'},
+        // {0:'area',1:'地区'},
+        {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"identity",1:'身份'},
         {0:"communication_phone",1:"联系电话"},
         {0:"office_phone",1:"办公电话"},
@@ -141,8 +123,7 @@
               editAjaxUrl:editAjaxUrl,
               deleteUrl:deleteUrl,
               detailUrl:detailUrl,
-              editPassword:'password',
-              editStateSuc:editStateSuc
+              editPassword:'password'
             });
           }else{
             layer.msg('错误');
