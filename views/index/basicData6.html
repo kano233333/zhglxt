@@ -50,7 +50,8 @@
     var cols = [ //表头
       {type: 'checkbox'}
       , {title: 'id',align:'center',type:'numbers'}
-      , {field: 'area', title: '所属区域',align:'center'}
+      // , {field: 'area', title: '所属区域',align:'center'}
+      , {field: 'area', title: '所属区域',align:'center',templet:'<span>{{areaOption[d.area]}}</span>'}
       , {field: 'company_name', title: '企业名称',align:'center'}
       , {field: 'property', title: '企业性质',align:'center'}
       , {field: 'industry', title: '所处行业',align:'center'}
@@ -65,7 +66,8 @@
       var iframe = window['layui-layer-iframe' + index];
       var editData = [
         {0:'id',       1:'ID   ',   2:data['id']},
-        {0:'area',     1:"所属区域", 2:data['area']},
+        // {0:'area',     1:"所属区域", 2:data['area']},
+        {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"company_name",    1:'企业名称', 2:data['company_name']},
         {0:"property",1:{title:'企业性质',option:propertyOption}},
         {0:"industry",1:{title:'所处行业',option:industryOption}},
@@ -81,7 +83,8 @@
     function addSuc(layero, index){
       var iframe = window['layui-layer-iframe' + index];
       var addData = [
-        {0:'area',1:"区域"},
+        // {0:'area',1:"区域"},
+        {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"company_name",1:'企业名称'},
         {0:"property",1:{title:'企业性质',option:propertyOption}},
         {0:"industry",1:{title:'所处行业',option:industryOption}},
