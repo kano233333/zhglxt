@@ -77,8 +77,11 @@
               {0:"area",1:{title:'所属区域',option:areaOption}},
               {0:"grid",1:{title:'网格',option:gridOption}},
               {0:'mission_title',1:'标题',2:data['mission_title']},
-              {0:'mission_level',1:{title:'网格',option:['一级','二级','三级']},2:''},
-              {0:"mission_type",1:{title:'网格',option:gridOption}},
+              {0:'mission_level',1:{title:'任务等级',option:['一级','二级','三级']},2:''},
+              {0:"mission_type",1:{
+                 'title':'任务类型',
+                 'option':['群体活动','宣传活动 ','寻访活动','工作例会','通知']
+               },2:''},
               {0:'not_before',1:'截至时间',2:data['not_before'],3:[data['not_before'].split(' ')[0],[data['not_before'].split(' ')[1]]]},
               {0:"content",1:"内容",2:data['content']},
               {0:'mission_people',1:{title:'人员',data:mission_people}}
