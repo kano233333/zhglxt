@@ -72,7 +72,10 @@ height:100%;" id="{{d[index][0]}}">
     {{# for(var i in d[index][1].data){ }}
     <div class="sdlr-wrap2">
       <div class="box-left2">
-        <p>第{{i}}网格</p>
+        <!-- <p>第{{i}}网格</p> -->
+          <p>
+              {{gridOption[i]}}
+          </p>
       </div>
       <div class="box-right22">
         <input class="check-one" type="checkbox" placeholder="">
