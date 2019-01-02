@@ -40,6 +40,7 @@
 <div id="box" style="padding:40px;">
   <div id="view"></div>
 </div>
+<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../layuiadmin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="./const.js"></script>
 <script type="text/html" id="formModle">
@@ -76,6 +77,15 @@
         {{# }else if(i=='log_type'){ }}
         <th class="right">
           {{logType[d[0][i]]}}
+        </th>
+        <!-- 详情数字转文字 -->
+        {{# }else if(i=='area'){ }}
+        <th class="right">
+          {{areaOption[d[0][i]]}}
+        </th>
+        {{# }else if(i=='grid'){ }}
+        <th class="right">
+          {{gridTestOption[d[0][i]]}}
         </th>
         {{# }else{ }}
         <th class="right">

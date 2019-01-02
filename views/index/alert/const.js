@@ -319,7 +319,7 @@ const sexOption = ['男','女'];
 
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
 
-const areaOption = ['天府镇'];
+const areaOption = {0:'天府镇'};
 
 const userStatusOption = ['未启用','已启用'];
 
@@ -417,3 +417,10 @@ const gridStatus = {
   0:"未通过",
   1:"已通过"
 };
+
+const gridTestOption = {
+  0:"代家沟组",
+  1:"自生桥组",
+  2:"三才生组",
+  3:"土地垭组",
+}
