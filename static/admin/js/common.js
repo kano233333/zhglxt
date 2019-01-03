@@ -296,9 +296,12 @@ function setTable(obj) {
       $('.member').click(function(){
         var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
         AJAX({
-          url:obj.postFinish,
+          // url:obj.postFinish,
+          url:'http://58.144.34.96:5000/web_manager/public/index.php/index/Data/selectMembersByName',
           method:'POST',
-          data:{id:obj.data[parseInt(idX)-1].id},
+          data:{
+            house_holder:obj.data[parseInt(idX)-1].house_holder
+          },
           success:function(data){
             if(data.state==200){
               layer.open({
