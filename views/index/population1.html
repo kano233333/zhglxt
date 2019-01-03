@@ -112,8 +112,9 @@
     }
     var correspond = {};
     var editAjaxUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editHouse';
-    var detailUrl = './alert/detail.html'
+    var detailUrl = './alert/detail.html';
     var deleteUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/deleteHouse';
+    var postFinish = globalUrl+otherUrl.Work[0][3]
     var getTable = function() {
       AJAX({
         url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/getHouseList',
@@ -132,7 +133,9 @@
               editAjaxUrl:editAjaxUrl,
               deleteUrl:deleteUrl,
               detailUrl:detailUrl,
-              checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/auditHouse'
+              checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/auditHouse',
+              workFinish:'./familyMember.html',
+              postFinish:postFinish,
             });
           }else{
             layer.msg('错误');

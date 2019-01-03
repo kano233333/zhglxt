@@ -293,6 +293,29 @@ function setTable(obj) {
           }
         })
       })
+      $('.member').click(function(){
+        var idX = this.parentNode.parentNode.parentNode.parentNode.children[1].getElementsByTagName('div')[0].innerText;
+        AJAX({
+          url:obj.postFinish,
+          method:'POST',
+          data:{id:obj.data[parseInt(idX)-1].id},
+          success:function(data){
+            if(data.state==200){
+              layer.open({
+                type: 2,
+                title: '家庭成员',
+                area:['900px','550px'],
+                content: obj.workFinish,
+                maxmin: true,
+                success: function (layero, index) {
+                  var iframe = window['layui-layer-iframe' + index];
+                  iframe.getFromParent(data, idX);
+                }
+              })
+            }
+          }
+        })
+      })
       $('.deal').click(function () {
         var convalue = this.getAttribute('convalue');
         layer.open({
