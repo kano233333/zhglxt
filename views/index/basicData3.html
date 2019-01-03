@@ -97,9 +97,8 @@
         {0:"house_num",1:'门牌号'},
         {0:"block",1:'所属楼栋'},
         {0:"house_area",1:'房屋面积'},
-        // {0:"house_status",1:'房屋状态'},
         {0:"house_status",1:{title:'房屋状态',option:houseStatusOption}},
-        {0:"house_type",1:{title:'房屋类型',option:houseTypeOption}},
+        {0:"house_type",1:{title:'房屋户型',option:houseTypeOption}},
         {0:'unit',1:'所属单元'},
         {0:"edit_house_name",1:'编辑人'},
         {0:"house_site",1:'房屋地址'},
@@ -107,7 +106,7 @@
         {0:"house_holder",1:'房主'},
         {0:"id_number",1:"身份证号"},
         {0:"people_tel",1:"房主电话"},
-        {0:"people_number",1:"居住人数"},
+        {0:"holder_number",1:"居住人数"},
         {0:"house_site2",1:"户籍地址"},
       ]
       var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/addHouse';
@@ -115,28 +114,31 @@
     }
     var correspond = {};
     var editAjaxUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editHouse';
-    var detailUrl = './alert/detail.html'
+    var detailUrl = './alert/detail.html';
     var deleteUrl =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/deleteHouse';
+    var postFinish = globalUrl+otherUrl.Work[0][3]
     var getTable = function() {
       AJAX({
         url: 'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/getHouseList',
         method: 'GET',
         success:function(data) {
           if(data.state==200){
-          correspond = data.data;
-          setTable({
-            addUrl:addUrl,
-            editUrl:editUrl,
-            cols:cols,
-            data:data.data,
-            editSuc:editSuc,
-            editEnd:editEnd,
-            addSuc:addSuc,
-            editAjaxUrl:editAjaxUrl,
-            deleteUrl:deleteUrl,
-            detailUrl:detailUrl,
-            checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/editHouse'
-          });
+            correspond = data.data;
+            setTable({
+              addUrl:addUrl,
+              editUrl:editUrl,
+              cols:cols,
+              data:data.data,
+              editSuc:editSuc,
+              editEnd:editEnd,
+              addSuc:addSuc,
+              editAjaxUrl:editAjaxUrl,
+              deleteUrl:deleteUrl,
+              detailUrl:detailUrl,
+              checkUrl:'http://58.144.34.96:5000/web_manager/public/index.php/index/Basicdata/auditHouse',
+              workFinish:'./familyMember.html',
+              postFinish:postFinish,
+            });
           }else{
             layer.msg('错误');
           }
@@ -159,10 +161,10 @@
     <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
       查看详情
     </button>
-    <!-- <button class="layui-btn layui-btn-sm layui-btn-normal detail" convalue="{{d.LAY_INDEX-1}}">
+    <button class="layui-btn layui-btn-sm layui-btn-normal member" style="background-color: #FF6600" convalue="{{d.LAY_INDEX-1}}">
       家庭成员
-    </button> -->
-    {{# if(d['house_audit']!=1){ }}
+    </button>
+    {{# if(d.house_audit!=1){ }}
     <button class="layui-btn layui-btn-sm layui-btn-normal check" style="background-color: red" convalue="{{d.LAY_INDEX-1}}">
       审核
     </button>
