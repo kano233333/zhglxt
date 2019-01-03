@@ -233,7 +233,7 @@ const xxx = [
 
 const aaa = [
   // {0:'no',1:'序号'},
-  {0:'area',1:'所属区域'},
+  {0:"area",1:{title:'所属区域',option:['天府镇']}},
   {0:'community_id',1:'所属小区'},
   {0:'username',1:'姓名'},
   {0:'sex',1:{title:'性别',option:['男','女']}},
@@ -248,7 +248,12 @@ const aaa = [
   {0:'id_number',1:'身份证号'},
   // {0:'birth_data',1:'出生日期'},
   // {0:'org_id',1:'组织关系'},
-  {0:'grid',1:'所属网格'},
+  {0:"grid",1:{title:'网格',option:{
+    0:"代家沟组",
+    1:"自生桥组",
+    2:"三才生组",
+    3:"土地垭组",
+  }}},
   {0:'building_id',1:'所属楼栋'},
   // {0:'unit_id',1:'所属单元'},
   // {0:'is_insured',1:{title:'是否参保',option:['否','是']}},
@@ -311,7 +316,7 @@ const bbb = [
 ];
 
 const sdlvTime = ['birth_data','in_date','out_date'];
-const sdlrOption = ['sex','is_insured','is_renthouse','marriage','political_status','education','has_jycard'];
+const sdlrOption = ['area','grid','sex','is_insured','is_renthouse','marriage','political_status','education','has_jycard'];
 
 
 const sexIndex = {0:'男',1:'女','男性':'男','女性':'女'};
