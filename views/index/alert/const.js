@@ -173,7 +173,7 @@ const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type'
                     'house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane','area','grid',
                     'is_single_parent','is_single_old','metal_disease','metal_disease','is_correctional','is_released','is_xj','is_xd','is_special_care','is_disabled','is_leftover_children','has_critical_disease','is_empty_nester','is_poor','is_veteran','is_jobless','is_sanwu','is_dibao','is_overseas_student','is_overseas_chinese','is_cflac_member','is_ftu_member','has_jycard'];
 const postFile = ['file','img_src','img_path','pic'];
-const optionPostValue = ['mission_level','mission_type','house_type','house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane'];
+const optionPostValue = ['house_type','house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane'];
 const postTime = ['not_before'];
 const checkoutAdd = ['mission_people'];
 const passwd = ['password'];
@@ -424,8 +424,9 @@ const gridStatus = {
 };
 
 const gridTestOption = {
-  0:"代家沟组",
-  1:"自生桥组",
-  2:"三才生组",
-  3:"土地垭组",
+  0:"",
+  1:"代家沟组",
+  2:"自生桥组",
+  3:"三才生组",
+  4:"土地垭组",
 }
