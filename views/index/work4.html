@@ -52,8 +52,8 @@
       , {field: 'state', title: '处理状态',align:'center',templet:'#dealState'}
       , {field: 'created_at', title: '创建时间',align:'center'}
       , {field: 'emergency_level', title: '事件等级',align:'center',templet:'#dealLevel'}
-      , {field: 'emergency_source', title: '事件来源',align:'center'}
-      , {field: 'emergency_type', title: '事件类型',align:'center'}
+      , {field: 'emergency_source', title: '事件来源',align:'center',templet:'<span>{{eventResource[d.emergency_source]}}</span>'}
+      , {field: 'emergency_type', title: '事件类型',align:'center',templet:'<span>{{eventType[d.emergency_type]}}</span>'}
       , {field: 'from_who_name',title:"发起人",align:'center',templet:'#detail'}
     ];
     var addUrl = './alert/add.html';
@@ -68,10 +68,10 @@
         {0:"grid",1:{title:'网格',option:gridOption}},
         {0:"emergency_level",1:{
             'title':'事件等级',
-            'option':['一级','二级 ','三级']
+            'option':['紧急','一般']
           }},
-        {0:'emergency_source',1:'事件来源',2:data['emergency_source']},
-        {0:'emergency_type',1:'事件类型',2:data['emergency_type']},
+        {0:"emergency_source",1:{title:'事件来源',option:eventResource}},
+        {0:"emergency_type",1:{title:'事件类型',option:eventType}},
         {0:'is_important',1:{title:'是否重要',option:['否','是']},2:''},
         {0:"content",1:"内容",2:data['content']},
       ]
@@ -90,10 +90,10 @@
         {0:"content",1:"内容"},
         {0:"emergency_level",1:{
             'title':'事件等级',
-            'option':['一级','二级 ','三级']
+            'option':['紧急','一般']
           }},
-        {0:"emergency_type",1:"事件类型"},
-        {0:"emergency_source",1:"事件来源"},
+        {0:"emergency_source",1:{title:'事件来源',option:eventResource}},
+        {0:"emergency_type",1:{title:'事件类型',option:eventType}},
         {0:"is_important",1:{
             'title':'是否重点事件',
             'option':['否','是']
@@ -151,12 +151,10 @@
 </script>
 
 <script id="dealLevel" type="text/html">
-  {{# if(d.emergency_level==1){ }}
-  <span style="color: #ff5542">{{level[d.emergency_level]}}</span>
-  {{# }else if(d.emergency_level==2){ }}
-  <span style="color: #4460cb">{{level[d.emergency_level]}}</span>
-  {{# }else if(d.emergency_level==3){ }}
-  <span style="color: #30d100">{{level[d.levemergency_levelel]}}</span>
+  {{# if(d.emergency_level==0){ }}
+  <span style="color: #ff5542">{{eventLevel[d.emergency_level]}}</span>
+  {{# }else if(d.emergency_level==1){ }}
+  <span style="color: #4460cb">{{eventLevel[d.emergency_level]}}</span>
   {{# } }}
 </script>
 

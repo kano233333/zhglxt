@@ -152,11 +152,17 @@ const ys = {
 };
 
 const level = {
-  0:"",
-  1:"一级",
-  2:"二级",
-  3:'三级'
+  0:"一级",
+  1:"二级",
+  2:'三级'
 };
+
+const eventLevel = {
+  0:"紧急",
+  1:"一般"
+}
+
+const missionType = ['群体活动','宣传活动 ','寻访活动','工作例会','通知']
 
 const dealStatus = {
   0:"未处理未转派",
@@ -172,7 +178,7 @@ const scoreXX = {
   4:'优'
 };
 
-const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','sex','userStatusOption',
+const optionAdd = ['priv_id','role_id','level','is_duban','supervise','log_type','mission_level','mission_type','is_important','emergency_level','user_state','sex','emergency_type','emergency_source',
                     'house_status','house_type','facility_type','road_level','one_lane','industry','property','company_size','one_lane','area','grid',
                     'is_single_parent','is_single_old','metal_disease','metal_disease','is_correctional','is_released','is_xj','is_xd','is_special_care','is_disabled','is_leftover_children','has_critical_disease','is_empty_nester','is_poor','is_veteran','is_jobless','is_sanwu','is_dibao','is_overseas_student','is_overseas_chinese','is_cflac_member','is_ftu_member','has_jycard'];
 const postFile = ['file','img_src','img_path','pic'];
@@ -225,7 +231,7 @@ const logType = {
   5:'重点人员寻访'
 };
 
-const indexOne = ['role_id','log_type','sex'];
+const indexOne = ['role_id','log_type'];
 
 const timeID = ['time','time2'];
 
