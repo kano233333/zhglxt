@@ -225,7 +225,7 @@ const logType = {
   5:'重点人员寻访'
 };
 
-const indexOne = ['role_id','log_type','emergency_level','grid','sex'];
+const indexOne = ['role_id','log_type','sex'];
 
 const timeID = ['time','time2'];
 
@@ -427,9 +427,8 @@ const gridStatus = {
 };
 
 const gridTestOption = {
-  0:"",
-  1:"代家沟组",
-  2:"自生桥组",
-  3:"三才生组",
-  4:"土地垭组",
+  0:"代家沟组",
+  1:"自生桥组",
+  2:"三才生组",
+  3:"土地垭组",
 }
