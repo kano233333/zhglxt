@@ -128,7 +128,10 @@ const ys = {
   'store_name':   '商铺名称',
   'store_holder': '商铺店主',
   'store_area':   '商铺面积',
-  'store_audit':        '状态',
+  'store_audit':  '状态',
+  'store_address': '商铺地址',
+  'holder_tel':'店主电话',
+  'sale_area':'经营范围',
   /*%%%%%%%%%%%%%%%%%%%%  zhouyang  %%%%%%%%%%%%%%%%%%%%*/
   //房屋（户主)
   'house_num': '门牌号',

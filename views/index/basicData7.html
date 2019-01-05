@@ -68,8 +68,11 @@
         // {0:'area',         1:"所属区域", 2:data['area']||''},
         {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:"store_name",   1:'商铺名称', 2:data['store_name']||''},
-        {0:'store_holder', 1:'商铺店主', 2:data['store_holder']||''},
+        {0:"store_address",   1:'商铺地址', 2:data['store_name']||''},
         {0:'store_area',   1:'商铺面积', 2:data['store_area']||''},
+        {0:'store_holder', 1:'商铺店主', 2:data['store_holder']||''},
+        {0:'holder_tel', 1:'店主电话', 2:data['store_holder']||''},
+        {0:'sale_area', 1:'经营范围', 2:data['store_holder']||''},
         // {0:'store_audit',        1:'状态',    2:data['store_audit']},
       ]
       var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/editStoreData';
@@ -84,8 +87,11 @@
         // {0:'area',         1:"所属区域"},
         {0:"area",1:{title:'所属区域',option:areaOption}},
         {0:'store_name',   1:"商铺名称"},
-        {0:'store_holder', 1:"商铺店主"},
+        {0:"store_address",   1:'商铺地址'},
         {0:'store_area',   1:"商铺面积"},
+        {0:'store_holder', 1:"商铺店主"},
+        {0:'holder_tel', 1:'店主电话'},
+        {0:'sale_area', 1:'经营范围'},
         // {0:'state',        1:"状态"},
       ]
       var url =  'http://58.144.34.96:5000/web_manager/public/index.php/index/Courtdata/addStoreData';
