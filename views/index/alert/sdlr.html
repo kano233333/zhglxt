@@ -99,10 +99,12 @@
       $('#sub').click(function(){
         var postJson = {};
         for(let i in aaa){
+          var index = document.querySelector('#' + aaa[i][0]).selectedIndex;
           if(sdlrOption.indexOf(aaa[i][0])!=-1){
-            var index = document.querySelector('#' + aaa[i][0]).selectedIndex;
-            if(dataYesNo.indexOf(aaa[i][0])!=-1){
+            if(dataYesNo.indexOf(aaa[i][0])!=-1 || sdlrIndex.indexOf(aaa[i][0])!=-1){
               postJson[aaa[i][0]] = index;
+            }else if(sdlrValue.indexOf(aaa[i][0]!=-1)){
+              postJson[aaa[i][0]] = document.querySelectorAll('#'+aaa[i][0]+" option")[index].innerText;
             }
           }else{
             postJson[aaa[i][0]] = $('#' + aaa[i][0]).val();

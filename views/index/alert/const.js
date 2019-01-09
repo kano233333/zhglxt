@@ -189,7 +189,7 @@ const passwd = ['password'];
 const checkOne = [];
 const postTimeYear = ['in_date','edit_time','birth_date'];  //年月日
 const postTimeNor = [];
-
+const sdlrValue = ['political_status','marriage','education'];
 
 const eventType = {
   0:'民事纠纷',
@@ -346,7 +346,7 @@ const sdlrOption = ['area','grid','sex','is_insured','is_renthouse','marriage','
 
 const sexIndex = {0:'男',1:'女','男性':'男','女性':'女'};
 const sexOption = ['男','女'];
-
+const sdlrIndex = ['area','grid'];
 const dataYesNo = ['has_jycard','is_renthouse','is_insured','sex'];
 
 const areaOption = {0:'天府镇'};
