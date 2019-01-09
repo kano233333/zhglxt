@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcaa2568-3c68-4cda-8eef-776ce7c068f1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/views/index/alert/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/alert/add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index/alert/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/alert/const.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index/alert/sdlr.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/alert/sdlr.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/工作簿1.xlsx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,11 +58,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sdlr.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sdlr.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index/alert/sdlr.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="105" column="55" lean-forward="true" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
+            <state relative-caret-position="114">
+              <caret line="105" column="36" lean-forward="true" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/index/alert/add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="179" column="33" lean-forward="true" selection-start-line="179" selection-start-column="33" selection-end-line="179" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -71,8 +79,8 @@
       <file leaf-file-name="const.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index/alert/const.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="348" column="25" selection-start-line="348" selection-start-column="25" selection-end-line="348" selection-end-column="25" />
+            <state relative-caret-position="328">
+              <caret line="473" column="13" selection-start-line="473" selection-start-column="6" selection-end-line="473" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -98,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>box-left</find>
       <find>box-right</find>
       <find>sex</find>
       <find>d[index][2]</find>
@@ -121,13 +128,14 @@
       <find>是否</find>
       <find>sdlrOption</find>
       <find>政治</find>
-      <find>optionPostValue</find>
       <find>value</find>
       <find>sdlrValue</find>
       <find>dataYesNo</find>
       <find>index</find>
       <find>sdlrva</find>
+      <find>optionPostValue</find>
       <find>sdlrindex</find>
+      <find>postFile</find>
     </findStrings>
     <replaceStrings>
       <replace>layui-icon</replace>
@@ -234,7 +242,6 @@
         <option value="$PROJECT_DIR$/views/index/system1.html" />
         <option value="$PROJECT_DIR$/views/index/work1.html" />
         <option value="$PROJECT_DIR$/views/index/alert/zp.html" />
-        <option value="$PROJECT_DIR$/views/index/alert/add.html" />
         <option value="$PROJECT_DIR$/views/index/alert/edit.html" />
         <option value="$PROJECT_DIR$/views/index/alert/deal.html" />
         <option value="$PROJECT_DIR$/views/index/basicData1.html" />
@@ -242,8 +249,9 @@
         <option value="$PROJECT_DIR$/views/index/alert/score.html" />
         <option value="$PROJECT_DIR$/views/index/area4.html" />
         <option value="$PROJECT_DIR$/static/admin/js/common.js" />
-        <option value="$PROJECT_DIR$/views/index/alert/const.js" />
         <option value="$PROJECT_DIR$/views/index/alert/sdlr.html" />
+        <option value="$PROJECT_DIR$/views/index/alert/const.js" />
+        <option value="$PROJECT_DIR$/views/index/alert/add.html" />
       </list>
     </option>
   </component>
@@ -424,12 +432,12 @@
       <workItem from="1546521286881" duration="16000" />
       <workItem from="1546523243417" duration="630000" />
       <workItem from="1546577536238" duration="36000" />
-      <workItem from="1547041841756" duration="1961000" />
+      <workItem from="1547041841756" duration="2245000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="366001000" />
+    <option name="totallyTimeSpent" value="366285000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -450,7 +458,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32879046" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44974446" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.08006814" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20029895" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" show_stripe_button="false" />
@@ -674,13 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index/alert/add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="215" column="19" lean-forward="true" selection-start-line="215" selection-start-column="19" selection-end-line="215" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index/alert/zp.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1919">
@@ -821,6 +822,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/alert/sdlr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="105" column="36" lean-forward="true" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/index/alert/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -830,15 +838,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index/alert/const.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="348" column="25" selection-start-line="348" selection-start-column="25" selection-end-line="348" selection-end-column="25" />
+        <state relative-caret-position="328">
+          <caret line="473" column="13" selection-start-line="473" selection-start-column="6" selection-end-line="473" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index/alert/sdlr.html">
+    <entry file="file://$PROJECT_DIR$/views/index/alert/add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="105" column="55" lean-forward="true" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
+        <state relative-caret-position="150">
+          <caret line="179" column="33" lean-forward="true" selection-start-line="179" selection-start-column="33" selection-end-line="179" selection-end-column="33" />
         </state>
       </provider>
     </entry>

@@ -470,3 +470,5 @@ const gridTestOption = {
   18:"刘家沟组",
   19:"马家沟组"
 }
+
+const notMust = ['file','img_src','img_path','pic'];

@@ -172,8 +172,10 @@ height:100%;" id="{{d[index][0]}}">
         var formdata = '';
         for (let i in elData) {
           if (document.querySelector('#' + elData[i][0]).value == '') {
-            layer.msg('请完善信息');
-            return;
+            if(notMust.indexOf(elData[i][0])==-1){
+              layer.msg('请完善信息');
+              return;
+            }
           }else{
             if(optionAdd.indexOf(elData[i][0])!=-1){  //option
               var index = document.querySelector('#' + elData[i][0]).selectedIndex;
